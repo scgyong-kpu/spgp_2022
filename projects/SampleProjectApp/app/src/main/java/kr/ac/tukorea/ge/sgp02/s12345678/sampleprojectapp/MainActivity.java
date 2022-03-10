@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,11 +18,12 @@ public class MainActivity extends AppCompatActivity {
         tv.setText("Program started");
 
         Button btn = findViewById(R.id.btnPushMe);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                tv.setText("Button Pushed");
-            }
-        });
+        btn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        TextView tv = findViewById(R.id.nameText);
+        tv.setText("Buton Clicked");
     }
 }
