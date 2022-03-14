@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/mainText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
@@ -15,6 +16,7 @@
         android:layout_gravity="center"
          />
     <TextView
+        android:id="@+id/subText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Hi TUKorea!"
@@ -22,5 +24,12 @@
         android:textStyle="bold|italic"
         android:gravity="center"
         />
+
+    <Button
+        android:id="@+id/btnPushMe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Push Me !!!" />
+
 
 </LinearLayout>
