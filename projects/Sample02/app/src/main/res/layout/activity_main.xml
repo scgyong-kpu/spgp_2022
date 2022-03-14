@@ -29,7 +29,9 @@
         android:id="@+id/btnPushMe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Push Me !!!" />
+        android:text="Push Me !!!"
+        android:onClick="onBtnPushMe"
+        />
 
 
 </LinearLayout>
