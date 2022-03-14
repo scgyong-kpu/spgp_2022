@@ -16,13 +16,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         TextView tv = findViewById(R.id.nameText);
         tv.setText("Program started");
-
-        Button btn = findViewById(R.id.btnPushMe);
-        btn.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View view) {
+    public void onBtnPushMe(View view) {
         TextView tv = findViewById(R.id.nameText);
         tv.setText("Buton Clicked");
     }
