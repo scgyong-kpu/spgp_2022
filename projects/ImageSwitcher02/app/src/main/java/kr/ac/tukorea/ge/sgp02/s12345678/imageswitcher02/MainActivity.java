@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private int[] resIds = new int[] {
+    private static final int[] RES_IDS = new int[] {
             R.mipmap.cat_1,
             R.mipmap.cat_2,
             R.mipmap.cat_3,
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         pageTextView.setText(text);
 
         ImageView contentImageView = findViewById(R.id.contentImageView);
-        int resId = resIds[pageNumber - 1];
+        int resId = RES_IDS[pageNumber - 1];
         contentImageView.setImageResource(resId);
     }
 }
