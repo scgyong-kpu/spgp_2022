@@ -12,6 +12,13 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    private int[] resIds = new int[] {
+            R.mipmap.cat_1,
+            R.mipmap.cat_2,
+            R.mipmap.cat_3,
+            R.mipmap.cat_4,
+            R.mipmap.cat_5,
+    };
     private int pageNumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +45,6 @@ public class MainActivity extends AppCompatActivity {
         String text = pageNumber + " / " + 5;
         pageTextView.setText(text);
 
-        int[] resIds = new int[] {
-                R.mipmap.cat_1,
-                R.mipmap.cat_2,
-                R.mipmap.cat_3,
-                R.mipmap.cat_4,
-                R.mipmap.cat_5,
-        };
         ImageView contentImageView = findViewById(R.id.contentImageView);
         int resId = resIds[pageNumber - 1];
         contentImageView.setImageResource(resId);
