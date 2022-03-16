@@ -12,12 +12,13 @@
         android:layout_height="wrap_content"
         >
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/prev"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"            android:src="@mipmap/prev"
             android:onClick="onBtnPrev"
             />
         <TextView
+            android:id="@+id/pageText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -27,8 +28,9 @@
             android:text="1 / 5"
             />
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
             android:src="@mipmap/next"
             android:onClick="onBtnNext"
             />

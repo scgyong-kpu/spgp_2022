@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
+
+    protected int page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +21,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void onBtnPrev(View view) {
         Log.d(TAG, "Prev Button Pressed");
+        setPage(page - 1);
     }
     public void onBtnNext(View view) {
         Log.d(TAG, "Next Button Pressed");
+        setPage(page + 1);
+    }
+
+    private void setPage(int newPage) {
+        page = newPage;
+        String text = page + " / " + 5;
+        TextView tv = findViewById(R.id.pageText);
+        tv.setText(text);
     }
 }
