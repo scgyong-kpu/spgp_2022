@@ -11,23 +11,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="<"
+            android:src="@mipmap/prev"
+            android:onClick="onBtnPrev"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:layout_gravity="center"
             android:textSize="20sp"
             android:text="1 / 5"
             />
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=">"
+            android:src="@mipmap/next"
+            android:onClick="onBtnNext"
             />
     </LinearLayout>
     <TextView
