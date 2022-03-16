@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,5 +37,16 @@ public class MainActivity extends AppCompatActivity {
         TextView pageTextView = findViewById(R.id.pageTextView);
         String text = pageNumber + " / " + 5;
         pageTextView.setText(text);
+
+        int[] resIds = new int[] {
+                R.mipmap.cat_1,
+                R.mipmap.cat_2,
+                R.mipmap.cat_3,
+                R.mipmap.cat_4,
+                R.mipmap.cat_5,
+        };
+        ImageView contentImageView = findViewById(R.id.contentImageView);
+        int resId = resIds[pageNumber - 1];
+        contentImageView.setImageResource(resId);
     }
 }

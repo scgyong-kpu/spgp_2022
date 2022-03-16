@@ -11,35 +11,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="&lt;"
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/prev"
             android:onClick="onBtnPrev"
+            android:scaleType="fitCenter"
             />
         <TextView
             android:id="@+id/pageTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="1 / 5"
             android:textSize="20sp"
             android:layout_weight="1"
             android:gravity="center"
             />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/next"
+            android:scaleType="fitCenter"
             android:text=">"
             android:onClick="onBtnNext"
             />
 
     </LinearLayout>
 
-    <TextView
+    <ImageView
+        android:id="@+id/contentImageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Content"
+        android:src="@mipmap/cat_1"
         android:gravity="center"
         android:background="#ccf"
         />
