@@ -20,10 +20,17 @@ public class MainActivity extends AppCompatActivity {
             R.mipmap.cat_5,
     };
     private int pageNumber;
+    private TextView pageTextView;
+    private ImageView contentImageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        pageTextView = findViewById(R.id.pageTextView);
+        contentImageView = findViewById(R.id.contentImageView);
+
         setPage(1);
     }
 
@@ -41,11 +48,9 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         pageNumber = page;
-        TextView pageTextView = findViewById(R.id.pageTextView);
         String text = pageNumber + " / " + 5;
         pageTextView.setText(text);
 
-        ImageView contentImageView = findViewById(R.id.contentImageView);
         int resId = RES_IDS[pageNumber - 1];
         contentImageView.setImageResource(resId);
     }
