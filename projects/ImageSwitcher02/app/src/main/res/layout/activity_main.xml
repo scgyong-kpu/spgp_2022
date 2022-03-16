@@ -14,7 +14,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="<"
+            android:text="&lt;"
+            android:onClick="onBtnPrev"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -28,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=">"
+            android:onClick="onBtnNext"
             />
 
     </LinearLayout>
