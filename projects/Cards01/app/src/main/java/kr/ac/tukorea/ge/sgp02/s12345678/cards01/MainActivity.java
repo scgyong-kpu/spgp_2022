@@ -60,12 +60,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
         int resId = (Integer) imageButton.getTag();
-        imageButton.setImageResource(resId);
         if (previousImageButton != null) {
-            previousImageButton.setImageResource(R.mipmap.card_blue_back);
+            int previousResourceId = (Integer)previousImageButton.getTag();
+            if (resId == previousResourceId) {
+                imageButton.setVisibility(View.INVISIBLE);
+                previousImageButton.setVisibility(View.INVISIBLE);
+                previousImageButton = null;
+            } else {
+                imageButton.setImageResource(resId);
+                previousImageButton.setImageResource(R.mipmap.card_blue_back);
+                previousImageButton = imageButton;
+            }
+        } else {
+            imageButton.setImageResource(resId);
+            previousImageButton = imageButton;
         }
-
-        previousImageButton = imageButton;
     }
 
     private int findButtonIndex(int id) {
