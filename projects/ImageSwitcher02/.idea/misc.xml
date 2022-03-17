@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/scgyong/android/git/projects/ImageSwitcher02/app/src/main/res/drawable/sel_next.xml" value="0.1345" />
+        <entry key="..\:/scgyong/android/git/projects/ImageSwitcher02/app/src/main/res/drawable/sel_prev.xml" value="0.1345" />
         <entry key="..\:/scgyong/android/git/projects/ImageSwitcher02/app/src/main/res/layout/activity_main.xml" value="0.22" />
       </map>
     </option>
