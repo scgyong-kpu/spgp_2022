@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         imageButton.setImageResource(R.mipmap.card_as);
+        if (previousImageButton != null) {
+            previousImageButton.setImageResource(R.mipmap.card_blue_back);
+        }
 
         previousImageButton = imageButton;
     }
