@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,11 +25,15 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private ImageButton previousImageButton;
+    private int flips;
+    private TextView scoreTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        scoreTextView = findViewById(R.id.scoreTextView);
 
         startGame();
     }
@@ -68,13 +73,21 @@ public class MainActivity extends AppCompatActivity {
                 previousImageButton = null;
             } else {
                 imageButton.setImageResource(resId);
+                setScore(flips + 1);
                 previousImageButton.setImageResource(R.mipmap.card_blue_back);
                 previousImageButton = imageButton;
             }
         } else {
+            setScore(flips + 1);
             imageButton.setImageResource(resId);
             previousImageButton = imageButton;
         }
+    }
+
+    private void setScore(int score) {
+        flips = score;
+        String text = "Flips: " + flips;
+        scoreTextView.setText(text);
     }
 
     private int findButtonIndex(int id) {
