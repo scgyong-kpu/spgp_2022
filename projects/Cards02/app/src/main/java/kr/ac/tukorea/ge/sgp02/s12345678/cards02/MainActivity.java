@@ -41,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
         int btnIndex = findButtonIndex(imageButton.getId());
         Log.d(TAG, "onBtnCard: " + btnIndex);
 
+        imageButton.setImageResource(R.mipmap.card_as);
+        if (previousButton != null) {
+            previousButton.setImageResource(R.mipmap.card_blue_back);
+        }
+
         previousButton = imageButton;
     }
 
