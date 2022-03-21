@@ -1,7 +1,9 @@
 package kr.ac.tukorea.ge.sgp02.s12345678.cards02;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -49,7 +51,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void onBtnRestart(View view) {
         Log.d(TAG, "onBtnRestart");
+        askRetry();
     }
+
+    private void askRetry() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Restart");
+        builder.setMessage("Do you really want to restart the game?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                startGame();
+            }
+        });
+        builder.setNegativeButton("No", null);
+
+        AlertDialog dlg = builder.create();
+        dlg.show();
+    }
+
     public void onBtnCard(View view) {
         if (!(view instanceof ImageButton)) {
             Log.e(TAG, "Not an imagebutton: " + view);
