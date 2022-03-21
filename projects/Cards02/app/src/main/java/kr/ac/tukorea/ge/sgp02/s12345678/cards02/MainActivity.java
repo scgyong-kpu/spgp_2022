@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
             R.id.card_30,R.id.card_31,R.id.card_32,R.id.card_33,
     };
 
+    private ImageButton previousButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +29,19 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onBtnRestart");
     }
     public void onBtnCard(View view) {
-        int btnIndex = findButtonIndex(view.getId());
+        if (!(view instanceof ImageButton)) {
+            Log.e(TAG, "Not an imagebutton: " + view);
+            return;
+        }
+        ImageButton imageButton = (ImageButton) view;
+        if (imageButton == previousButton) {
+            Log.v(TAG, "Same button");
+            return;
+        }
+        int btnIndex = findButtonIndex(imageButton.getId());
         Log.d(TAG, "onBtnCard: " + btnIndex);
+
+        previousButton = imageButton;
     }
 
     private int findButtonIndex(int id) {
