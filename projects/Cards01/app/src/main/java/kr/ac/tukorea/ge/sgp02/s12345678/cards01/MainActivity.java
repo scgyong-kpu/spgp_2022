@@ -73,15 +73,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void askRetry() {
         new AlertDialog.Builder(this)
-            .setTitle("Restart?")
-            .setMessage("Do you really want to restart the game?")
-            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            .setTitle(R.string.restart)
+            .setMessage(R.string.restart_alert_msg)
+            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     startGame();
                 }
             })
-            .setNegativeButton("No",null)
+            .setNegativeButton(R.string.no,null)
             .create()
             .show();
     }
@@ -97,7 +97,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (previousImageButton == imageButton) {
             Log.d(TAG, "Same image button");
-            Toast.makeText(this, "Same Button", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,
+                    R.string.same_card,
+                    Toast.LENGTH_SHORT).show();
             return;
         }
 

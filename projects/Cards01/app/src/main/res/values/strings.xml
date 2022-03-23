@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Cards01</string>
+    <string name="restart">Restart</string>
+    <string name="restart_alert_msg">Do you really want to restart the game?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="same_card">You pressed the same card</string>
 </resources>
