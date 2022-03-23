@@ -11,6 +11,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -43,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startGame() {
+        Random random = new Random();
+        for (int i = 0; i < resIds.length; i++) {
+            int t = random.nextInt(resIds.length);
+            int id = resIds[i];
+            resIds[i] = resIds[t];
+            resIds[t] = id;
+        }
+
         for (int i = 0; i < BUTTON_IDS.length; i++) {
             int resId = resIds[i];
             ImageButton btn = findViewById(BUTTON_IDS[i]);
