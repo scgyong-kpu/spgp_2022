@@ -11,6 +11,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -43,6 +45,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startGame() {
+
+        Random r = new Random();
+        for (int i = 0; i < resIds.length; i++) {
+            int t = r.nextInt(resIds.length);
+            int id = resIds[t];
+            resIds[t] = resIds[i];
+            resIds[i] = id;
+        }
+
         openCardCount = BUTTON_IDS.length;
         for (int i = 0; i < BUTTON_IDS.length; i++) {
             ImageButton btn = findViewById(BUTTON_IDS[i]);
