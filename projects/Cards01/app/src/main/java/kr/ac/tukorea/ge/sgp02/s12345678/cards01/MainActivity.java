@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton previousImageButton;
     private int flips;
     private TextView scoreTextView;
+    private int openCardCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +43,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startGame() {
+        openCardCount = BUTTON_IDS.length;
         for (int i = 0; i < BUTTON_IDS.length; i++) {
             ImageButton btn = findViewById(BUTTON_IDS[i]);
             int resId = resIds[i];
-//            btn.setImageResource(resId);
+            btn.setImageResource(R.mipmap.card_blue_back);
+            btn.setVisibility(View.VISIBLE);
             btn.setTag(resId);
         }
+        setScore(0);
+        previousImageButton = null;
     }
 
     public void onBtnRestart(View view) {
@@ -91,6 +96,10 @@ public class MainActivity extends AppCompatActivity {
             if (resId == previousResourceId) {
                 imageButton.setVisibility(View.INVISIBLE);
                 previousImageButton.setVisibility(View.INVISIBLE);
+                openCardCount -= 2;
+                if (openCardCount == 0) {
+                    askRetry();
+                }
                 previousImageButton = null;
             } else {
                 imageButton.setImageResource(resId);
