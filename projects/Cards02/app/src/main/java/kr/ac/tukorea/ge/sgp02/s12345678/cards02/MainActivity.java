@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -72,15 +73,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void askRetry() {
         new AlertDialog.Builder(this)
-                .setTitle("Restart")
-                .setMessage("Do you really want to restart the game?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.restart)
+                .setMessage(R.string.restart_alert_msg)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         startGame();
                     }
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton(R.string.no, null)
                 .create()
                 .show();
     }
@@ -93,7 +94,9 @@ public class MainActivity extends AppCompatActivity {
         ImageButton imageButton = (ImageButton) view;
         if (imageButton == previousButton) {
             Log.v(TAG, "Same button");
-            Toast.makeText(this, "You pressed same card!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,
+                    R.string.same_card_toast,
+                    Toast.LENGTH_SHORT).show();
             return;
         }
         int btnIndex = findButtonIndex(imageButton.getId());
@@ -126,7 +129,10 @@ public class MainActivity extends AppCompatActivity {
     private void setScore(int flips) {
         this.flips = flips;
 
-        scoreTextView.setText("Flips: " + flips);
+        Resources res = getResources();
+        String fmt = res.getString(R.string.flips_fmt); //"Flips: %d";
+        String text = String.format(fmt, flips);
+        scoreTextView.setText(text);
     }
 
     private int findButtonIndex(int id) {
