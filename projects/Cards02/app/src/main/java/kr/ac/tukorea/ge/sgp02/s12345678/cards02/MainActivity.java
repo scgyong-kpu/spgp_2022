@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView scoreTextView;
     private ImageButton previousButton;
     private int flips;
+    private int openCardCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +46,12 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < BUTTON_IDS.length; i++) {
             int resId = resIds[i];
             ImageButton btn = findViewById(BUTTON_IDS[i]);
+            btn.setVisibility(View.VISIBLE);
+            btn.setImageResource(R.mipmap.card_blue_back);
             btn.setTag(resId);
         }
+        previousButton = null;
+        openCardCount = resIds.length;
         setScore(0);
     }
 
@@ -100,6 +105,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             imageButton.setVisibility(View.INVISIBLE);
             previousButton.setVisibility(View.INVISIBLE);
+            openCardCount -= 2;
+            if (openCardCount == 0) {
+                askRetry();
+            }
             previousButton = null;
         }
     }
