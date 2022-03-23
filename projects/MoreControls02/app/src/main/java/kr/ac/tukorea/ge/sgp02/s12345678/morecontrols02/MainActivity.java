@@ -11,7 +11,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements TextWatcher {
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private CheckBox checkbox;
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
         outputTextView = findViewById(R.id.outputTextView);
         nameEdit = findViewById(R.id.nameEdit);
 
-        nameEdit.addTextChangedListener(this);
+        nameEdit.addTextChangedListener(nameWathcer);
     }
 
     public void onCheckbox(View view) {
@@ -40,19 +40,21 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
         outputTextView.setText(text);
     }
 
-    @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        Log.v(TAG, "before");
-    }
+    private TextWatcher nameWathcer = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            Log.v(TAG, "before");
+        }
 
-    @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        Log.d(TAG, "textChange: " + charSequence);
-        outputTextView.setText("Text Length: " + charSequence.length());
-    }
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            Log.d(TAG, "textChange: " + charSequence);
+            outputTextView.setText("Text Length: " + charSequence.length());
+        }
 
-    @Override
-    public void afterTextChanged(Editable editable) {
-        Log.v(TAG, "after");
-    }
+        @Override
+        public void afterTextChanged(Editable editable) {
+            Log.v(TAG, "after");
+        }
+    };
 }
