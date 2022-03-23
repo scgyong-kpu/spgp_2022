@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">카드게임</string>
+    <string name="restart">재시작</string>
+    <string name="restart_alert_msg">진짜로 다시할건가 자네?</string>
+    <string name="yes">그러자</string>
+    <string name="no">시름</string>
+    <string name="same_card">똑같은카드좀누르지마</string>
+    <string name="flips_fmt">너가 %d 개의 카드를 뒤집었다</string>
+</resources>

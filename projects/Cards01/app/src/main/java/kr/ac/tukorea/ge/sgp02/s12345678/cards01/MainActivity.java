@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -129,7 +130,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setScore(int score) {
         flips = score;
-        String text = "Flips: " + flips;
+        Resources res = getResources();
+        String format = res.getString(R.string.flips_fmt);
+        String text = String.format(format, score);
         scoreTextView.setText(text);
     }
 
