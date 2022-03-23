@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton imageButton = (ImageButton) view;
         if (imageButton == previousButton) {
             Log.v(TAG, "Same button");
+            Toast.makeText(this, "You pressed same card!", Toast.LENGTH_SHORT).show();
             return;
         }
         int btnIndex = findButtonIndex(imageButton.getId());
