@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">카드껨</string>
+    <string name="restart">재시작</string>
+    <string name="restart_alert_msg">자네 진짜로 재시작을 원하나?</string>
+    <string name="yes">오케바리</string>
+    <string name="no">그르지마</string>
+    <string name="same_card_toast">똑같은 카드좀 고만 눌러</string>
+    <string name="flips_fmt">너가 뒤집은 카드는 %d 장인것이다</string>
+</resources>
