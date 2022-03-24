@@ -31,5 +31,11 @@
         android:text="@string/do_it"
         android:onClick="onBtnDoIt"
         />
+    <kr.ac.tukorea.ge.sgp02.s12345678.morecontrols01.GameView
+        android:id="@+id/gameView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        />
 
 </LinearLayout>
