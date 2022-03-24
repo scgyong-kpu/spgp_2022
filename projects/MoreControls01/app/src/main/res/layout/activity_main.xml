@@ -38,9 +38,10 @@
             android:layout_height="match_parent"
             android:text="@string/do_it"
             android:onClick="onBtnDoIt"
+            android:layout_weight="1"
             />
         <kr.ac.tukorea.ge.sgp02.s12345678.morecontrols01.GameView
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
             />
     </LinearLayout>
