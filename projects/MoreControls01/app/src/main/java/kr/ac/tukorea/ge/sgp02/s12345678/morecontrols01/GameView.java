@@ -10,14 +10,22 @@ import android.view.View;
 
 public class GameView extends View {
     private static final String TAG = GameView.class.getSimpleName();
+    private Paint paint;
 
     public GameView(Context context) {
         super(context);
         Log.d(TAG, "GameView cons");
+        initView();
     }
     public GameView(Context context, AttributeSet as) {
         super(context, as);
         Log.d(TAG, "GameView cons with as");
+        initView();
+    }
+
+    private void initView() {
+        paint = new Paint();
+        paint.setColor(Color.parseColor("blue"));
     }
 
     @Override
@@ -30,8 +38,6 @@ public class GameView extends View {
         int width = getWidth();
         int height = getHeight();
         Log.d(TAG, "size: " + width + "," + height + " padding: " + left + "," + top + "," + right + "," + bottom);
-        Paint paint = new Paint();
-        paint.setColor(Color.parseColor("#000000"));
         float rx = width / 10, ry = height / 10;
         canvas.drawRoundRect(left, top, width - right, height - bottom, rx, ry, paint);
     }
