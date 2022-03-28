@@ -19,6 +19,14 @@ public class GameView extends View {
         Paint paint = new Paint();
         int width = getWidth();
         int height = getHeight();
-        canvas.drawRoundRect(10, 20, width, height, 30, 40, paint);
+        int lp = getPaddingLeft();
+        int tp = getPaddingTop();
+        int rp = getPaddingRight();
+        int bp = getPaddingBottom();
+
+        int cw = width - lp - rp;
+        int ch = height - tp - bp;
+
+        canvas.drawRoundRect(lp, tp, lp + cw, tp + ch, 30, 40, paint);
     }
 }

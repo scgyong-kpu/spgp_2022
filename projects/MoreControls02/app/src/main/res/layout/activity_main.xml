@@ -13,6 +13,9 @@
         android:layout_height="wrap_content"
         android:text="Hello World!"
         android:textSize="30sp"
+        android:background="#fcc"
+        android:layout_margin="10dp"
+        android:padding="20dp"
     />
     <EditText
         android:id="@+id/nameEdit"
@@ -34,12 +37,16 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="1"
+            android:padding="10dp"
             />
     </LinearLayout>
     <kr.ac.tukorea.ge.sgp02.s12345678.morecontrols02.GameView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:paddingLeft="20dp"
+        android:paddingRight="70dp"
+        android:background="#ccf"
         />
     <Button
         android:layout_width="match_parent"
