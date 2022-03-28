@@ -45,7 +45,8 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:paddingLeft="20dp"
-        android:paddingRight="70dp"
+        android:paddingTop="100dp"
+        android:paddingRight="170dp"
         android:background="#ccf"
         />
     <Button

@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
@@ -17,12 +18,24 @@ public class GameView extends View {
     private Bitmap soccerBitmap;
     private Rect soccerSrcRect = new Rect();
     private Rect soccerDstRect = new Rect();
+    private Paint leftCirclePaint = new Paint();
+    private Paint rightCirclePaint = new Paint();
+    private Paint textPaint = new Paint();
+    private Rect textExtentRect = new Rect();
+
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initView();
     }
 
     private void initView() {
+        paint.setColor(0xFFCCCCCC);
+        leftCirclePaint.setColor(Color.BLUE);
+        rightCirclePaint.setColor(Color.RED);
+        rightCirclePaint.setStyle(Paint.Style.STROKE);
+        rightCirclePaint.setStrokeWidth(10);
+        textPaint.setColor(Color.GREEN);
+        textPaint.setTextSize(50);
         Resources res = getResources();
         soccerBitmap = BitmapFactory.decodeResource(res, R.mipmap.soccer_ball_240);
         soccerSrcRect.set(0, 0, soccerBitmap.getWidth(), soccerBitmap.getHeight());
@@ -53,5 +66,21 @@ public class GameView extends View {
         soccerDstRect.set(centerX - ballRadius, centerY - ballRadius,
                 centerX + ballRadius, centerY + ballRadius);
         canvas.drawBitmap(soccerBitmap, soccerSrcRect, soccerDstRect, null);
+
+        int leftCenterX = paddingLeft + contentWidth / 4;
+        int leftCenterY = paddingTop + contentHeight / 4;
+        int circleRadius = size / 16;
+        canvas.drawCircle(leftCenterX, leftCenterY, circleRadius, leftCirclePaint);
+
+        int rightCenterX = centerX + contentWidth / 4;
+        int rightCenterY = paddingTop + contentHeight / 4;
+//        int circleRadius = size / 16;
+        canvas.drawCircle(rightCenterX, rightCenterY, circleRadius, rightCirclePaint);
+
+        String text = "Soccer";
+        textPaint.getTextBounds(text, 0, text.length(), textExtentRect);
+        int textX = centerX - textExtentRect.width() / 2;
+        int textY = centerY + contentHeight / 4;
+        canvas.drawText(text, textX, textY, textPaint);
     }
 }
