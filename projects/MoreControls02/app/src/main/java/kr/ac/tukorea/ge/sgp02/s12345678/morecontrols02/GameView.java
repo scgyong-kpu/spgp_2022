@@ -17,6 +17,8 @@ public class GameView extends View {
     protected void onDraw(Canvas canvas) {
         //super.onDraw(canvas);
         Paint paint = new Paint();
-        canvas.drawRoundRect(10, 20, 100, 300, 30, 40, paint);
+        int width = getWidth();
+        int height = getHeight();
+        canvas.drawRoundRect(10, 20, width, height, 30, 40, paint);
     }
 }
