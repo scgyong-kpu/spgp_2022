@@ -8,43 +8,45 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Choreographer;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
-public class GameView extends View {
+public class GameView extends View implements Choreographer.FrameCallback {
     private static final String TAG = GameView.class.getSimpleName();
     private Bitmap soccerBitmap;
     private int ballDx, ballDy;
     private Rect srcRect = new Rect();
     private Rect dstRect = new Rect();
     private Paint fpsPaint = new Paint();
-    private long lastTimeMillis;
+    private long lastTimeNanos;
     private int framesPerSecond;
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initView();
 
-        updateGame();
+        Choreographer.getInstance().postFrameCallback(this);
     }
 
-    private void updateGame() {
-        long now = System.currentTimeMillis();
-        int elapsed = (int) (now - lastTimeMillis);
-        framesPerSecond = 1000 / elapsed;
-        lastTimeMillis = now;
+    @Override
+    public void doFrame(long currentTimeNanos) {
+        long now = currentTimeNanos;
+        int elapsed = (int) (now - lastTimeNanos);
+        framesPerSecond = 1_000_000_000 / elapsed;
+        lastTimeNanos = now;
         update();
         invalidate();
-        postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                updateGame();
-            }
-        }, 30);
+//        postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                updateGame();
+//            }
+//        }, 30);
+        Choreographer.getInstance().postFrameCallback(this);
     }
 
     private void initView() {
