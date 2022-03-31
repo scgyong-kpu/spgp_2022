@@ -17,6 +17,7 @@ public class GameView extends View {
     private static final String TAG = GameView.class.getSimpleName();
     private final Handler handler;
     private Bitmap soccerBitmap;
+    private int ballDx, ballDy;
     private Rect srcRect = new Rect();
     private Rect dstRect = new Rect();
 
@@ -44,6 +45,9 @@ public class GameView extends View {
         soccerBitmap = BitmapFactory.decodeResource(res, R.mipmap.soccer_ball_240);
         srcRect.set(0, 0, soccerBitmap.getWidth(), soccerBitmap.getHeight());
         dstRect.set(0, 0, 100, 100);
+
+        ballDx = 10;
+        ballDy = 10;
     }
 
     @Override
@@ -54,7 +58,25 @@ public class GameView extends View {
     }
 
     private void update() {
-        dstRect.offset(1, 1);
+        dstRect.offset(ballDx, ballDy);
+        if (ballDx < 0) {
+            if (dstRect.left < 0) {
+                ballDx = -ballDx;
+            }
+        } else {
+            if (dstRect.right > getWidth()) {
+                ballDx = -ballDx;
+            }
+        }
+        if (ballDy < 0) {
+            if (dstRect.top < 0) {
+                ballDy = -ballDy;
+            }
+        } else {
+            if (dstRect.bottom > getHeight()) {
+                ballDy = -ballDy;
+            }
+        }
     }
 
 }
