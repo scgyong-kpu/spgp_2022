@@ -41,12 +41,12 @@ public class GameView extends View {
         lastTimeMillis = now;
         update();
         invalidate();
-        handler.post(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 updateGame();
             }
-        });
+        }, 30);
     }
 
     private void initView() {
