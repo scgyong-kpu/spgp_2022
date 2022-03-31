@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.annotation.Nullable;
 
 public class GameView extends View {
     private static final String TAG = GameView.class.getSimpleName();
+    private final Handler handler;
     private Bitmap soccerBitmap;
     private Rect srcRect = new Rect();
     private Rect dstRect = new Rect();
@@ -21,6 +23,20 @@ public class GameView extends View {
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initView();
+
+        handler = new Handler();
+        updateGame();
+    }
+
+    private void updateGame() {
+        update();
+        invalidate();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                updateGame();
+            }
+        });
     }
 
     private void initView() {
@@ -36,4 +52,9 @@ public class GameView extends View {
         canvas.drawBitmap(soccerBitmap, srcRect, dstRect, null);
         Log.d(TAG, "onDraw()");
     }
+
+    private void update() {
+        dstRect.offset(1, 1);
+    }
+
 }
