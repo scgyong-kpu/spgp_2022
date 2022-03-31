@@ -17,7 +17,6 @@ import androidx.annotation.Nullable;
 
 public class GameView extends View {
     private static final String TAG = GameView.class.getSimpleName();
-    private final Handler handler;
     private Bitmap soccerBitmap;
     private int ballDx, ballDy;
     private Rect srcRect = new Rect();
@@ -30,7 +29,6 @@ public class GameView extends View {
         super(context, attrs);
         initView();
 
-        handler = new Handler();
         updateGame();
     }
 
@@ -41,7 +39,7 @@ public class GameView extends View {
         lastTimeMillis = now;
         update();
         invalidate();
-        handler.postDelayed(new Runnable() {
+        postDelayed(new Runnable() {
             @Override
             public void run() {
                 updateGame();
