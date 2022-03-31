@@ -19,8 +19,10 @@ public class GameView extends View implements Choreographer.FrameCallback {
     private static final String TAG = GameView.class.getSimpleName();
     private Bitmap soccerBitmap;
     private int ballDx, ballDy;
+    private int ball2Dx, ball2Dy;
     private Rect srcRect = new Rect();
     private Rect dstRect = new Rect();
+    private Rect dstRect2 = new Rect();
     private Paint fpsPaint = new Paint();
     private long lastTimeNanos;
     private int framesPerSecond;
@@ -58,6 +60,10 @@ public class GameView extends View implements Choreographer.FrameCallback {
         ballDx = 10;
         ballDy = 10;
 
+        ball2Dx = 7;
+        ball2Dy = 15;
+        dstRect2.set(0, 0, 100, 100);
+
         fpsPaint.setColor(Color.BLUE);
         fpsPaint.setTextSize(50);
     }
@@ -66,6 +72,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
     protected void onDraw(Canvas canvas) {
         //super.onDraw(canvas);
         canvas.drawBitmap(soccerBitmap, srcRect, dstRect, null);
+        canvas.drawBitmap(soccerBitmap, srcRect, dstRect2, null);
 //        canvas.drawText("" + framesPerSecond, 0, 0, fpsPaint);
         canvas.drawText(String.valueOf(framesPerSecond), 0, 100, fpsPaint);
         Log.d(TAG, "onDraw()");
@@ -89,6 +96,25 @@ public class GameView extends View implements Choreographer.FrameCallback {
         } else {
             if (dstRect.bottom > getHeight()) {
                 ballDy = -ballDy;
+            }
+        }
+        dstRect2.offset(ball2Dx, ball2Dy);
+        if (ball2Dx < 0) {
+            if (dstRect.left < 0) {
+                ball2Dx = -ball2Dx;
+            }
+        } else {
+            if (dstRect2.right > getWidth()) {
+                ball2Dx = -ball2Dx;
+            }
+        }
+        if (ball2Dy < 0) {
+            if (dstRect2.top < 0) {
+                ball2Dy = -ball2Dy;
+            }
+        } else {
+            if (dstRect2.bottom > getHeight()) {
+                ball2Dy = -ball2Dy;
             }
         }
     }
