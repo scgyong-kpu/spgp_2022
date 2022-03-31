@@ -5,6 +5,8 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -20,6 +22,9 @@ public class GameView extends View {
     private int ballDx, ballDy;
     private Rect srcRect = new Rect();
     private Rect dstRect = new Rect();
+    private Paint fpsPaint = new Paint();
+    private long lastTimeMillis;
+    private int framesPerSecond;
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -30,6 +35,10 @@ public class GameView extends View {
     }
 
     private void updateGame() {
+        long now = System.currentTimeMillis();
+        int elapsed = (int) (now - lastTimeMillis);
+        framesPerSecond = 1000 / elapsed;
+        lastTimeMillis = now;
         update();
         invalidate();
         handler.post(new Runnable() {
@@ -48,12 +57,17 @@ public class GameView extends View {
 
         ballDx = 10;
         ballDy = 10;
+
+        fpsPaint.setColor(Color.BLUE);
+        fpsPaint.setTextSize(50);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         //super.onDraw(canvas);
         canvas.drawBitmap(soccerBitmap, srcRect, dstRect, null);
+//        canvas.drawText("" + framesPerSecond, 0, 0, fpsPaint);
+        canvas.drawText(String.valueOf(framesPerSecond), 0, 100, fpsPaint);
         Log.d(TAG, "onDraw()");
     }
 
