@@ -42,12 +42,12 @@ public class GameView extends View {
         update();
 
         invalidate();
-        post(new Runnable() {
+        postDelayed(new Runnable() {
             @Override
             public void run() {
                 updateFrame();
             }
-        });
+        }, 16);
     }
 
     private void update() {
