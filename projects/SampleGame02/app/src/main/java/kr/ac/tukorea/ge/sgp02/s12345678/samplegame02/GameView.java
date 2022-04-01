@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ public class GameView extends View {
     private Rect soccerSrcRect = new Rect();
     private Rect soccerDstRect = new Rect();
 
+    private Handler handler = new Handler();
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initView();
@@ -29,6 +31,19 @@ public class GameView extends View {
 
         soccerSrcRect.set(0, 0, soccerBitmap.getWidth(), soccerBitmap.getHeight());
         soccerDstRect.set(0, 0, 200, 200);
+
+        updateFrame();
+    }
+
+    private void updateFrame() {
+        soccerDstRect.offset(1, 1);
+        invalidate();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                updateFrame();
+            }
+        });
     }
 
     @Override
