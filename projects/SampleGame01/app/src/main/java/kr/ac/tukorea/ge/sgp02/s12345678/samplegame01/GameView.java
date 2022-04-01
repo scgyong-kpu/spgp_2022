@@ -15,7 +15,11 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class GameView extends View implements Choreographer.FrameCallback {
+    private static final int BALL_COUNT = 10;
     public static GameView view;
     private static final String TAG = GameView.class.getSimpleName();
 //    private Bitmap soccerBitmap;
@@ -24,11 +28,11 @@ public class GameView extends View implements Choreographer.FrameCallback {
 //    private Rect srcRect = new Rect();
 //    private Rect dstRect = new Rect();
 //    private Rect dstRect2 = new Rect();
-    private Ball ball1;
-    private Ball ball2;
     private Paint fpsPaint = new Paint();
     private long lastTimeNanos;
     private int framesPerSecond;
+
+    private ArrayList<Ball> balls = new ArrayList<>();
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -59,17 +63,15 @@ public class GameView extends View implements Choreographer.FrameCallback {
         Bitmap soccerBitmap = BitmapFactory.decodeResource(res, R.mipmap.soccer_ball_240);
         Ball.setBitmap(soccerBitmap);
 
-        ball1 = new Ball(10, 10);
-        ball2 = new Ball(7, 15);
-//        srcRect.set(0, 0, soccerBitmap.getWidth(), soccerBitmap.getHeight());
-//        dstRect.set(0, 0, 100, 100);
-//
-//        ballDx = 10;
-//        ballDy = 10;
-//
-//        ball2Dx = 7;
-//        ball2Dy = 15;
-//        dstRect2.set(0, 0, 100, 100);
+        Random random = new Random();
+        for (int i = 0; i < BALL_COUNT; i++) {
+            int dx = random.nextInt(10) + 5;
+            int dy = random.nextInt(10) + 5;
+            Ball ball = new Ball(dx, dy);
+            balls.add(ball);
+        }
+//        ball1 = new Ball(10, 10);
+//        ball2 = new Ball(7, 15);
 
         fpsPaint.setColor(Color.BLUE);
         fpsPaint.setTextSize(50);
@@ -78,56 +80,21 @@ public class GameView extends View implements Choreographer.FrameCallback {
     @Override
     protected void onDraw(Canvas canvas) {
         //super.onDraw(canvas);
-        ball1.draw(canvas);
-        ball2.draw(canvas);
-//        canvas.drawBitmap(soccerBitmap, srcRect, dstRect, null);
-//        canvas.drawBitmap(soccerBitmap, srcRect, dstRect2, null);
-//        canvas.drawText("" + framesPerSecond, 0, 0, fpsPaint);
+        for (Ball ball : balls) {
+            ball.draw(canvas);
+        }
+//        ball1.draw(canvas);
+//        ball2.draw(canvas);
         canvas.drawText(String.valueOf(framesPerSecond), 0, 100, fpsPaint);
         Log.d(TAG, "onDraw()");
     }
 
     private void update() {
-        ball1.update();
-        ball2.update();
-//        dstRect.offset(ballDx, ballDy);
-//        if (ballDx < 0) {
-//            if (dstRect.left < 0) {
-//                ballDx = -ballDx;
-//            }
-//        } else {
-//            if (dstRect.right > getWidth()) {
-//                ballDx = -ballDx;
-//            }
-//        }
-//        if (ballDy < 0) {
-//            if (dstRect.top < 0) {
-//                ballDy = -ballDy;
-//            }
-//        } else {
-//            if (dstRect.bottom > getHeight()) {
-//                ballDy = -ballDy;
-//            }
-//        }
-//        dstRect2.offset(ball2Dx, ball2Dy);
-//        if (ball2Dx < 0) {
-//            if (dstRect.left < 0) {
-//                ball2Dx = -ball2Dx;
-//            }
-//        } else {
-//            if (dstRect2.right > getWidth()) {
-//                ball2Dx = -ball2Dx;
-//            }
-//        }
-//        if (ball2Dy < 0) {
-//            if (dstRect2.top < 0) {
-//                ball2Dy = -ball2Dy;
-//            }
-//        } else {
-//            if (dstRect2.bottom > getHeight()) {
-//                ball2Dy = -ball2Dy;
-//            }
-//        }
+        for (Ball ball : balls) {
+            ball.update();
+        }
+//        ball1.update();
+//        ball2.update();
     }
 
 }
