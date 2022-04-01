@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Choreographer;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -78,6 +79,19 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
         fpsPaint.setColor(Color.BLUE);
         fpsPaint.setTextSize(50);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_MOVE:
+                float x = event.getX();
+                float y = event.getY();
+                fighter.setPosition(x, y);
+                return true;
+        }
+        return super.onTouchEvent(event);
     }
 
     @Override
