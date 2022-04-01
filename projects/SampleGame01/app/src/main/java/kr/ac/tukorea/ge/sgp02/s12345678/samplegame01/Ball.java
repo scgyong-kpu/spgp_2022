@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-public class Ball {
+public class Ball implements GameObject {
     private int dx, dy;
     private Rect dstRect = new Rect();
 
