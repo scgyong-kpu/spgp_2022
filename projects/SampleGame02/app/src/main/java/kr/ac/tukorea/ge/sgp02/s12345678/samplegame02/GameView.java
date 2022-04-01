@@ -20,7 +20,6 @@ public class GameView extends View {
     private Rect soccerDstRect = new Rect();
     private int ballDx, ballDy;
 
-    private Handler handler = new Handler();
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initView();
@@ -43,7 +42,7 @@ public class GameView extends View {
         update();
 
         invalidate();
-        handler.post(new Runnable() {
+        post(new Runnable() {
             @Override
             public void run() {
                 updateFrame();
