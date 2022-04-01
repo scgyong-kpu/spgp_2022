@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Choreographer;
 import android.view.View;
 
@@ -21,7 +20,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
     private Rect soccerSrcRect = new Rect();
     private Rect soccerDstRect = new Rect();
     private int ballDx, ballDy;
-    private long previousTimeMillis;
+    private long previousTimeNanos;
     private int framesPerSecond;
     private Paint fpsPaint = new Paint();
 
@@ -47,12 +46,13 @@ public class GameView extends View implements Choreographer.FrameCallback {
     }
 
     @Override
-    public void doFrame(long l) {
-        long now = System.currentTimeMillis();
-        int elapsed = (int) (now - previousTimeMillis);
-        framesPerSecond = 1000 / elapsed;
+    public void doFrame(long currentTimeNanos) {
+        long now = currentTimeNanos;
+//        long now = System.currentTimeMillis();
+        int elapsed = (int) (now - previousTimeNanos);
+        framesPerSecond = 1_000_000_000 / elapsed;
         //Log.v(TAG, "Elapsed: " + elapsed + " FPS: " + framesPerSecond);
-        previousTimeMillis = now;
+        previousTimeNanos = now;
         update();
         invalidate();
         Choreographer.getInstance().postFrameCallback(this);
