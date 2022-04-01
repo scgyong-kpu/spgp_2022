@@ -5,20 +5,25 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Choreographer;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
-public class GameView extends View {
+public class GameView extends View implements Choreographer.FrameCallback {
     private static final String TAG = GameView.class.getSimpleName();
     private Bitmap soccerBitmap;
     private Rect soccerSrcRect = new Rect();
     private Rect soccerDstRect = new Rect();
     private int ballDx, ballDy;
+    private long previousTimeMillis;
+    private int framesPerSecond;
+    private Paint fpsPaint = new Paint();
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -35,19 +40,22 @@ public class GameView extends View {
         ballDx = 10;
         ballDy = 10;
 
-        updateFrame();
+        fpsPaint.setColor(Color.BLUE);
+        fpsPaint.setTextSize(100);
+
+        Choreographer.getInstance().postFrameCallback(this);
     }
 
-    private void updateFrame() {
+    @Override
+    public void doFrame(long l) {
+        long now = System.currentTimeMillis();
+        int elapsed = (int) (now - previousTimeMillis);
+        framesPerSecond = 1000 / elapsed;
+        //Log.v(TAG, "Elapsed: " + elapsed + " FPS: " + framesPerSecond);
+        previousTimeMillis = now;
         update();
-
         invalidate();
-        postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                updateFrame();
-            }
-        }, 16);
+        Choreographer.getInstance().postFrameCallback(this);
     }
 
     private void update() {
@@ -75,6 +83,8 @@ public class GameView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawBitmap(soccerBitmap, soccerSrcRect, soccerDstRect, null);
-        Log.d(TAG, "onDraw()");
+        canvas.drawText("FPS: " + framesPerSecond, framesPerSecond * 10, 100, fpsPaint);
+//        Log.d(TAG, "onDraw()");
     }
+
 }
