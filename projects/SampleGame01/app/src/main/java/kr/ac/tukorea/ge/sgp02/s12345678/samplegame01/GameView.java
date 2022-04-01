@@ -33,6 +33,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
     private int framesPerSecond;
 
     private ArrayList<Ball> balls = new ArrayList<>();
+    private Fighter fighter;
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -70,8 +71,10 @@ public class GameView extends View implements Choreographer.FrameCallback {
             Ball ball = new Ball(dx, dy);
             balls.add(ball);
         }
-//        ball1 = new Ball(10, 10);
-//        ball2 = new Ball(7, 15);
+
+        Bitmap fighterBitmap = BitmapFactory.decodeResource(res, R.mipmap.plane_240);
+        Fighter.setBitmap(fighterBitmap);
+        fighter = new Fighter();
 
         fpsPaint.setColor(Color.BLUE);
         fpsPaint.setTextSize(50);
@@ -83,8 +86,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
         for (Ball ball : balls) {
             ball.draw(canvas);
         }
-//        ball1.draw(canvas);
-//        ball2.draw(canvas);
+        fighter.draw(canvas);
         canvas.drawText(String.valueOf(framesPerSecond), 0, 100, fpsPaint);
         Log.d(TAG, "onDraw()");
     }
@@ -93,8 +95,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
         for (Ball ball : balls) {
             ball.update();
         }
-//        ball1.update();
-//        ball2.update();
+        fighter.update();
     }
 
 }
