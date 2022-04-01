@@ -61,9 +61,9 @@ public class GameView extends View implements Choreographer.FrameCallback {
     }
 
     private void initView() {
-        Resources res = getResources();
-        Bitmap soccerBitmap = BitmapFactory.decodeResource(res, R.mipmap.soccer_ball_240);
-        Ball.setBitmap(soccerBitmap);
+//        Resources res = getResources();
+//        Bitmap soccerBitmap = BitmapFactory.decodeResource(res, R.mipmap.soccer_ball_240);
+//        Ball.setBitmap(soccerBitmap);
 
         Random random = new Random();
         for (int i = 0; i < BALL_COUNT; i++) {
@@ -73,8 +73,8 @@ public class GameView extends View implements Choreographer.FrameCallback {
             balls.add(ball);
         }
 
-        Bitmap fighterBitmap = BitmapFactory.decodeResource(res, R.mipmap.plane_240);
-        Fighter.setBitmap(fighterBitmap);
+//        Bitmap fighterBitmap = BitmapFactory.decodeResource(res, R.mipmap.plane_240);
+//        Fighter.setBitmap(fighterBitmap);
         fighter = new Fighter();
 
         fpsPaint.setColor(Color.BLUE);

@@ -1,6 +1,8 @@
 package kr.ac.tukorea.ge.sgp02.s12345678.samplegame01;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
@@ -16,11 +18,12 @@ public class Ball {
         this.dy = dy;
 
         dstRect.set(0, 0, 200, 200);
-    }
 
-    public static void setBitmap(Bitmap bitmap) {
-        Ball.bitmap = bitmap;
-        srcRect.set(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        if (bitmap == null) {
+            Resources res = GameView.view.getResources();
+            bitmap = BitmapFactory.decodeResource(res, R.mipmap.soccer_ball_240);
+            srcRect.set(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        }
     }
 
     public void draw(Canvas canvas) {
