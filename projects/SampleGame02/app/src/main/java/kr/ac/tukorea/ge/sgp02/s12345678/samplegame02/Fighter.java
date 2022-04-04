@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-public class Fighter {
+public class Fighter implements GameObject {
 
     private static Bitmap bitmap;
     private static Rect srcRect = new Rect();
