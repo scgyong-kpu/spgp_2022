@@ -15,10 +15,12 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameView extends View implements Choreographer.FrameCallback {
     private static final String TAG = GameView.class.getSimpleName();
-//    Ball ball1, ball2;
+    private static final int BALL_COUNT = 10;
+    //    Ball ball1, ball2;
     private ArrayList<Ball> balls = new ArrayList<>();
 
     private long previousTimeNanos;
@@ -39,10 +41,17 @@ public class GameView extends View implements Choreographer.FrameCallback {
         Bitmap soccerBitmap = BitmapFactory.decodeResource(res, R.mipmap.soccer_ball_240);
         Ball.setBitmap(soccerBitmap);
 
-        Ball ball1 = new Ball(10, 10);
-        Ball ball2 = new Ball(7, 15);
-        balls.add(ball1);
-        balls.add(ball2);
+        Random random = new Random();
+        for (int i = 0; i < BALL_COUNT; i++) {
+            int dx = random.nextInt(10) + 5;
+            int dy = random.nextInt(10) + 5;
+            Ball ball = new Ball(dx, dy);
+            balls.add(ball);
+        }
+//        Ball ball1 = new Ball(10, 10);
+//        Ball ball2 = new Ball(7, 15);
+//        balls.add(ball1);
+//        balls.add(ball2);
 
         fpsPaint.setColor(Color.BLUE);
         fpsPaint.setTextSize(100);
