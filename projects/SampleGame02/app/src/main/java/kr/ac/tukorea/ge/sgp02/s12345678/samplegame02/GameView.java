@@ -94,10 +94,14 @@ public class GameView extends View implements Choreographer.FrameCallback {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
-        if (action == MotionEvent.ACTION_DOWN) {
-            int x = (int) event.getX();
-            int y = (int) event.getY();
-            fighter.setPosition(x, y);
+//        if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_MOVE:
+                int x = (int) event.getX();
+                int y = (int) event.getY();
+                fighter.setPosition(x, y);
+                return true;
         }
         return super.onTouchEvent(event);
     }
