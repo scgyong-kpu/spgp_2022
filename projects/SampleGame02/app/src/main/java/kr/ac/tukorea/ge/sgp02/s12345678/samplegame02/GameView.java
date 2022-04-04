@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.Choreographer;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -90,4 +91,14 @@ public class GameView extends View implements Choreographer.FrameCallback {
 //        Log.d(TAG, "onDraw()");
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getAction();
+        if (action == MotionEvent.ACTION_DOWN) {
+            int x = (int) event.getX();
+            int y = (int) event.getY();
+            fighter.setPosition(x, y);
+        }
+        return super.onTouchEvent(event);
+    }
 }
