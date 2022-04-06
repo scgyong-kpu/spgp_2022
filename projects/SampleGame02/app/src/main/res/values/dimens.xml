@@ -5,4 +5,6 @@
     <dimen name="ball_radius">20dp</dimen>
     <dimen name="ball_speed_min">20dp</dimen>
     <dimen name="ball_speed_max">200dp</dimen>
+    <dimen name="laser_length">20dp</dimen>
+    <dimen name="laser_speed">1000dp</dimen>
 </resources>

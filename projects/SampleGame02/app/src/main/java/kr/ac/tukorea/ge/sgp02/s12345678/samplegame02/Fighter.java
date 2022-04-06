@@ -65,4 +65,9 @@ public class Fighter extends Sprite {
         dx = (float) (dist * Math.cos(angle));
         dy = (float) (dist * Math.sin(angle));
     }
+
+    public void fire() {
+        Bullet bullet = new Bullet(x, y, angle);
+        MainGame.getInstance().add(bullet);
+    }
 }
