@@ -1,8 +1,6 @@
 package kr.ac.tukorea.ge.sgp02.s12345678.samplegame02;
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.RectF;
 
@@ -21,8 +19,7 @@ public class Fighter extends Sprite {
         setTargetPosition(x, y);
         angle = -(float) (Math.PI / 2);
 
-        Resources res = GameView.view.getResources();
-        targetBitmap = BitmapFactory.decodeResource(res, R.mipmap.target);
+        targetBitmap = BitmapPool.get(R.mipmap.target);
     }
 
     public void update() {

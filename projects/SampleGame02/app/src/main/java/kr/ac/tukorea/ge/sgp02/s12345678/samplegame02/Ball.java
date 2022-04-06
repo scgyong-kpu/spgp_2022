@@ -1,12 +1,5 @@
 package kr.ac.tukorea.ge.sgp02.s12345678.samplegame02;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Rect;
-import android.graphics.RectF;
-
 public class Ball extends Sprite {
     private float dx, dy;
 
