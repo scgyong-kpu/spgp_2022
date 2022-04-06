@@ -14,9 +14,12 @@ public class Fighter implements GameObject {
 
     private static final String TAG = Fighter.class.getSimpleName();
     private static Bitmap bitmap;
-    private static Rect srcRect = new Rect();
+    private static Bitmap target;
+    //private static Rect srcRect = new Rect();
     private RectF dstRect = new RectF();
+    private RectF targetRect = new RectF();
 
+    private float radius;
     private float x, y;
     private float dx, dy;
     private float tx, ty;
@@ -24,16 +27,18 @@ public class Fighter implements GameObject {
     public Fighter(float x, float y) {
         this.x = x;
         this.y = y;
-        float radius = Metrics.size(R.dimen.fighter_radius);
+        radius = Metrics.size(R.dimen.fighter_radius);
         dstRect.set(x - radius, y - radius,
                 x + radius, y + radius);
         tx = x;
         ty = y;
+        targetRect.set(dstRect);
 
         if (bitmap == null) {
             Resources res = GameView.view.getResources();
             bitmap = BitmapFactory.decodeResource(res, R.mipmap.plane_240);
-            srcRect.set(0, 0, bitmap.getWidth(), bitmap.getHeight());
+            //srcRect.set(0, 0, bitmap.getWidth(), bitmap.getHeight());
+            target = BitmapFactory.decodeResource(res, R.mipmap.target);
         }
     }
 
@@ -58,12 +63,18 @@ public class Fighter implements GameObject {
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(bitmap, srcRect, dstRect, null);
+        canvas.drawBitmap(bitmap, null, dstRect, null);
+        if (dx != 0 && dy != 0) {
+            canvas.drawBitmap(target, null, targetRect, null);
+        }
     }
 
     public void setTargetPosition(int tx, int ty) {
         this.tx = tx;
         this.ty = ty;
+        targetRect.set(tx - radius/2, ty - radius/2,
+                tx + radius/2, ty + radius/2);
+
         float angle = (float) Math.atan2(ty - this.y, tx - this.x);
         float speed = Metrics.size(R.dimen.fighter_speed);
         float dist = speed * MainGame.getInstance().frameTime;
