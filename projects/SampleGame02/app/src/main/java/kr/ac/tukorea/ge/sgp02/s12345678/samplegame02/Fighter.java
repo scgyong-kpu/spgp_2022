@@ -6,7 +6,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 
 public class Fighter implements GameObject {
 
@@ -22,7 +24,9 @@ public class Fighter implements GameObject {
     public Fighter(float x, float y) {
         this.x = x;
         this.y = y;
-        float radius = 100;
+        float radius_dp = 100;
+        DisplayMetrics displayMetrics = GameView.view.getResources().getDisplayMetrics();
+        float radius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, radius_dp, displayMetrics);
         dstRect.set(x - radius, y - radius,
                 x + radius, y + radius);
         tx = x;
