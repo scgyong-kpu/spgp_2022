@@ -44,8 +44,38 @@ public class Fighter implements GameObject {
         float dist = speed * MainGame.getInstance().frameTime;
         dx = (float) (dist * Math.cos(angle));
         dy = (float) (dist * Math.sin(angle));
-        x += dx;
-        y += dy;
+        if (dx > 0) {
+            if (x + dx > tx) {
+                dx = tx - x;
+                x = tx;
+            } else {
+                x += dx;
+            }
+        } else {
+            if (x + dx < tx) {
+                dx = tx - x;
+                x = tx;
+            } else {
+                x += dx;
+            }
+        }
+        if (dy > 0) {
+            if (y + dy > ty) {
+                dy = ty - y;
+                y = ty;
+            } else {
+                y += dy;
+            }
+        } else {
+            if (y + dy < ty) {
+                dy = ty - y;
+                y = ty;
+            } else {
+                y += dy;
+            }
+        }
+//        x += dx;
+//        y += dy;
         Log.d(TAG, "x="+x+" y="+y+" dx="+dx+" dy="+dy);
         dstRect.offset(dx, dy);
     }
