@@ -19,10 +19,12 @@ public class Fighter implements GameObject {
     private float dx, dy;
     private float tx, ty;
 
-    public Fighter() {
-        x = 100;
-        y = 100;
-        dstRect.set(0, 0, 200, 200);
+    public Fighter(float x, float y) {
+        this.x = x;
+        this.y = y;
+        float radius = 100;
+        dstRect.set(x - radius, y - radius,
+                x + radius, y + radius);
         tx = x;
         ty = y;
 
