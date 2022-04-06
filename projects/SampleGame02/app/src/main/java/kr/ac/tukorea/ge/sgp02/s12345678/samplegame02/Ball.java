@@ -5,15 +5,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.graphics.RectF;
 
 public class Ball implements GameObject {
 
     private static Bitmap bitmap;
     private static Rect srcRect = new Rect();
-    private Rect dstRect = new Rect();
-    private int dx, dy;
+    private RectF dstRect = new RectF();
+    private float dx, dy;
 
-    public Ball(int dx, int dy) {
+    public Ball(float dx, float dy) {
         this.dx = dx;
         this.dy = dy;
         dstRect.set(0, 0, 200, 200);
@@ -31,23 +32,26 @@ public class Ball implements GameObject {
 //    }
 
     public void update() {
+        MainGame game = MainGame.getInstance();
+        float dx = this.dx * game.frameTime;
+        float dy = this.dy * game.frameTime;
         dstRect.offset(dx, dy);
         if (dx > 0) {
             if (dstRect.right > GameView.view.getWidth()) {
-                dx = -dx;
+                this.dx = -dx;
             }
         } else {
             if (dstRect.left < 0) {
-                dx = -dx;
+                this.dx = -dx;
             }
         }
         if (dy > 0) {
             if (dstRect.bottom > GameView.view.getHeight()) {
-                dy = -dy;
+                this.dy = -dy;
             }
         } else {
             if (dstRect.top < 0) {
-                dy = -dy;
+                this.dy = -dy;
             }
         }
     }
