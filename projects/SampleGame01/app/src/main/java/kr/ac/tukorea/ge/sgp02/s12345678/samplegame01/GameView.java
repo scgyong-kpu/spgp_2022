@@ -20,23 +20,15 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GameView extends View implements Choreographer.FrameCallback {
-    private static final int BALL_COUNT = 10;
+//    private static final int BALL_COUNT = 10;
     public static GameView view;
     private static final String TAG = GameView.class.getSimpleName();
-//    private Bitmap soccerBitmap;
-//    private int ballDx, ballDy;
-//    private int ball2Dx, ball2Dy;
-//    private Rect srcRect = new Rect();
-//    private Rect dstRect = new Rect();
-//    private Rect dstRect2 = new Rect();
     private Paint fpsPaint = new Paint();
     private long lastTimeNanos;
     private int framesPerSecond;
 
-//    private ArrayList<Ball> balls = new ArrayList<>();
-//    private Fighter fighter;// = new Fighter();
-    private  ArrayList<GameObject> gameObjects = new ArrayList<>();
-    private Fighter fighter;
+//    private  ArrayList<GameObject> gameObjects = new ArrayList<>();
+//    private Fighter fighter;
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -51,28 +43,23 @@ public class GameView extends View implements Choreographer.FrameCallback {
         int elapsed = (int) (now - lastTimeNanos);
         framesPerSecond = 1_000_000_000 / elapsed;
         lastTimeNanos = now;
-        update();
+        MainGame.getInstance().update();
         invalidate();
-//        postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                updateGame();
-//            }
-//        }, 30);
         Choreographer.getInstance().postFrameCallback(this);
     }
 
     private void initView() {
-        Random random = new Random();
-        for (int i = 0; i < BALL_COUNT; i++) {
-            int dx = random.nextInt(10) + 5;
-            int dy = random.nextInt(10) + 5;
-            Ball ball = new Ball(dx, dy);
-            gameObjects.add(ball);
-        }
-
-        fighter = new Fighter();
-        gameObjects.add(fighter);
+        MainGame.getInstance().init();
+//        Random random = new Random();
+//        for (int i = 0; i < BALL_COUNT; i++) {
+//            int dx = random.nextInt(10) + 5;
+//            int dy = random.nextInt(10) + 5;
+//            Ball ball = new Ball(dx, dy);
+//            gameObjects.add(ball);
+//        }
+//
+//        fighter = new Fighter();
+//        gameObjects.add(fighter);
 
         fpsPaint.setColor(Color.BLUE);
         fpsPaint.setTextSize(50);
@@ -80,40 +67,28 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-            case MotionEvent.ACTION_MOVE:
-                float x = event.getX();
-                float y = event.getY();
-                fighter.setPosition(x, y);
-                return true;
-        }
-        return super.onTouchEvent(event);
+        return MainGame.getInstance().onTouchEvent(event);
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//            case MotionEvent.ACTION_MOVE:
+//                float x = event.getX();
+//                float y = event.getY();
+//                fighter.setPosition(x, y);
+//                return true;
+//        }
+//        return super.onTouchEvent(event);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        //super.onDraw(canvas);
-//        for (Ball ball : balls) {
-//            ball.draw(canvas);
+        MainGame.getInstance().draw(canvas);
+//        for (GameObject gobj : gameObjects) {
+//            gobj.draw(canvas);
 //        }
-//        fighter.draw(canvas);
-        for (GameObject gobj : gameObjects) {
-            gobj.draw(canvas);
-        }
 
         canvas.drawText(String.valueOf(framesPerSecond), 0, 100, fpsPaint);
-        Log.d(TAG, "onDraw()");
+//        Log.d(TAG, "onDraw()");
     }
 
-    private void update() {
-//        for (Ball ball : balls) {
-//            ball.update();
-//        }
-//        fighter.update();
-        for (GameObject gobj : gameObjects) {
-            gobj.update();
-        }
-    }
 
 }
