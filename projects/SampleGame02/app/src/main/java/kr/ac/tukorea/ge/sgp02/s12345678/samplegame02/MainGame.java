@@ -14,6 +14,8 @@ public class MainGame {
         return singleton;
     }
 
+    public float frameTime;
+
     private MainGame() {
     }
 
@@ -36,7 +38,8 @@ public class MainGame {
         objects.add(fighter);
     }
 
-    public void update() {
+    public void update(int elapsedNanos) {
+        frameTime = elapsedNanos * 1e-9f; // 1_000_000_000.0f;
         for (GameObject gobj : objects) {
             gobj.update();
         }
