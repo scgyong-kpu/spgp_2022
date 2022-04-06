@@ -51,44 +51,20 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
     private void initView() {
         MainGame.getInstance().init();
-//        Random random = new Random();
-//        for (int i = 0; i < BALL_COUNT; i++) {
-//            int dx = random.nextInt(10) + 5;
-//            int dy = random.nextInt(10) + 5;
-//            Ball ball = new Ball(dx, dy);
-//            gameObjects.add(ball);
-//        }
-//
-//        fighter = new Fighter();
-//        gameObjects.add(fighter);
-
         fpsPaint.setColor(Color.BLUE);
-        fpsPaint.setTextSize(50);
+        fpsPaint.setTextSize(100);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return MainGame.getInstance().onTouchEvent(event);
-//        switch (event.getAction()) {
-//            case MotionEvent.ACTION_DOWN:
-//            case MotionEvent.ACTION_MOVE:
-//                float x = event.getX();
-//                float y = event.getY();
-//                fighter.setPosition(x, y);
-//                return true;
-//        }
-//        return super.onTouchEvent(event);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         MainGame.getInstance().draw(canvas);
-//        for (GameObject gobj : gameObjects) {
-//            gobj.draw(canvas);
-//        }
 
-        canvas.drawText(String.valueOf(framesPerSecond), 0, 100, fpsPaint);
-//        Log.d(TAG, "onDraw()");
+        canvas.drawText("FPS:" + framesPerSecond, framesPerSecond * 10, 100, fpsPaint);
     }
 
 
