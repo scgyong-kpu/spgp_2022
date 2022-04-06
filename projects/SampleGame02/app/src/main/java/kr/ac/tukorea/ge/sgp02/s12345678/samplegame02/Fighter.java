@@ -4,43 +4,25 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Rect;
 import android.graphics.RectF;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.util.TypedValue;
 
-public class Fighter implements GameObject {
+public class Fighter extends Sprite {
 
     private static final String TAG = Fighter.class.getSimpleName();
-    private static Bitmap bitmap;
-    private static Bitmap target;
-    //private static Rect srcRect = new Rect();
-    private RectF dstRect = new RectF();
+    private Bitmap targetBitmap;
     private RectF targetRect = new RectF();
 
-    private float radius;
     private float angle;
-    private float x, y;
     private float dx, dy;
     private float tx, ty;
 
     public Fighter(float x, float y) {
-        this.x = x;
-        this.y = y;
-        radius = Metrics.size(R.dimen.fighter_radius);
-        dstRect.set(x - radius, y - radius,
-                x + radius, y + radius);
-        tx = x;
-        ty = y;
-        targetRect.set(dstRect);
+        super(x, y, R.dimen.fighter_radius, R.mipmap.plane_240);
+        setTargetPosition(x, y);
+        angle = -(float) (Math.PI / 2);
 
-        if (bitmap == null) {
-            Resources res = GameView.view.getResources();
-            bitmap = BitmapFactory.decodeResource(res, R.mipmap.plane_240);
-            //srcRect.set(0, 0, bitmap.getWidth(), bitmap.getHeight());
-            target = BitmapFactory.decodeResource(res, R.mipmap.target);
-        }
+        Resources res = GameView.view.getResources();
+        targetBitmap = BitmapFactory.decodeResource(res, R.mipmap.target);
     }
 
     public void update() {
@@ -69,11 +51,11 @@ public class Fighter implements GameObject {
         canvas.drawBitmap(bitmap, null, dstRect, null);
         canvas.restore();
         if (dx != 0 && dy != 0) {
-            canvas.drawBitmap(target, null, targetRect, null);
+            canvas.drawBitmap(targetBitmap, null, targetRect, null);
         }
     }
 
-    public void setTargetPosition(int tx, int ty) {
+    public void setTargetPosition(float tx, float ty) {
         this.tx = tx;
         this.ty = ty;
         targetRect.set(tx - radius/2, ty - radius/2,

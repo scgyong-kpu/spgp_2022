@@ -7,31 +7,14 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
-public class Ball implements GameObject {
-
-    private static Bitmap bitmap;
-    private static Rect srcRect = new Rect();
-    private RectF dstRect = new RectF();
+public class Ball extends Sprite {
     private float dx, dy;
 
     public Ball(float dx, float dy) {
+        super(100, 100, R.dimen.ball_radius, R.mipmap.soccer_ball_240);
         this.dx = dx;
         this.dy = dy;
-        float radius = Metrics.size(R.dimen.ball_radius);
-        float x = 100, y = 100;
-        dstRect.set(x - radius, y - radius, x + radius, y + radius);
-
-        if (bitmap == null) {
-            Resources res = GameView.view.getResources();
-            bitmap = BitmapFactory.decodeResource(res, R.mipmap.soccer_ball_240);
-            srcRect.set(0, 0, bitmap.getWidth(), bitmap.getHeight());
-        }
     }
-
-//    public static void setBitmap(Bitmap bitmap) {
-//        Ball.bitmap = bitmap;
-//        srcRect.set(0, 0, bitmap.getWidth(), bitmap.getHeight());
-//    }
 
     public void update() {
         MainGame game = MainGame.getInstance();
@@ -56,9 +39,5 @@ public class Ball implements GameObject {
                 this.dy = -this.dy;
             }
         }
-    }
-
-    public void draw(Canvas canvas) {
-        canvas.drawBitmap(bitmap, srcRect, dstRect, null);
     }
 }
