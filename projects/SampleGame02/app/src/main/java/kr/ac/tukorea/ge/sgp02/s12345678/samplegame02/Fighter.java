@@ -50,6 +50,7 @@ public class Fighter implements GameObject {
         float angle = (float) Math.atan2(ty - y, tx - x);
         float speed = Metrics.size(R.dimen.fighter_speed);
         float dist = speed * MainGame.getInstance().frameTime;
+//        Log.d(TAG, "speed=" + speed+" dist="+dist);
         dx = (float) (dist * Math.cos(angle));
         dy = (float) (dist * Math.sin(angle));
         if (dx > 0) {
