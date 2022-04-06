@@ -27,9 +27,12 @@ public class MainGame {
 
     public void init() {
         Random random = new Random();
+        float min = Metrics.size(R.dimen.ball_speed_min);
+        float max = Metrics.size(R.dimen.ball_speed_max);
+        float diff = max - min;
         for (int i = 0; i < BALL_COUNT; i++) {
-            int dx = random.nextInt(500) + 100;
-            int dy = random.nextInt(500) + 100;
+            float dx = random.nextFloat() * diff + min;
+            float dy = random.nextFloat() * diff + min;
             Ball ball = new Ball(dx, dy);
             objects.add(ball);
         }

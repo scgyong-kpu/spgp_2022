@@ -2,4 +2,7 @@
 <resources>
     <dimen name="fighter_radius">30dp</dimen>
     <dimen name="fighter_speed">300dp</dimen>
+    <dimen name="ball_radius">20dp</dimen>
+    <dimen name="ball_speed_min">20dp</dimen>
+    <dimen name="ball_speed_max">200dp</dimen>
 </resources>

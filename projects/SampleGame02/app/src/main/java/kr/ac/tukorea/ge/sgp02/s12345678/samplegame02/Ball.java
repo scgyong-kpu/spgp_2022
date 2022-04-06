@@ -17,7 +17,9 @@ public class Ball implements GameObject {
     public Ball(float dx, float dy) {
         this.dx = dx;
         this.dy = dy;
-        dstRect.set(0, 0, 200, 200);
+        float radius = Metrics.size(R.dimen.ball_radius);
+        float x = 100, y = 100;
+        dstRect.set(x - radius, y - radius, x + radius, y + radius);
 
         if (bitmap == null) {
             Resources res = GameView.view.getResources();
