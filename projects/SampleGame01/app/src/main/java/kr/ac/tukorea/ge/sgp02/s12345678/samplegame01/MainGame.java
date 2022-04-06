@@ -38,7 +38,7 @@ public class MainGame {
             case MotionEvent.ACTION_MOVE:
                 float x = event.getX();
                 float y = event.getY();
-                fighter.setPosition(x, y);
+                fighter.setTargetPosition(x, y);
                 return true;
         }
         return false;
