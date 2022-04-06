@@ -34,7 +34,7 @@ public class MainGame {
             objects.add(ball);
         }
 
-        fighter = new Fighter(GameView.view.getWidth() / 2, 500);
+        fighter = new Fighter(Metrics.width / 2, Metrics.height / 2);
         objects.add(fighter);
     }
 

@@ -37,7 +37,7 @@ public class Ball implements GameObject {
         float dy = this.dy * game.frameTime;
         dstRect.offset(dx, dy);
         if (dx > 0) {
-            if (dstRect.right > GameView.view.getWidth()) {
+            if (dstRect.right > Metrics.width) {
                 this.dx = -this.dx;
             }
         } else {
@@ -46,7 +46,7 @@ public class Ball implements GameObject {
             }
         }
         if (dy > 0) {
-            if (dstRect.bottom > GameView.view.getHeight()) {
+            if (dstRect.bottom > Metrics.height) {
                 this.dy = -this.dy;
             }
         } else {
