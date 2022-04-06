@@ -38,20 +38,20 @@ public class Ball implements GameObject {
         dstRect.offset(dx, dy);
         if (dx > 0) {
             if (dstRect.right > GameView.view.getWidth()) {
-                this.dx = -dx;
+                this.dx = -this.dx;
             }
         } else {
             if (dstRect.left < 0) {
-                this.dx = -dx;
+                this.dx = -this.dx;
             }
         }
         if (dy > 0) {
             if (dstRect.bottom > GameView.view.getHeight()) {
-                this.dy = -dy;
+                this.dy = -this.dy;
             }
         } else {
             if (dstRect.top < 0) {
-                this.dy = -dy;
+                this.dy = -this.dy;
             }
         }
     }

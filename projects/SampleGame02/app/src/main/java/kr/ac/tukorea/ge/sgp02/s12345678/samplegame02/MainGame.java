@@ -28,8 +28,8 @@ public class MainGame {
     public void init() {
         Random random = new Random();
         for (int i = 0; i < BALL_COUNT; i++) {
-            int dx = random.nextInt(100) + 100;
-            int dy = random.nextInt(100) + 100;
+            int dx = random.nextInt(500) + 100;
+            int dy = random.nextInt(500) + 100;
             Ball ball = new Ball(dx, dy);
             objects.add(ball);
         }
