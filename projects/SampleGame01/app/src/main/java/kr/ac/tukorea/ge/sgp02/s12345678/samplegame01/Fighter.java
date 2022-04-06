@@ -19,8 +19,13 @@ public class Fighter implements GameObject {
     private static Bitmap bitmap;
     private static Rect srcRect = new Rect();
 
-    public Fighter() {
-        dstRect.set(0, 0, 200, 200);
+    public Fighter(int x, int y) {
+        this.x = x;
+        this.y = y;
+        this.tx = x;
+        this.ty = y;
+        int radius = 100;
+        dstRect.set(x - radius, y - radius, x + radius, y + radius);
 
         if (bitmap == null) {
             Resources res = GameView.view.getResources();
