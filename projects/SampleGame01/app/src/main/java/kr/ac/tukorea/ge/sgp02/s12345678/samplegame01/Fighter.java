@@ -21,7 +21,7 @@ public class Fighter implements GameObject {
     private static Bitmap bitmap;
     private static Rect srcRect = new Rect();
 
-    public Fighter(int x, int y) {
+    public Fighter(float x, float y) {
         this.x = x;
         this.y = y;
         this.tx = x;

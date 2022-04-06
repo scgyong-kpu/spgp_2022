@@ -26,6 +26,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
     private Paint fpsPaint = new Paint();
     private long lastTimeNanos;
     private int framesPerSecond;
+    private boolean initialized;
 
 //    private  ArrayList<GameObject> gameObjects = new ArrayList<>();
 //    private Fighter fighter;
@@ -33,8 +34,21 @@ public class GameView extends View implements Choreographer.FrameCallback {
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         view = this;
-        initView();
-        Choreographer.getInstance().postFrameCallback(this);
+//        initView();
+//        Choreographer.getInstance().postFrameCallback(this);
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        Metrics.width = w;
+        Metrics.height = h;
+
+        if (!initialized) {
+            initView();
+            initialized = true;
+            Choreographer.getInstance().postFrameCallback(this);
+        }
     }
 
     @Override

@@ -28,7 +28,9 @@ public class MainGame {
             gameObjects.add(ball);
         }
 
-        fighter = new Fighter(500, 500);
+        float fx = Metrics.width / 2;
+        float fy = Metrics.height / 2;
+        fighter = new Fighter(fx, fy);
         gameObjects.add(fighter);
     }
 

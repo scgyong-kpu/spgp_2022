@@ -37,7 +37,7 @@ public class Ball implements GameObject {
                 dx = -dx;
             }
         } else {
-            if (dstRect.right > GameView.view.getWidth()) {
+            if (dstRect.right > Metrics.width) {
                 dx = -dx;
             }
         }
@@ -46,7 +46,7 @@ public class Ball implements GameObject {
                 dy = -dy;
             }
         } else {
-            if (dstRect.bottom > GameView.view.getHeight()) {
+            if (dstRect.bottom > Metrics.height) {
                 dy = -dy;
             }
         }
