@@ -23,7 +23,7 @@ public class Bullet implements GameObject {
         if (paint == null) {
             paint = new Paint();
             paint.setColor(Color.RED);
-            paint.setStrokeWidth(5);
+            paint.setStrokeWidth(Metrics.size(R.dimen.laser_width));
         }
     }
     @Override

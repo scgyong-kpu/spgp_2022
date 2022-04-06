@@ -7,4 +7,5 @@
     <dimen name="ball_speed_max">200dp</dimen>
     <dimen name="laser_length">20dp</dimen>
     <dimen name="laser_speed">1000dp</dimen>
+    <dimen name="laser_width">3dp</dimen>
 </resources>
