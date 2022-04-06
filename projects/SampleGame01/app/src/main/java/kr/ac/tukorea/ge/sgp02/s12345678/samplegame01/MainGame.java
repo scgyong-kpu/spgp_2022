@@ -17,6 +17,7 @@ public class MainGame {
     private static final int BALL_COUNT = 10;
     private ArrayList<GameObject> gameObjects = new ArrayList<>();
     private Fighter fighter;
+    public float frameTime;
 
     public void init() {
         Random random = new Random();
@@ -49,7 +50,8 @@ public class MainGame {
         }
     }
 
-    public void update() {
+    public void update(int elapsedNanos) {
+        frameTime = (float) (elapsedNanos / 1_000_000_000f);
         for (GameObject gobj : gameObjects) {
             gobj.update();
         }
