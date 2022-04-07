@@ -1,23 +1,17 @@
-package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight;
+package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Choreographer;
 import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
-import java.util.Random;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game.MainGame;
 
 public class GameView extends View implements Choreographer.FrameCallback {
     public static GameView view;

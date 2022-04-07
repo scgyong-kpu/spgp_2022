@@ -1,10 +1,12 @@
-package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight;
+package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework;
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.RectF;
+
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BitmapPool;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameObject;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
 
 public class Sprite implements GameObject {
     protected Bitmap bitmap;

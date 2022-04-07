@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".app.MainActivity">
 
-    <kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.GameView
+    <kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />

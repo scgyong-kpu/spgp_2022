@@ -1,8 +1,13 @@
-package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight;
+package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
+
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.R;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Sprite;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BitmapPool;
 
 public class Fighter extends Sprite {
     private static final String TAG = Fighter.class.getSimpleName();
