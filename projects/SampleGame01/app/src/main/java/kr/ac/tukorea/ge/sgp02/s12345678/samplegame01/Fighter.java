@@ -37,22 +37,11 @@ public class Fighter implements GameObject {
         }
     }
 
-//    public static void setBitmap(Bitmap bitmap) {
-//        Fighter.bitmap = bitmap;
-//        srcRect.set(0, 0, bitmap.getWidth(), bitmap.getHeight());
-//    }
-
     public void draw(Canvas canvas) {
         canvas.drawBitmap(bitmap, srcRect, dstRect, null);
     }
 
     public void update() {
-        float angle = (float) Math.atan2(ty - y, tx - x);
-        float speed = Metrics.size(R.dimen.fighter_speed);
-        float dist = speed * MainGame.getInstance().frameTime;
-        dx = (float) (dist * Math.cos(angle));
-        dy = (float) (dist * Math.sin(angle));
-//        Log.d(TAG, "x="+x+" y="+y+" dx="+dx+" dy="+dy);
         if (dx > 0) {
             if (x + dx > tx) {
                 x = tx;
@@ -88,14 +77,13 @@ public class Fighter implements GameObject {
         dstRect.offset(dx, dy);
     }
 
-    public void setTargetPosition(float x, float y) {
-        tx = x;
-        ty = y;
-        //int hw = 200 / 2, hh = 200 / 2;
-//        int radius = 200 / 2;
-//        dstRect.set((int)x - radius,
-//                (int)y - radius,
-//                (int)x + radius,
-//                (int)y + radius);
+    public void setTargetPosition(float tx, float ty) {
+        this.tx = tx;
+        this.ty = ty;
+        float angle = (float) Math.atan2(ty - y, tx - x);
+        float speed = Metrics.size(R.dimen.fighter_speed);
+        float dist = speed * MainGame.getInstance().frameTime;
+        dx = (float) (dist * Math.cos(angle));
+        dy = (float) (dist * Math.sin(angle));
     }
 }
