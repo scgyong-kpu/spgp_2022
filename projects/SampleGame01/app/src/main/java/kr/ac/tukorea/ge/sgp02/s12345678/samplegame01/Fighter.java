@@ -42,38 +42,21 @@ public class Fighter implements GameObject {
     }
 
     public void update() {
-        if (dx > 0) {
-            if (x + dx > tx) {
-                x = tx;
-                dx = tx - x;
-            } else {
-                x += dx;
-            }
+        if (dx == 0 && dy == 0)
+            return;
+
+        if ((dx > 0 && x + dx > tx) || (dx < 0 && x + dx < tx)) {
+            dx = tx - x;
+            x = tx;
         } else {
-            if (x + dx < tx) {
-                x = tx;
-                dx = tx - x;
-            } else {
-                x += dx;
-            }
+            x += dx;
         }
-        if (dy > 0) {
-            if (y + dy > ty) {
-                y = ty;
-                dy = ty - y;
-            } else {
-                y += dy;
-            }
+        if ((dy > 0 && y + dy > ty) || (dy < 0 && y + dy < ty)) {
+            dy = ty - y;
+            y = ty;
         } else {
-            if (y + dy < ty) {
-                y = ty;
-                dy = ty - y;
-            } else {
-                y += dy;
-            }
+            y += dy;
         }
-//        x += dx;
-//        y += dy;
         dstRect.offset(dx, dy);
     }
 
