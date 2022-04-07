@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.R;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameObject;
 
@@ -36,7 +37,7 @@ public class MainGame {
 //        }
 
         float fx = Metrics.width / 2;
-        float fy = Metrics.height / 2;
+        float fy = Metrics.height - Metrics.size(R.dimen.fighter_y_offset);
         fighter = new Fighter(fx, fy);
         gameObjects.add(fighter);
     }
