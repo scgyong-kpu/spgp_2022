@@ -16,6 +16,7 @@ public class Fighter implements GameObject {
     private RectF targetRect = new RectF();
 
     private float radius;
+    private float angle;
     private float x, y;
     private float dx, dy;
     private float tx, ty;
@@ -34,6 +35,7 @@ public class Fighter implements GameObject {
         this.tx = x;
         this.ty = y;
         targetRect.set(dstRect);
+        angle = -(float) (Math.PI / 2);
 
         if (bitmap == null) {
             Resources res = GameView.view.getResources();
@@ -44,7 +46,10 @@ public class Fighter implements GameObject {
     }
 
     public void draw(Canvas canvas) {
+        canvas.save();
+        canvas.rotate((float) (angle * 180 / Math.PI) + 90, x, y);
         canvas.drawBitmap(bitmap, null, dstRect, null);
+        canvas.restore();
         if (dx != 0 && dy != 0) {
             canvas.drawBitmap(targetBitmap, null, targetRect, null);
         }
@@ -74,7 +79,7 @@ public class Fighter implements GameObject {
         this.ty = ty;
         targetRect.set(tx - radius/2, ty - radius/2,
                 tx + radius/2, ty + radius/2);
-        float angle = (float) Math.atan2(ty - y, tx - x);
+        angle = (float) Math.atan2(ty - y, tx - x);
         float speed = Metrics.size(R.dimen.fighter_speed);
         float dist = speed * MainGame.getInstance().frameTime;
         dx = (float) (dist * Math.cos(angle));
