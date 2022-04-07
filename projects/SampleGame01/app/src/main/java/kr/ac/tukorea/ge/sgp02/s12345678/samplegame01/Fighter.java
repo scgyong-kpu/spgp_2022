@@ -10,39 +10,24 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 
-public class Fighter implements GameObject {
+public class Fighter extends Sprite {
     private static final String TAG = Fighter.class.getSimpleName();
-    private RectF dstRect = new RectF();
     private RectF targetRect = new RectF();
 
-    private float radius;
     private float angle;
-    private float x, y;
     private float dx, dy;
     private float tx, ty;
 
-    private static Bitmap bitmap;
     private static Bitmap targetBitmap;
 //    private static Rect srcRect;
 
     public Fighter(float x, float y) {
-        this.x = x;
-        this.y = y;
-//        Resources res = GameView.view.getResources();
-        radius = Metrics.size(R.dimen.fighter_radius);
-        dstRect.set(x - radius, y - radius, x + radius, y + radius);
-
-        this.tx = x;
-        this.ty = y;
-        targetRect.set(dstRect);
+        super(x, y, R.dimen.fighter_radius, R.mipmap.plane_240);
+        setTargetPosition(x, y);
         angle = -(float) (Math.PI / 2);
 
-        if (bitmap == null) {
-            Resources res = GameView.view.getResources();
-            bitmap = BitmapFactory.decodeResource(res, R.mipmap.plane_240);
-//            srcRect.set(0, 0, bitmap.getWidth(), bitmap.getHeight());
-            targetBitmap = BitmapFactory.decodeResource(res, R.mipmap.target);
-        }
+        Resources res = GameView.view.getResources();
+        targetBitmap = BitmapFactory.decodeResource(res, R.mipmap.target);
     }
 
     public void draw(Canvas canvas) {
