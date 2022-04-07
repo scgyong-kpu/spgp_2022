@@ -28,6 +28,7 @@ public class Fighter extends Sprite {
         //angle = -(float) (Math.PI / 2);
 
         targetBitmap = BitmapPool.get(R.mipmap.target);
+        fireInterval = Metrics.floatValue(R.dimen.fighter_fire_interval);
     }
 
     public void draw(Canvas canvas) {
