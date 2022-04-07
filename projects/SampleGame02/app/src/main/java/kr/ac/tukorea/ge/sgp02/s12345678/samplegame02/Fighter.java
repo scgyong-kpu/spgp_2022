@@ -47,7 +47,7 @@ public class Fighter extends Sprite {
         canvas.rotate((float) (angle * 180 / Math.PI) + 90, x, y);
         canvas.drawBitmap(bitmap, null, dstRect, null);
         canvas.restore();
-        if (dx != 0 && dy != 0) {
+        if (dx != 0 || dy != 0) {
             canvas.drawBitmap(targetBitmap, null, targetRect, null);
         }
     }
