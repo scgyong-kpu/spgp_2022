@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GameView extends View implements Choreographer.FrameCallback {
-//    private static final int BALL_COUNT = 10;
     public static GameView view;
     private static final String TAG = GameView.class.getSimpleName();
     private Paint fpsPaint = new Paint();
@@ -28,14 +27,9 @@ public class GameView extends View implements Choreographer.FrameCallback {
     private int framesPerSecond;
     private boolean initialized;
 
-//    private  ArrayList<GameObject> gameObjects = new ArrayList<>();
-//    private Fighter fighter;
-
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         view = this;
-//        initView();
-//        Choreographer.getInstance().postFrameCallback(this);
     }
 
     @Override
@@ -82,6 +76,4 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
         canvas.drawText("FPS:" + framesPerSecond, framesPerSecond * 10, 100, fpsPaint);
     }
-
-
 }
