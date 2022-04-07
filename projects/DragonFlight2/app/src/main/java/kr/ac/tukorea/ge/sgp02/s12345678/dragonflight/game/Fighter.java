@@ -3,6 +3,7 @@ package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
+import android.util.Log;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.R;
@@ -36,7 +37,7 @@ public class Fighter extends Sprite {
 //        canvas.rotate((float) (angle * 180 / Math.PI) + 90, x, y);
         canvas.drawBitmap(bitmap, null, dstRect, null);
 //        canvas.restore();
-        if (dx != 0 && dy != 0) {
+        if (dx != 0 || dy != 0) {
             canvas.drawBitmap(targetBitmap, null, targetRect, null);
         }
     }
@@ -70,8 +71,8 @@ public class Fighter extends Sprite {
     public void setTargetPosition(float tx, float ty) {
         this.tx = tx;
         this.ty = y;
-        targetRect.set(tx - radius/2, ty - radius/2,
-                tx + radius/2, ty + radius/2);
+        targetRect.set(tx - radius/2, y - radius/2,
+                tx + radius/2, y + radius/2);
 //        angle = (float) Math.atan2(ty - y, tx - x);
         dx = Metrics.size(R.dimen.fighter_speed);
         if (tx < x) {
