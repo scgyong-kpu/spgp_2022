@@ -41,6 +41,7 @@ public class MainGame {
         float fy = Metrics.height - Metrics.size(R.dimen.fighter_y_offset);
         fighter = new Fighter(fx, fy);
         gameObjects.add(fighter);
+        gameObjects.add(new EnemyGenerator());
     }
 
     public boolean onTouchEvent(MotionEvent event) {
