@@ -1,6 +1,9 @@
 package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -27,19 +30,8 @@ public class MainGame {
     private Fighter fighter;
     public float frameTime;
 
+    private Paint collisionPaint;
     public void init() {
-//        Random random = new Random();
-//        float min = Metrics.size(R.dimen.ball_speed_min);
-//        float max = Metrics.size(R.dimen.ball_speed_max);
-//        float diff = max - min;
-//        for (int i = 0; i < BALL_COUNT; i++) {
-////            int dx = random.nextInt(10) + 5;
-////            int dy = random.nextInt(10) + 5;
-//            float dx = random.nextFloat() * diff + min;
-//            float dy = random.nextFloat() * diff + min;
-//            Ball ball = new Ball(dx, dy);
-//            gameObjects.add(ball);
-//        }
         gameObjects.clear();
 
         float fx = Metrics.width / 2;
@@ -47,6 +39,11 @@ public class MainGame {
         fighter = new Fighter(fx, fy);
         gameObjects.add(fighter);
         gameObjects.add(new EnemyGenerator());
+
+        collisionPaint = new Paint();
+        collisionPaint.setColor(Color.RED);
+        collisionPaint.setStrokeWidth(1);
+        collisionPaint.setStyle(Paint.Style.STROKE);
     }
 
     public boolean onTouchEvent(MotionEvent event) {
@@ -69,6 +66,14 @@ public class MainGame {
         for (GameObject gobj : gameObjects) {
             gobj.draw(canvas);
         }
+
+        for (GameObject gobj : gameObjects) {
+            if (gobj instanceof BoxCollidable) {
+                RectF rect = ((BoxCollidable) gobj).getBoundingRect();
+                canvas.drawRect(rect, collisionPaint);
+            }
+        }
+
     }
 
     public void update(int elapsedNanos) {
