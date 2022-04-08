@@ -27,7 +27,6 @@ public class EnemyGenerator implements GameObject {
         if (elapsedTime > spawnInterval) {
             spawn();
             elapsedTime -= spawnInterval;
-            Log.d(TAG, "Object count = " + MainGame.getInstance().objectCount());
         }
     }
 
