@@ -1,6 +1,7 @@
 package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game;
 
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameObject;
 
 public class MainGame {
+    private static final String TAG = MainGame.class.getSimpleName();
     private static MainGame singleton;
     public static MainGame getInstance() {
         if (singleton == null) {
@@ -36,6 +38,7 @@ public class MainGame {
 //            Ball ball = new Ball(dx, dy);
 //            gameObjects.add(ball);
 //        }
+        gameObjects.clear();
 
         float fx = Metrics.width / 2;
         float fy = Metrics.height - Metrics.size(R.dimen.fighter_y_offset);
@@ -53,7 +56,7 @@ public class MainGame {
                 float y = event.getY();
                 fighter.setTargetPosition(x, y);
 //                if (action == MotionEvent.ACTION_DOWN) {
-//                    fighter.fire();
+//                    Log.d(TAG, "Object count = " + MainGame.getInstance().objectCount());
 //                }
                 return true;
         }
