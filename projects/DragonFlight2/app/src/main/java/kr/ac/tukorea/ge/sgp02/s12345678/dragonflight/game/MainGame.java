@@ -77,6 +77,7 @@ public class MainGame {
             gobj.update();
         }
 
+        boolean removed = false;
         for (GameObject o1 : gameObjects) {
             if (!(o1 instanceof Enemy)) {
                 continue;
@@ -88,7 +89,14 @@ public class MainGame {
 
                 if (CollisionHelper.collides((BoxCollidable)o1, (BoxCollidable)o2)) {
                     Log.d(TAG, "Collision!" + o1 + " - " + o2);
+                    remove(o1);
+                    remove(o2);
+                    removed = true;
+                    break;
                 }
+            }
+            if (removed) {
+                break;
             }
         }
     }
