@@ -3,38 +3,37 @@ package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BoxCollidable;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameObject;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.R;
 
-public class Bullet implements GameObject {
+public class Bullet implements GameObject, BoxCollidable {
     protected float x, y;
     protected final float length;
-    protected final float dx, dy;
-    protected final float ex, ey;
+    protected final float dy;
     protected static Paint paint;
+    protected static float width;
     public Bullet(float x, float y, float angle) {
         this.x = x;
         this.y = y;
         this.length = Metrics.size(R.dimen.laser_length);
         float speed = Metrics.size(R.dimen.laser_speed);
-        this.dx = (float) (speed * Math.cos(angle));
-        this.dy = (float) (speed * Math.sin(angle));
-        this.ex = (float) (length * Math.cos(angle));
-        this.ey = (float) (length * Math.sin(angle));
+        this.dy = -speed;
 
         if (paint == null) {
             paint = new Paint();
             paint.setColor(Color.RED);
-            paint.setStrokeWidth(Metrics.size(R.dimen.laser_width));
+            width = Metrics.size(R.dimen.laser_width);
+            paint.setStrokeWidth(width);
         }
     }
     @Override
     public void update() {
         MainGame game = MainGame.getInstance();
         float frameTime = game.frameTime;
-        x += dx * frameTime;
         y += dy * frameTime;
 
         if (y < 0) {
@@ -44,6 +43,12 @@ public class Bullet implements GameObject {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawLine(x, y, x + ex, y + ey, paint);
+        canvas.drawLine(x, y, x, y + length, paint);
+    }
+
+    @Override
+    public RectF getBoundingRect() {
+        RectF rect = new RectF(x - width/2, y - length, x + width/2, y);
+        return rect;
     }
 }

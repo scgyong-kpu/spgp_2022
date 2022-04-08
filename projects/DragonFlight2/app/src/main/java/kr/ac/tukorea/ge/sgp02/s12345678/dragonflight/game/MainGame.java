@@ -7,6 +7,8 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.R;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BoxCollidable;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.CollisionHelper;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameView;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameObject;
@@ -73,6 +75,21 @@ public class MainGame {
         frameTime = (float) (elapsedNanos / 1_000_000_000f);
         for (GameObject gobj : gameObjects) {
             gobj.update();
+        }
+
+        for (GameObject o1 : gameObjects) {
+            if (!(o1 instanceof Enemy)) {
+                continue;
+            }
+            for (GameObject o2 : gameObjects) {
+                if (!(o2 instanceof Bullet)) {
+                    continue;
+                }
+
+                if (CollisionHelper.collides((BoxCollidable)o1, (BoxCollidable)o2)) {
+                    Log.d(TAG, "Collision!" + o1 + " - " + o2);
+                }
+            }
         }
     }
 
