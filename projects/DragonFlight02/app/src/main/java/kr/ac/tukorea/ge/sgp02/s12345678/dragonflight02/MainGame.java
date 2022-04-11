@@ -63,9 +63,6 @@ public class MainGame {
                 int x = (int) event.getX();
                 int y = (int) event.getY();
                 fighter.setTargetPosition(x, y);
-                if (action == MotionEvent.ACTION_DOWN) {
-                    fighter.fire();
-                }
                 return true;
         }
         return false;
