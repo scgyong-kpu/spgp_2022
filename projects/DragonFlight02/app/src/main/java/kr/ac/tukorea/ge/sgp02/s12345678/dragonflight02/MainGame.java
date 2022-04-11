@@ -37,7 +37,8 @@ public class MainGame {
 //            objects.add(ball);
 //        }
 
-        fighter = new Fighter(Metrics.width / 2, Metrics.height / 2);
+        float fighterY = Metrics.height - Metrics.size(R.dimen.fighter_y_offset);
+        fighter = new Fighter(Metrics.width / 2, fighterY);
         objects.add(fighter);
     }
 
