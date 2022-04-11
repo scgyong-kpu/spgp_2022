@@ -74,4 +74,8 @@ public class MainGame {
     public void add(GameObject gameObject) {
         objects.add(gameObject);
     }
+
+    public void remove(GameObject gameObject) {
+        objects.remove(gameObject);
+    }
 }
