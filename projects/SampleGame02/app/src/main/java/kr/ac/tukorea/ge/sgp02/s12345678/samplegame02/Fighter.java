@@ -26,15 +26,20 @@ public class Fighter extends Sprite {
         if (dx == 0 && dy == 0)
             return;
 
+        float frameTime = MainGame.getInstance().frameTime;
+        float dx = this.dx * frameTime;
         if ((dx > 0 && x + dx > tx) || (dx < 0 && x + dx < tx)) {
             dx = tx - x;
             x = tx;
+            this.dx = 0;
         } else {
             x += dx;
         }
+        float dy = this.dy * frameTime;
         if ((dy > 0 && y + dy > ty) || (dy < 0 && y + dy < ty)) {
             dy = ty - y;
             y = ty;
+            this.dy = 0;
         } else {
             y += dy;
         }
@@ -60,10 +65,10 @@ public class Fighter extends Sprite {
 
         angle = (float) Math.atan2(ty - this.y, tx - this.x);
         float speed = Metrics.size(R.dimen.fighter_speed);
-        float dist = speed * MainGame.getInstance().frameTime;
+//        float dist = speed * MainGame.getInstance().frameTime;
 //        Log.d(TAG, "speed=" + speed+" dist="+dist);
-        dx = (float) (dist * Math.cos(angle));
-        dy = (float) (dist * Math.sin(angle));
+        dx = (float) (speed * Math.cos(angle));
+        dy = (float) (speed * Math.sin(angle));
     }
 
     public void fire() {

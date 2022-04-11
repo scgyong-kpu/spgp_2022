@@ -14,23 +14,11 @@ public class Ball extends Sprite {
         float dx = this.dx * game.frameTime;
         float dy = this.dy * game.frameTime;
         dstRect.offset(dx, dy);
-        if (dx > 0) {
-            if (dstRect.right > Metrics.width) {
-                this.dx = -this.dx;
-            }
-        } else {
-            if (dstRect.left < 0) {
-                this.dx = -this.dx;
-            }
+        if ((dx > 0 && dstRect.right > Metrics.width) || (dx < 0 && dstRect.left < 0)) {
+            this.dx = -this.dx;
         }
-        if (dy > 0) {
-            if (dstRect.bottom > Metrics.height) {
-                this.dy = -this.dy;
-            }
-        } else {
-            if (dstRect.top < 0) {
-                this.dy = -this.dy;
-            }
+        if ((dy > 0 && dstRect.bottom > Metrics.height) || (dy < 0 && dstRect.top < 0)) {
+            this.dy = -this.dy;
         }
     }
 }
