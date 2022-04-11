@@ -9,4 +9,5 @@
     <dimen name="laser_speed">1000dp</dimen>
     <dimen name="laser_width">3dp</dimen>
     <dimen name="fighter_y_offset">100dp</dimen>
+    <item name="fighter_fire_interval" type="dimen" format="float">0.2</item>
 </resources>

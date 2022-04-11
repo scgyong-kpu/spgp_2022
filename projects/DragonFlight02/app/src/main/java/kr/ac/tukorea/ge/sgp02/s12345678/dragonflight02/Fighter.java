@@ -21,7 +21,7 @@ public class Fighter extends Sprite {
         setTargetPosition(x, y);
 
         targetBitmap = BitmapPool.get(R.mipmap.target);
-        fireInterval = 0.2f;
+        fireInterval = Metrics.floatValue(R.dimen.fighter_fire_interval);
     }
 
     public void update() {
