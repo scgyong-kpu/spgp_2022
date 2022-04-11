@@ -72,10 +72,20 @@ public class MainGame {
     }
 
     public void add(GameObject gameObject) {
-        objects.add(gameObject);
+        GameView.view.post(new Runnable() {
+            @Override
+            public void run() {
+                objects.add(gameObject);
+            }
+        });
     }
 
     public void remove(GameObject gameObject) {
-        objects.remove(gameObject);
+        GameView.view.post(new Runnable() {
+            @Override
+            public void run() {
+                objects.remove(gameObject);
+            }
+        });
     }
 }
