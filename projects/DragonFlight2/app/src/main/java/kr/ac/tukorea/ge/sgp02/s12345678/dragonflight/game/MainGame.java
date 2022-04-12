@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.R;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BoxCollidable;
@@ -15,6 +16,7 @@ import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.CollisionHelper;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameView;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameObject;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Recyclable;
 
 public class MainGame {
     private static final String TAG = MainGame.class.getSimpleName();
@@ -80,6 +82,7 @@ public class MainGame {
     public void update(int elapsedNanos) {
         frameTime = (float) (elapsedNanos / 1_000_000_000f);
         playTime += frameTime;
+//        Log.d(TAG, "--------------------------------------------");
         for (GameObject gobj : gameObjects) {
             gobj.update();
         }
@@ -122,11 +125,32 @@ public class MainGame {
             @Override
             public void run() {
                 gameObjects.remove(gameObject);
+                if (gameObject instanceof Recyclable) {
+                    recycle((Recyclable) gameObject);
+                }
             }
         });
     }
 
     public int objectCount() {
         return gameObjects.size();
+    }
+
+    private static HashMap<Class, ArrayList<Recyclable>> recycleBin = new HashMap<>();
+
+    public void recycle(Recyclable object) {
+        object.recycle();
+        Class clazz = object.getClass();
+        ArrayList<Recyclable> array = recycleBin.get(clazz);
+        if (array == null) {
+            array = new ArrayList<>();
+            recycleBin.put(clazz, array);
+        }
+        array.add(object);
+    }
+    public Recyclable get(Class clazz) {
+        ArrayList<Recyclable> array = recycleBin.get(clazz);
+        if (array == null || array.isEmpty()) return null;
+        return array.remove(0);
     }
 }
