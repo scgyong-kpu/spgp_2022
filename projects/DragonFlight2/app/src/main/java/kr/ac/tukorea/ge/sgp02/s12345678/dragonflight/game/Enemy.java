@@ -9,9 +9,15 @@ import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Sprite;
 
 public class Enemy extends AnimSprite implements BoxCollidable {
-    public static float size;
+    public static void setSize(float size) {
+        Enemy.size = size;
+        Enemy.inset = size / 10;
+    }
+
+    private static float size, inset;
     private final int level;
     protected float dy;
+    protected RectF boundingRect = new RectF();
 
     private static final int[] bitmapIds = {
             R.mipmap.enemy_01,R.mipmap.enemy_02,R.mipmap.enemy_03,R.mipmap.enemy_04,R.mipmap.enemy_05,
@@ -21,8 +27,8 @@ public class Enemy extends AnimSprite implements BoxCollidable {
     };
     public static final int MIN_LEVEL = 0;
     public static final int MAX_LEVEL = bitmapIds.length - 1;
-    public Enemy(int level, float x, float y, float speed) {
-        super(x, y, size, size, bitmapIds[level], 8, 0);
+    public Enemy(int level, float x, float speed) {
+        super(x, -size, size, size, bitmapIds[level], 8, 0);
         this.level = level;
         dy = speed;
     }
@@ -32,13 +38,16 @@ public class Enemy extends AnimSprite implements BoxCollidable {
         float frameTime = MainGame.getInstance().frameTime;
         y += dy * frameTime;
         setDstRectWithRadius();
+        boundingRect.set(dstRect);
+        boundingRect.inset(inset, inset);
         if (dstRect.top > Metrics.height) {
             MainGame.getInstance().remove(this);
+            return;
         }
     }
 
     @Override
     public RectF getBoundingRect() {
-        return dstRect;
+        return boundingRect;
     }
 }
