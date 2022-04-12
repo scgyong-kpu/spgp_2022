@@ -16,6 +16,7 @@ public class Bullet implements GameObject, BoxCollidable {
     protected final float dy;
     protected static Paint paint;
     protected static float width;
+    protected RectF boundingRect = new RectF();
     public Bullet(float x, float y, float angle) {
         this.x = x;
         this.y = y;
@@ -39,16 +40,17 @@ public class Bullet implements GameObject, BoxCollidable {
         if (y < 0) {
             game.remove(this);
         }
+        boundingRect.set(x - width / 2, y - length, x + width / 2, y);
     }
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawLine(x, y, x, y + length, paint);
+        canvas.drawLine(x, y, x, y - length, paint);
     }
 
     @Override
     public RectF getBoundingRect() {
-        RectF rect = new RectF(x - width/2, y - length, x + width/2, y);
+        RectF rect = new RectF(x - width/2, y, x + width/2, y);
         return rect;
     }
 }
