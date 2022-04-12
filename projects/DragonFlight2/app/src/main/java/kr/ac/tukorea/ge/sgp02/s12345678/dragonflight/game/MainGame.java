@@ -29,6 +29,7 @@ public class MainGame {
     private ArrayList<GameObject> gameObjects = new ArrayList<>();
     private Fighter fighter;
     public float frameTime;
+    public float playTime;
 
     private Paint collisionPaint;
     public void init() {
@@ -78,6 +79,7 @@ public class MainGame {
 
     public void update(int elapsedNanos) {
         frameTime = (float) (elapsedNanos / 1_000_000_000f);
+        playTime += frameTime;
         for (GameObject gobj : gameObjects) {
             gobj.update();
         }
