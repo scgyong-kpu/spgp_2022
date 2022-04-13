@@ -3,16 +3,21 @@ package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.game;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.BoxCollidable;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.GameObject;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.R;
 
-public class Bullet implements GameObject {
+public class Bullet implements GameObject, BoxCollidable {
     protected float x, y;
     protected final float length;
     protected final float dy;
+
     protected static Paint paint;
+    protected static float laserWidth;
+
     public Bullet(float x, float y) {
         this.x = x;
         this.y = y;
@@ -22,7 +27,8 @@ public class Bullet implements GameObject {
         if (paint == null) {
             paint = new Paint();
             paint.setColor(Color.RED);
-            paint.setStrokeWidth(Metrics.size(R.dimen.laser_width));
+            laserWidth = Metrics.size(R.dimen.laser_width);
+            paint.setStrokeWidth(laserWidth);
         }
     }
     @Override
@@ -38,5 +44,11 @@ public class Bullet implements GameObject {
     @Override
     public void draw(Canvas canvas) {
         canvas.drawLine(x, y, x, y - length, paint);
+    }
+
+    @Override
+    public RectF getBoundingRect() {
+        float hw = laserWidth / 2;
+        return new RectF(x - hw, y, x + hw, y - length);
     }
 }

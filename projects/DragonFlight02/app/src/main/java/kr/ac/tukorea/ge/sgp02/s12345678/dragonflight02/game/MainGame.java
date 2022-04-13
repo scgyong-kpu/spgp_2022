@@ -1,16 +1,20 @@
 package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.game;
 
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.CollisionHelper;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.R;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.GameObject;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.GameView;
 
 public class MainGame {
+    private static final String TAG = MainGame.class.getSimpleName();
+
     public static MainGame getInstance() {
         if (singleton == null) {
             singleton = new MainGame();
@@ -48,6 +52,26 @@ public class MainGame {
         frameTime = elapsedNanos * 1e-9f; // 1_000_000_000.0f;
         for (GameObject gobj : objects) {
             gobj.update();
+        }
+
+        checkCollision();
+    }
+
+    private void checkCollision() {
+        for (GameObject o1: objects) {
+            if (!(o1 instanceof Enemy)) {
+                continue;
+            }
+            Enemy enemy = (Enemy) o1;
+            for (GameObject o2: objects) {
+                if (!(o2 instanceof Bullet)) {
+                    continue;
+                }
+                Bullet bullet = (Bullet) o2;
+                if (CollisionHelper.collides(enemy, bullet)) {
+                    Log.d(TAG, "Collision !!");
+                }
+            }
         }
     }
 
