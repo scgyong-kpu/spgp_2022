@@ -70,6 +70,9 @@ public class MainGame {
                 Bullet bullet = (Bullet) o2;
                 if (CollisionHelper.collides(enemy, bullet)) {
                     Log.d(TAG, "Collision !!");
+                    remove(enemy);
+                    remove(bullet);
+                    break;
                 }
             }
         }
