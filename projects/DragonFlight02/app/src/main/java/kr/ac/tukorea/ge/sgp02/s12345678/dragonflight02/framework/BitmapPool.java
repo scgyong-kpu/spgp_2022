@@ -1,4 +1,4 @@
-package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02;
+package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;

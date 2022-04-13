@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DragonFlight02">
         <activity
-            android:name=".MainActivity"
+            android:name=".app.MainActivity"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>

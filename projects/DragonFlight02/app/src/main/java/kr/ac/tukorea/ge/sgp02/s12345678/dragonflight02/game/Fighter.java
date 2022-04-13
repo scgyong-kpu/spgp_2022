@@ -1,8 +1,13 @@
-package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02;
+package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.game;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
+
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Metrics;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.R;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Sprite;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.BitmapPool;
 
 public class Fighter extends Sprite {
 

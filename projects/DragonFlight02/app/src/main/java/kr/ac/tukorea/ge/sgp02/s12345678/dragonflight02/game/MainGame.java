@@ -1,10 +1,14 @@
-package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02;
+package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.game;
 
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
-import java.util.Random;
+
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Metrics;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.R;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.GameObject;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.GameView;
 
 public class MainGame {
     public static MainGame getInstance() {
