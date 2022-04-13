@@ -14,6 +14,7 @@ public class Bullet implements GameObject, BoxCollidable {
     protected float x, y;
     protected final float length;
     protected final float dy;
+    protected RectF boundingRect = new RectF();
 
     protected static Paint paint;
     protected static float laserWidth;
@@ -36,6 +37,9 @@ public class Bullet implements GameObject, BoxCollidable {
         float frameTime = MainGame.getInstance().frameTime;
         y += dy * frameTime;
 
+        float hw = laserWidth / 2;
+        boundingRect.set(x - hw, y, x + hw, y - length);
+
         if (y < 0) {
             MainGame.getInstance().remove(this);
         }
@@ -48,7 +52,6 @@ public class Bullet implements GameObject, BoxCollidable {
 
     @Override
     public RectF getBoundingRect() {
-        float hw = laserWidth / 2;
-        return new RectF(x - hw, y, x + hw, y - length);
+        return boundingRect;
     }
 }

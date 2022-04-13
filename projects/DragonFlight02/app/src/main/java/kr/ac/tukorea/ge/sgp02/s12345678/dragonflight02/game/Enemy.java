@@ -9,15 +9,18 @@ import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Sprite;
 
 public class Enemy extends Sprite implements BoxCollidable {
     protected float dy;
+    protected RectF boundingRect = new RectF();
+
     public Enemy(float x, float speed) {
 //        super(x, 0, R.dimen.enemy_radius, R.mipmap.f_01_01);
         super(x, -size/2, size, size, R.mipmap.f_01_01);
         dy = speed;
     }
 
-    private static float size;
+    private static float size, inset;
     public static void setSize(float size) {
         Enemy.size = size;
+        Enemy.inset = size / 16;
     }
 
     @Override
@@ -25,6 +28,8 @@ public class Enemy extends Sprite implements BoxCollidable {
         float frameTime = MainGame.getInstance().frameTime;
         y += dy * frameTime;
         setDstRectWithRadius();
+        boundingRect.set(dstRect);
+        boundingRect.inset(inset, inset);
         if (dstRect.top > Metrics.height) {
             MainGame.getInstance().remove(this);
         }
@@ -32,6 +37,6 @@ public class Enemy extends Sprite implements BoxCollidable {
 
     @Override
     public RectF getBoundingRect() {
-        return dstRect;
+        return boundingRect;
     }
 }
