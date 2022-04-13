@@ -31,8 +31,12 @@ public class EnemyGenerator implements GameObject {
     }
 
     private void spawn() {
-        Enemy enemy = new Enemy(Metrics.width / 2, fallSpeed);
-        MainGame.getInstance().add(enemy);
+        float tenth = Metrics.width / 10;
+        for (int i = 1; i <= 9; i += 2) {
+            float x = i * tenth;
+            Enemy enemy = new Enemy(x, fallSpeed);
+            MainGame.getInstance().add(enemy);
+        }
     }
 
     @Override
