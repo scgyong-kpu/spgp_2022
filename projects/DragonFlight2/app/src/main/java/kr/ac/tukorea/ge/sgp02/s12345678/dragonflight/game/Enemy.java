@@ -6,8 +6,10 @@ import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Sprite;
 
 public class Enemy extends Sprite {
     protected float dy;
-    public Enemy(float x, float y, float speed) {
-        super(x, y, R.dimen.enemy_radius, R.mipmap.f_01_01);
+    public Enemy(float x, float speed) {
+        super(x, 0, R.dimen.enemy_radius, R.mipmap.f_01_01);
+        y -= radius;
+        setDstRectWithRadius();
         dy = speed;
     }
 

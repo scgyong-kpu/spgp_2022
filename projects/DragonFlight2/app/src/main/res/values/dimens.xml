@@ -10,6 +10,6 @@
     <dimen name="laser_width">3dp</dimen>
     <dimen name="fighter_y_offset">100dp</dimen>
     <dimen name="enemy_radius">30dp</dimen>
-    <dimen name="enemy_initial_speed">100dp</dimen>
+    <dimen name="enemy_initial_speed">10dp</dimen>
     <item name="fighter_fire_interval" type="dimen" format="float">0.2</item>
 </resources>
