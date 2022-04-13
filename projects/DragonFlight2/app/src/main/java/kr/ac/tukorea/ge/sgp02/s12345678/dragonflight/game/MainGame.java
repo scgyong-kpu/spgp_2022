@@ -1,16 +1,19 @@
 package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game;
 
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.R;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.CollisionHelper;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameView;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameObject;
 
 public class MainGame {
+    private static final String TAG = MainGame.class.getSimpleName();
     private static MainGame singleton;
     public static MainGame getInstance() {
         if (singleton == null) {
@@ -65,6 +68,35 @@ public class MainGame {
         frameTime = (float) (elapsedNanos / 1_000_000_000f);
         for (GameObject gobj : gameObjects) {
             gobj.update();
+        }
+
+        checkCollision();
+    }
+
+    private void checkCollision() {
+        for (GameObject o1 : gameObjects) {
+            if (!(o1 instanceof Enemy)) {
+                continue;
+            }
+            Enemy enemy = (Enemy) o1;
+            boolean removed = false;
+            for (GameObject o2 : gameObjects) {
+                if (!(o2 instanceof Bullet)) {
+                    continue;
+                }
+                Bullet bullet = (Bullet) o2;
+                if (CollisionHelper.collides(enemy, bullet)) {
+                    Log.d(TAG, "Collision !!");
+                    remove(bullet);
+                    remove(enemy);
+                    removed = true;
+                    break;
+                }
+            }
+            if (removed) {
+                continue;
+            }
+            // check enemy vs fighter
         }
     }
 
