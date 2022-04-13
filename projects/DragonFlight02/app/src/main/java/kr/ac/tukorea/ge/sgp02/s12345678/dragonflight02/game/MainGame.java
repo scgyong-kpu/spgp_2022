@@ -1,11 +1,15 @@
 package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.game;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.BoxCollidable;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.CollisionHelper;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.R;
@@ -14,6 +18,7 @@ import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.GameView;
 
 public class MainGame {
     private static final String TAG = MainGame.class.getSimpleName();
+    private Paint collisionPaint;
 
     public static MainGame getInstance() {
         if (singleton == null) {
@@ -46,6 +51,10 @@ public class MainGame {
         float fighterY = Metrics.height - Metrics.size(R.dimen.fighter_y_offset);
         fighter = new Fighter(Metrics.width / 2, fighterY);
         objects.add(fighter);
+
+        collisionPaint = new Paint();
+        collisionPaint.setColor(Color.RED);
+        collisionPaint.setStyle(Paint.Style.STROKE);
     }
 
     public void update(int elapsedNanos) {
@@ -81,6 +90,10 @@ public class MainGame {
     public void draw(Canvas canvas) {
         for (GameObject gobj : objects) {
             gobj.draw(canvas);
+            if (gobj instanceof BoxCollidable) {
+                RectF rect = ((BoxCollidable) gobj).getBoundingRect();
+                canvas.drawRect(rect, collisionPaint);
+            }
         }
     }
 
