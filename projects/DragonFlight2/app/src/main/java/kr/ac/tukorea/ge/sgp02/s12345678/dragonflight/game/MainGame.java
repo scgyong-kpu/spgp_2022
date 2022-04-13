@@ -23,7 +23,13 @@ public class MainGame {
     private Fighter fighter;
     public float frameTime;
 
+    public static void clear() {
+        singleton = null;
+    }
+
     public void init() {
+
+        gameObjects.clear();
 
         gameObjects.add(new EnemyGenerator());
 

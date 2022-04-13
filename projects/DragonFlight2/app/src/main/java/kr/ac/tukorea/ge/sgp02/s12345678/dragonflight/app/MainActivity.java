@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.R;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameView;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game.MainGame;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,5 +26,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         GameView.view.resumeGame();
+    }
+
+    @Override
+    protected void onDestroy() {
+        GameView.view = null;
+        MainGame.clear();
+        super.onDestroy();
     }
 }
