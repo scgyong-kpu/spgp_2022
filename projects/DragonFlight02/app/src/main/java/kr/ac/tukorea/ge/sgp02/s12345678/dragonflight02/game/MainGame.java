@@ -29,7 +29,13 @@ public class MainGame {
     private ArrayList<GameObject> objects = new ArrayList<>();
     private Fighter fighter;
 
+    public static void clear() {
+        singleton = null;
+    }
+
     public void init() {
+
+        objects.clear();
 
         objects.add(new EnemyGenerator());
 

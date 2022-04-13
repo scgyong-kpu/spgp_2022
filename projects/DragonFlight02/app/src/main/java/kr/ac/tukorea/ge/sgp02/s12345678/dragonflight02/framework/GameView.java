@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Choreographer;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,6 +23,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
     public static GameView view;
     private boolean initialized;
+    private boolean running;
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -38,6 +40,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
         if (!initialized) {
             initView();
             initialized = true;
+            running = true;
         }
     }
 
@@ -55,6 +58,10 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
     @Override
     public void doFrame(long currentTimeNanos) {
+        if (!running) {
+            Log.d(TAG, "Running is false on doFrame()");
+            return;
+        }
         long now = currentTimeNanos;
         int elapsed = (int) (now - previousTimeNanos);
         if (elapsed != 0) {
@@ -79,5 +86,17 @@ public class GameView extends View implements Choreographer.FrameCallback {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return MainGame.getInstance().onTouchEvent(event);
+    }
+
+    public void pauseGame() {
+        running = false;
+    }
+
+    public void resumeGame() {
+        if (initialized && !running) {
+            Log.d(TAG, "Resuming the game");
+            running = true;
+            Choreographer.getInstance().postFrameCallback(this);
+        }
     }
 }
