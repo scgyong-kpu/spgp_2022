@@ -15,7 +15,7 @@ public class EnemyGenerator implements GameObject {
     public EnemyGenerator() {
         this.spawnInterval = INITIAL_SPAWN_INTERVAL;
         this.fallSpeed = Metrics.size(R.dimen.enemy_initial_speed);
-        Enemy.size = Metrics.width / 5.0f;
+        Enemy.size = Metrics.width / 5.0f * 0.6f;
     }
 
     @Override
