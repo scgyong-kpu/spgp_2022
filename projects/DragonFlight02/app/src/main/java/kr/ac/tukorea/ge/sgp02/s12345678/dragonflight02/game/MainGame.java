@@ -30,16 +30,8 @@ public class MainGame {
     private Fighter fighter;
 
     public void init() {
-//        Random random = new Random();
-//        float min = Metrics.size(R.dimen.ball_speed_min);
-//        float max = Metrics.size(R.dimen.ball_speed_max);
-//        float diff = max - min;
-//        for (int i = 0; i < BALL_COUNT; i++) {
-//            float dx = random.nextFloat() * diff + min;
-//            float dy = random.nextFloat() * diff + min;
-//            Ball ball = new Ball(dx, dy);
-//            objects.add(ball);
-//        }
+
+        objects.add(new EnemyGenerator());
 
         float fighterY = Metrics.height - Metrics.size(R.dimen.fighter_y_offset);
         fighter = new Fighter(Metrics.width / 2, fighterY);
