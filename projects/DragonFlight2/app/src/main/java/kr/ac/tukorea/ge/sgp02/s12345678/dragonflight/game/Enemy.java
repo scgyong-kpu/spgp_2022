@@ -32,7 +32,7 @@ public class Enemy extends AnimSprite implements BoxCollidable {
 
     @Override
     public void update() {
-        super.update();
+//        super.update();
 
         float frameTime = MainGame.getInstance().frameTime;
         y += dy * frameTime;
