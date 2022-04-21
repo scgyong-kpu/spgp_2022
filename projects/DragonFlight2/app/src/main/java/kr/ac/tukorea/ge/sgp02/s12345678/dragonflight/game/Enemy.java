@@ -9,10 +9,16 @@ import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Sprite;
 
 public class Enemy extends Sprite implements BoxCollidable {
     public static float size;
+    protected final int level;
     protected float dy;
     protected RectF boundingBox = new RectF();
-    public Enemy(float x, float speed) {
-        super(x, -size, size, size, R.mipmap.f_01_01);
+    protected static int[] bitmapIds = {
+            R.mipmap.f_01_01,R.mipmap.f_02_01,R.mipmap.f_03_01,R.mipmap.f_04_01,R.mipmap.f_05_01,
+            R.mipmap.f_06_01,R.mipmap.f_07_01,R.mipmap.f_08_01,R.mipmap.f_09_01,R.mipmap.f_10_01,
+    };
+    public Enemy(int level, float x, float speed) {
+        super(x, -size, size, size, bitmapIds[level - 1]);
+        this.level = level;
 //        y -= radius;
 //        setDstRectWithRadius();
         dy = speed;
