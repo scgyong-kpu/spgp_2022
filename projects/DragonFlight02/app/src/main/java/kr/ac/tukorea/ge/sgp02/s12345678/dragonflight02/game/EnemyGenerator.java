@@ -2,6 +2,8 @@ package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.game;
 
 import android.graphics.Canvas;
 
+import java.util.Random;
+
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.R;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.GameObject;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Metrics;
@@ -31,10 +33,12 @@ public class EnemyGenerator implements GameObject {
     }
 
     private void spawn() {
+        Random rand = new Random();
         float tenth = Metrics.width / 10;
         for (int i = 1; i <= 9; i += 2) {
             float x = i * tenth;
-            Enemy enemy = new Enemy(x, fallSpeed);
+            int level = rand.nextInt(Enemy.MAX_LEVEL) + 1;
+            Enemy enemy = new Enemy(level, x, fallSpeed);
             MainGame.getInstance().add(enemy);
         }
     }
