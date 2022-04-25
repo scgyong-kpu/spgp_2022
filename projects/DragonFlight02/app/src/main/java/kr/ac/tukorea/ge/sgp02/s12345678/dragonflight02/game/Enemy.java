@@ -25,7 +25,7 @@ public class Enemy extends AnimSprite implements BoxCollidable {
 
     public Enemy(int level, float x, float speed) {
 //        super(x, 0, R.dimen.enemy_radius, R.mipmap.f_01_01);
-        super(x, -size/2, size, size, BITMAP_IDS[level - 1], 0);
+        super(x, -size/2, size, size, BITMAP_IDS[level - 1], 6, 0);
         this.level = level;
         dy = speed;
     }
