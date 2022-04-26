@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.util.Log;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BoxCollidable;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameObject;
@@ -11,6 +12,7 @@ import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.R;
 
 public class Bullet implements GameObject, BoxCollidable {
+    private static final String TAG = Bullet.class.getSimpleName();
     protected float x, y;
     protected final float length;
     protected final float dx, dy;
@@ -39,6 +41,7 @@ public class Bullet implements GameObject, BoxCollidable {
             laserWidth = Metrics.size(R.dimen.laser_width);
             paint.setStrokeWidth(laserWidth);
         }
+        Log.d(TAG, "Created: " + this);
     }
     @Override
     public void update() {
