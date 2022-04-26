@@ -24,7 +24,7 @@ public class MainGame {
     private Paint collisionPaint;
 
     public enum Layer {
-        enemy, bullet, player, controller, COUNT
+        enemy, bullet, player, ui, controller, COUNT
     }
     public static MainGame getInstance() {
         if (singleton == null) {
@@ -36,6 +36,7 @@ public class MainGame {
 //    private ArrayList<GameObject> gameObjects = new ArrayList<>();
     protected ArrayList<ArrayList<GameObject>> layers;
     private Fighter fighter;
+    Score score;
     public float frameTime;
 
     public static void clear() {
@@ -53,6 +54,10 @@ public class MainGame {
         float fy = Metrics.height - Metrics.size(R.dimen.fighter_y_offset);
         fighter = new Fighter(fx, fy);
         add(Layer.player, fighter);
+
+        score = new Score();
+        score.setScore(123445);
+        add(Layer.ui, score);
 
         collisionPaint = new Paint();
         collisionPaint.setStyle(Paint.Style.STROKE);
