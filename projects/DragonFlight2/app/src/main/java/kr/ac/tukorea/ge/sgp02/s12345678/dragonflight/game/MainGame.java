@@ -22,7 +22,7 @@ public class MainGame {
     private Paint collisionPaint;
 
     public enum Layer {
-        enemy, bullet, player, ui, controller, COUNT
+        bg, enemy, bullet, player, ui, controller, COUNT
     }
     public static MainGame getInstance() {
         if (singleton == null) {
@@ -57,6 +57,9 @@ public class MainGame {
 //        score.set(123445);
         add(Layer.ui, score);
 
+        add(Layer.bg, new Background(R.mipmap.bg_city));
+        add(Layer.bg, new Background(R.mipmap.clouds));
+        
         collisionPaint = new Paint();
         collisionPaint.setStyle(Paint.Style.STROKE);
         collisionPaint.setColor(Color.RED);
