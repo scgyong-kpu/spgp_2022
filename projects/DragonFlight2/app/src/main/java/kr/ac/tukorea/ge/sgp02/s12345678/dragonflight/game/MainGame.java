@@ -23,6 +23,9 @@ public class MainGame {
     private static MainGame singleton;
     private Paint collisionPaint;
 
+    public enum Layer {
+        enemy, bullet, player, controller, COUNT
+    }
     public static MainGame getInstance() {
         if (singleton == null) {
             singleton = new MainGame();
@@ -30,7 +33,8 @@ public class MainGame {
         return singleton;
     }
     private static final int BALL_COUNT = 10;
-    private ArrayList<GameObject> gameObjects = new ArrayList<>();
+//    private ArrayList<GameObject> gameObjects = new ArrayList<>();
+    protected ArrayList<ArrayList<GameObject>> layers;
     private Fighter fighter;
     public float frameTime;
 
@@ -39,19 +43,26 @@ public class MainGame {
     }
 
     public void init() {
+        initLayers(Layer.COUNT.ordinal());
+//        gameObjects.clear();
 
-        gameObjects.clear();
-
-        gameObjects.add(new EnemyGenerator());
+        add(Layer.controller, new EnemyGenerator());
 
         float fx = Metrics.width / 2;
         float fy = Metrics.height - Metrics.size(R.dimen.fighter_y_offset);
         fighter = new Fighter(fx, fy);
-        gameObjects.add(fighter);
+        add(Layer.player, fighter);
 
         collisionPaint = new Paint();
         collisionPaint.setStyle(Paint.Style.STROKE);
         collisionPaint.setColor(Color.RED);
+    }
+
+    private void initLayers(int layerCount) {
+        layers = new ArrayList<>();
+        for (int i = 0; i < layerCount; i++) {
+            layers.add(new ArrayList<>());
+        }
     }
 
     public boolean onTouchEvent(MotionEvent event) {
@@ -71,35 +82,41 @@ public class MainGame {
     }
 
     public void draw(Canvas canvas) {
-        for (GameObject gobj : gameObjects) {
-            gobj.draw(canvas);
-            if (gobj instanceof BoxCollidable) {
-                RectF box = ((BoxCollidable) gobj).getBoundingRect();
-                canvas.drawRect(box, collisionPaint);
+        for (ArrayList<GameObject> objects: layers) {
+            for (GameObject gobj : objects) {
+                gobj.draw(canvas);
+                if (gobj instanceof BoxCollidable) {
+                    RectF box = ((BoxCollidable) gobj).getBoundingRect();
+                    canvas.drawRect(box, collisionPaint);
+                }
             }
         }
     }
 
     public void update(int elapsedNanos) {
         frameTime = (float) (elapsedNanos / 1_000_000_000f);
-        for (GameObject gobj : gameObjects) {
-            gobj.update();
+        for (ArrayList<GameObject> objects: layers) {
+            for (GameObject o : objects) {
+                o.update();
+            }
         }
 
         checkCollision();
     }
 
+    public ArrayList<GameObject> objectsAt(Layer layer) {
+        return layers.get(layer.ordinal());
+    }
+
     private void checkCollision() {
-        for (GameObject o1 : gameObjects) {
-            if (!(o1 instanceof Enemy)) {
-                continue;
-            }
+        ArrayList<GameObject> enemies = objectsAt(Layer.enemy);
+        ArrayList<GameObject> bullets = objectsAt(Layer.bullet);
+        for (GameObject o1 : enemies) {
+//            if (!(o1 instanceof Enemy)) { continue; }
             Enemy enemy = (Enemy) o1;
             boolean removed = false;
-            for (GameObject o2 : gameObjects) {
-                if (!(o2 instanceof Bullet)) {
-                    continue;
-                }
+            for (GameObject o2 : bullets) {
+//                if (!(o2 instanceof Bullet)) { continue; }
                 Bullet bullet = (Bullet) o2;
                 if (CollisionHelper.collides(enemy, bullet)) {
                     Log.d(TAG, "Collision !!");
@@ -116,11 +133,12 @@ public class MainGame {
         }
     }
 
-    public void add(GameObject gameObject) {
+    public void add(Layer layer, GameObject gameObject) {
         GameView.view.post(new Runnable() {
             @Override
             public void run() {
-                gameObjects.add(gameObject);
+                ArrayList<GameObject> objects = layers.get(layer.ordinal());
+                objects.add(gameObject);
             }
         });
     }
@@ -129,15 +147,24 @@ public class MainGame {
         GameView.view.post(new Runnable() {
             @Override
             public void run() {
-                gameObjects.remove(gameObject);
-                if (gameObject instanceof Recyclable) {
-                    RecycleBin.collect((Recyclable) gameObject);
+                for (ArrayList<GameObject> objects: layers) {
+                    boolean removed = objects.remove(gameObject);
+                    if (removed) {
+                        if (gameObject instanceof Recyclable) {
+                            RecycleBin.collect((Recyclable) gameObject);
+                        }
+                        break;
+                    }
                 }
             }
         });
     }
 
     public int objectCount() {
-        return gameObjects.size();
+        int count = 0;
+        for (ArrayList<GameObject> objects: layers) {
+            count += objects.size();
+        }
+        return count;
     }
 }

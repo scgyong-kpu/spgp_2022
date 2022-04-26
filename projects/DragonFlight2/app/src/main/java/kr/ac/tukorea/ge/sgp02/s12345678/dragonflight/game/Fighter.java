@@ -83,6 +83,6 @@ public class Fighter extends Sprite {
 
     public void fire() {
         Bullet bullet = Bullet.get(x, y, (float) (-Math.PI/2));
-        MainGame.getInstance().add(bullet);
+        MainGame.getInstance().add(MainGame.Layer.bullet, bullet);
     }
 }
