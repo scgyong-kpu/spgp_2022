@@ -16,15 +16,19 @@ public class RecycleBin {
             bin = new ArrayList<>();
             recycleBin.put(clazz, bin);
         }
+        if (bin.indexOf(object) >= 0) {
+            Log.w(TAG, "Already exists: " + object);
+            return;
+        }
         bin.add(object);
-        Log.d(TAG, "collect(): " + clazz.getSimpleName() + " : " + bin.size() + " objects");
+        Log.d(TAG, "collect(): " + clazz.getSimpleName() + " : " + bin.size() + " objects " + object);
     }
 
     public static Recyclable get(Class clazz) {
         ArrayList<Recyclable> bin = recycleBin.get(clazz);
         if (bin == null) return null;
         if (bin.size() == 0) return null;
-        Log.d(TAG, "get(): " + clazz.getSimpleName() + " : " + (bin.size() - 1) + " objects");
+        Log.d(TAG, "get(): " + clazz.getSimpleName() + " : " + (bin.size() - 1) + " objects " + bin.get(0));
         return bin.remove(0);
     }
 }
