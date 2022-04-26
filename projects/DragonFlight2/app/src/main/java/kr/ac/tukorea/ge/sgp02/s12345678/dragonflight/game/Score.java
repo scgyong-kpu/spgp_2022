@@ -29,8 +29,11 @@ public class Score implements GameObject {
         this.dstCharHeight = dstCharWidth * srcCharHeight / srcCharWidth;
     }
 
-    public void setScore(int score) {
+    public void set(int score) {
         this.score = score;
+    }
+    public void add(int score) {
+        this.score += score;
     }
 
     @Override
@@ -51,4 +54,5 @@ public class Score implements GameObject {
             value /= 10;
         }
     }
+
 }

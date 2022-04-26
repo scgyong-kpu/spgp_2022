@@ -4,14 +4,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.R;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BoxCollidable;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.CollisionHelper;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameObject;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameView;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
@@ -56,7 +54,7 @@ public class MainGame {
         add(Layer.player, fighter);
 
         score = new Score();
-        score.setScore(123445);
+//        score.set(123445);
         add(Layer.ui, score);
 
         collisionPaint = new Paint();
