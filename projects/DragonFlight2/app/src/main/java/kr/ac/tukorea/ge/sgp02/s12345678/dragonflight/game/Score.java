@@ -39,10 +39,14 @@ public class Score implements GameObject {
 
     @Override
     public void update() {
-        if (score < displayScore) {
+        int diff = score - displayScore;
+        if (diff == 0) return;
+        if (-10 < diff && diff < 0) {
             displayScore--;
-        } else if (score > displayScore) {
+        } else if (0 < diff && diff < 10) {
             displayScore++;
+        } else {
+            displayScore += diff / 10;
         }
     }
 

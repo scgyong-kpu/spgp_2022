@@ -55,7 +55,7 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
         Log.d(TAG, "Created: " + this);
     }
     public int getScore() {
-        return level * 10;
+        return level * 100;
     }
 
     @Override
