@@ -57,8 +57,8 @@ public class MainGame {
 //        score.set(123445);
         add(Layer.ui, score);
 
-        add(Layer.bg1, new Background(R.mipmap.bg_city, Metrics.size(R.dimen.bg_speed_city)));
-        add(Layer.bg2, new Background(R.mipmap.clouds, Metrics.size(R.dimen.bg_speed_cloud)));
+        add(Layer.bg1, new VertScrollBackground(R.mipmap.bg_city, Metrics.size(R.dimen.bg_speed_city)));
+        add(Layer.bg2, new VertScrollBackground(R.mipmap.clouds, Metrics.size(R.dimen.bg_speed_cloud)));
 
         collisionPaint = new Paint();
         collisionPaint.setStyle(Paint.Style.STROKE);
