@@ -27,7 +27,7 @@ public class Bullet implements GameObject, BoxCollidable {
     protected static ArrayList<Bullet> recycleBin = new ArrayList<>();
     public static Bullet get(float x, float y, float angle) {
         if (recycleBin.size() > 0) {
-            Log.d(TAG, "get(): Recycle Bin has " + recycleBin.size() + " bullets");
+//            Log.d(TAG, "get(): Recycle Bin has " + recycleBin.size() + " bullets");
             Bullet bullet = recycleBin.remove(0);
             bullet.reuse(x, y, angle);
             return bullet;
@@ -70,7 +70,7 @@ public class Bullet implements GameObject, BoxCollidable {
         if (y < 0) {
             game.remove(this);
             recycleBin.add(this);
-            Log.d(TAG, "remove(): Recycle Bin has " + recycleBin.size() + " bullets");
+//            Log.d(TAG, "remove(): Recycle Bin has " + recycleBin.size() + " bullets");
         }
     }
 
