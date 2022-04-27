@@ -10,9 +10,11 @@ import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.AnimSprite;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.BitmapPool;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.BoxCollidable;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Metrics;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Recyclable;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.RecycleBin;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Sprite;
 
-public class Enemy extends AnimSprite implements BoxCollidable {
+public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     private static final String TAG = Enemy.class.getSimpleName();
     private int level;
     protected float dy;
@@ -28,10 +30,11 @@ public class Enemy extends AnimSprite implements BoxCollidable {
     public static final int MIN_LEVEL = 1;
     public static final int MAX_LEVEL = BITMAP_IDS.length;
 
-    private static ArrayList<Enemy> recyceBin = new ArrayList<>();
+//    private static ArrayList<Enemy> recyceBin = new ArrayList<>();
     public static Enemy get(int level, float x, float speed) {
-        if (recyceBin.size() > 0) {
-            Enemy enemy = recyceBin.remove(0);
+        Enemy enemy = (Enemy) RecycleBin.get(Enemy.class);
+        if (enemy != null) {
+            //Enemy enemy = recyceBin.remove(0);
             enemy.set(level, x, speed);
             return enemy;
         }
@@ -72,12 +75,17 @@ public class Enemy extends AnimSprite implements BoxCollidable {
         boundingRect.inset(inset, inset);
         if (dstRect.top > Metrics.height) {
             MainGame.getInstance().remove(this);
-            recyceBin.add(this);
+            //recyceBin.add(this);
         }
     }
 
     @Override
     public RectF getBoundingRect() {
         return boundingRect;
+    }
+
+    @Override
+    public void finish() {
+
     }
 }
