@@ -25,6 +25,9 @@ public class RecycleBin {
             bin = new ArrayList<>();
             recycleBin.put(clazz, bin);
         }
+        if (bin.indexOf(object) >= 0) {
+            return;
+        }
         bin.add(object);
     }
 }
