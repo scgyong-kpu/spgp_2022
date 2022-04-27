@@ -22,7 +22,11 @@ public class Enemy extends AnimSprite implements BoxCollidable {
     };
     public static final int MIN_LEVEL = 1;
     public static final int MAX_LEVEL = bitmapIds.length;
-    public Enemy(int level, float x, float speed) {
+
+    public static Enemy get(int level, float x, float speed) {
+        return new Enemy(level, x, speed);
+    }
+    private Enemy(int level, float x, float speed) {
         super(x, -size, size, size, bitmapIds[level - 1], FRAMES_PER_SECOND, 0);
         this.level = level;
 //        y -= radius;
