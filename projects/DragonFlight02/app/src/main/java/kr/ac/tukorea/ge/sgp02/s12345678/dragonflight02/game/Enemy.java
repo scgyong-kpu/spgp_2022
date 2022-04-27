@@ -1,15 +1,20 @@
 package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.game;
 
 import android.graphics.RectF;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.R;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.AnimSprite;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.BitmapPool;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.BoxCollidable;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Sprite;
 
 public class Enemy extends AnimSprite implements BoxCollidable {
-    private final int level;
+    private static final String TAG = Enemy.class.getSimpleName();
+    private int level;
     protected float dy;
     protected RectF boundingRect = new RectF();
 
@@ -23,14 +28,31 @@ public class Enemy extends AnimSprite implements BoxCollidable {
     public static final int MIN_LEVEL = 1;
     public static final int MAX_LEVEL = BITMAP_IDS.length;
 
+    private static ArrayList<Enemy> recyceBin = new ArrayList<>();
     public static Enemy get(int level, float x, float speed) {
+        if (recyceBin.size() > 0) {
+            Enemy enemy = recyceBin.remove(0);
+            enemy.set(level, x, speed);
+            return enemy;
+        }
         return new Enemy(level, x, speed);
     }
+
+    private void set(int level, float x, float speed) {
+        bitmap = BitmapPool.get(BITMAP_IDS[level - 1]);
+        this.x = x;
+        this.y = -size/2;
+        this.dy = speed;
+        this.level = level;
+    }
+
     private Enemy(int level, float x, float speed) {
 //        super(x, 0, R.dimen.enemy_radius, R.mipmap.f_01_01);
         super(x, -size/2, size, size, BITMAP_IDS[level - 1], 6, 0);
         this.level = level;
         dy = speed;
+
+        Log.d(TAG, "Created: " + this);
     }
 
     private static float size, inset;
@@ -50,6 +72,7 @@ public class Enemy extends AnimSprite implements BoxCollidable {
         boundingRect.inset(inset, inset);
         if (dstRect.top > Metrics.height) {
             MainGame.getInstance().remove(this);
+            recyceBin.add(this);
         }
     }
 
