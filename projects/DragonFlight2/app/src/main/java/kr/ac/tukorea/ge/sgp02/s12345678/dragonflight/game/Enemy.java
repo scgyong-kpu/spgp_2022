@@ -18,7 +18,7 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     public static final float FRAMES_PER_SECOND = 10.0f;
     private static final String TAG = Enemy.class.getSimpleName();
     public static float size;
-    protected final int level;
+    protected int level;
     protected float dy;
     protected RectF boundingBox = new RectF();
     protected static int[] bitmapIds = {
@@ -46,6 +46,7 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
         this.x = x;
         this.y = -size;
         this.dy = speed;
+        this.level = level;
     }
     private Enemy(int level, float x, float speed) {
         super(x, -size, size, size, bitmapIds[level - 1], FRAMES_PER_SECOND, 0);
@@ -79,5 +80,9 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     @Override
     public void finish() {
 
+    }
+
+    public int getScore() {
+        return level * 10;
     }
 }
