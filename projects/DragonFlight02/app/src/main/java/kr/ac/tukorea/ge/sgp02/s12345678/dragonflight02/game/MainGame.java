@@ -21,6 +21,7 @@ import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.RecycleBin;
 public class MainGame {
     private static final String TAG = MainGame.class.getSimpleName();
     private Paint collisionPaint;
+    Score score;
 
     public static MainGame getInstance() {
         if (singleton == null) {
@@ -60,8 +61,8 @@ public class MainGame {
         fighter = new Fighter(Metrics.width / 2, fighterY);
         add(Layer.player, fighter);
 
-        Score score = new Score();
-        score.set(12345);
+        score = new Score();
+//        score.set(12345);
         add(Layer.ui, score);
 
         collisionPaint = new Paint();
