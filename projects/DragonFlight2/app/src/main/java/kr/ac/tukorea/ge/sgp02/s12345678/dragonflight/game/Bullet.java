@@ -6,6 +6,8 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BoxCollidable;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameObject;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
@@ -21,8 +23,19 @@ public class Bullet implements GameObject, BoxCollidable {
     protected static Paint paint;
     protected static float laserWidth;
 
+    protected static ArrayList<Bullet> recycleBin = new ArrayList<>();
     public static Bullet get(float x, float y) {
+        if (recycleBin.size() > 0) {
+            Bullet bullet = recycleBin.remove(0);
+//            Log.d(TAG, "Recycle: " + recycleBin.size() + " bullets");
+            bullet.set(x, y);
+            return bullet;
+        }
         return new Bullet(x, y);
+    }
+    private void set(float x, float y) {
+        this.x = x;
+        this.y = y;
     }
     private Bullet(float x, float y) {
         this.x = x;
@@ -50,6 +63,8 @@ public class Bullet implements GameObject, BoxCollidable {
 
         if (y < 0) {
             game.remove(this);
+            recycleBin.add(this);
+//            Log.d(TAG, "Remove: " + recycleBin.size() + " bullets");
         }
     }
 
