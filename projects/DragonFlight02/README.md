@@ -24,3 +24,11 @@
 * Object count
 * Animation
 * Recycling
+  * static recycleBin in Bullet, Enemy
+  * `RecycleBin` class
+* Object layering
+  * Controller objects
+  * UI objects
+    * Score
+* Background / Vertical Scroll
+* 
