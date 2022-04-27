@@ -19,7 +19,10 @@ public class Bullet implements GameObject, BoxCollidable {
     protected static Paint paint;
     protected static float laserWidth;
 
-    public Bullet(float x, float y) {
+    public static Bullet get(float x, float y) {
+        return new Bullet(x, y);
+    }
+    private Bullet(float x, float y) {
         this.x = x;
         this.y = y;
         this.length = Metrics.size(R.dimen.laser_length);
