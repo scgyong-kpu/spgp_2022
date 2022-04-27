@@ -15,6 +15,8 @@ import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.CollisionHelper;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameView;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameObject;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Recyclable;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.RecycleBin;
 
 public class MainGame {
     private static final String TAG = MainGame.class.getSimpleName();
@@ -128,6 +130,9 @@ public class MainGame {
             @Override
             public void run() {
                 gameObjects.remove(gameObject);
+                if (gameObject instanceof Recyclable) {
+                    RecycleBin.add((Recyclable) gameObject);
+                }
             }
         });
     }
