@@ -14,12 +14,20 @@
   * Enemy Level
   * Wave
   * 생성 좌표
- * pause/resume 처리
- * MainGame 이 singleton 이라서 생기는 문제 해결
- * Collision
+* pause/resume 처리
+* MainGame 이 singleton 이라서 생기는 문제 해결
+* Collision
   * Collision Check
   * Collision Handling
   * Box Check
- * Object count
- * Animation
- * Recycling
+* Object count
+* Animation
+* Recycling
+  * static recycleBin in Bullet, Enemy
+  * `RecycleBin` class
+* Object layering
+  * Controller objects
+  * UI objects
+    * Score
+* Background / Vertical Scroll
+* 
