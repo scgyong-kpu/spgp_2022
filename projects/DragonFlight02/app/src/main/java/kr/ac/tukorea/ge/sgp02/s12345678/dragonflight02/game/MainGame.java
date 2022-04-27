@@ -40,7 +40,7 @@ public class MainGame {
 //    private ArrayList<GameObject> objects = new ArrayList<>();
     private ArrayList<ArrayList<GameObject>> layers;
     public enum Layer {
-        bullet, enemy, player, controller, COUNT
+        bullet, enemy, player, ui, controller, COUNT
     }
     private Fighter fighter;
 
@@ -59,6 +59,10 @@ public class MainGame {
         float fighterY = Metrics.height - Metrics.size(R.dimen.fighter_y_offset);
         fighter = new Fighter(Metrics.width / 2, fighterY);
         add(Layer.player, fighter);
+
+        Score score = new Score();
+        score.set(12345);
+        add(Layer.ui, score);
 
         collisionPaint = new Paint();
         collisionPaint.setColor(Color.RED);
