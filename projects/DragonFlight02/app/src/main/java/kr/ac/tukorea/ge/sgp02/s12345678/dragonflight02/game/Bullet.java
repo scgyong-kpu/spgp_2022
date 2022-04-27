@@ -4,6 +4,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.BoxCollidable;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.GameObject;
@@ -11,6 +14,7 @@ import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.R;
 
 public class Bullet implements GameObject, BoxCollidable {
+    private static final String TAG = Bullet.class.getSimpleName();
     protected float x, y;
     protected final float length;
     protected final float dy;
@@ -19,9 +23,21 @@ public class Bullet implements GameObject, BoxCollidable {
     protected static Paint paint;
     protected static float laserWidth;
 
+    private static ArrayList<Bullet> recycleBin = new ArrayList<>();
     public static Bullet get(float x, float y) {
+        if (recycleBin.size() > 0) {
+            Bullet bullet = recycleBin.remove(0);
+            bullet.set(x, y);
+            return bullet;
+        }
         return new Bullet(x, y);
     }
+
+    private void set(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+
     private Bullet(float x, float y) {
         this.x = x;
         this.y = y;
@@ -34,6 +50,8 @@ public class Bullet implements GameObject, BoxCollidable {
             laserWidth = Metrics.size(R.dimen.laser_width);
             paint.setStrokeWidth(laserWidth);
         }
+
+        Log.d(TAG, "Created: " + this);
     }
     @Override
     public void update() {
@@ -45,6 +63,7 @@ public class Bullet implements GameObject, BoxCollidable {
 
         if (y < 0) {
             MainGame.getInstance().remove(this);
+            recycleBin.add(this);
         }
     }
 
