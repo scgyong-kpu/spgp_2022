@@ -54,6 +54,7 @@ public class MainGame {
         initLayers(Layer.COUNT.ordinal());
 
         add(Layer.controller, new EnemyGenerator());
+        add(Layer.controller, new CollisionChecker());
 
         float fighterY = Metrics.height - Metrics.size(R.dimen.fighter_y_offset);
         fighter = new Fighter(Metrics.width / 2, fighterY);
@@ -79,30 +80,14 @@ public class MainGame {
             }
         }
 
-        checkCollision();
+//        checkCollision();
     }
 
-    private void checkCollision() {
-        ArrayList<GameObject> enemies = layers.get(Layer.enemy.ordinal());
-        ArrayList<GameObject> bullets = layers.get(Layer.bullet.ordinal());
-        for (GameObject o1: enemies) {
-            if (!(o1 instanceof Enemy)) {
-                continue;
-            }
-            Enemy enemy = (Enemy) o1;
-            for (GameObject o2: bullets) {
-                if (!(o2 instanceof Bullet)) {
-                    continue;
-                }
-                Bullet bullet = (Bullet) o2;
-                if (CollisionHelper.collides(enemy, bullet)) {
-                    Log.d(TAG, "Collision !!");
-                    remove(enemy);
-                    remove(bullet);
-                    break;
-                }
-            }
-        }
+//    private void checkCollision() {
+//    }
+
+    public ArrayList<GameObject> objectsAt(Layer layer) {
+        return layers.get(layer.ordinal());
     }
 
     public void draw(Canvas canvas) {
