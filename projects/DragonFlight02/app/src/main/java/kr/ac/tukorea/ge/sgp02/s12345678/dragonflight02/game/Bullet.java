@@ -12,8 +12,10 @@ import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.BoxCollidable;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.GameObject;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.R;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Recyclable;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.RecycleBin;
 
-public class Bullet implements GameObject, BoxCollidable {
+public class Bullet implements GameObject, BoxCollidable, Recyclable {
     private static final String TAG = Bullet.class.getSimpleName();
     protected float x, y;
     protected final float length;
@@ -23,10 +25,11 @@ public class Bullet implements GameObject, BoxCollidable {
     protected static Paint paint;
     protected static float laserWidth;
 
-    private static ArrayList<Bullet> recycleBin = new ArrayList<>();
+//    private static ArrayList<Bullet> recycleBin = new ArrayList<>();
     public static Bullet get(float x, float y) {
-        if (recycleBin.size() > 0) {
-            Bullet bullet = recycleBin.remove(0);
+        Bullet bullet = (Bullet) RecycleBin.get(Bullet.class);
+        if (bullet != null) {
+//            Bullet bullet = recycleBin.remove(0);
             bullet.set(x, y);
             return bullet;
         }
@@ -63,7 +66,7 @@ public class Bullet implements GameObject, BoxCollidable {
 
         if (y < 0) {
             MainGame.getInstance().remove(this);
-            recycleBin.add(this);
+            //recycleBin.add(this);
         }
     }
 
@@ -75,5 +78,10 @@ public class Bullet implements GameObject, BoxCollidable {
     @Override
     public RectF getBoundingRect() {
         return boundingRect;
+    }
+
+    @Override
+    public void finish() {
+
     }
 }
