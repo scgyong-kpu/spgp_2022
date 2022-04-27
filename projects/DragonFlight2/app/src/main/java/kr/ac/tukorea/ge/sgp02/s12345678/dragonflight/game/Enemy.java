@@ -83,6 +83,6 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     }
 
     public int getScore() {
-        return level * 10;
+        return level * level * 100;
     }
 }
