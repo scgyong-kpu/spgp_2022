@@ -33,6 +33,10 @@ public class Score implements GameObject {
         this.score = score;
     }
 
+    public void add(int score) {
+        this.score += score;
+    }
+
     @Override
     public void update() {
 

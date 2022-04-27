@@ -22,6 +22,7 @@ public class MainGame {
     private static final String TAG = MainGame.class.getSimpleName();
     private static MainGame singleton;
     private Paint collisionPaint;
+    Score score;
 
     public static MainGame getInstance() {
         if (singleton == null) {
@@ -55,8 +56,8 @@ public class MainGame {
         fighter = new Fighter(fx, fy);
         add(Layer.player, fighter);
 
-        Score score = new Score();
-        score.set(123456);
+        score = new Score();
+//        score.set(123456);
         add(Layer.ui, score);
 
         collisionPaint = new Paint();
