@@ -16,5 +16,7 @@
     <dimen name="score_digit_width">20dp</dimen>
     <dimen name="bg_speed_city">10dp</dimen>
     <dimen name="bg_speed_cloud">20dp</dimen>
+    <dimen name="enemy_gauge_fg_width">4dp</dimen>
+    <dimen name="enemy_gauge_bg_width">5dp</dimen>
     <item name="fighter_fire_interval" type="dimen" format="float">0.2</item>
 </resources>
