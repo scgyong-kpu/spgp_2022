@@ -29,6 +29,9 @@ public class Score implements GameObject {
         this.dstCharHeight = dstCharWidth * srcCharHeight / srcCharWidth;
     }
 
+    public int get() {
+        return score;
+    }
     public void set(int score) {
         this.score = score;
         this.displayScore = score;

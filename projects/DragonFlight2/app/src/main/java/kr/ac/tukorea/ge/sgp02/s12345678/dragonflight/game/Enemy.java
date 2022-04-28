@@ -23,7 +23,7 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     protected float dy;
     protected RectF boundingBox = new RectF();
     protected Gauge gauge;
-    protected int life;
+    protected float life, maxLife;
     protected static int[] bitmapIds = {
             R.mipmap.enemy_01,R.mipmap.enemy_02,R.mipmap.enemy_03,R.mipmap.enemy_04,R.mipmap.enemy_05,
             R.mipmap.enemy_06,R.mipmap.enemy_07,R.mipmap.enemy_08,R.mipmap.enemy_09,R.mipmap.enemy_10,
@@ -48,6 +48,8 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
         this.y = -size;
         this.dy = speed;
         bitmap = BitmapPool.get(bitmapIds[level - 1]);
+        life = maxLife = level * 10;
+        gauge.setValue(1.0f);
     }
     private Enemy(int level, float x, float speed) {
         super(x, -size, size, size, bitmapIds[level - 1], FRAMES_PER_SECOND, 0);
@@ -55,13 +57,14 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
 //        y -= radius;
 //        setDstRectWithRadius();
         dy = speed;
-        life = level * 10;
+        life = maxLife = level * 10;
         Log.d(TAG, "Created: " + this);
         gauge = new Gauge(
                 Metrics.size(R.dimen.enemy_gauge_fg_width), R.color.enemy_gauge_fg,
                 Metrics.size(R.dimen.enemy_gauge_bg_width), R.color.enemy_gauge_bg,
                 size * 0.9f
         );
+        gauge.setValue(1.0f);
     }
     public int getScore() {
         return level * 100;
@@ -97,5 +100,14 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     @Override
     public void finish() {
 
+    }
+
+    public boolean decreaseLife(float power) {
+        life -= power;
+        if (life <= 0) {
+            return true;
+        }
+        gauge.setValue(life / maxLife);
+        return false;
     }
 }

@@ -21,26 +21,33 @@ public class Bullet implements GameObject, BoxCollidable, Recyclable {
     protected final float length;
     protected final float dx, dy;
     protected final float ex, ey;
+
+    public float getPower() {
+        return power;
+    }
+
+    protected float power;
     protected RectF boundingBox = new RectF();
 
     protected static Paint paint;
     protected static float laserWidth;
 
 //    protected static ArrayList<Bullet> recycleBin = new ArrayList<>();
-    public static Bullet get(float x, float y, float angle) {
+    public static Bullet get(float x, float y, float angle, float power) {
         Bullet bullet = (Bullet) RecycleBin.get(Bullet.class);
         if (bullet != null) {
-            bullet.reuse(x, y, angle);
+            bullet.reuse(x, y, angle, power);
             return bullet;
         }
-        return new Bullet(x, y, angle);
+        return new Bullet(x, y, angle, power);
     }
-    private void reuse(float x, float y, float angle) {
+    private void reuse(float x, float y, float angle, float power) {
         this.x = x;
         this.y = y;
+        this.power = power;
         // angle
     }
-    private Bullet(float x, float y, float angle) {
+    private Bullet(float x, float y, float angle, float power) {
         this.x = x;
         this.y = y;
         this.length = Metrics.size(R.dimen.laser_length);
@@ -49,6 +56,7 @@ public class Bullet implements GameObject, BoxCollidable, Recyclable {
         this.dy = (float) (speed * Math.sin(angle));
         this.ex = (float) (length * Math.cos(angle));
         this.ey = (float) (length * Math.sin(angle));
+        this.power = power;
 
         if (paint == null) {
             paint = new Paint();
