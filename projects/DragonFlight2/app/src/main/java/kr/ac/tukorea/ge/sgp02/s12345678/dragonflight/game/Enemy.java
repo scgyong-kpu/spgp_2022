@@ -20,7 +20,7 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     private static final String TAG = Enemy.class.getSimpleName();
     public static float size;
     protected int level;
-    protected int life, maxLife;
+    protected float life, maxLife;
     protected Gauge gauge;
     protected float dy;
     protected RectF boundingBox = new RectF();
@@ -104,7 +104,7 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
         return level * level * 100;
     }
 
-    public boolean decreaseLife(int power) {
+    public boolean decreaseLife(float power) {
         life -= power;
         if (life <= 0) return true;
 
