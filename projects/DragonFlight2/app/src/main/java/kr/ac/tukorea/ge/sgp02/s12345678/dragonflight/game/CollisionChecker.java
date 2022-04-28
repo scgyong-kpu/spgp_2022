@@ -21,7 +21,7 @@ public class CollisionChecker implements GameObject {
                 continue;
             }
             Enemy enemy = (Enemy) o1;
-            boolean removed = false;
+            boolean collided = false;
             for (GameObject o2 : bullets) {
                 if (!(o2 instanceof Bullet)) {
                     continue;
@@ -30,13 +30,16 @@ public class CollisionChecker implements GameObject {
                 if (CollisionHelper.collides(enemy, bullet)) {
                     Log.d(TAG, "Collision !!");
                     game.remove(bullet);
-                    game.remove(enemy);
-                    game.score.add(enemy.getScore());
-                    removed = true;
+                    boolean dead = enemy.decreaseLife(bullet.getPower());
+                    if (dead) {
+                        game.remove(enemy);
+                        game.score.add(enemy.getScore());
+                    }
+                    collided = true;
                     break;
                 }
             }
-            if (removed) {
+            if (collided) {
                 continue;
             }
             // check enemy vs fighter
