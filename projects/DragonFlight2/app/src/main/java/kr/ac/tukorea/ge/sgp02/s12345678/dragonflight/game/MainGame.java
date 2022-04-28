@@ -34,7 +34,7 @@ public class MainGame {
 //    private ArrayList<GameObject> gameObjects = new ArrayList<>();
     protected ArrayList<ArrayList<GameObject>> layers;
     public enum Layer {
-        bg, bullet, enemy, player, ui, controller, COUNT
+        bg1, bullet, enemy, player, bg2, ui, controller, COUNT
     }
     private Fighter fighter;
     public float frameTime;
@@ -60,8 +60,8 @@ public class MainGame {
 //        score.set(123456);
         add(Layer.ui, score);
 
-        add(Layer.bg, new Background(R.mipmap.bg_city));
-        add(Layer.bg, new Background(R.mipmap.clouds));
+        add(Layer.bg1, new Background(R.mipmap.bg_city));
+        add(Layer.bg2, new Background(R.mipmap.clouds));
 
         collisionPaint = new Paint();
         collisionPaint.setStyle(Paint.Style.STROKE);
