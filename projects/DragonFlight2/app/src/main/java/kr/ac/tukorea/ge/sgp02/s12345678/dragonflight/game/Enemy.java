@@ -1,5 +1,6 @@
 package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game;
 
+import android.graphics.Canvas;
 import android.graphics.RectF;
 import android.util.Log;
 
@@ -20,6 +21,7 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     public static float size;
     protected int level;
     protected int life, maxLife;
+    protected Gauge gauge;
     protected float dy;
     protected RectF boundingBox = new RectF();
     protected static int[] bitmapIds = {
@@ -49,6 +51,7 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
         this.dy = speed;
         this.level = level;
         life = maxLife = level * 10;
+        gauge.setValue(1.0f);
     }
     private Enemy(int level, float x, float speed) {
         super(x, -size, size, size, bitmapIds[level - 1], FRAMES_PER_SECOND, 0);
@@ -57,6 +60,12 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
 //        setDstRectWithRadius();
         dy = speed;
         life = maxLife = level * 10;
+        gauge = new Gauge(
+                Metrics.size(R.dimen.enemy_gauge_fg_width), R.color.enemy_gauge_fg,
+                Metrics.size(R.dimen.enemy_gauge_bg_width), R.color.enemy_gauge_bg,
+                size * 0.9f
+        );
+        gauge.setValue(1.0f);
         Log.d(TAG, "Created: " + this);
     }
 
@@ -76,6 +85,12 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     }
 
     @Override
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
+        gauge.draw(canvas, x, y + size * 0.5f);
+    }
+
+    @Override
     public RectF getBoundingRect() {
         return boundingBox;
     }
@@ -92,6 +107,8 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     public boolean decreaseLife(int power) {
         life -= power;
         if (life <= 0) return true;
+
+        gauge.setValue((float)life / maxLife);
         return false;
     }
 }
