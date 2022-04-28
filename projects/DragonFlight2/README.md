@@ -29,5 +29,7 @@
   * Controller objects
   * UI objects
     * Score
+* FrameTime update
 * Background / Vertical Scroll
-* 
+* Enemy Life / Gauge 추가
+* Multiple Activity
