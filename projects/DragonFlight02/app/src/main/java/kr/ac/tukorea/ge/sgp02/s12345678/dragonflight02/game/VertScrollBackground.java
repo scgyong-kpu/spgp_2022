@@ -5,11 +5,12 @@ import android.graphics.Canvas;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Sprite;
 
-public class Background extends Sprite {
+// homework: make HorzScrollBackground class
+public class VertScrollBackground extends Sprite {
     private final float speed;
     private final int height;
 
-    public Background(int bitmapResId, float speed) {
+    public VertScrollBackground(int bitmapResId, float speed) {
         super(Metrics.width / 2, Metrics.height / 2,
                 Metrics.width, Metrics.height, bitmapResId);
         height = bitmap.getHeight() * Metrics.width / bitmap.getWidth();

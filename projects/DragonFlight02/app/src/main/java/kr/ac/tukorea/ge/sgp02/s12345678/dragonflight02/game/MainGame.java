@@ -4,13 +4,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.BoxCollidable;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.CollisionHelper;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.R;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.GameObject;
@@ -65,8 +63,8 @@ public class MainGame {
 //        score.set(12345);
         add(Layer.ui, score);
 
-        add(Layer.bg1, new Background(R.mipmap.bg_city, Metrics.size(R.dimen.bg_speed_city)));
-        add(Layer.bg2, new Background(R.mipmap.clouds, Metrics.size(R.dimen.bg_speed_cloud)));
+        add(Layer.bg1, new VertScrollBackground(R.mipmap.bg_city, Metrics.size(R.dimen.bg_speed_city)));
+        add(Layer.bg2, new VertScrollBackground(R.mipmap.clouds, Metrics.size(R.dimen.bg_speed_cloud)));
 
         collisionPaint = new Paint();
         collisionPaint.setColor(Color.RED);
