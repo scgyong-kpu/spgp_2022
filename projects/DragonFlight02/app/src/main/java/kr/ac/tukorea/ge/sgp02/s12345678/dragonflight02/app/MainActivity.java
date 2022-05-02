@@ -2,7 +2,10 @@ package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.R;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.GameView;
@@ -16,26 +19,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    @Override
-    protected void onPause() {
-        if (GameView.view != null) {
-            GameView.view.pauseGame();
-        }
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (GameView.view != null) {
-            GameView.view.resumeGame();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        GameView.view = null;
-        MainGame.clear();
-        super.onDestroy();
+    public void onBtnStart(View view) {
+//        Log.d("tag", "onBtnStart()");
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
     }
 }
