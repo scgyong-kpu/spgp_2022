@@ -7,4 +7,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="enemy_gauge_fg">#C31767BD</color>
+    <color name="enemy_gauge_bg">#8DF4E136</color>
 </resources>
