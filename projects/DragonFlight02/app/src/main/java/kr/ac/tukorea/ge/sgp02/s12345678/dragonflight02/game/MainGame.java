@@ -65,8 +65,8 @@ public class MainGame {
 //        score.set(12345);
         add(Layer.ui, score);
 
-        add(Layer.bg, new Background(R.mipmap.bg_city));
-        add(Layer.bg, new Background(R.mipmap.clouds));
+        add(Layer.bg, new Background(R.mipmap.bg_city, Metrics.size(R.dimen.bg_speed_city)));
+        add(Layer.bg, new Background(R.mipmap.clouds, Metrics.size(R.dimen.bg_speed_cloud)));
 
         collisionPaint = new Paint();
         collisionPaint.setColor(Color.RED);
