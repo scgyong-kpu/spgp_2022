@@ -63,6 +63,9 @@ public class GameView extends View implements Choreographer.FrameCallback {
             return;
         }
         long now = currentTimeNanos;
+        if (previousTimeNanos == 0) {
+            previousTimeNanos = now;
+        }
         int elapsed = (int) (now - previousTimeNanos);
         if (elapsed != 0) {
             framesPerSecond = 1_000_000_000 / elapsed;
@@ -96,6 +99,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
         if (initialized && !running) {
             Log.d(TAG, "Resuming the game");
             running = true;
+            previousTimeNanos = 0;
             Choreographer.getInstance().postFrameCallback(this);
         }
     }
