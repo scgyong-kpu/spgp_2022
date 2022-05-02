@@ -28,7 +28,7 @@ public class Background extends Sprite {
     @Override
     public void draw(Canvas canvas) {
 //        super.draw(canvas);
-        int curr = (int)y % Metrics.height;
+        int curr = (int)y % height;
         if (curr > 0) curr -= height;
         while (curr < Metrics.height) {
             dstRect.set(0, curr, Metrics.width, curr + height);

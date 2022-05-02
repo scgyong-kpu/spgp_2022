@@ -41,7 +41,7 @@ public class MainGame {
 //    private ArrayList<GameObject> objects = new ArrayList<>();
     private ArrayList<ArrayList<GameObject>> layers;
     public enum Layer {
-        bg, bullet, enemy, player, ui, controller, COUNT
+        bg1, bullet, enemy, player, bg2, ui, controller, COUNT
     }
     private Fighter fighter;
 
@@ -65,8 +65,8 @@ public class MainGame {
 //        score.set(12345);
         add(Layer.ui, score);
 
-        add(Layer.bg, new Background(R.mipmap.bg_city, Metrics.size(R.dimen.bg_speed_city)));
-        add(Layer.bg, new Background(R.mipmap.clouds, Metrics.size(R.dimen.bg_speed_cloud)));
+        add(Layer.bg1, new Background(R.mipmap.bg_city, Metrics.size(R.dimen.bg_speed_city)));
+        add(Layer.bg2, new Background(R.mipmap.clouds, Metrics.size(R.dimen.bg_speed_cloud)));
 
         collisionPaint = new Paint();
         collisionPaint.setColor(Color.RED);
