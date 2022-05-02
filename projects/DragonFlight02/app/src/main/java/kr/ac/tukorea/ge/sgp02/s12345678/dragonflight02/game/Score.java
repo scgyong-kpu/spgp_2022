@@ -64,4 +64,7 @@ public class Score implements GameObject {
         }
     }
 
+    public int get() {
+        return score;
+    }
 }
