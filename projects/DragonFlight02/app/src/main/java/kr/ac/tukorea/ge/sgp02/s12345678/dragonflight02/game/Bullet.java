@@ -84,4 +84,8 @@ public class Bullet implements GameObject, BoxCollidable, Recyclable {
     public void finish() {
 
     }
+
+    public float getPower() {
+        return 10;
+    }
 }

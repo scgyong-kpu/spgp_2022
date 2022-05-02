@@ -28,9 +28,13 @@ public class CollisionChecker implements GameObject {
                 Bullet bullet = (Bullet) o2;
                 if (CollisionHelper.collides(enemy, bullet)) {
                     Log.d(TAG, "Collision !!");
-                    game.remove(enemy);
                     game.remove(bullet);
-                    game.score.add(enemy.getScore());
+                    float power = bullet.getPower();
+                    boolean dead = enemy.decreaseLife(power);
+                    if (dead) {
+                        game.remove(enemy);
+                        game.score.add(enemy.getScore());
+                    }
                     break;
                 }
             }

@@ -17,6 +17,7 @@ import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight02.framework.Sprite;
 public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     private static final String TAG = Enemy.class.getSimpleName();
     private int level;
+    private float life;
     protected float dy;
     protected RectF boundingRect = new RectF();
 
@@ -47,6 +48,7 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
         this.y = -size/2;
         this.dy = speed;
         this.level = level;
+        life = level * 10;
     }
 
     private Enemy(int level, float x, float speed) {
@@ -54,6 +56,7 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
         super(x, -size/2, size, size, BITMAP_IDS[level - 1], 6, 0);
         this.level = level;
         dy = speed;
+        life = level * 10;
 
         Log.d(TAG, "Created: " + this);
     }
@@ -91,5 +94,11 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
 
     public int getScore() {
         return level * level * 100;
+    }
+
+    public boolean decreaseLife(float power) {
+        life -= power;
+        if (life <= 0) return true;
+        return false;
     }
 }
