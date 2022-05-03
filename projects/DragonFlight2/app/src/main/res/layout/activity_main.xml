@@ -9,20 +9,22 @@
 
     <LinearLayout
         android:id="@+id/trees"
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_centerVertical="true"
         >
         <ImageView
             android:id="@+id/tree1"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:layout_width="500dp"
+            android:layout_height="200dp"
+            android:scaleType="fitCenter"
             android:src="@mipmap/trees"/>
         <ImageView
             android:id="@+id/tree2"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:layout_width="500dp"
+            android:layout_height="200dp"
+            android:scaleType="fitCenter"
             android:src="@mipmap/trees"/>
     </LinearLayout>
     <LinearLayout

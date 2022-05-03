@@ -16,7 +16,8 @@ import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game.MainGame;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private View trees;
+    private View tree1;
+    private View tree2;
     private ValueAnimator animator;
 
     @Override
@@ -24,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        trees = findViewById(R.id.trees);
+        tree1 = findViewById(R.id.tree1);
+        tree2 = findViewById(R.id.tree2);
         createAnimator();
     }
 
@@ -42,14 +44,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void createAnimator() {
         animator = ValueAnimator.ofFloat(0.0f, 1.0f);
-        animator.setDuration(5000);
+        animator.setDuration(30000);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setInterpolator(new LinearInterpolator());
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 float progress = (Float)valueAnimator.getAnimatedValue();
-                Log.d(TAG, "Progerss: " + progress);
+//                Log.d(TAG, "Progerss: " + progress);
+                float tx = -1 * tree1.getWidth() * progress;
+                tree1.setTranslationX(tx);
+                tree2.setTranslationX(tx);
             }
         });
     }
