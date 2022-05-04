@@ -9,6 +9,7 @@ import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.AnimSprite;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BaseGame;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BitmapPool;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BoxCollidable;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Gauge;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Recyclable;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.RecycleBin;

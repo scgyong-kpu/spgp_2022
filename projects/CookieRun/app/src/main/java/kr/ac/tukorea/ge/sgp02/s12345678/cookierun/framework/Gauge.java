@@ -1,4 +1,4 @@
-package kr.ac.tukorea.ge.sgp02.s12345678.cookierun.game;
+package kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework;
 
 import android.content.Context;
 import android.graphics.Canvas;
