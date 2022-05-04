@@ -54,7 +54,11 @@ public class MainGame {
         fighter = new Fighter(fx, fy);
         add(Layer.player, fighter);
 
-        score = new Score();
+//        int mipmapResId = R.mipmap.number_24x32;
+//        float marginTop = Metrics.size(R.dimen.score_margin_top);
+//        float marginRight = Metrics.size(R.dimen.score_margin_right);
+//        float charWidth = Metrics.size(R.dimen.score_digit_width);
+//        score = new Score(mipmapResId, marginTop, marginRight, charWidth);
 //        score.set(123456);
         add(Layer.ui, score);
 
