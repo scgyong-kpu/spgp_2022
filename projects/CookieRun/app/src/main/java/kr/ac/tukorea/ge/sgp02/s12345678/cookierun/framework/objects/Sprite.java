@@ -1,8 +1,12 @@
-package kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework;
+package kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.objects;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
+
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.interfaces.GameObject;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.res.BitmapPool;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.res.Metrics;
 
 public class Sprite implements GameObject {
     protected Bitmap bitmap;

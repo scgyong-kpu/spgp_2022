@@ -1,4 +1,4 @@
-package kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework;
+package kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -11,6 +11,9 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.game.BaseGame;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.res.Metrics;
 
 public class GameView extends View implements Choreographer.FrameCallback {
     public static GameView view;

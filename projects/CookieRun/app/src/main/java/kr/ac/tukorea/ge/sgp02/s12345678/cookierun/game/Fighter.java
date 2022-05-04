@@ -5,10 +5,10 @@ import android.graphics.Canvas;
 import android.graphics.RectF;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.R;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BaseGame;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BitmapPool;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Metrics;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Sprite;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.game.BaseGame;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.res.BitmapPool;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.res.Metrics;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.objects.Sprite;
 
 public class Fighter extends Sprite {
     private static final String TAG = Fighter.class.getSimpleName();

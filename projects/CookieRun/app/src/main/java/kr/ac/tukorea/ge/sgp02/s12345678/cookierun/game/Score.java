@@ -5,10 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.R;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BitmapPool;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.GameObject;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Metrics;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.res.BitmapPool;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.interfaces.GameObject;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.res.Metrics;
 
 public class Score implements GameObject {
     private final Bitmap bitmap;

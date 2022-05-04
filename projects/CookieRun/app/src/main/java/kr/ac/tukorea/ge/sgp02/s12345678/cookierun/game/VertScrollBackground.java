@@ -2,9 +2,9 @@ package kr.ac.tukorea.ge.sgp02.s12345678.cookierun.game;
 
 import android.graphics.Canvas;
 
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BaseGame;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Metrics;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Sprite;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.game.BaseGame;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.res.Metrics;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.objects.Sprite;
 
 public class VertScrollBackground extends Sprite {
     private final float speed;

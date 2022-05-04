@@ -1,6 +1,8 @@
-package kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework;
+package kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.util;
 
 import android.graphics.RectF;
+
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.interfaces.BoxCollidable;
 
 public class CollisionHelper {
     public static boolean collides(BoxCollidable o1, BoxCollidable o2) {

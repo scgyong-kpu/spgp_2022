@@ -7,12 +7,12 @@ import android.graphics.RectF;
 import android.util.Log;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.R;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BaseGame;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BoxCollidable;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.GameObject;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Metrics;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Recyclable;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.RecycleBin;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.game.BaseGame;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.interfaces.BoxCollidable;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.interfaces.GameObject;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.res.Metrics;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.interfaces.Recyclable;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.game.RecycleBin;
 
 
 public class Bullet implements GameObject, BoxCollidable, Recyclable {

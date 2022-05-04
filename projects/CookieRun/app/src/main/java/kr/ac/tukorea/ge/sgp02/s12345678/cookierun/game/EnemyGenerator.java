@@ -5,9 +5,9 @@ import android.graphics.Canvas;
 import java.util.Random;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.R;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BaseGame;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.GameObject;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Metrics;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.game.BaseGame;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.interfaces.GameObject;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.res.Metrics;
 
 public class EnemyGenerator implements GameObject {
     private static final float INITIAL_SPAWN_INTERVAL = 2.0f;

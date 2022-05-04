@@ -1,7 +1,9 @@
-package kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework;
+package kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.game;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.interfaces.Recyclable;
 
 public class RecycleBin {
     private static HashMap<Class, ArrayList<Recyclable>> recycleBin = new HashMap<>();

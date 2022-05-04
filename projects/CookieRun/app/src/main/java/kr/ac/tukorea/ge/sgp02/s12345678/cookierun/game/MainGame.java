@@ -5,9 +5,9 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.R;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BaseGame;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.GameObject;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Metrics;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.game.BaseGame;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.interfaces.GameObject;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.res.Metrics;
 
 public class MainGame extends BaseGame {
     private static final String TAG = MainGame.class.getSimpleName();

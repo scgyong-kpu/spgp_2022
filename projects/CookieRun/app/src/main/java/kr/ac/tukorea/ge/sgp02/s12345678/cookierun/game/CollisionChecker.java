@@ -5,8 +5,8 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.CollisionHelper;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.GameObject;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.util.CollisionHelper;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.interfaces.GameObject;
 
 public class CollisionChecker implements GameObject {
     private static final String TAG = CollisionChecker.class.getSimpleName();

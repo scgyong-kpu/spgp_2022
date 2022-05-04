@@ -5,14 +5,14 @@ import android.graphics.RectF;
 import android.util.Log;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.R;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.AnimSprite;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BaseGame;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BitmapPool;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BoxCollidable;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Gauge;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Metrics;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Recyclable;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.RecycleBin;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.objects.AnimSprite;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.game.BaseGame;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.res.BitmapPool;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.interfaces.BoxCollidable;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.util.Gauge;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.res.Metrics;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.interfaces.Recyclable;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.game.RecycleBin;
 
 
 public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
