@@ -16,16 +16,10 @@
         >
         <ImageView
             android:id="@+id/tree1"
-            android:layout_width="500dp"
-            android:layout_height="200dp"
+            android:layout_width="1140dp"
+            android:layout_height="230dp"
             android:scaleType="fitCenter"
-            android:src="@mipmap/trees"/>
-        <ImageView
-            android:id="@+id/tree2"
-            android:layout_width="500dp"
-            android:layout_height="200dp"
-            android:scaleType="fitCenter"
-            android:src="@mipmap/trees"/>
+            android:src="@mipmap/trees_w"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
