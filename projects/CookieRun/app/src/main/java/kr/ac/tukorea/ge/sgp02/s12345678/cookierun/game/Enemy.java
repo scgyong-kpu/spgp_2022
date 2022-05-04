@@ -6,6 +6,7 @@ import android.util.Log;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.R;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.AnimSprite;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BaseGame;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BitmapPool;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BoxCollidable;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Metrics;
@@ -71,13 +72,13 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     public void update() {
 //        super.update();
 
-        float frameTime = MainGame.getInstance().frameTime;
+        float frameTime = BaseGame.getInstance().frameTime;
         y += dy * frameTime;
         setDstRectWithRadius();
         boundingBox.set(dstRect);
         boundingBox.inset(size/16, size/16);
         if (dstRect.top > Metrics.height) {
-            MainGame.getInstance().remove(this);
+            BaseGame.getInstance().remove(this);
             //recycleBin.add(this);
         }
     }

@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.RectF;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.R;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BaseGame;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BitmapPool;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Sprite;
@@ -42,7 +43,7 @@ public class Fighter extends Sprite {
     }
 
     public void update() {
-        float frameTime = MainGame.getInstance().frameTime;
+        float frameTime = BaseGame.getInstance().frameTime;
         elapsedTimeForFire += frameTime;
         if (elapsedTimeForFire >= fireInterval) {
             fire();
@@ -85,6 +86,6 @@ public class Fighter extends Sprite {
         if (score > 100000) score = 100000;
         float power = 10 + score / 1000;
         Bullet bullet = Bullet.get(x, y, power);
-        MainGame.getInstance().add(MainGame.Layer.bullet, bullet);
+        MainGame.get().add(MainGame.Layer.bullet, bullet);
     }
 }

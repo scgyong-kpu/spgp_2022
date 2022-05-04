@@ -7,6 +7,7 @@ import android.graphics.RectF;
 import android.util.Log;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.R;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BaseGame;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BoxCollidable;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.GameObject;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Metrics;
@@ -59,7 +60,7 @@ public class Bullet implements GameObject, BoxCollidable, Recyclable {
     }
     @Override
     public void update() {
-        MainGame game = MainGame.getInstance();
+        BaseGame game = BaseGame.getInstance();
         float frameTime = game.frameTime;
         y -= speed * frameTime;
 

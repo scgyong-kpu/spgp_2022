@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BaseGame;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.GameView;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.game.MainGame;
 
@@ -12,6 +13,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainGame.get();
         setContentView(new GameView(this, null));
     }
 
@@ -30,7 +32,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         GameView.view = null;
-        MainGame.clear();
+        BaseGame.clear();
         super.onDestroy();
     }
 }

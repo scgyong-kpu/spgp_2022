@@ -2,6 +2,7 @@ package kr.ac.tukorea.ge.sgp02.s12345678.cookierun.game;
 
 import android.graphics.Canvas;
 
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BaseGame;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Sprite;
 
@@ -18,7 +19,7 @@ public class VertScrollBackground extends Sprite {
 
     @Override
     public void update() {
-        this.y += speed * MainGame.getInstance().frameTime;
+        this.y += speed * BaseGame.getInstance().frameTime;
 //        if (y > Metrics.height) {
 //            y = 0;
 //        }

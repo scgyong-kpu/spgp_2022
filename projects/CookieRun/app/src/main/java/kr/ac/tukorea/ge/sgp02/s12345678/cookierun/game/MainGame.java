@@ -1,49 +1,32 @@
 package kr.ac.tukorea.ge.sgp02.s12345678.cookierun.game;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.RectF;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.R;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BoxCollidable;
+import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.BaseGame;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.GameObject;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.GameView;
 import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Metrics;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.Recyclable;
-import kr.ac.tukorea.ge.sgp02.s12345678.cookierun.framework.RecycleBin;
 
-public class MainGame {
+public class MainGame extends BaseGame {
     private static final String TAG = MainGame.class.getSimpleName();
-    private static MainGame singleton;
-    private Paint collisionPaint;
-    Score score;
-
-    public static MainGame getInstance() {
+    public static MainGame get() {
         if (singleton == null) {
             singleton = new MainGame();
         }
-        return singleton;
+        return (MainGame)singleton;
     }
-    private static final int BALL_COUNT = 10;
-//    private ArrayList<GameObject> gameObjects = new ArrayList<>();
-    protected ArrayList<ArrayList<GameObject>> layers;
+
     public enum Layer {
         bg1, bullet, enemy, player, bg2, ui, controller, COUNT
     }
     private Fighter fighter;
-    public float frameTime;
+    Score score;
 
-    public static void clear() {
-        singleton = null;
-    }
 
     public void init() {
 
-//        gameObjects.clear();
         initLayers(Layer.COUNT.ordinal());
 
         add(Layer.controller, new EnemyGenerator());
@@ -65,16 +48,6 @@ public class MainGame {
         add(Layer.bg1, new VertScrollBackground(R.mipmap.bg_city, Metrics.size(R.dimen.bg_speed_city)));
         add(Layer.bg2, new VertScrollBackground(R.mipmap.clouds, Metrics.size(R.dimen.bg_speed_cloud)));
 
-        collisionPaint = new Paint();
-        collisionPaint.setStyle(Paint.Style.STROKE);
-        collisionPaint.setColor(Color.RED);
-    }
-
-    private void initLayers(int count) {
-        layers = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            layers.add(new ArrayList<>());
-        }
     }
 
     public boolean onTouchEvent(MotionEvent event) {
@@ -93,28 +66,7 @@ public class MainGame {
         return false;
     }
 
-    public void draw(Canvas canvas) {
-        for (ArrayList<GameObject> gameObjects : layers) {
-            for (GameObject gobj : gameObjects) {
-                gobj.draw(canvas);
-                if (gobj instanceof BoxCollidable) {
-                    RectF box = ((BoxCollidable) gobj).getBoundingRect();
-                    canvas.drawRect(box, collisionPaint);
-                }
-            }
-        }
-    }
 
-    public void update(int elapsedNanos) {
-        frameTime = (float) (elapsedNanos / 1_000_000_000f);
-        for (ArrayList<GameObject> gameObjects : layers) {
-            for (GameObject gobj : gameObjects) {
-                gobj.update();
-            }
-        }
-
-//        checkCollision();
-    }
 
 //    private void checkCollision() {
 //    }
@@ -124,36 +76,7 @@ public class MainGame {
     }
 
     public void add(Layer layer, GameObject gameObject) {
-        GameView.view.post(new Runnable() {
-            @Override
-            public void run() {
-                ArrayList<GameObject> gameObjects = layers.get(layer.ordinal());
-                gameObjects.add(gameObject);
-            }
-        });
+        add(layer.ordinal(), gameObject);
     }
 
-    public void remove(GameObject gameObject) {
-        GameView.view.post(new Runnable() {
-            @Override
-            public void run() {
-                for (ArrayList<GameObject> gameObjects : layers) {
-                    boolean removed = gameObjects.remove(gameObject);
-                    if (!removed) continue;
-                    if (gameObject instanceof Recyclable) {
-                        RecycleBin.add((Recyclable) gameObject);
-                    }
-                    break;
-                }
-            }
-        });
-    }
-
-    public int objectCount() {
-        int count = 0;
-        for (ArrayList<GameObject> gameObjects : layers) {
-            count += gameObjects.size();
-        }
-        return count;
-    }
 }
