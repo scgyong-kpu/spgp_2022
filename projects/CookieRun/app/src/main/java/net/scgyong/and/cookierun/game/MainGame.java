@@ -1,5 +1,7 @@
 package net.scgyong.and.cookierun.game;
 
+import android.view.MotionEvent;
+
 import net.scgyong.and.cookierun.R;
 import net.scgyong.and.cookierun.framework.game.BaseGame;
 import net.scgyong.and.cookierun.framework.objects.HorzScrollBackground;
@@ -9,6 +11,7 @@ import net.scgyong.and.cookierun.framework.res.Metrics;
 public class MainGame extends BaseGame {
     public static final String PARAM_STAGE_INDEX = "stage_index";
     private static final String TAG = MainGame.class.getSimpleName();
+    private Player player;
 
     public static MainGame get() {
         if (singleton == null) {
@@ -40,7 +43,7 @@ public class MainGame extends BaseGame {
 //                size(2), size(7),
 //                size(2), size(2),
 //                R.mipmap.cookie);
-        Player player = new Player(
+        player = new Player(
                 size(2), size(7),
                 size(2), size(2)
         );
@@ -63,4 +66,12 @@ public class MainGame extends BaseGame {
 //        add(Layer.item.ordinal(), JellyItem.get(5, 8, 3));
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            player.jump();
+            return true;
+        }
+        return false;
+    }
 }

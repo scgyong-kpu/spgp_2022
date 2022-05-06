@@ -2,6 +2,7 @@ package net.scgyong.and.cookierun.game;
 
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.Log;
 
 import net.scgyong.and.cookierun.R;
 import net.scgyong.and.cookierun.framework.interfaces.BoxCollidable;
@@ -10,6 +11,7 @@ import net.scgyong.and.cookierun.framework.objects.SheetSprite;
 public class Player extends SheetSprite implements BoxCollidable {
 
     private static final float FRAMES_PER_SECOND = 8f;
+    private static final String TAG = Player.class.getSimpleName();
 
     public Player(float x, float y, float w, float h) {
         super(R.mipmap.cookie, FRAMES_PER_SECOND);
@@ -27,5 +29,9 @@ public class Player extends SheetSprite implements BoxCollidable {
     @Override
     public RectF getBoundingRect() {
         return dstRect;
+    }
+
+    public void jump() {
+        Log.d(TAG, "Jump");
     }
 }
