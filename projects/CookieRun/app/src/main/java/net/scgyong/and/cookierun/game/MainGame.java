@@ -19,10 +19,18 @@ public class MainGame extends BaseGame {
         bg, player, COUNT
     }
 
+    public float size(float unit) {
+        return Metrics.height / 9.5f * unit;
+    }
+
     public void init() {
         initLayers(Layer.COUNT.ordinal());
 
-        add(Layer.player.ordinal(), new Sprite(Metrics.width / 2, Metrics.height / 2, 500, 500, R.mipmap.cookie));
+        Sprite player = new Sprite(
+                size(2), size(7),
+                size(2), size(2),
+                R.mipmap.cookie);
+        add(Layer.player.ordinal(), player);
         add(Layer.bg.ordinal(), new HorzScrollBackground(R.mipmap.cookie, Metrics.size(R.dimen.bg_scroll_1)));
     }
 
