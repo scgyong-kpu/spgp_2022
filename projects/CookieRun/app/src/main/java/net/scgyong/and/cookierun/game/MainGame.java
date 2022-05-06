@@ -35,7 +35,6 @@ public class MainGame extends BaseGame {
 
     public void init() {
         super.init();
-        showsBoxCollidables = BuildConfig.showsCollisionBox;
 
         initLayers(Layer.COUNT.ordinal());
 

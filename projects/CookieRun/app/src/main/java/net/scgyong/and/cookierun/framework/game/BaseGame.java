@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.view.MotionEvent;
 
+import net.scgyong.and.cookierun.BuildConfig;
 import net.scgyong.and.cookierun.framework.interfaces.BoxCollidable;
 
 import java.util.ArrayList;
@@ -31,12 +32,13 @@ public class BaseGame {
 
     protected ArrayList<ArrayList<GameObject>> layers;
     protected Paint collisionPaint;
-    protected boolean showsBoxCollidables;
 
     public void init() {
-        collisionPaint = new Paint();
-        collisionPaint.setStyle(Paint.Style.STROKE);
-        collisionPaint.setColor(Color.RED);
+        if (BuildConfig.showsCollisionBox) {
+            collisionPaint = new Paint();
+            collisionPaint.setStyle(Paint.Style.STROKE);
+            collisionPaint.setColor(Color.RED);
+        }
 
         elapsedTime = 0;
     }
@@ -64,7 +66,7 @@ public class BaseGame {
                 gobj.draw(canvas);
             }
         }
-        if (showsBoxCollidables) {
+        if (BuildConfig.showsCollisionBox) {
             drawBoxCollidables(canvas);
         }
     }

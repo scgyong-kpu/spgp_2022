@@ -6,8 +6,10 @@ import android.util.Log;
 
 import net.scgyong.and.cookierun.R;
 import net.scgyong.and.cookierun.framework.interfaces.BoxCollidable;
+import net.scgyong.and.cookierun.framework.interfaces.GameObject;
 import net.scgyong.and.cookierun.framework.objects.SheetSprite;
 import net.scgyong.and.cookierun.framework.res.Metrics;
+import net.scgyong.and.cookierun.framework.view.GameView;
 
 import java.util.ArrayList;
 
@@ -48,7 +50,7 @@ public class Player extends SheetSprite implements BoxCollidable {
         }
     }
     private State state = State.run;
-    private final float ground;
+//    private final float ground;
     private final float jumpPower;
     private final float gravity;
     private float jumpSpeed;
@@ -58,7 +60,7 @@ public class Player extends SheetSprite implements BoxCollidable {
         super(R.mipmap.cookie, FRAMES_PER_SECOND);
         this.x = x;
         this.y = y;
-        this.ground = y;
+//        this.ground = y;
         jumpPower = Metrics.size(R.dimen.player_jump_power);
         gravity = Metrics.size(R.dimen.player_gravity);
         setDstRect(w, h);
@@ -76,13 +78,40 @@ public class Player extends SheetSprite implements BoxCollidable {
             float dy = jumpSpeed * frameTime;
             jumpSpeed += gravity * frameTime;
 //            Log.d(TAG, "y=" + y + " dy=" + dy + " js=" + jumpSpeed);
-            if (y + dy >= ground) {
-                dy = ground - y;
-                setState(State.run);
+            if (jumpSpeed >= 0) {
+                float foot = dstRect.bottom;
+                float platformTop = findNearestPlatformTop(foot);
+                Log.i(TAG, "foot="+foot + " ptop=" + platformTop);
+                if (foot + dy >= platformTop) {
+                    dy = platformTop - foot;
+                    setState(State.run);
+                }
             }
             y += dy;
             dstRect.offset(0, dy);
         }
+    }
+
+    private float findNearestPlatformTop(float foot) {
+        MainGame game = MainGame.get();
+        ArrayList<GameObject> platforms = game.objectsAt(MainGame.Layer.platform.ordinal());
+        float top = Metrics.height;
+        for (GameObject obj: platforms) {
+            Platform platform = (Platform) obj;
+            RectF rect = platform.getBoundingRect();
+            if (rect.left > x || x > rect.right) {
+                continue;
+            }
+            Log.d(TAG, "foot:" + foot + " platform: " + rect);
+            if (rect.top < foot) {
+                continue;
+            }
+            if (top > rect.top) {
+                top = rect.top;
+            }
+            Log.d(TAG, "top=" + top + " gotcha:" + platform);
+        }
+        return top;
     }
 
     public void jump() {
