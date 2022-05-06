@@ -1,9 +1,11 @@
 package net.scgyong.and.cookierun.game;
 
 import net.scgyong.and.cookierun.R;
+import net.scgyong.and.cookierun.framework.game.RecycleBin;
 import net.scgyong.and.cookierun.framework.objects.Sprite;
+import net.scgyong.and.cookierun.framework.res.BitmapPool;
 
-public class Platform extends Sprite {
+public class Platform extends ScrollObject {
     public enum Type {
         T_10x2, T_2x2, T_3x1;
         float width() {
@@ -32,7 +34,23 @@ public class Platform extends Sprite {
             R.mipmap.cookierun_platform_124x120,
             R.mipmap.cookierun_platform_120x40,
     };
-    public Platform(Type type, float left, float top) {
-        super(left + type.width() / 2, top + type.height() / 2, type.width(), type.height(), type.bitmapId());
+    public static Platform get(Type type, float unitLeft, float unitTop) {
+        Platform platform = (Platform) RecycleBin.get(Platform.class);
+        if (platform == null) {
+            platform = new Platform();
+        }
+        platform.init(type, unitLeft, unitTop);
+        return platform;
+    }
+
+    private Platform() {
+    }
+
+    private void init(Type type, float unitLeft, float unitTop) {
+        bitmap = BitmapPool.get(type.bitmapId());
+        MainGame game = MainGame.get();
+        float left = game.size(unitLeft);
+        float top = game.size(unitTop);
+        dstRect.set(left, top, left + type.width(), top + type.height());
     }
 }
