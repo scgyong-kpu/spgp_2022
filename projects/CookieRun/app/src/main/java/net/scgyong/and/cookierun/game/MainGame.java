@@ -51,8 +51,10 @@ public class MainGame extends BaseGame {
         add(Layer.bg.ordinal(), new HorzScrollBackground(R.mipmap.cookie_run_bg_2, Metrics.size(R.dimen.bg_scroll_2)));
         add(Layer.bg.ordinal(), new HorzScrollBackground(R.mipmap.cookie_run_bg_3, Metrics.size(R.dimen.bg_scroll_3)));
 
-        MapLoader.get().init(mapIndex);
-        add(Layer.controller.ordinal(), MapLoader.get());
+        MapLoader mapLoader = MapLoader.get();
+        mapLoader.init(mapIndex);
+        add(Layer.controller.ordinal(), mapLoader);
+        add(Layer.controller.ordinal(), new CollisionChecker());
 //        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_10x2, 1, 7));
 //        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_2x2, 11, 8));
 //        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_2x2, 13, 7));
