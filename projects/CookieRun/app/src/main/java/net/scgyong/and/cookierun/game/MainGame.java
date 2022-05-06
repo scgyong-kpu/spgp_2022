@@ -16,7 +16,7 @@ public class MainGame extends BaseGame {
         return (MainGame)singleton;
     }
     public enum Layer {
-        bg, platform, player, COUNT
+        bg, platform, item, player, COUNT
     }
 
     public float size(float unit) {
@@ -40,6 +40,11 @@ public class MainGame extends BaseGame {
         add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_2x2, 13, 7));
         add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_3x1, 6, 4));
         add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_3x1, 9, 4));
+
+        add(Layer.item.ordinal(), JellyItem.get(2, 5, 3));
+        add(Layer.item.ordinal(), JellyItem.get(3, 6, 3));
+        add(Layer.item.ordinal(), JellyItem.get(4, 7, 3));
+        add(Layer.item.ordinal(), JellyItem.get(5, 8, 3));
     }
 
 }
