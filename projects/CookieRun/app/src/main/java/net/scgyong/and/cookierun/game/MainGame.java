@@ -43,7 +43,7 @@ public class MainGame extends BaseGame {
 //                size(2), size(2),
 //                R.mipmap.cookie);
         player = new Player(
-                size(2), size(7),
+                size(2), size(2),
                 size(2), size(2)
         );
         add(Layer.player.ordinal(), player);
