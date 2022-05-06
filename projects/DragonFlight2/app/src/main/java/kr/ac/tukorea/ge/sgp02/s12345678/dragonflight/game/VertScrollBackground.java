@@ -2,9 +2,9 @@ package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game;
 
 import android.graphics.Canvas;
 
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BaseGame;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Sprite;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.game.BaseGame;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.res.Metrics;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.objects.Sprite;
 
 public class VertScrollBackground extends Sprite {
     private final float speed;

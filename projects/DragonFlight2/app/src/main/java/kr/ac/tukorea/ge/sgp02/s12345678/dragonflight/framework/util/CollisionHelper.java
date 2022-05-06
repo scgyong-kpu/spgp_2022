@@ -1,6 +1,8 @@
-package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework;
+package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.util;
 
 import android.graphics.RectF;
+
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.interfaces.BoxCollidable;
 
 public class CollisionHelper {
     public static boolean collides(BoxCollidable o1, BoxCollidable o2) {

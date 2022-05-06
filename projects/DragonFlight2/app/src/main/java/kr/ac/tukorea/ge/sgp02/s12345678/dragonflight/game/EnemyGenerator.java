@@ -5,9 +5,9 @@ import android.graphics.Canvas;
 import java.util.Random;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.R;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BaseGame;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameObject;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.game.BaseGame;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.interfaces.GameObject;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.res.Metrics;
 
 public class EnemyGenerator implements GameObject {
     private static final float INITIAL_SPAWN_INTERVAL = 2.0f;

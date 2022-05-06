@@ -5,8 +5,8 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.CollisionHelper;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameObject;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.util.CollisionHelper;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.interfaces.GameObject;
 
 public class CollisionChecker implements GameObject {
     private static final String TAG = CollisionChecker.class.getSimpleName();

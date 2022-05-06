@@ -6,13 +6,13 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.Log;
 
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BaseGame;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BoxCollidable;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameObject;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.game.BaseGame;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.interfaces.BoxCollidable;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.interfaces.GameObject;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.res.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.R;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Recyclable;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.RecycleBin;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.interfaces.Recyclable;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.game.RecycleBin;
 
 public class Bullet implements GameObject, BoxCollidable, Recyclable {
     private static final String TAG = Bullet.class.getSimpleName();

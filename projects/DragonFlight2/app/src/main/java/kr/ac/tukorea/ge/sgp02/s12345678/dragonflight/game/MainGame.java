@@ -5,10 +5,10 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.R;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BaseGame;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameObject;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Score;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.game.BaseGame;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.res.Metrics;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.interfaces.GameObject;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.objects.Score;
 
 public class MainGame extends BaseGame {
     private static final String TAG = MainGame.class.getSimpleName();

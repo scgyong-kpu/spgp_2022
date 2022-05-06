@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameView;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BaseGame;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.view.GameView;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.game.BaseGame;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game.MainGame;
 
 public class GameActivity extends AppCompatActivity {
