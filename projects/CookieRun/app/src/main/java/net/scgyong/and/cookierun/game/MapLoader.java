@@ -38,7 +38,7 @@ public class MapLoader implements GameObject {
 
         platformPaint = new Paint();
         platformPaint.setColor(Color.BLUE);
-        platformPaint.setStrokeWidth(3);
+        platformPaint.setStrokeWidth(5);
     }
     @Override
     public void update(float frameTime) {
@@ -48,12 +48,12 @@ public class MapLoader implements GameObject {
 
         while (true) {
             float left = scroll + itemLeft;
-            if (left > Metrics.width + unit) {
+            if (left > Metrics.width/2 + unit) {
                 break;
             }
             int index = random.nextInt(JellyItem.JELLY_COUNT);
             float unitTop = random.nextInt(8);
-            JellyItem item = JellyItem.get(index, (int)(left / unit), unitTop);
+            JellyItem item = JellyItem.get(index, (left / unit), unitTop);
             game.add(MainGame.Layer.item.ordinal(), item);
             Log.d(TAG, "itemLeft=" + itemLeft + " left=" + left + " w=" + item.dstWidth());
             itemLeft += item.dstWidth();
@@ -62,11 +62,11 @@ public class MapLoader implements GameObject {
 
         while (true) {
             float left = scroll + platformLeft;
-            if (left > Metrics.width + unit) {
+            if (left > Metrics.width/2 + unit) {
                 break;
             }
             Platform.Type type = Platform.Type.random(random);
-            Platform platform = Platform.get(type, (int)(left / unit), 8);
+            Platform platform = Platform.get(type, (left / unit), 8);
             game.add(MainGame.Layer.platform.ordinal(), platform);
             Log.d(TAG, "platformLeft=" + platformLeft + " left=" + left + " w=" + platform.dstWidth());
             platformLeft += platform.dstWidth();
@@ -76,7 +76,7 @@ public class MapLoader implements GameObject {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawLine(scroll -3 * unit + itemLeft, 0, scroll -3 * unit + itemLeft, Metrics.height, itemPaint);
-        canvas.drawLine(scroll -12 * unit + platformLeft, 0, scroll -12 * unit + platformLeft, Metrics.height, platformPaint);
+        canvas.drawLine(scroll + platformLeft, 0, scroll + platformLeft, Metrics.height, platformPaint);
+        canvas.drawLine(scroll + itemLeft, 0, scroll + itemLeft, Metrics.height, itemPaint);
     }
 }
