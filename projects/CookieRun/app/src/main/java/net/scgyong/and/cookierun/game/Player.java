@@ -7,6 +7,7 @@ import android.util.Log;
 import net.scgyong.and.cookierun.R;
 import net.scgyong.and.cookierun.framework.interfaces.BoxCollidable;
 import net.scgyong.and.cookierun.framework.objects.SheetSprite;
+import net.scgyong.and.cookierun.framework.res.Metrics;
 
 import java.util.ArrayList;
 
@@ -18,24 +19,13 @@ public class Player extends SheetSprite implements BoxCollidable {
     static {
         State.initRects();
     }
+
     private enum State {
         run, jump, COUNT;
         Rect[] srcRects() {
             return rects[this.ordinal()];
         }
         static Rect[][] rects;
-//        = {
-//            new Rect[] {
-//                new Rect(72 + 0 * 272, 404, 72+140 + 0 * 272, 404+140),
-//                new Rect(72 + 1 * 272, 404, 72+140 + 1 * 272, 404+140),
-//                new Rect(72 + 2 * 272, 404, 72+140 + 2 * 272, 404+140),
-//                new Rect(72 + 3 * 272, 404, 72+140 + 3 * 272, 404+140)
-//            },
-//            new Rect[] {
-//                new Rect(72 + 7 * 272, 132, 72+140 + 7 * 272, 132+140),
-//                new Rect(72 + 8 * 272, 132, 72+140 + 8 * 272, 132+140),
-//            },
-//        };
         static void initRects() {
             int[][] indices = {
                     new int[] { 100, 101, 102, 103 }, // run
@@ -57,11 +47,19 @@ public class Player extends SheetSprite implements BoxCollidable {
         }
     }
     private State state = State.run;
+    private final float ground;
+    private final float jumpPower;
+    private final float gravity;
+    private float jumpSpeed;
+
 
     public Player(float x, float y, float w, float h) {
         super(R.mipmap.cookie, FRAMES_PER_SECOND);
         this.x = x;
         this.y = y;
+        this.ground = y;
+        jumpPower = Metrics.size(R.dimen.player_jump_power);
+        gravity = Metrics.size(R.dimen.player_gravity);
         setDstRect(w, h);
         setState(State.run);
     }
@@ -71,12 +69,28 @@ public class Player extends SheetSprite implements BoxCollidable {
         return dstRect;
     }
 
+    @Override
+    public void update(float frameTime) {
+        if (state == State.jump) {
+            float dy = jumpSpeed * frameTime;
+            jumpSpeed += gravity * frameTime;
+//            Log.d(TAG, "y=" + y + " dy=" + dy + " js=" + jumpSpeed);
+            if (y + dy >= ground) {
+                dy = ground - y;
+                setState(State.run);
+            }
+            y += dy;
+            dstRect.offset(0, dy);
+        }
+    }
+
     public void jump() {
         Log.d(TAG, "Jump");
         if (state == State.run) {
             setState(State.jump);
-        } else {
-            setState(State.run);
+            jumpSpeed = -jumpPower;
+//        } else {
+//            setState(State.run);
         }
     }
 

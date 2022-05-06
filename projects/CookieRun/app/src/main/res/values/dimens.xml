@@ -4,4 +4,6 @@
     <dimen name="bg_scroll_2">-20dp</dimen>
     <dimen name="bg_scroll_3">-30dp</dimen>
     <dimen name="map_scroll_speed">-100dp</dimen>
+    <dimen name="player_jump_power">400dp</dimen>
+    <dimen name="player_gravity">900dp</dimen>
 </resources>
