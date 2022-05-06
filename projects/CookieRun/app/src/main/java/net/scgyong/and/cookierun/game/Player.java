@@ -21,7 +21,7 @@ public class Player extends SheetSprite implements BoxCollidable {
     }
 
     private enum State {
-        run, jump, COUNT;
+        run, jump, doubleJump, COUNT;
         Rect[] srcRects() {
             return rects[this.ordinal()];
         }
@@ -30,6 +30,7 @@ public class Player extends SheetSprite implements BoxCollidable {
             int[][] indices = {
                     new int[] { 100, 101, 102, 103 }, // run
                     new int[] { 7, 8 }, // jump
+                    new int[] { 1, 2, 3, 4 }, // doubleJump
             };
             ArrayList<Rect[]> rectsList = new ArrayList<>();
             for (int[] ints : indices) {
@@ -71,7 +72,7 @@ public class Player extends SheetSprite implements BoxCollidable {
 
     @Override
     public void update(float frameTime) {
-        if (state == State.jump) {
+        if (state == State.jump || state == State.doubleJump) {
             float dy = jumpSpeed * frameTime;
             jumpSpeed += gravity * frameTime;
 //            Log.d(TAG, "y=" + y + " dy=" + dy + " js=" + jumpSpeed);
@@ -89,8 +90,9 @@ public class Player extends SheetSprite implements BoxCollidable {
         if (state == State.run) {
             setState(State.jump);
             jumpSpeed = -jumpPower;
-//        } else {
-//            setState(State.run);
+        } else if (state == State.jump){
+            setState(State.doubleJump);
+            jumpSpeed = -jumpPower;
         }
     }
 
