@@ -17,11 +17,11 @@ public class ScrollObject extends Sprite implements Recyclable, BoxCollidable {
 
     @Override
     public void update(float frameTime) {
-        float speed = -200;
+        float speed = MapLoader.get().speed;
         float dx = speed * frameTime;
         dstRect.offset(dx, 0);
         if (dstRect.right < 0) {
-            Log.d(TAG, "Removing:" + this);
+//            Log.d(TAG, "Removing:" + this);
             BaseGame.getInstance().remove(this);
         }
     }

@@ -23,7 +23,7 @@ public class BitmapPool {
         if (bitmap == null) {
             Resources res = GameView.view.getResources();
             bitmap = BitmapFactory.decodeResource(res, mipmapResId, opts);
-            Log.d(TAG, "BID=" + mipmapResId + " w:" + bitmap.getWidth() + " h:" + bitmap.getHeight());
+//            Log.d(TAG, "BID=" + mipmapResId + " w:" + bitmap.getWidth() + " h:" + bitmap.getHeight());
             bitmaps.put(mipmapResId, bitmap);
         }
         return bitmap;

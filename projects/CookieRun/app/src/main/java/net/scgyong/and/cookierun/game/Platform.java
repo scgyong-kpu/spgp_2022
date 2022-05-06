@@ -5,9 +5,11 @@ import net.scgyong.and.cookierun.framework.game.RecycleBin;
 import net.scgyong.and.cookierun.framework.objects.Sprite;
 import net.scgyong.and.cookierun.framework.res.BitmapPool;
 
+import java.util.Random;
+
 public class Platform extends ScrollObject {
     public enum Type {
-        T_10x2, T_2x2, T_3x1;
+        T_10x2, T_2x2, T_3x1, COUNT;
         float width() {
             int w = 1;
             switch (this) {
@@ -27,6 +29,13 @@ public class Platform extends ScrollObject {
         }
         int bitmapId() {
             return BITMAP_IDS[this.ordinal()];
+        }
+        static Type[] types = {
+                T_10x2, T_2x2, T_3x1,
+        };
+        public static Type random(Random random) {
+            int index = random.nextInt(COUNT.ordinal());
+            return types[index];
         }
     }
     protected static int[] BITMAP_IDS = {

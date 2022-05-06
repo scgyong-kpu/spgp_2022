@@ -31,6 +31,14 @@ public class Sprite implements GameObject {
     protected Sprite() {
     }
 
+    public float dstWidth() {
+        return dstRect.width();
+    }
+
+    public float dstHeight() {
+        return dstRect.height();
+    }
+
     public void setDstRectWithRadius() {
         dstRect.set(x - radius, y - radius, x + radius, y + radius);
     }

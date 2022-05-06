@@ -16,7 +16,7 @@ public class MainGame extends BaseGame {
         return (MainGame)singleton;
     }
     public enum Layer {
-        bg, platform, item, player, COUNT
+        bg, platform, item, player, controller, COUNT
     }
 
     public float size(float unit) {
@@ -24,6 +24,9 @@ public class MainGame extends BaseGame {
     }
 
     public void init() {
+        super.init();
+        showsBoxCollidables = true;
+
         initLayers(Layer.COUNT.ordinal());
 
         Sprite player = new Sprite(
@@ -35,16 +38,18 @@ public class MainGame extends BaseGame {
         add(Layer.bg.ordinal(), new HorzScrollBackground(R.mipmap.cookie_run_bg_2, Metrics.size(R.dimen.bg_scroll_2)));
         add(Layer.bg.ordinal(), new HorzScrollBackground(R.mipmap.cookie_run_bg_3, Metrics.size(R.dimen.bg_scroll_3)));
 
-        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_10x2, 1, 7));
-        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_2x2, 11, 8));
-        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_2x2, 13, 7));
-        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_3x1, 6, 4));
-        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_3x1, 9, 4));
-
-        add(Layer.item.ordinal(), JellyItem.get(2, 5, 3));
-        add(Layer.item.ordinal(), JellyItem.get(3, 6, 3));
-        add(Layer.item.ordinal(), JellyItem.get(4, 7, 3));
-        add(Layer.item.ordinal(), JellyItem.get(5, 8, 3));
+        MapLoader.get().init();
+        add(Layer.controller.ordinal(), MapLoader.get());
+//        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_10x2, 1, 7));
+//        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_2x2, 11, 8));
+//        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_2x2, 13, 7));
+//        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_3x1, 6, 4));
+//        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_3x1, 9, 4));
+//
+//        add(Layer.item.ordinal(), JellyItem.get(2, 5, 3));
+//        add(Layer.item.ordinal(), JellyItem.get(3, 6, 3));
+//        add(Layer.item.ordinal(), JellyItem.get(4, 7, 3));
+//        add(Layer.item.ordinal(), JellyItem.get(5, 8, 3));
     }
 
 }
