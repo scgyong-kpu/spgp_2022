@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import net.scgyong.and.cookierun.R;
+import net.scgyong.and.cookierun.game.MainGame;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,10 +15,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startActivity(new Intent(this, GameActivity.class));
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra(MainGame.PARAM_STAGE_INDEX, 0);
+        startActivity(intent);
     }
 
-    public void onBtnStart(View view) {
-        startActivity(new Intent(this, GameActivity.class));
+    public void onBtnFirst(View view) {
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra(MainGame.PARAM_STAGE_INDEX, 0);
+        startActivity(intent);
+    }
+
+    public void onBtnSecond(View view) {
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra(MainGame.PARAM_STAGE_INDEX, 1);
+        startActivity(intent);
     }
 }

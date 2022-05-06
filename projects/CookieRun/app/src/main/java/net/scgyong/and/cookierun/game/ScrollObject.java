@@ -12,7 +12,7 @@ public class ScrollObject extends Sprite implements Recyclable, BoxCollidable {
     private static final String TAG = ScrollObject.class.getSimpleName();
 
     protected ScrollObject() {
-        Log.d(TAG, "New:" + this);
+//        Log.d(TAG, "New:" + this);
     }
 
     @Override

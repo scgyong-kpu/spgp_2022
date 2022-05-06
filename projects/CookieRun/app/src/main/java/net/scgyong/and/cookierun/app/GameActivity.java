@@ -2,6 +2,7 @@ package net.scgyong.and.cookierun.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import net.scgyong.and.cookierun.framework.game.BaseGame;
@@ -13,7 +14,10 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MainGame.get();
+        MainGame game = MainGame.get();
+        Intent intent = getIntent();
+        int stageIndex = intent.getExtras().getInt(MainGame.PARAM_STAGE_INDEX);
+        game.setMapIndex(stageIndex);
         setContentView(new GameView(this, null));
     }
 

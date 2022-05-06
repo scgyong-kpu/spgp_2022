@@ -7,6 +7,7 @@ import net.scgyong.and.cookierun.framework.objects.Sprite;
 import net.scgyong.and.cookierun.framework.res.Metrics;
 
 public class MainGame extends BaseGame {
+    public static final String PARAM_STAGE_INDEX = "stage_index";
     private static final String TAG = MainGame.class.getSimpleName();
 
     public static MainGame get() {
@@ -23,6 +24,12 @@ public class MainGame extends BaseGame {
         return Metrics.height / 9.5f * unit;
     }
 
+    public void setMapIndex(int mapIndex) {
+        this.mapIndex = mapIndex;
+    }
+
+    protected int mapIndex;
+
     public void init() {
         super.init();
         showsBoxCollidables = true;
@@ -38,7 +45,7 @@ public class MainGame extends BaseGame {
         add(Layer.bg.ordinal(), new HorzScrollBackground(R.mipmap.cookie_run_bg_2, Metrics.size(R.dimen.bg_scroll_2)));
         add(Layer.bg.ordinal(), new HorzScrollBackground(R.mipmap.cookie_run_bg_3, Metrics.size(R.dimen.bg_scroll_3)));
 
-        MapLoader.get().init();
+        MapLoader.get().init(mapIndex);
         add(Layer.controller.ordinal(), MapLoader.get());
 //        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_10x2, 1, 7));
 //        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_2x2, 11, 8));
