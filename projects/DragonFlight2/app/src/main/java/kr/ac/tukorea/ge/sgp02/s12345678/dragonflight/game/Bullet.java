@@ -60,7 +60,7 @@ public class Bullet implements GameObject, BoxCollidable, Recyclable {
     }
     @Override
     public void update() {
-        MainGame game = MainGame.getInstance();
+        BaseGame game = BaseGame.getInstance();
         float frameTime = game.frameTime;
         y -= speed * frameTime;
 

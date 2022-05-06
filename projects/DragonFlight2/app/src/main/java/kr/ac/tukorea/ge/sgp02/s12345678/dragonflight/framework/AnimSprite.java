@@ -3,8 +3,6 @@ package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game.MainGame;
-
 public class AnimSprite extends Sprite {
     private final float framesPerSecond;
     private final int frameCount;

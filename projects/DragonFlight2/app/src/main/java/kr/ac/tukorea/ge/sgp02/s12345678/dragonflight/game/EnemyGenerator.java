@@ -24,7 +24,7 @@ public class EnemyGenerator implements GameObject {
 
     @Override
     public void update() {
-        float frameTime = MainGame.getInstance().frameTime;
+        float frameTime = BaseGame.getInstance().frameTime;
         elapsedTime += frameTime;
         if (elapsedTime > spawnInterval) {
             spawn();
@@ -41,7 +41,7 @@ public class EnemyGenerator implements GameObject {
             if (level < Enemy.MIN_LEVEL) level = Enemy.MIN_LEVEL;
             if (level > Enemy.MAX_LEVEL) level = Enemy.MAX_LEVEL;
             Enemy enemy = Enemy.get(level, tenth * i, fallSpeed);
-            MainGame.getInstance().add(MainGame.Layer.enemy, enemy);
+            MainGame.get().add(MainGame.Layer.enemy, enemy);
         }
     }
 

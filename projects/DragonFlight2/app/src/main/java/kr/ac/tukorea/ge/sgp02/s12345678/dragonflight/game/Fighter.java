@@ -43,7 +43,7 @@ public class Fighter extends Sprite {
     }
 
     public void update() {
-        float frameTime = MainGame.getInstance().frameTime;
+        float frameTime = BaseGame.getInstance().frameTime;
         elapsedTimeForFire += frameTime;
         if (elapsedTimeForFire >= fireInterval) {
             fire();
@@ -82,10 +82,11 @@ public class Fighter extends Sprite {
     }
 
     public void fire() {
-        int score = MainGame.getInstance().score.get();
+        MainGame game = MainGame.get();
+        int score = game.score.get();
         if (score > 100000) score = 100000;
         float power = 10 + score / 1000;
         Bullet bullet = Bullet.get(x, y, power);
-        MainGame.getInstance().add(MainGame.Layer.bullet, bullet);
+        game.add(MainGame.Layer.bullet, bullet);
     }
 }
