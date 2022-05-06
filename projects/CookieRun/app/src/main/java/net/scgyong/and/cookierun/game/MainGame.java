@@ -16,7 +16,7 @@ public class MainGame extends BaseGame {
         return (MainGame)singleton;
     }
     public enum Layer {
-        bg, player, COUNT
+        bg, platform, player, COUNT
     }
 
     public float size(float unit) {
@@ -34,6 +34,12 @@ public class MainGame extends BaseGame {
         add(Layer.bg.ordinal(), new HorzScrollBackground(R.mipmap.cookie_run_bg_1, Metrics.size(R.dimen.bg_scroll_1)));
         add(Layer.bg.ordinal(), new HorzScrollBackground(R.mipmap.cookie_run_bg_2, Metrics.size(R.dimen.bg_scroll_2)));
         add(Layer.bg.ordinal(), new HorzScrollBackground(R.mipmap.cookie_run_bg_3, Metrics.size(R.dimen.bg_scroll_3)));
+
+        add(Layer.platform.ordinal(), new Platform(Platform.Type.T_10x2, size(1), size(7)));
+        add(Layer.platform.ordinal(), new Platform(Platform.Type.T_2x2, size(11), size(8)));
+        add(Layer.platform.ordinal(), new Platform(Platform.Type.T_2x2, size(13), size(7)));
+        add(Layer.platform.ordinal(), new Platform(Platform.Type.T_3x1, size(6), size(4)));
+        add(Layer.platform.ordinal(), new Platform(Platform.Type.T_3x1, size(9), size(4)));
     }
 
 }
