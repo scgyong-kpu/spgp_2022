@@ -22,12 +22,12 @@ public class MapLoader implements GameObject {
     private static MapLoader instance;
     private final Random random;
     private final float unit;
-    private final ArrayList<String> lines = new ArrayList<String>();
+    private ArrayList<String> lines;
     private int columns;
     private int rows;
     public float speed = -200;
-    public float scroll, itemLeft, platformLeft;
-//    private Paint itemPaint, platformPaint;
+    public float scroll;
+    private int current;
 
     private MapLoader() {
         random = new Random();
@@ -44,18 +44,12 @@ public class MapLoader implements GameObject {
     };
     public void init(int mapIndex) {
         scroll = 0;
-        itemLeft = platformLeft = 0;
+        current = 0;
         loadFromTextAsset(MAP_FILES[mapIndex]);
-//        itemPaint = new Paint();
-//        itemPaint.setColor(Color.RED);
-//        itemPaint.setStrokeWidth(3);
-//
-//        platformPaint = new Paint();
-//        platformPaint.setColor(Color.BLUE);
-//        platformPaint.setStrokeWidth(5);
     }
 
     private void loadFromTextAsset(String filename) {
+        lines = new ArrayList<>();
         AssetManager assets = GameView.view.getContext().getAssets();
         try {
             InputStream is = assets.open(filename);
@@ -65,13 +59,13 @@ public class MapLoader implements GameObject {
             String[] comps = header.split(" ");
             columns = Integer.parseInt(comps[0]);
             rows = Integer.parseInt(comps[1]);
-            Log.d(TAG, "Col=" + columns + " Row="  + rows);
+//            Log.d(TAG, "Col=" + columns + " Row="  + rows);
             while (true) {
                 String line = reader.readLine();
                 if (line == null) {
                     break;
                 }
-                Log.d(TAG,  "-row=" + line);
+//                Log.d(TAG,  "-row=" + line);
                 lines.add(line);
             }
         } catch (IOException e) {
@@ -85,37 +79,49 @@ public class MapLoader implements GameObject {
 
         MainGame game = MainGame.get();
 
-        while (true) {
-            float left = scroll + itemLeft;
-            if (left > Metrics.width + unit) {
-                break;
-            }
-            int index = random.nextInt(JellyItem.JELLY_COUNT);
-            float unitTop = random.nextInt(8);
-            JellyItem item = JellyItem.get(index, (left / unit), unitTop);
-            game.add(MainGame.Layer.item.ordinal(), item);
-//            Log.d(TAG, "itemLeft=" + itemLeft + " left=" + left + " w=" + item.dstWidth());
-            itemLeft += item.dstWidth();
-//            break;
+        float left = scroll + current * unit;
+        while (left < Metrics.width - unit) {
+            createColumn(left / unit);
+            current++;
+            left += unit;
         }
+    }
 
-        while (true) {
-            float left = scroll + platformLeft;
-            if (left > Metrics.width + unit) {
-                break;
+    private void createColumn(float leftUnit) {
+        float y = 0;
+        for (int row = 0; row < rows; row++) {
+            char ch = getAt(current, row);
+            if (ch == 0) {
+                MainGame.get().finish();
+                return;
             }
-            Platform.Type type = Platform.Type.random(random);
-            Platform platform = Platform.get(type, (left / unit), 8);
+            createObject(ch, leftUnit, row);
+            y += unit;
+        }
+    }
+
+    private char getAt(int x, int y) {
+        try {
+            int lineIndex = x / columns * rows + y;
+            String line = lines.get(lineIndex);
+            return line.charAt(x % columns);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    private void createObject(char ch, float leftUnit, float topUnit) {
+        MainGame game = MainGame.get();
+        if (ch >= '1' && ch <= '9') {
+            JellyItem item = JellyItem.get(ch - '1', leftUnit, topUnit);
+            game.add(MainGame.Layer.item.ordinal(), item);
+        } else if (ch >= 'O' && ch <= 'Q') {
+            Platform platform = Platform.get(Platform.Type.values()[ch - 'O'], leftUnit, topUnit);
             game.add(MainGame.Layer.platform.ordinal(), platform);
-//            Log.d(TAG, "platformLeft=" + platformLeft + " left=" + left + " w=" + platform.dstWidth());
-            platformLeft += platform.dstWidth();
-//            break;
         }
     }
 
     @Override
     public void draw(Canvas canvas) {
-//        canvas.drawLine(scroll + platformLeft, 0, scroll + platformLeft, Metrics.height, platformPaint);
-//        canvas.drawLine(scroll + itemLeft, 0, scroll + itemLeft, Metrics.height, itemPaint);
     }
 }

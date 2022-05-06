@@ -1,6 +1,8 @@
 package net.scgyong.and.cookierun.framework.view;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -94,5 +96,16 @@ public class GameView extends View implements Choreographer.FrameCallback {
             Choreographer.getInstance().postFrameCallback(this);
             Log.d(TAG, "Resuming game");
         }
+    }
+
+    public Activity getActivity() {
+        Context context = getContext();
+        while (context instanceof ContextWrapper) {
+            if (context instanceof Activity) {
+                return (Activity)context;
+            }
+            context = ((ContextWrapper)context).getBaseContext();
+        }
+        return null;
     }
 }

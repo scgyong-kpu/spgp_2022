@@ -30,12 +30,9 @@ public class Platform extends ScrollObject {
         int bitmapId() {
             return BITMAP_IDS[this.ordinal()];
         }
-        static Type[] types = {
-                T_10x2, T_2x2, T_3x1,
-        };
         public static Type random(Random random) {
             int index = random.nextInt(COUNT.ordinal());
-            return types[index];
+            return values()[index];
         }
     }
     protected static int[] BITMAP_IDS = {

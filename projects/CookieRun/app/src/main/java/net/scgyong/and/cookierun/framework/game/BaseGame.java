@@ -121,4 +121,8 @@ public class BaseGame {
         }
         return count;
     }
+
+    public void finish() {
+        GameView.view.getActivity().finish();
+    }
 }
