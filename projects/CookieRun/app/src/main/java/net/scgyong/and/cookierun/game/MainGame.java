@@ -2,10 +2,10 @@ package net.scgyong.and.cookierun.game;
 
 import android.view.MotionEvent;
 
+import net.scgyong.and.cookierun.BuildConfig;
 import net.scgyong.and.cookierun.R;
 import net.scgyong.and.cookierun.framework.game.BaseGame;
 import net.scgyong.and.cookierun.framework.objects.HorzScrollBackground;
-import net.scgyong.and.cookierun.framework.objects.Sprite;
 import net.scgyong.and.cookierun.framework.res.Metrics;
 
 public class MainGame extends BaseGame {
@@ -35,7 +35,7 @@ public class MainGame extends BaseGame {
 
     public void init() {
         super.init();
-        showsBoxCollidables = true;
+        showsBoxCollidables = BuildConfig.showsCollisionBox;
 
         initLayers(Layer.COUNT.ordinal());
 
