@@ -45,7 +45,7 @@ public class Score implements GameObject {
     }
 
     @Override
-    public void update() {
+    public void update(float frameTime) {
         int diff = score - displayScore;
         if (diff == 0) return;
         if (-10 < diff && diff < 0) {

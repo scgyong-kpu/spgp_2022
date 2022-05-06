@@ -17,8 +17,8 @@ public class HorzScrollBackground extends Sprite {
     }
 
     @Override
-    public void update() {
-        this.x += speed * BaseGame.getInstance().frameTime;
+    public void update(float frameTime) {
+        this.x += speed * frameTime;
     }
 
     @Override

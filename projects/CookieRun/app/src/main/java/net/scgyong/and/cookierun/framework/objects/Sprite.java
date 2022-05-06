@@ -37,7 +37,7 @@ public class Sprite implements GameObject {
     }
 
     @Override
-    public void update() {
+    public void update(float frameTime) {
     }
 
     @Override
