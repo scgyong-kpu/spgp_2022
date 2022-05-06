@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="bg_scroll_1">-10dp</dimen>
+    <dimen name="bg_scroll_2">-20dp</dimen>
+    <dimen name="bg_scroll_3">-30dp</dimen>
 </resources>
