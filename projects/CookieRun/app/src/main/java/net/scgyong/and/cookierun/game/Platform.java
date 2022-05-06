@@ -2,12 +2,11 @@ package net.scgyong.and.cookierun.game;
 
 import net.scgyong.and.cookierun.R;
 import net.scgyong.and.cookierun.framework.game.RecycleBin;
-import net.scgyong.and.cookierun.framework.objects.Sprite;
 import net.scgyong.and.cookierun.framework.res.BitmapPool;
 
 import java.util.Random;
 
-public class Platform extends ScrollObject {
+public class Platform extends MapSprite {
     public enum Type {
         T_10x2, T_2x2, T_3x1, COUNT;
         float width() {

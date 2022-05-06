@@ -1,17 +1,16 @@
 package net.scgyong.and.cookierun.game;
 
 import android.graphics.RectF;
-import android.util.Log;
 
 import net.scgyong.and.cookierun.framework.game.BaseGame;
 import net.scgyong.and.cookierun.framework.interfaces.BoxCollidable;
 import net.scgyong.and.cookierun.framework.interfaces.Recyclable;
 import net.scgyong.and.cookierun.framework.objects.Sprite;
 
-public class ScrollObject extends Sprite implements Recyclable, BoxCollidable {
-    private static final String TAG = ScrollObject.class.getSimpleName();
+public class MapSprite extends Sprite implements Recyclable, BoxCollidable {
+    private static final String TAG = MapSprite.class.getSimpleName();
 
-    protected ScrollObject() {
+    protected MapSprite() {
 //        Log.d(TAG, "New:" + this);
     }
 

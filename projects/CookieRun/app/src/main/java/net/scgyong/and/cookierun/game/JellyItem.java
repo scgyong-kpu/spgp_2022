@@ -2,13 +2,12 @@ package net.scgyong.and.cookierun.game;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.util.Log;
 
 import net.scgyong.and.cookierun.R;
 import net.scgyong.and.cookierun.framework.game.RecycleBin;
 import net.scgyong.and.cookierun.framework.res.BitmapPool;
 
-public class JellyItem extends ScrollObject {
+public class JellyItem extends MapSprite {
     public static final int JELLY_COUNT = 60;
     private static final int SIZE = 66;
     private static final int BORDER = 2;
