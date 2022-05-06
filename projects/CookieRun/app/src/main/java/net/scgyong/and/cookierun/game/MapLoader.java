@@ -77,7 +77,7 @@ public class MapLoader implements GameObject {
         MainGame game = MainGame.get();
 
         float left = scroll + current * unit;
-        while (left < Metrics.width - unit) {
+        while (left < Metrics.width + unit) {
             createColumn(left / unit);
             current++;
             left += unit;
