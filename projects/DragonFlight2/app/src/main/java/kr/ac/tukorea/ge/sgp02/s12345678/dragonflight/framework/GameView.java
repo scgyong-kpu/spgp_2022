@@ -12,8 +12,6 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game.BaseGame;
-
 public class GameView extends View implements Choreographer.FrameCallback {
     public static GameView view;
     private static final String TAG = GameView.class.getSimpleName();

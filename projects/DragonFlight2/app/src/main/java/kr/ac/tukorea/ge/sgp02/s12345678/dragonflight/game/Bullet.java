@@ -6,8 +6,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.Log;
 
-import java.util.ArrayList;
-
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BaseGame;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BoxCollidable;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameObject;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;

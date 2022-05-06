@@ -2,6 +2,7 @@ package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game;
 
 import android.graphics.Canvas;
 
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BaseGame;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Sprite;
 

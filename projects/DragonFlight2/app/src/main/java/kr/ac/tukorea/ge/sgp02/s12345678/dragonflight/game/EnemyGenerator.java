@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import java.util.Random;
 
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.R;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BaseGame;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameObject;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
 
