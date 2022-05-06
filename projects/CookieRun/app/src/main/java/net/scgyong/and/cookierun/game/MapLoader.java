@@ -3,6 +3,7 @@ package net.scgyong.and.cookierun.game;
 import android.content.res.AssetManager;
 import android.graphics.Canvas;
 
+import net.scgyong.and.cookierun.R;
 import net.scgyong.and.cookierun.framework.interfaces.GameObject;
 import net.scgyong.and.cookierun.framework.res.Metrics;
 import net.scgyong.and.cookierun.framework.view.GameView;
@@ -22,13 +23,14 @@ public class MapLoader implements GameObject {
     private ArrayList<String> lines;
     private int columns;
     private int rows;
-    public float speed = -200;
+    public float speed;
     public float scroll;
     private int current;
 
     private MapLoader() {
         random = new Random();
         unit = MainGame.get().size(1);
+        speed = Metrics.size(R.dimen.map_scroll_speed);
     }
     public static MapLoader get() {
         if (instance == null) {
