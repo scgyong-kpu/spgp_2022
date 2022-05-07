@@ -121,6 +121,13 @@ public class Player extends SheetSprite implements BoxCollidable {
     }
 
     private float findNearestPlatformTop(float foot) {
+        Platform platform = findNearestPlatform(foot);
+        if (platform == null) return Metrics.height;
+        return platform.getBoundingRect().top;
+    }
+
+    private Platform findNearestPlatform(float foot) {
+        Platform nearest = null;
         MainGame game = MainGame.get();
         ArrayList<GameObject> platforms = game.objectsAt(MainGame.Layer.platform.ordinal());
         float top = Metrics.height;
@@ -136,10 +143,11 @@ public class Player extends SheetSprite implements BoxCollidable {
             }
             if (top > rect.top) {
                 top = rect.top;
+                nearest = platform;
             }
 //            Log.d(TAG, "top=" + top + " gotcha:" + platform);
         }
-        return top;
+        return nearest;
     }
 
     public void jump() {
@@ -162,6 +170,18 @@ public class Player extends SheetSprite implements BoxCollidable {
             setState(State.run);
             return;
         }
+    }
+
+    public void fall() {
+        if (state != State.run) return;
+        float foot = collisionBox.bottom;
+        Platform platform = findNearestPlatform(foot);
+        if (platform == null) return;
+        if (!platform.canPass()) return;
+        setState(State.falling);
+        dstRect.offset(0, 0.001f);
+        collisionBox.offset(0, 0.001f);
+        jumpSpeed = 0;
     }
 
     private void setState(State state) {

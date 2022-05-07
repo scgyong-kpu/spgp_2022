@@ -78,7 +78,16 @@ public class MainGame extends BaseGame {
                 return true;
             }
         }));
-//        add(Layer.ui.ordinal(), new Sprite(Metrics.width - btn_x - btn_w, btn_y, btn_w, btn_h, R.mipmap.btn_fall_n));
+        add(Layer.touchUi.ordinal(), new Button(
+                btn_x + btn_w, btn_y, btn_w, btn_h, R.mipmap.btn_fall_n, R.mipmap.btn_fall_p,
+                new Button.Callback() {
+            @Override
+            public boolean onTouch(Button.Action action) {
+                if (action != Button.Action.pressed) return false;
+                player.fall();
+                return true;
+            }
+        }));
     }
 
     @Override
