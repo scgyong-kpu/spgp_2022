@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.text.method.Touch;
 import android.view.MotionEvent;
 
 import net.scgyong.and.cookierun.BuildConfig;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 import net.scgyong.and.cookierun.framework.interfaces.GameObject;
 import net.scgyong.and.cookierun.framework.interfaces.Recyclable;
+import net.scgyong.and.cookierun.framework.interfaces.Touchable;
 import net.scgyong.and.cookierun.framework.view.GameView;
 
 public class BaseGame {
@@ -109,10 +111,24 @@ public class BaseGame {
     }
 
     public boolean onTouchEvent(MotionEvent event) {
+        int touchLayer = getTouchLayerIndex();
+        if (touchLayer < 0) return false;
+        ArrayList<GameObject> gameObjects = layers.get(touchLayer);
+        for (GameObject gobj : gameObjects) {
+            if (!(gobj instanceof Touchable)) {
+                continue;
+            }
+            boolean processed = ((Touchable) gobj).onTouchEvent(event);
+            if (processed) return true;
+        }
         return false;
     }
 
-        public ArrayList<GameObject> objectsAt(int layerIndex) {
+    protected int getTouchLayerIndex() {
+        return -1;
+    }
+
+    public ArrayList<GameObject> objectsAt(int layerIndex) {
         return layers.get(layerIndex);
     }
 

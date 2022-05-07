@@ -1,12 +1,9 @@
 package net.scgyong.and.cookierun.game;
 
-import android.view.MotionEvent;
-
-import net.scgyong.and.cookierun.BuildConfig;
 import net.scgyong.and.cookierun.R;
 import net.scgyong.and.cookierun.framework.game.BaseGame;
+import net.scgyong.and.cookierun.framework.objects.Button;
 import net.scgyong.and.cookierun.framework.objects.HorzScrollBackground;
-import net.scgyong.and.cookierun.framework.objects.Sprite;
 import net.scgyong.and.cookierun.framework.res.Metrics;
 
 public class MainGame extends BaseGame {
@@ -21,7 +18,7 @@ public class MainGame extends BaseGame {
         return (MainGame)singleton;
     }
     public enum Layer {
-        bg, platform, item, player, ui, controller, COUNT
+        bg, platform, item, player, ui, touchUi, controller, COUNT
     }
 
     public float size(float unit) {
@@ -61,17 +58,27 @@ public class MainGame extends BaseGame {
         float btn_y = size(8.75f);
         float btn_w = size(8.0f / 3.0f);
         float btn_h = size(1.0f);
-        add(Layer.ui.ordinal(), new Sprite(btn_x, btn_y, btn_w, btn_h, R.mipmap.btn_jump_n));
-        add(Layer.ui.ordinal(), new Sprite(Metrics.width - btn_x, btn_y, btn_w, btn_h, R.mipmap.btn_slide_n));
+        add(Layer.touchUi.ordinal(), new Button(btn_x, btn_y, btn_w, btn_h, R.mipmap.btn_jump_n, new Button.Callback() {
+            @Override
+            public boolean onTouch(Button.Action action) {
+                if (action != Button.Action.pressed) return false;
+                player.jump();
+                return true;
+            }
+        }));
+        add(Layer.touchUi.ordinal(), new Button(Metrics.width - btn_x, btn_y, btn_w, btn_h, R.mipmap.btn_slide_n, new Button.Callback() {
+            @Override
+            public boolean onTouch(Button.Action action) {
+//                if (action != Button.Action.pressed) return false;
+//                player.slide();
+                return true;
+            }
+        }));
 //        add(Layer.ui.ordinal(), new Sprite(Metrics.width - btn_x - btn_w, btn_y, btn_w, btn_h, R.mipmap.btn_fall_n));
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            player.jump();
-            return true;
-        }
-        return false;
+    protected int getTouchLayerIndex() {
+        return Layer.touchUi.ordinal();
     }
 }
