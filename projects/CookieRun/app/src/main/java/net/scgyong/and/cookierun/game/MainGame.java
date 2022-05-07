@@ -58,7 +58,9 @@ public class MainGame extends BaseGame {
         float btn_y = size(8.75f);
         float btn_w = size(8.0f / 3.0f);
         float btn_h = size(1.0f);
-        add(Layer.touchUi.ordinal(), new Button(btn_x, btn_y, btn_w, btn_h, R.mipmap.btn_jump_n, new Button.Callback() {
+        add(Layer.touchUi.ordinal(), new Button(
+                btn_x, btn_y, btn_w, btn_h, R.mipmap.btn_jump_n, R.mipmap.btn_jump_p,
+                new Button.Callback() {
             @Override
             public boolean onTouch(Button.Action action) {
                 if (action != Button.Action.pressed) return false;
@@ -66,11 +68,13 @@ public class MainGame extends BaseGame {
                 return true;
             }
         }));
-        add(Layer.touchUi.ordinal(), new Button(Metrics.width - btn_x, btn_y, btn_w, btn_h, R.mipmap.btn_slide_n, new Button.Callback() {
+        add(Layer.touchUi.ordinal(), new Button(
+                Metrics.width - btn_x, btn_y, btn_w, btn_h, R.mipmap.btn_slide_n, R.mipmap.btn_slide_p,
+                new Button.Callback() {
             @Override
             public boolean onTouch(Button.Action action) {
 //                if (action != Button.Action.pressed) return false;
-//                player.slide();
+                player.slide(action == Button.Action.pressed);
                 return true;
             }
         }));

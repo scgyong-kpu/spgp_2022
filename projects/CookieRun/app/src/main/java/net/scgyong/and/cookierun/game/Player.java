@@ -21,7 +21,7 @@ public class Player extends SheetSprite implements BoxCollidable {
     }
 
     private enum State {
-        run, jump, doubleJump, falling, COUNT;
+        run, jump, doubleJump, falling, slide, COUNT;
         Rect[] srcRects() {
             return rectsArray[this.ordinal()];
         }
@@ -41,6 +41,7 @@ public class Player extends SheetSprite implements BoxCollidable {
                     new int[] { 7, 8 }, // jump
                     new int[] { 1, 2, 3, 4 }, // doubleJump
                     new int[] { 0 }, // falling
+                    new int[] { 9, 10 },
             };
             rectsArray = new Rect[indices.length][];
             for (int r = 0; r < indices.length; r++) {
@@ -61,6 +62,7 @@ public class Player extends SheetSprite implements BoxCollidable {
                 new float[] { 0.10f, 0.20f, 0.10f, 0.00f }, // jump
                 new float[] { 0.10f, 0.15f, 0.10f, 0.00f }, // doubleJump
                 new float[] { 0.10f, 0.05f, 0.10f, 0.00f }, // falling
+                new float[] { 0.00f, 0.50f, 0.00f, 0.00f }, // slide
         };
     }
     private State state = State.run;
@@ -108,6 +110,7 @@ public class Player extends SheetSprite implements BoxCollidable {
                 collisionBox.offset(0, dy);
                 break;
             case run:
+            case slide:
                 float platformTop = findNearestPlatformTop(foot);
                 if (foot < platformTop) {
                     setState(State.falling);
@@ -147,6 +150,17 @@ public class Player extends SheetSprite implements BoxCollidable {
         } else if (state == State.jump){
             setState(State.doubleJump);
             jumpSpeed = -jumpPower;
+        }
+    }
+
+    public void slide(boolean startsSlide) {
+        if (state == State.run && startsSlide) {
+            setState(State.slide);
+            return;
+        }
+        if (state == State.slide && !startsSlide) {
+            setState(State.run);
+            return;
         }
     }
 
