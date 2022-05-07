@@ -6,6 +6,7 @@ import net.scgyong.and.cookierun.BuildConfig;
 import net.scgyong.and.cookierun.R;
 import net.scgyong.and.cookierun.framework.game.BaseGame;
 import net.scgyong.and.cookierun.framework.objects.HorzScrollBackground;
+import net.scgyong.and.cookierun.framework.objects.Sprite;
 import net.scgyong.and.cookierun.framework.res.Metrics;
 
 public class MainGame extends BaseGame {
@@ -20,7 +21,7 @@ public class MainGame extends BaseGame {
         return (MainGame)singleton;
     }
     public enum Layer {
-        bg, platform, item, player, controller, COUNT
+        bg, platform, item, player, ui, controller, COUNT
     }
 
     public float size(float unit) {
@@ -55,16 +56,14 @@ public class MainGame extends BaseGame {
         mapLoader.init(mapIndex);
         add(Layer.controller.ordinal(), mapLoader);
         add(Layer.controller.ordinal(), new CollisionChecker(player));
-//        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_10x2, 1, 7));
-//        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_2x2, 11, 8));
-//        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_2x2, 13, 7));
-//        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_3x1, 6, 4));
-//        add(Layer.platform.ordinal(), Platform.get(Platform.Type.T_3x1, 9, 4));
-//
-//        add(Layer.item.ordinal(), JellyItem.get(2, 5, 3));
-//        add(Layer.item.ordinal(), JellyItem.get(3, 6, 3));
-//        add(Layer.item.ordinal(), JellyItem.get(4, 7, 3));
-//        add(Layer.item.ordinal(), JellyItem.get(5, 8, 3));
+
+        float btn_x = size(1.5f);
+        float btn_y = size(8.75f);
+        float btn_w = size(8.0f / 3.0f);
+        float btn_h = size(1.0f);
+        add(Layer.ui.ordinal(), new Sprite(btn_x, btn_y, btn_w, btn_h, R.mipmap.btn_jump_n));
+        add(Layer.ui.ordinal(), new Sprite(Metrics.width - btn_x, btn_y, btn_w, btn_h, R.mipmap.btn_slide_n));
+//        add(Layer.ui.ordinal(), new Sprite(Metrics.width - btn_x - btn_w, btn_y, btn_w, btn_h, R.mipmap.btn_fall_n));
     }
 
     @Override
