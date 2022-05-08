@@ -25,12 +25,12 @@ public class MapLoader implements GameObject {
     private int rows;
     public float speed;
     public float scroll;
+    public int length;
     private int current;
 
     private MapLoader() {
         random = new Random();
         unit = MainGame.get().size(1);
-        speed = Metrics.size(R.dimen.map_scroll_speed);
     }
     public static MapLoader get() {
         if (instance == null) {
@@ -45,6 +45,7 @@ public class MapLoader implements GameObject {
         scroll = 0;
         current = 0;
         loadFromTextAsset(MAP_FILES[mapIndex]);
+        speed = Metrics.size(R.dimen.map_scroll_speed);
     }
 
     private void loadFromTextAsset(String filename) {
@@ -67,6 +68,9 @@ public class MapLoader implements GameObject {
 //                Log.d(TAG,  "-row=" + line);
                 lines.add(line);
             }
+            int pages = lines.size() / rows;
+            int lastCol = lines.get(lines.size() - 1).length();
+            length = (pages - 1) * columns + lastCol;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,7 +95,8 @@ public class MapLoader implements GameObject {
         for (int row = 0; row < rows; row++) {
             char ch = getAt(current, row);
             if (ch == 0) {
-                MainGame.get().finish();
+//                MainGame.get().finish();
+                speed = 0;
                 return;
             }
             createObject(ch, leftUnit, row);
