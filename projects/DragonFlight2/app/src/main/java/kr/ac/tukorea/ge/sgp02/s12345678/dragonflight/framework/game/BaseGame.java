@@ -1,4 +1,4 @@
-package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework;
+package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.game;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -7,6 +7,11 @@ import android.graphics.RectF;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
+
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.interfaces.BoxCollidable;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.interfaces.GameObject;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.interfaces.Recyclable;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.view.GameView;
 
 public class BaseGame {
     protected static BaseGame singleton;

@@ -1,9 +1,9 @@
-package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework;
+package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.res;
 
 import android.content.res.Resources;
 import android.util.TypedValue;
 
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameView;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.view.GameView;
 
 public class Metrics {
     public static int width;

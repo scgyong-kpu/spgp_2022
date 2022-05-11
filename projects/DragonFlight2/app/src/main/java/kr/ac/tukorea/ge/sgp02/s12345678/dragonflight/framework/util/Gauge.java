@@ -1,4 +1,4 @@
-package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework;
+package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.util;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -6,7 +6,7 @@ import android.graphics.Paint;
 
 import androidx.core.content.ContextCompat;
 
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.GameView;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.view.GameView;
 
 public class Gauge {
     private final float width;
