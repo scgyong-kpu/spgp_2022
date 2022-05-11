@@ -4,16 +4,15 @@ import android.graphics.Canvas;
 import android.graphics.RectF;
 import android.util.Log;
 
-import java.util.ArrayList;
-
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.R;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.AnimSprite;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BaseGame;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BitmapPool;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.BoxCollidable;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Gauge;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Metrics;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Recyclable;
 import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.RecycleBin;
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework.Sprite;
 
 public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     public static final float FRAMES_PER_SECOND = 10.0f;

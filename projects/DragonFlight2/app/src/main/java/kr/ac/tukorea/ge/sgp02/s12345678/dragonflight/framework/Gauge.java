@@ -1,4 +1,4 @@
-package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game;
+package kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.framework;
 
 import android.content.Context;
 import android.graphics.Canvas;
