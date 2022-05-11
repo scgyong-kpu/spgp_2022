@@ -12,7 +12,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game.MainGame;
+import kr.ac.tukorea.ge.sgp02.s12345678.dragonflight.game.BaseGame;
 
 public class GameView extends View implements Choreographer.FrameCallback {
     public static GameView view;
@@ -56,7 +56,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
         if (elapsed != 0) {
             framesPerSecond = 1_000_000_000 / elapsed;
             lastTimeNanos = now;
-            MainGame game = MainGame.getInstance();
+            BaseGame game = BaseGame.getInstance();
             game.update(elapsed);
             invalidate();
         }
@@ -64,22 +64,22 @@ public class GameView extends View implements Choreographer.FrameCallback {
     }
 
     private void initView() {
-        MainGame.getInstance().init();
+        BaseGame.getInstance().init();
         fpsPaint.setColor(Color.BLUE);
         fpsPaint.setTextSize(100);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        return MainGame.getInstance().onTouchEvent(event);
+        return BaseGame.getInstance().onTouchEvent(event);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        MainGame.getInstance().draw(canvas);
+        BaseGame.getInstance().draw(canvas);
 
         canvas.drawText("FPS:" + framesPerSecond, framesPerSecond * 10, 100, fpsPaint);
-        canvas.drawText("" + MainGame.getInstance().objectCount(), 10, 100, fpsPaint);
+        canvas.drawText("" + BaseGame.getInstance().objectCount(), 10, 100, fpsPaint);
     }
 
     public void pauseGame() {

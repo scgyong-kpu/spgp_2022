@@ -73,13 +73,13 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     public void update() {
 //        super.update();
 
-        float frameTime = MainGame.getInstance().frameTime;
+        float frameTime = BaseGame.getInstance().frameTime;
         y += dy * frameTime;
         setDstRectWithRadius();
         boundingBox.set(dstRect);
         boundingBox.inset(size/16, size/16);
         if (dstRect.top > Metrics.height) {
-            MainGame.getInstance().remove(this);
+            BaseGame.getInstance().remove(this);
             //recycleBin.add(this);
         }
     }
