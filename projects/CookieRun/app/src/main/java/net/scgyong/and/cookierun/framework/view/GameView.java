@@ -108,4 +108,8 @@ public class GameView extends View implements Choreographer.FrameCallback {
         }
         return null;
     }
+
+    public boolean onBackPressed() {
+        return Scene.getInstance().handleBackKey();
+    }
 }

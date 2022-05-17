@@ -64,4 +64,15 @@ public class PausedScene extends Scene {
     protected int getTouchLayerIndex() {
         return Layer.touchUi.ordinal();
     }
+
+    @Override
+    public boolean isTransparent() {
+        return true;
+    }
+
+    @Override
+    public boolean handleBackKey() {
+        Scene.popScene();
+        return true;
+    }
 }
