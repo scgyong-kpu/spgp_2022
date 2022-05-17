@@ -15,7 +15,7 @@ public class MapSprite extends Sprite implements Recyclable, BoxCollidable {
     }
 
     protected void setUnitDstRect(float unitLeft, float unitTop, float unitWidth, float unitHeight) {
-        MainGame game = MainGame.get();
+        MainScene game = MainScene.get();
         float left = game.size(unitLeft);
         float top = game.size(unitTop);
         dstRect.set(left, top, left + game.size(unitWidth), top + game.size(unitHeight));

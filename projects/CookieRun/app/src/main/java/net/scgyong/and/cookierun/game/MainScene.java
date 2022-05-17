@@ -6,16 +6,16 @@ import net.scgyong.and.cookierun.framework.objects.Button;
 import net.scgyong.and.cookierun.framework.objects.HorzScrollBackground;
 import net.scgyong.and.cookierun.framework.res.Metrics;
 
-public class MainGame extends Scene {
+public class MainScene extends Scene {
     public static final String PARAM_STAGE_INDEX = "stage_index";
-    private static final String TAG = MainGame.class.getSimpleName();
+    private static final String TAG = MainScene.class.getSimpleName();
     private Player player;
 
-    public static MainGame get() {
+    public static MainScene get() {
         if (singleton == null) {
-            singleton = new MainGame();
+            singleton = new MainScene();
         }
-        return (MainGame)singleton;
+        return (MainScene)singleton;
     }
     public enum Layer {
         bg, platform, item, player, obstacle, ui, touchUi, controller, COUNT;

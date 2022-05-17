@@ -17,9 +17,9 @@ public class CollisionChecker implements GameObject {
 
     @Override
     public void update(float frameTime) {
-        MainGame game = MainGame.get();
+        MainScene game = MainScene.get();
 //        Player player = (Player) game.objectsAt(MainGame.Layer.player.ordinal()).get(0);
-        ArrayList<GameObject> items = game.objectsAt(MainGame.Layer.item.ordinal());
+        ArrayList<GameObject> items = game.objectsAt(MainScene.Layer.item.ordinal());
         for (GameObject item: items) {
             if (!(item instanceof BoxCollidable)) {
                 continue;

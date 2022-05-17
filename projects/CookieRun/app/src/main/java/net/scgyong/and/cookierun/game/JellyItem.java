@@ -7,7 +7,6 @@ import android.graphics.RectF;
 import net.scgyong.and.cookierun.R;
 import net.scgyong.and.cookierun.framework.game.RecycleBin;
 import net.scgyong.and.cookierun.framework.res.BitmapPool;
-import net.scgyong.and.cookierun.framework.res.Metrics;
 
 public class JellyItem extends MapSprite {
     public static final int JELLY_COUNT = 60;
@@ -54,6 +53,6 @@ public class JellyItem extends MapSprite {
 
     private JellyItem() {
         bitmap = BitmapPool.get(R.mipmap.jelly);
-        inset = MainGame.get().size(0.15f);
+        inset = MainScene.get().size(0.15f);
     }
 }

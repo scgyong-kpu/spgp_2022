@@ -7,16 +7,16 @@ import android.os.Bundle;
 
 import net.scgyong.and.cookierun.framework.game.Scene;
 import net.scgyong.and.cookierun.framework.view.GameView;
-import net.scgyong.and.cookierun.game.MainGame;
+import net.scgyong.and.cookierun.game.MainScene;
 
 public class GameActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MainGame game = MainGame.get();
+        MainScene game = MainScene.get();
         Intent intent = getIntent();
-        int stageIndex = intent.getExtras().getInt(MainGame.PARAM_STAGE_INDEX);
+        int stageIndex = intent.getExtras().getInt(MainScene.PARAM_STAGE_INDEX);
         game.setMapIndex(stageIndex);
         setContentView(new GameView(this, null));
     }

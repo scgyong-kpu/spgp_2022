@@ -128,8 +128,8 @@ public class Player extends SheetSprite implements BoxCollidable {
 
     private Platform findNearestPlatform(float foot) {
         Platform nearest = null;
-        MainGame game = MainGame.get();
-        ArrayList<GameObject> platforms = game.objectsAt(MainGame.Layer.platform.ordinal());
+        MainScene game = MainScene.get();
+        ArrayList<GameObject> platforms = game.objectsAt(MainScene.Layer.platform.ordinal());
         float top = Metrics.height;
         for (GameObject obj: platforms) {
             Platform platform = (Platform) obj;

@@ -33,7 +33,7 @@ public class MapLoader implements GameObject {
 
     private MapLoader() {
         random = new Random();
-        unit = MainGame.get().size(1);
+        unit = MainScene.get().size(1);
 
         gauge = new Gauge(
                 Metrics.size(R.dimen.map_gauge_fg_width), R.color.map_gauge_fg,
@@ -90,7 +90,7 @@ public class MapLoader implements GameObject {
     public void update(float frameTime) {
         scroll += speed * frameTime;
 
-        MainGame game = MainGame.get();
+        MainScene game = MainScene.get();
 
         float left = scroll + current * unit;
         while (left < Metrics.width + unit) {
@@ -125,16 +125,16 @@ public class MapLoader implements GameObject {
     }
 
     private void createObject(char ch, float leftUnit, float topUnit) {
-        MainGame game = MainGame.get();
+        MainScene game = MainScene.get();
         if (ch >= '1' && ch <= '9') {
             JellyItem item = JellyItem.get(ch - '1', leftUnit, topUnit);
-            game.add(MainGame.Layer.item.ordinal(), item);
+            game.add(MainScene.Layer.item.ordinal(), item);
         } else if (ch >= 'O' && ch <= 'Q') {
             Platform platform = Platform.get(Platform.Type.values()[ch - 'O'], leftUnit, topUnit);
-            game.add(MainGame.Layer.platform.ordinal(), platform);
+            game.add(MainScene.Layer.platform.ordinal(), platform);
         } else if (ch >= 'X' && ch <= 'Z') {
             Obstacle obstacle = Obstacle.get(ch - 'X', leftUnit, topUnit);
-            game.add(MainGame.Layer.obstacle.ordinal(), obstacle);
+            game.add(MainScene.Layer.obstacle.ordinal(), obstacle);
         }
     }
 
