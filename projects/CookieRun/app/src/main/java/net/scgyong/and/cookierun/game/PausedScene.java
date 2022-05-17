@@ -12,6 +12,7 @@ public class PausedScene extends Scene {
     public static PausedScene get() {
         if (singleton == null) {
             singleton = new PausedScene();
+            singleton.init();
         }
         return singleton;
     }
