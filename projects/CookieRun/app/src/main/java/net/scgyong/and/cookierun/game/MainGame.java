@@ -1,12 +1,12 @@
 package net.scgyong.and.cookierun.game;
 
 import net.scgyong.and.cookierun.R;
-import net.scgyong.and.cookierun.framework.game.BaseGame;
+import net.scgyong.and.cookierun.framework.game.Scene;
 import net.scgyong.and.cookierun.framework.objects.Button;
 import net.scgyong.and.cookierun.framework.objects.HorzScrollBackground;
 import net.scgyong.and.cookierun.framework.res.Metrics;
 
-public class MainGame extends BaseGame {
+public class MainGame extends Scene {
     public static final String PARAM_STAGE_INDEX = "stage_index";
     private static final String TAG = MainGame.class.getSimpleName();
     private Player player;

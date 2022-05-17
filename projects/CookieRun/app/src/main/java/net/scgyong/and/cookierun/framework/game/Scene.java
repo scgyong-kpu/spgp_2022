@@ -4,7 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.text.method.Touch;
 import android.view.MotionEvent;
 
 import net.scgyong.and.cookierun.BuildConfig;
@@ -17,11 +16,11 @@ import net.scgyong.and.cookierun.framework.interfaces.Recyclable;
 import net.scgyong.and.cookierun.framework.interfaces.Touchable;
 import net.scgyong.and.cookierun.framework.view.GameView;
 
-public class BaseGame {
-    protected static BaseGame singleton;
+public class Scene {
+    protected static Scene singleton;
     protected float frameTime, elapsedTime;
 
-    public static BaseGame getInstance() {
+    public static Scene getInstance() {
 //        if (singleton == null) {
 //            singleton = new BaseGame();
 //        }

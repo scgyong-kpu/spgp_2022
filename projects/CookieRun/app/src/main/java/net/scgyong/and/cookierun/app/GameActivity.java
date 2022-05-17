@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import net.scgyong.and.cookierun.framework.game.BaseGame;
+import net.scgyong.and.cookierun.framework.game.Scene;
 import net.scgyong.and.cookierun.framework.view.GameView;
 import net.scgyong.and.cookierun.game.MainGame;
 
@@ -36,7 +36,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         GameView.view = null;
-        BaseGame.clear();
+        Scene.clear();
         super.onDestroy();
     }
 }

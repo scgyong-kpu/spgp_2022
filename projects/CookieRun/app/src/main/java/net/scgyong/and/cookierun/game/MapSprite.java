@@ -2,7 +2,7 @@ package net.scgyong.and.cookierun.game;
 
 import android.graphics.RectF;
 
-import net.scgyong.and.cookierun.framework.game.BaseGame;
+import net.scgyong.and.cookierun.framework.game.Scene;
 import net.scgyong.and.cookierun.framework.interfaces.BoxCollidable;
 import net.scgyong.and.cookierun.framework.interfaces.Recyclable;
 import net.scgyong.and.cookierun.framework.objects.Sprite;
@@ -28,7 +28,7 @@ public class MapSprite extends Sprite implements Recyclable, BoxCollidable {
         dstRect.offset(dx, 0);
         if (dstRect.right < 0) {
 //            Log.d(TAG, "Removing:" + this);
-            BaseGame.getInstance().remove(this);
+            Scene.getInstance().remove(this);
         }
     }
 

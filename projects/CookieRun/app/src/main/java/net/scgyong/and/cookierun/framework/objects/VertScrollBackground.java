@@ -2,7 +2,6 @@ package net.scgyong.and.cookierun.framework.objects;
 
 import android.graphics.Canvas;
 
-import net.scgyong.and.cookierun.framework.game.BaseGame;
 import net.scgyong.and.cookierun.framework.res.Metrics;
 
 public class VertScrollBackground extends Sprite {
