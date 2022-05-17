@@ -16,28 +16,13 @@ public class Platform extends MapSprite {
     public enum Type {
         T_10x2, T_2x2, T_3x1, COUNT;
         float width() {
-            int w = 1;
-            switch (this) {
-                case T_10x2: w = 10; break;
-                case T_2x2: w = 2; break;
-                case T_3x1: w = 3; break;
-            }
-            return MainGame.get().size(w);
+            return MainGame.get().size(widths[ordinal()]);
         }
         float height() {
-            int h = 1;
-            switch (this) {
-                case T_10x2: case T_2x2: h = 2; break;
-                case T_3x1: h = 1; break;
-            }
-            return MainGame.get().size(h);
+            return MainGame.get().size(heights[ordinal()]);
         }
         int bitmapId() {
             return BITMAP_IDS[this.ordinal()];
-        }
-        public static Type random(Random random) {
-            int index = random.nextInt(COUNT.ordinal());
-            return values()[index];
         }
     }
     protected static int[] BITMAP_IDS = {
@@ -45,6 +30,9 @@ public class Platform extends MapSprite {
             R.mipmap.cookierun_platform_124x120,
             R.mipmap.cookierun_platform_120x40,
     };
+    protected static int[] widths = { 10, 2, 3 };
+    protected static int[] heights = { 2, 2, 1 };
+
     public static Platform get(Type type, float unitLeft, float unitTop) {
         Platform platform = (Platform) RecycleBin.get(Platform.class);
         if (platform == null) {
