@@ -10,7 +10,7 @@ public class Platform extends MapSprite {
     private Type type;
 
     public boolean canPass() {
-        return type != Type.T_10x2;
+        return type == Type.T_3x1;
     }
 
     public enum Type {
