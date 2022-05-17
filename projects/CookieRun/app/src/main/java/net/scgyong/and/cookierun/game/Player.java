@@ -57,8 +57,8 @@ public class Player extends SheetSprite implements BoxCollidable {
                 rectsArray[r] = rects;
             }
         }
-        float[][] insets = {
-                new float[] { 0.10f, 0.05f, 0.10f, 0.00f }, // run
+        static float[][] insets = {
+                new float[] { 80/270f, 135/270f, 80/270f, 0.00f }, // run
                 new float[] { 0.10f, 0.20f, 0.10f, 0.00f }, // jump
                 new float[] { 0.10f, 0.15f, 0.10f, 0.00f }, // doubleJump
                 new float[] { 0.10f, 0.05f, 0.10f, 0.00f }, // falling
