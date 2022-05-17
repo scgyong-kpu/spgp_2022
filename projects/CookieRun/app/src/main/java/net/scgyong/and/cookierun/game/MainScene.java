@@ -5,6 +5,7 @@ import net.scgyong.and.cookierun.framework.game.Scene;
 import net.scgyong.and.cookierun.framework.objects.Button;
 import net.scgyong.and.cookierun.framework.objects.HorzScrollBackground;
 import net.scgyong.and.cookierun.framework.res.Metrics;
+import net.scgyong.and.cookierun.framework.res.Sound;
 
 public class MainScene extends Scene {
     public static final String PARAM_STAGE_INDEX = "stage_index";
@@ -97,5 +98,25 @@ public class MainScene extends Scene {
     @Override
     protected int getTouchLayerIndex() {
         return Layer.touchUi.ordinal();
+    }
+
+    @Override
+    public void start() {
+        Sound.playMusic(R.raw.main);
+    }
+
+    @Override
+    public void pause() {
+        Sound.pauseMusic();
+    }
+
+    @Override
+    public void resume() {
+        Sound.resumeMusic();
+    }
+
+    @Override
+    public void end() {
+        Sound.stopMusic();
     }
 }

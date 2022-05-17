@@ -18,12 +18,12 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int stageIndex = intent.getExtras().getInt(MainScene.PARAM_STAGE_INDEX);
 
+        setContentView(new GameView(this, null));
+
         MainScene game = MainScene.get();
         game.setMapIndex(stageIndex);
         Scene.push(game);
 //        Scene.push(PausedScene.get());
-
-        setContentView(new GameView(this, null));
     }
 
     @Override
