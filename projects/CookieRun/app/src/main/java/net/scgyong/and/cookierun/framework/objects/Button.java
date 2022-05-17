@@ -1,12 +1,14 @@
 package net.scgyong.and.cookierun.framework.objects;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import net.scgyong.and.cookierun.framework.interfaces.Touchable;
 import net.scgyong.and.cookierun.framework.res.BitmapPool;
 
 public class Button extends Sprite implements Touchable {
+    private static final String TAG = Button.class.getSimpleName();
     protected final Callback callback;
     private final Bitmap normalBitmap;
     private Bitmap pressedBitmap;
@@ -39,10 +41,13 @@ public class Button extends Sprite implements Touchable {
             case MotionEvent.ACTION_DOWN:
                 pressed = true;
                 bitmap = pressedBitmap;
-                return callback.onTouch(Action.pressed);
+                Log.d(TAG, "Down: " + pressedBitmap);
+                callback.onTouch(Action.pressed);
+                return true;
             case MotionEvent.ACTION_UP:
                 pressed = false;
                 bitmap = normalBitmap;
+                Log.d(TAG, "Up: " + normalBitmap);
                 return callback.onTouch(Action.released);
             case MotionEvent.ACTION_MOVE:
                 return pressed;

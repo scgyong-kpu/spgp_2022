@@ -25,6 +25,11 @@ public class PausedScene extends Scene {
         initLayers(Layer.COUNT.ordinal());
 
         add(Layer.ui.ordinal(), new Sprite(
+                Metrics.width / 2, Metrics.height / 2,
+                Metrics.width, Metrics.height,
+                R.mipmap.trans_50p));
+
+        add(Layer.ui.ordinal(), new Sprite(
                 Metrics.width / 2, Metrics.height / 4,
                 Metrics.width / 3, Metrics.width / 3 * 230 / 440,
                 R.mipmap.game_paused));
@@ -53,5 +58,10 @@ public class PausedScene extends Scene {
                 return false;
             }
         }));
+    }
+
+    @Override
+    protected int getTouchLayerIndex() {
+        return Layer.touchUi.ordinal();
     }
 }
