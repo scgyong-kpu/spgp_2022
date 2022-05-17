@@ -1,15 +1,28 @@
 package net.scgyong.and.cookierun.game;
 
+import android.animation.ValueAnimator;
 import android.graphics.RectF;
+import android.util.Log;
+import android.view.animation.BounceInterpolator;
 
 import net.scgyong.and.cookierun.R;
 import net.scgyong.and.cookierun.framework.game.RecycleBin;
 import net.scgyong.and.cookierun.framework.res.BitmapPool;
+import net.scgyong.and.cookierun.framework.res.Metrics;
+
+import java.util.Random;
 
 public class Obstacle extends MapSprite {
+    private static final String TAG = Obstacle.class.getSimpleName();
     protected Modifier modifier;
     protected long createdOn;
     protected RectF collisionBox = new RectF();
+    protected ValueAnimator animator;
+    protected static Random random = new Random();
+
+    public enum Type {
+        shortSingle, shortTriple, longDouble, fallingFork, COUNT
+    }
 
     public static Obstacle get(int index, float unitLeft, float unitTop) {
         Obstacle obs = (Obstacle) RecycleBin.get(Obstacle.class);
@@ -36,6 +49,7 @@ public class Obstacle extends MapSprite {
         }
         public void init(Obstacle obstacle, float unitLeft, float unitTop) {
             unitTop -= this.height - 1;
+            Log.d(TAG, "Height=" + this.height + " :" + this);
             obstacle.setUnitDstRect(unitLeft, unitTop, width, height);
             if (mipmapResId != 0) {
                 obstacle.bitmap = BitmapPool.get(mipmapResId);
@@ -85,6 +99,35 @@ public class Obstacle extends MapSprite {
         public MoveModifier(float widthUnit, float heightUnit, int mipmapResId) {
             super(widthUnit, heightUnit, mipmapResId);
         }
+
+        @Override
+        public void init(Obstacle obstacle, float unitLeft, float unitTop) {
+            super.init(obstacle, unitLeft, unitTop);
+            float height = obstacle.dstHeight();
+            float bottom = obstacle.dstRect.bottom;
+            obstacle.dstRect.offset(0, -bottom);
+//            obstacle.dstRect.offset(0, -obstacle.dstRect.bottom);
+//            obstacle.collisionBox.set(obstacle.dstRect);
+            ValueAnimator animator = ValueAnimator.ofFloat(0, bottom);
+            animator.setDuration(random.nextInt(800) + 600);
+            animator.setInterpolator(new BounceInterpolator());
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator va) {
+                    float value = (Float)va.getAnimatedValue();
+                    obstacle.dstRect.set(
+                            obstacle.dstRect.left,
+                            value - height,
+                            obstacle.dstRect.right,
+                            value
+                    );
+                    obstacle.collisionBox.set(obstacle.dstRect);
+                }
+            });
+            animator.setStartDelay(random.nextInt(800) + 2000);
+            animator.start();
+            obstacle.animator = animator;
+        }
     }
 
     private static Modifier[] MODIFIERS = {
@@ -104,10 +147,12 @@ public class Obstacle extends MapSprite {
                     R.mipmap.epn01_tm01_jp2up_04,
                     R.mipmap.epn01_tm01_jp2up_05,
             }, 68/222f),
-            new MoveModifier(1, 482/86f, R.mipmap.epn01_tm01_sda),
+            new MoveModifier(1.5f, 1.5f*482/86f, R.mipmap.epn01_tm01_sda),
     };
 
     private void init(int index, float unitLeft, float unitTop) {
+        animator = null;
+        bitmap = null;
         modifier = MODIFIERS[index];
         modifier.init(this, unitLeft, unitTop);
     }
@@ -121,5 +166,13 @@ public class Obstacle extends MapSprite {
     @Override
     public RectF getBoundingRect() {
         return collisionBox;
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        if (animator != null) {
+            animator.cancel();
+        }
     }
 }

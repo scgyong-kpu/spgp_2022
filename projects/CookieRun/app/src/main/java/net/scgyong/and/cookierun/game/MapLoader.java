@@ -2,6 +2,7 @@ package net.scgyong.and.cookierun.game;
 
 import android.content.res.AssetManager;
 import android.graphics.Canvas;
+import android.util.Log;
 
 import net.scgyong.and.cookierun.R;
 import net.scgyong.and.cookierun.framework.interfaces.GameObject;
@@ -101,6 +102,7 @@ public class MapLoader implements GameObject {
     }
 
     private void createColumn(float leftUnit) {
+//        Log.d(TAG, "current column=" + current);
         float y = 0;
         for (int row = 0; row < rows; row++) {
             char ch = getAt(current, row);
@@ -109,6 +111,9 @@ public class MapLoader implements GameObject {
                 speed = 0;
                 return;
             }
+//            if (ch != ' ' && ch != '-') {
+//                Log.d(TAG, " row=" + row + " ch=" + ch);
+//            }
             createObject(ch, leftUnit, row);
             y += unit;
         }
@@ -134,6 +139,9 @@ public class MapLoader implements GameObject {
             game.add(MainScene.Layer.platform.ordinal(), platform);
         } else if (ch >= 'X' && ch <= 'Z') {
             Obstacle obstacle = Obstacle.get(ch - 'X', leftUnit, topUnit);
+            game.add(MainScene.Layer.obstacle.ordinal(), obstacle);
+        } else if (ch == 'T') {
+            Obstacle obstacle = Obstacle.get(Obstacle.Type.fallingFork.ordinal(), leftUnit, topUnit);
             game.add(MainScene.Layer.obstacle.ordinal(), obstacle);
         }
     }
