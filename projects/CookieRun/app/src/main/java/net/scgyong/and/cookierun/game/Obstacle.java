@@ -1,7 +1,10 @@
 package net.scgyong.and.cookierun.game;
 
+import android.graphics.Bitmap;
+
 import net.scgyong.and.cookierun.R;
 import net.scgyong.and.cookierun.framework.game.RecycleBin;
+import net.scgyong.and.cookierun.framework.res.BitmapPool;
 
 public class Obstacle extends MapSprite {
     public static Obstacle get(int index, float unitLeft, float unitTop) {
@@ -36,6 +39,7 @@ public class Obstacle extends MapSprite {
     };
 
     private void init(int index, float unitLeft, float unitTop) {
+        bitmap = BitmapPool.get(BITMAP_ID_ARRAYS[index][0]);
         setUnitDstRect(unitLeft, unitTop, 1, 1);
     }
 }
