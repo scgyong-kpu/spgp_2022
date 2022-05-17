@@ -11,11 +11,12 @@ public class MainScene extends Scene {
     private static final String TAG = MainScene.class.getSimpleName();
     private Player player;
 
+    private static MainScene singleton;
     public static MainScene get() {
         if (singleton == null) {
             singleton = new MainScene();
         }
-        return (MainScene)singleton;
+        return singleton;
     }
     public enum Layer {
         bg, platform, item, player, obstacle, ui, touchUi, controller, COUNT;

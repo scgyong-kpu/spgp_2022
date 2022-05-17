@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import net.scgyong.and.cookierun.BuildConfig;
@@ -17,22 +18,65 @@ import net.scgyong.and.cookierun.framework.interfaces.Touchable;
 import net.scgyong.and.cookierun.framework.view.GameView;
 
 public class Scene {
-    protected static Scene singleton;
+    private static final String TAG = Scene.class.getSimpleName();
     protected float frameTime, elapsedTime;
 
     public static Scene getInstance() {
-//        if (singleton == null) {
-//            singleton = new BaseGame();
-//        }
-        return singleton;
+        int lastIndex = sceneStack.size() - 1;
+        if (lastIndex < 0) return null;
+        return sceneStack.get(lastIndex);
     }
 
     public static void clear() {
-        singleton = null;
+        sceneStack.clear();
     }
 
     protected ArrayList<ArrayList<GameObject>> layers;
     protected Paint collisionPaint;
+
+    protected static ArrayList<Scene> sceneStack = new ArrayList<>();
+//    public Scene getTopScene() {
+//    }
+    public static void start(Scene scene) {
+        int lastIndex = sceneStack.size() - 1;
+        if (lastIndex >= 0) {
+            Scene top = sceneStack.remove(lastIndex);
+            Log.d(TAG, "Ending(in start): " + top);
+            top.end();
+            sceneStack.set(lastIndex, scene);
+        } else {
+            sceneStack.add(scene);
+        }
+        Log.d(TAG, "Starting(in start): " + scene);
+        scene.start();
+    }
+    public static void push(Scene scene) {
+        int lastIndex = sceneStack.size() - 1;
+        if (lastIndex >= 0) {
+            Scene top = sceneStack.get(lastIndex);
+            Log.d(TAG, "Pausing: " + top);
+            top.pause();
+        }
+        sceneStack.add(scene);
+        Log.d(TAG, "Starting(in push): " + scene);
+        scene.start();
+    }
+    public static void popScene() {
+        int lastIndex = sceneStack.size() - 1;
+        if (lastIndex >= 0) {
+            Scene top = sceneStack.remove(lastIndex);
+            Log.d(TAG, "Ending(in pop): " + top);
+            top.end();
+        }
+        lastIndex--;
+        if (lastIndex >= 0) {
+            Scene top = sceneStack.get(lastIndex);
+            Log.d(TAG, "Resuming: " + top);
+            top.resume();
+        } else {
+            Log.e(TAG, "should end app in popScene()");
+        }
+    }
 
     public void init() {
         if (BuildConfig.showsCollisionBox) {
@@ -43,6 +87,11 @@ public class Scene {
 
         elapsedTime = 0;
     }
+
+    public void start(){}
+    public void pause(){}
+    public void resume(){}
+    public void end(){}
 
     protected void initLayers(int count) {
         layers = new ArrayList<>();
