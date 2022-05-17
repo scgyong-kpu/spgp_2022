@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import net.scgyong.and.cookierun.R;
 import net.scgyong.and.cookierun.framework.interfaces.GameObject;
 import net.scgyong.and.cookierun.framework.res.Metrics;
+import net.scgyong.and.cookierun.framework.util.Gauge;
 import net.scgyong.and.cookierun.framework.view.GameView;
 
 import java.io.BufferedReader;
@@ -20,6 +21,7 @@ public class MapLoader implements GameObject {
     private static MapLoader instance;
     private final Random random;
     private final float unit;
+    private final float yGauge;
     private ArrayList<String> lines;
     private int columns;
     private int rows;
@@ -27,10 +29,18 @@ public class MapLoader implements GameObject {
     public float scroll;
     public int length;
     private int current;
+    private Gauge gauge;
 
     private MapLoader() {
         random = new Random();
         unit = MainGame.get().size(1);
+
+        gauge = new Gauge(
+                Metrics.size(R.dimen.map_gauge_fg_width), R.color.map_gauge_fg,
+                Metrics.size(R.dimen.map_gauge_bg_width), R.color.map_gauge_bg,
+                Metrics.width * 0.7f
+        );
+        yGauge = Metrics.size(R.dimen.map_gauge_y);
     }
     public static MapLoader get() {
         if (instance == null) {
@@ -130,5 +140,7 @@ public class MapLoader implements GameObject {
 
     @Override
     public void draw(Canvas canvas) {
+        gauge.setValue((float)current / length);
+        gauge.draw(canvas, Metrics.width / 2, yGauge);
     }
 }

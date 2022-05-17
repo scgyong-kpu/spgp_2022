@@ -6,4 +6,7 @@
     <dimen name="map_scroll_speed">-150dp</dimen>
     <dimen name="player_jump_power">400dp</dimen>
     <dimen name="player_gravity">900dp</dimen>
+    <dimen name="map_gauge_y">40dp</dimen>
+    <dimen name="map_gauge_fg_width">5dp</dimen>
+    <dimen name="map_gauge_bg_width">10dp</dimen>
 </resources>
