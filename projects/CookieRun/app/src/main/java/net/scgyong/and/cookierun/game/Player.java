@@ -49,9 +49,9 @@ public class Player extends SheetSprite implements BoxCollidable {
                 Rect[] rects = new Rect[ints.length];
                 for (int i = 0; i < ints.length; i++) {
                     int idx = ints[i];
-                    int l = 72 + (idx % 100) * 272;
-                    int t = 132 + (idx / 100) * 272;
-                    Rect rect = new Rect(l, t, l + 140, t + 140);
+                    int l = 2 + (idx % 100) * 272;
+                    int t = 2 + (idx / 100) * 272;
+                    Rect rect = new Rect(l, t, l + 270, t + 270);
                     rects[i] = rect;
                 }
                 rectsArray[r] = rects;
