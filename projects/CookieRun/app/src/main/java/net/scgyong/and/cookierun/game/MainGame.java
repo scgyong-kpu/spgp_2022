@@ -42,7 +42,7 @@ public class MainGame extends BaseGame {
 //                R.mipmap.cookie);
         player = new Player(
                 size(2), size(2),
-                size(2), size(2)
+                size(3.85f), size(3.85f)
         );
         add(Layer.player.ordinal(), player);
         add(Layer.bg.ordinal(), new HorzScrollBackground(R.mipmap.cookie_run_bg_1, Metrics.size(R.dimen.bg_scroll_1)));
