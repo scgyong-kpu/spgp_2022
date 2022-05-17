@@ -58,11 +58,11 @@ public class Player extends SheetSprite implements BoxCollidable {
             }
         }
         static float[][] insets = {
-                new float[] { 80/270f, 135/270f, 80/270f, 0.00f }, // run
-                new float[] { 0.10f, 0.20f, 0.10f, 0.00f }, // jump
-                new float[] { 0.10f, 0.15f, 0.10f, 0.00f }, // doubleJump
-                new float[] { 0.10f, 0.05f, 0.10f, 0.00f }, // falling
-                new float[] { 0.00f, 0.50f, 0.00f, 0.00f }, // slide
+                new float[] { 85/270f, 135/270f, 80/270f, 0.00f }, // run
+                new float[] { 85/270f, 158/270f, 80/270f, 0.00f }, // jump
+                new float[] { 85/270f, 150/270f, 80/270f, 0.00f }, // doubleJump
+                new float[] { 85/270f, 125/270f, 80/270f, 0.00f }, // falling
+                new float[] { 80/270f, 204/270f, 50/270f, 0.00f }, // slide
         };
     }
     private State state = State.run;
