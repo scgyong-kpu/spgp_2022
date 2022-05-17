@@ -59,7 +59,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
         if (elapsed != 0) {
             framesPerSecond = 1_000_000_000 / elapsed;
             lastTimeNanos = now;
-            Scene game = Scene.getInstance();
+            Scene game = Scene.getTopScene();
             game.update(elapsed);
             invalidate();
         }
@@ -67,22 +67,22 @@ public class GameView extends View implements Choreographer.FrameCallback {
     }
 
     private void initView() {
-        Scene.getInstance().init();
+        Scene.getTopScene().init();
         fpsPaint.setColor(Color.BLUE);
         fpsPaint.setTextSize(100);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        return Scene.getInstance().onTouchEvent(event);
+        return Scene.getTopScene().onTouchEvent(event);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Scene.getInstance().draw(canvas);
+        Scene.getTopScene().draw(canvas);
 
         canvas.drawText("FPS:" + framesPerSecond, framesPerSecond * 10, 100, fpsPaint);
-        canvas.drawText("" + Scene.getInstance().objectCount(), 10, 100, fpsPaint);
+        canvas.drawText("" + Scene.getTopScene().objectCount(), 10, 100, fpsPaint);
     }
 
     public void pauseGame() {
@@ -110,6 +110,6 @@ public class GameView extends View implements Choreographer.FrameCallback {
     }
 
     public boolean onBackPressed() {
-        return Scene.getInstance().handleBackKey();
+        return Scene.getTopScene().handleBackKey();
     }
 }

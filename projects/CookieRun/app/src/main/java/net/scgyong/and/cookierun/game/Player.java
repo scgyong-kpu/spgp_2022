@@ -1,24 +1,29 @@
 package net.scgyong.and.cookierun.game;
 
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.JsonReader;
 
 import net.scgyong.and.cookierun.R;
 import net.scgyong.and.cookierun.framework.interfaces.BoxCollidable;
 import net.scgyong.and.cookierun.framework.interfaces.GameObject;
 import net.scgyong.and.cookierun.framework.objects.SheetSprite;
+import net.scgyong.and.cookierun.framework.res.BitmapPool;
 import net.scgyong.and.cookierun.framework.res.Metrics;
+import net.scgyong.and.cookierun.framework.view.GameView;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Player extends SheetSprite implements BoxCollidable {
 
     private static final float FRAMES_PER_SECOND = 8f;
     private static final String TAG = Player.class.getSimpleName();
-
-    static {
-        State.initRects();
-    }
 
     private enum State {
         run, jump, doubleJump, falling, slide, COUNT;
@@ -35,7 +40,7 @@ public class Player extends SheetSprite implements BoxCollidable {
             dstRect.bottom -= h * inset[3];
         }
         static Rect[][] rectsArray;
-        static void initRects() {
+        static void initRects(CookieInfo info) {
             int[][] indices = {
                     new int[] { 100, 101, 102, 103 }, // run
                     new int[] { 7, 8 }, // jump
@@ -49,9 +54,9 @@ public class Player extends SheetSprite implements BoxCollidable {
                 Rect[] rects = new Rect[ints.length];
                 for (int i = 0; i < ints.length; i++) {
                     int idx = ints[i];
-                    int l = 2 + (idx % 100) * 272;
-                    int t = 2 + (idx / 100) * 272;
-                    Rect rect = new Rect(l, t, l + 270, t + 270);
+                    int l = 2 + (idx % 100) * (2 + info.size);
+                    int t = 2 + (idx / 100) * (2 + info.size);
+                    Rect rect = new Rect(l, t, l + info.size, t + info.size);
                     rects[i] = rect;
                 }
                 rectsArray[r] = rects;
@@ -73,13 +78,73 @@ public class Player extends SheetSprite implements BoxCollidable {
 
 
     public Player(float x, float y, float w, float h) {
-        super(R.mipmap.cookie, FRAMES_PER_SECOND);
+        super(0, FRAMES_PER_SECOND);
+        loadCookiesInfo();
+        selectCookie(0);
         this.x = x;
         this.y = y;
         jumpPower = Metrics.size(R.dimen.player_jump_power);
         gravity = Metrics.size(R.dimen.player_gravity);
         setDstRect(w, h);
         setState(State.run);
+    }
+
+    private void selectCookie(int cookieIndex) {
+        this.cookieIndex = cookieIndex;
+        CookieInfo info = cookieInfos.get(cookieIndex);
+        State.initRects(info);
+        AssetManager assets = GameView.view.getContext().getAssets();
+        try {
+            String filename = "cookies/" + info.id + "_sheet.png";
+            InputStream is = assets.open(filename);
+            bitmap = BitmapFactory.decodeStream(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private class CookieInfo {
+        int id;
+        String name;
+        int size;
+        int xcount;
+        int ycount;
+    }
+    private ArrayList<CookieInfo> cookieInfos;
+    private int cookieIndex;
+    private void loadCookiesInfo() {
+        cookieInfos = new ArrayList<>();
+        AssetManager assets = GameView.view.getContext().getAssets();
+        try {
+            InputStream is = assets.open("cookies.json");
+            JsonReader reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
+            reader.beginArray();
+            while (reader.hasNext()) {
+                reader.beginObject();
+                CookieInfo info = new CookieInfo();
+                while (reader.hasNext()) {
+                    String name = reader.nextName();
+                    if (name.equals("id")) {
+                        info.id = reader.nextInt();
+                    } else if (name.equals("name")) {
+                        info.name = reader.nextString();
+                    } else if (name.equals("size")) {
+                        info.size = reader.nextInt();
+                    } else if (name.equals("xcount")) {
+                        info.xcount = reader.nextInt();
+                    } else if (name.equals("ycount")) {
+                        info.ycount = reader.nextInt();
+                    }
+                }
+                reader.endObject();
+                cookieInfos.add(info);
+            }
+            reader.endArray();
+
+            cookieIndex = 0;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

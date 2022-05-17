@@ -28,7 +28,7 @@ public class MapSprite extends Sprite implements Recyclable, BoxCollidable {
         dstRect.offset(dx, 0);
         if (dstRect.right < 0) {
 //            Log.d(TAG, "Removing:" + this);
-            Scene.getInstance().remove(this);
+            Scene.getTopScene().remove(this);
         }
     }
 

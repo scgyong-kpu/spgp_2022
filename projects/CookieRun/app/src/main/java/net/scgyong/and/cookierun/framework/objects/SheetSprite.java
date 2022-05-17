@@ -10,7 +10,9 @@ public class SheetSprite extends Sprite {
     private final long createdOn;
     protected Rect[] srcRects;
     public SheetSprite(int mipmapResId, float framesPerSecond) {
-        bitmap = BitmapPool.get(mipmapResId);
+        if (mipmapResId != 0) {
+            bitmap = BitmapPool.get(mipmapResId);
+        }
         this.framesPerSecond = framesPerSecond;
         createdOn = System.currentTimeMillis();
     }
