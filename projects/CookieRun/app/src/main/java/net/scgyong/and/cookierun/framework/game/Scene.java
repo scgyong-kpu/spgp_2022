@@ -159,7 +159,9 @@ public class Scene {
                     boolean removed = gameObjects.remove(gameObject);
                     if (!removed) continue;
                     if (gameObject instanceof Recyclable) {
-                        RecycleBin.add((Recyclable) gameObject);
+                        Recyclable recyclable = (Recyclable) gameObject;
+                        recyclable.finish();
+                        RecycleBin.add(recyclable);
                     }
                     break;
                 }
