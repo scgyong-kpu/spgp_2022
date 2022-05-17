@@ -36,10 +36,6 @@ public class Obstacle extends MapSprite {
     };
 
     private void init(int index, float unitLeft, float unitTop) {
-        MainGame game = MainGame.get();
-        float left = game.size(unitLeft);
-        float top = game.size(unitTop);
-        float unit = game.size(1);
-        dstRect.set(left, top, left + unit, top + unit);
+        setUnitDstRect(unitLeft, unitTop, 1, 1);
     }
 }

@@ -14,6 +14,13 @@ public class MapSprite extends Sprite implements Recyclable, BoxCollidable {
 //        Log.d(TAG, "New:" + this);
     }
 
+    protected void setUnitDstRect(float unitLeft, float unitTop, float unitWidth, float unitHeight) {
+        MainGame game = MainGame.get();
+        float left = game.size(unitLeft);
+        float top = game.size(unitTop);
+        dstRect.set(left, top, left + game.size(unitWidth), top + game.size(unitHeight));
+    }
+
     @Override
     public void update(float frameTime) {
         float speed = MapLoader.get().speed;
