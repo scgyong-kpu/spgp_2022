@@ -20,12 +20,14 @@ public class Obstacle extends MapSprite {
         return obs;
     }
     private static class Modifier {
-        protected final float height;
+        protected final float width, height;
         protected int mipmapResId;
-        public Modifier(float heightUnit) {
+        public Modifier(float widthUnit, float heightUnit) {
+            this.width = widthUnit;
             this.height = heightUnit;
         }
-        public Modifier(float heightUnit, int mipmapResId) {
+        public Modifier(float widthUnit, float heightUnit, int mipmapResId) {
+            this.width = widthUnit;
             this.height = heightUnit;
             this.mipmapResId = mipmapResId;
         }
@@ -34,7 +36,7 @@ public class Obstacle extends MapSprite {
         }
         public void init(Obstacle obstacle, float unitLeft, float unitTop) {
             unitTop -= this.height - 1;
-            obstacle.setUnitDstRect(unitLeft, unitTop, 1, height);
+            obstacle.setUnitDstRect(unitLeft, unitTop, width, height);
             if (mipmapResId != 0) {
                 obstacle.bitmap = BitmapPool.get(mipmapResId);
             }
@@ -43,8 +45,8 @@ public class Obstacle extends MapSprite {
     private static class AnimModifier extends Modifier {
         private final int[] mipmapResIds;
         private final float topTransparent;
-        public AnimModifier(float heightUnit, int[] mipmapResIds, float topTransparent) {
-            super(heightUnit);
+        public AnimModifier(float widthUnit, float heightUnit, int[] mipmapResIds, float topTransparent) {
+            super(widthUnit, heightUnit);
             this.mipmapResIds = mipmapResIds;
             this.topTransparent = topTransparent;
         }
@@ -80,27 +82,27 @@ public class Obstacle extends MapSprite {
         }
     }
     private static class MoveModifier extends Modifier {
-        public MoveModifier(float heightUnit, int mipmapResId) {
-            super(heightUnit, mipmapResId);
+        public MoveModifier(float widthUnit, float heightUnit, int mipmapResId) {
+            super(widthUnit, heightUnit, mipmapResId);
         }
     }
 
     private static Modifier[] MODIFIERS = {
-            new Modifier(99/63f, R.mipmap.epn01_tm01_jp1a),
-            new AnimModifier(131/81f, new int[] {
+            new Modifier(.5f, .5f*99/63f, R.mipmap.epn01_tm01_jp1a),
+            new AnimModifier(1.2f, 131/81f, new int[] {
                     R.mipmap.epn01_tm01_jp1up_01,
                     R.mipmap.epn01_tm01_jp1up_02,
                     R.mipmap.epn01_tm01_jp1up_03,
                     R.mipmap.epn01_tm01_jp1up_04,
             }, 64/131f),
-            new AnimModifier(222/87f, new int[] {
+            new AnimModifier(1, 222/87f, new int[] {
                     R.mipmap.epn01_tm01_jp2up_01,
                     R.mipmap.epn01_tm01_jp2up_02,
                     R.mipmap.epn01_tm01_jp2up_03,
                     R.mipmap.epn01_tm01_jp2up_04,
                     R.mipmap.epn01_tm01_jp2up_05,
             }, 68/222f),
-            new MoveModifier(482/86f, R.mipmap.epn01_tm01_sda),
+            new MoveModifier(1, 482/86f, R.mipmap.epn01_tm01_sda),
     };
 
     private void init(int index, float unitLeft, float unitTop) {
