@@ -41,10 +41,7 @@ public class MainScene extends Scene {
 //                size(2), size(7),
 //                size(2), size(2),
 //                R.mipmap.cookie);
-        player = new Player(
-                size(2), size(2),
-                size(3.85f), size(3.85f)
-        );
+        player = new Player(size(2), size(2));
         add(Layer.player.ordinal(), player);
         add(Layer.bg.ordinal(), new HorzScrollBackground(R.mipmap.cookie_run_bg_1, Metrics.size(R.dimen.bg_scroll_1)));
         add(Layer.bg.ordinal(), new HorzScrollBackground(R.mipmap.cookie_run_bg_2, Metrics.size(R.dimen.bg_scroll_2)));

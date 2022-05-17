@@ -29,6 +29,7 @@ public class JellyItem extends MapSprite {
     }
 
     private void init(int index, float unitLeft, float unitTop) {
+        super.init();
         this.index = index;
         int srcLeft = BORDER + (index % ITEMS_IN_A_ROW) * (SIZE + BORDER);
         int srcTop = BORDER + (index / ITEMS_IN_A_ROW) * (SIZE + BORDER);

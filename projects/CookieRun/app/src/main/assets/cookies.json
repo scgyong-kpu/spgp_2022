@@ -14,9 +14,114 @@
     "ycount": 6
   },
   {
+    "id": "107571",
+    "name": "Buttercream Choco Cookie",
+    "size": 320,
+    "xcount": 11,
+    "ycount": 6
+  },
+  {
+    "id": "107570",
+    "name": "Cloud Cookie",
+    "size": 320,
+    "xcount": 11,
+    "ycount": 6
+  },
+  {
+    "id": "107569",
+    "name": "Cream Cookie",
+    "size": 344,
+    "xcount": 11,
+    "ycount": 6
+  },
+  {
     "id": "107568",
     "name": "Strawberry Cookie",
     "size": 320,
+    "xcount": 11,
+    "ycount": 6
+  },
+  {
+    "id": "107573",
+    "name": "Boarder Cookie",
+    "size": 360,
+    "xcount": 11,
+    "ycount": 6
+  },
+  {
+    "id": "107582",
+    "name": "Ginger Claus",
+    "size": 288,
+    "xcount": 11,
+    "ycount": 6
+  },
+  {
+    "id": "107576",
+    "name": "Muscle Cookie",
+    "size": 364,
+    "xcount": 11,
+    "ycount": 6
+  },
+  {
+    "id": "107809",
+    "name": "Adventurer Cookie",
+    "size": 364,
+    "xcount": 11,
+    "ycount": 6
+  },
+  {
+    "id": "107805",
+    "name": "Alchemist Cookie",
+    "size": 380,
+    "xcount": 11,
+    "ycount": 6
+  },
+  {
+    "id": "107822",
+    "name": "Cherry Blossom Cookie",
+    "size": 364,
+    "xcount": 11,
+    "ycount": 6
+  },
+  {
+    "id": "107836",
+    "name": "Herb Cookie",
+    "size": 370,
+    "xcount": 11,
+    "ycount": 6
+  },
+  {
+    "id": "107579",
+    "name": "Ninja Cookie",
+    "size": 320,
+    "xcount": 11,
+    "ycount": 6
+  },
+  {
+    "id": "107845",
+    "name": "Pancake Cookie",
+    "size": 363,
+    "xcount": 11,
+    "ycount": 6
+  },
+  {
+    "id": "107776",
+    "name": "Rebel Cookie",
+    "size": 400,
+    "xcount": 11,
+    "ycount": 6
+  },
+  {
+    "id": "107777",
+    "name": "Rebel Cookie (Cloud Alter Ego)",
+    "size": 400,
+    "xcount": 11,
+    "ycount": 6
+  },
+  {
+    "id": "107583",
+    "name": "ch17",
+    "size": 182,
     "xcount": 11,
     "ycount": 6
   }

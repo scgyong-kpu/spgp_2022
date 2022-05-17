@@ -83,15 +83,15 @@ public class Player extends SheetSprite implements BoxCollidable {
     protected RectF collisionBox = new RectF();
 
 
-    public Player(float x, float y, float w, float h) {
+    public Player(float x, float y) {
         super(0, FRAMES_PER_SECOND);
-        loadCookiesInfo();
-        selectCookie(1);
         this.x = x;
         this.y = y;
+        setDstRect(0, 0);
+        loadCookiesInfo();
+        selectCookie(0);
         jumpPower = Metrics.size(R.dimen.player_jump_power);
         gravity = Metrics.size(R.dimen.player_gravity);
-        setDstRect(w, h);
         setState(State.run);
     }
 
@@ -107,6 +107,9 @@ public class Player extends SheetSprite implements BoxCollidable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        float bottom = dstRect.bottom;
+        float size = MainScene.get().size(info.size * 3.85f / 270);
+        dstRect.set(x - size / 2, bottom - size, x + size / 2, bottom);
     }
 
     private class CookieInfo {
