@@ -90,12 +90,14 @@ public class Obstacle extends MapSprite {
     private static Modifier[] MODIFIERS = {
             new Modifier(.5f, .5f*99/63f, R.mipmap.epn01_tm01_jp1a),
             new AnimModifier(1.2f, 131/81f, new int[] {
+                    R.mipmap.trans_00p,
                     R.mipmap.epn01_tm01_jp1up_01,
                     R.mipmap.epn01_tm01_jp1up_02,
                     R.mipmap.epn01_tm01_jp1up_03,
                     R.mipmap.epn01_tm01_jp1up_04,
             }, 64/131f),
             new AnimModifier(1, 222/87f, new int[] {
+                    R.mipmap.trans_00p,
                     R.mipmap.epn01_tm01_jp2up_01,
                     R.mipmap.epn01_tm01_jp2up_02,
                     R.mipmap.epn01_tm01_jp2up_03,
