@@ -32,11 +32,16 @@ public class JellyItem extends MapSprite {
         int srcTop = BORDER + (index / ITEMS_IN_A_ROW) * (SIZE + BORDER);
         srcRect.set(srcLeft, srcTop, srcLeft + SIZE, srcTop + SIZE);
 //        Log.d(TAG, "index=" + index + " rect=" + srcRect);
+        float unitWidth = 1, unitHeight = 1;
+        setUnitDstRect(unitLeft, unitTop, unitWidth, unitHeight);
+    }
+
+    private void setUnitDstRect(float unitLeft, float unitTop, float unitWidth, float unitHeight) {
         MainGame game = MainGame.get();
         float left = game.size(unitLeft);
         float top = game.size(unitTop);
         float unit = game.size(1);
-        dstRect.set(left, top, left + unit, top + unit);
+        dstRect.set(left, top, left + game.size(unitWidth), top + game.size(unitHeight));
     }
 
     @Override
