@@ -134,6 +134,9 @@ public class MapLoader implements GameObject {
         if (ch >= '1' && ch <= '9') {
             JellyItem item = JellyItem.get(ch - '1', leftUnit, topUnit);
             game.add(MainScene.Layer.item.ordinal(), item);
+        } else if (ch == '@') {
+            JellyItem item = JellyItem.get(26, leftUnit, topUnit);
+            game.add(MainScene.Layer.item.ordinal(), item);
         } else if (ch >= 'O' && ch <= 'Q') {
             Platform platform = Platform.get(Platform.Type.values()[ch - 'O'], leftUnit, topUnit);
             game.add(MainScene.Layer.platform.ordinal(), platform);

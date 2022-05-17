@@ -26,6 +26,12 @@ public class CollisionChecker implements GameObject {
             }
             if (CollisionHelper.collides(player, (BoxCollidable) item)) {
                 //Log.d(TAG, "Collision: " + item);
+                if (item instanceof JellyItem) {
+                    JellyItem jelly = (JellyItem) item;
+                    if (jelly.index == 26) {
+                        player.changeBitmap();
+                    }
+                }
                 game.remove(item);
             }
         }
