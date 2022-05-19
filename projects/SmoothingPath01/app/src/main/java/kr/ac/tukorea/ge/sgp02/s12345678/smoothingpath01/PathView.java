@@ -19,6 +19,8 @@ import java.util.ArrayList;
  * TODO: document your custom view class.
  */
 public class PathView extends View {
+    private Path path;
+
     public int getPointCount() {
         return points.size();
     }
@@ -82,14 +84,21 @@ public class PathView extends View {
             canvas.drawCircle(first.x, first.y, 5.0f, paint);
             return;
         }
-        Path path = new Path();
+
+        canvas.drawPath(path, paint);
+
+    }
+
+    private void buildPath() {
+        int ptCount = points.size();
+        if (ptCount < 2) { return; }
+        PointF first = points.get(0);
+        path = new Path();
         path.moveTo(first.x, first.y);
         for (int i = 1; i < ptCount; i++) {
             PointF pt = points.get(i);
             path.lineTo(pt.x, pt.y);
         }
-        canvas.drawPath(path, paint);
-
     }
 
 
@@ -121,6 +130,7 @@ public class PathView extends View {
             point.x = event.getX();
             point.y = event.getY();
             points.add(point);
+            buildPath();
             if (listener != null) {
                 listener.onAdd();
             }
