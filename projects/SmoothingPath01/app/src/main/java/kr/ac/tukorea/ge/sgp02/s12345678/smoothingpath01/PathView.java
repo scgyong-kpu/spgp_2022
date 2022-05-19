@@ -30,6 +30,7 @@ public class PathView extends View {
     }
 
     private PointF fighterPos = new PointF();
+    private float angle;
     private Bitmap bitmap;
     private float hw, hh;
 
@@ -49,6 +50,7 @@ public class PathView extends View {
                 pm.getPosTan(length * progress, pos, tan);
                 fighterPos.x = pos[0];
                 fighterPos.y = pos[1];
+                angle = (float)(Math.atan2(tan[1], tan[0]) * 180 / Math.PI);
                 //Log.d(TAG, "pos:" + fighterPos);
                 invalidate();
             }
@@ -128,7 +130,10 @@ public class PathView extends View {
             canvas.drawPath(path, paint);
         }
 
+        canvas.save();
+        canvas.rotate(angle, fighterPos.x, fighterPos.y);
         canvas.drawBitmap(bitmap, fighterPos.x - hw, fighterPos.y - hh, alphaPaint);
+        canvas.restore();
     }
 
     private void buildPath() {
@@ -209,6 +214,7 @@ public class PathView extends View {
 
     public void clear() {
         points.clear();
+        angle = 0;
         invalidate();
     }
 }
