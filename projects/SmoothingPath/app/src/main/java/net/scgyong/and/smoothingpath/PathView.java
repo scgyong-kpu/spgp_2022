@@ -72,11 +72,15 @@ public class PathView extends View {
 //        int contentHeight = getHeight() - paddingTop - paddingBottom;
 
         int ptCount = points.size();
-        if (ptCount < 2) {
+        if (ptCount == 0) { return; }
+        PointF first = points.get(0);
+        if (ptCount == 1) {
+            canvas.drawCircle(first.x, first.y, 5.0f, paint);
             return;
         }
         Path path = new Path();
         path.moveTo(points.get(0).x, points.get(0).y);
+        path.moveTo(first.x, first.y);
         for (int i = 1; i < ptCount; i++) {
             PointF pt = points.get(i);
             path.lineTo(pt.x, pt.y);
