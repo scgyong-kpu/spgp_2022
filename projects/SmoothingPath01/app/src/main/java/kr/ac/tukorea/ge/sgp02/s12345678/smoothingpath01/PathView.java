@@ -1,11 +1,16 @@
 package kr.ac.tukorea.ge.sgp02.s12345678.smoothingpath01;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PathMeasure;
+import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,6 +27,33 @@ public class PathView extends View {
 
     public int getPointCount() {
         return points.size();
+    }
+
+    private PointF fighterPos = new PointF();
+    private Bitmap bitmap;
+    private float hw, hh;
+
+    public void start() {
+        int ptCount = points.size();
+        if (ptCount < 2) { return; }
+        PathMeasure pm = new PathMeasure(path, false);
+        float length = pm.getLength();
+        ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);
+        anim.setDuration(ptCount * 300);
+        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            float[] pos = new float[2];
+            float[] tan = new float[2];
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float progress = animation.getAnimatedFraction();
+                pm.getPosTan(length * progress, pos, tan);
+                fighterPos.x = pos[0];
+                fighterPos.y = pos[1];
+                //Log.d(TAG, "pos:" + fighterPos);
+                invalidate();
+            }
+        });
+        anim.start();
     }
 
     public interface Listener {
@@ -74,6 +106,10 @@ public class PathView extends View {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(2.0f);
         paint.setColor(mExampleColor);
+
+        bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.plane_240);
+        hw = bitmap.getWidth() / 2;
+        hh = bitmap.getHeight() / 2;
     }
 
     @Override
@@ -85,11 +121,11 @@ public class PathView extends View {
         Point first = points.get(0);
         if (ptCount == 1) {
             canvas.drawCircle(first.x, first.y, 5.0f, paint);
-            return;
+        } else {
+            canvas.drawPath(path, paint);
         }
 
-        canvas.drawPath(path, paint);
-
+        canvas.drawBitmap(bitmap, fighterPos.x - hw, fighterPos.y - hh, null);
     }
 
     private void buildPath() {
@@ -157,6 +193,9 @@ public class PathView extends View {
             point.y = event.getY();
             points.add(point);
             buildPath();
+            if (points.size() == 1) {
+                fighterPos.set(point.x, point.y);
+            }
             if (listener != null) {
                 listener.onAdd();
             }

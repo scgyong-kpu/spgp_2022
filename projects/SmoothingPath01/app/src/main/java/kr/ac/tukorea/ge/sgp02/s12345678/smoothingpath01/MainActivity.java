@@ -37,4 +37,8 @@ public class MainActivity extends AppCompatActivity {
         pathView.clear();
         showCount();
     }
+
+    public void onBtnStart(View view) {
+        pathView.start();
+    }
 }
