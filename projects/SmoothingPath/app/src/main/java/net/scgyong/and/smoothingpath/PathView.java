@@ -189,13 +189,13 @@ public class PathView extends View {
         mExampleColor = exampleColor;
     }
 
-    public void start() {
+    public void start(int msecPerPoint) {
         int ptCount = points.size();
         if (ptCount < 2) { return; }
         PathMeasure pm = new PathMeasure(path, false);
         float length = pm.getLength();
         ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);
-        anim.setDuration(ptCount * 300);
+        anim.setDuration(ptCount * msecPerPoint);
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             float[] pos = new float[2];
             float[] tan = new float[2];

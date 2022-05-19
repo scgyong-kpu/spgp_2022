@@ -30,7 +30,27 @@
             android:text="Start"
             android:onClick="onBtnStart"/>
     </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffc"
+        android:padding="20dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Speed:"
+            android:layout_gravity="center"
+            />
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:min="0"
+            android:max="900"
+            android:progress="500"
+            />
+    </LinearLayout>
     <net.scgyong.and.smoothingpath.PathView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
