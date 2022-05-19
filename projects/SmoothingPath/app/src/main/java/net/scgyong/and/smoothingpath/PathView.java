@@ -24,7 +24,11 @@ public class PathView extends View {
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
     Path path;
     private Paint paint;
-    ArrayList<PointF> points = new ArrayList<>();
+    class Point {
+        float x, y;
+        float dx, dy;
+    }
+    ArrayList<Point> points = new ArrayList<>();
     private Listener listener;
 
     public interface Listener {
@@ -85,7 +89,7 @@ public class PathView extends View {
 
         int ptCount = points.size();
         if (ptCount == 0) { return; }
-        PointF first = points.get(0);
+        Point first = points.get(0);
         if (ptCount == 1) {
             canvas.drawCircle(first.x, first.y, 5.0f, paint);
             return;
@@ -96,10 +100,10 @@ public class PathView extends View {
         int ptCount = points.size();
         if (ptCount < 2) { return; }
         path = new Path();
-        PointF first = points.get(0);
+        Point first = points.get(0);
         path.moveTo(first.x, first.y);
         for (int i = 1; i < ptCount; i++) {
-            PointF pt = points.get(i);
+            Point pt = points.get(i);
             path.lineTo(pt.x, pt.y);
         }
     }
@@ -111,7 +115,7 @@ public class PathView extends View {
                 points.clear();
                 return false;
             }
-            PointF pt = new PointF();
+            Point pt = new Point();
             pt.x = event.getX();
             pt.y = event.getY();
             points.add(pt);
