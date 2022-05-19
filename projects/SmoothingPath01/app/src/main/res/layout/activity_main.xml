@@ -18,6 +18,13 @@
             android:text="Clear"
             android:onClick="onBtnClear"
             />
+        <TextView
+            android:id="@+id/countTextView"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
 
     </LinearLayout>
     <kr.ac.tukorea.ge.sgp02.s12345678.smoothingpath01.PathView

@@ -19,6 +19,21 @@ import java.util.ArrayList;
  * TODO: document your custom view class.
  */
 public class PathView extends View {
+    public int getPointCount() {
+        return points.size();
+    }
+
+    public interface Listener {
+        public void onAdd();
+    }
+
+    public void setListener(Listener listener) {
+        this.listener = listener;
+    }
+
+    private Listener listener;
+
+
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
 
     private Paint paint;
@@ -61,11 +76,14 @@ public class PathView extends View {
         super.onDraw(canvas);
 
         int ptCount = points.size();
-        if (ptCount < 2) {
+        if (ptCount == 0) { return; }
+        PointF first = points.get(0);
+        if (ptCount == 1) {
+            canvas.drawCircle(first.x, first.y, 5.0f, paint);
             return;
         }
         Path path = new Path();
-        path.moveTo(points.get(0).x, points.get(0).y);
+        path.moveTo(first.x, first.y);
         for (int i = 1; i < ptCount; i++) {
             PointF pt = points.get(i);
             path.lineTo(pt.x, pt.y);
@@ -103,6 +121,9 @@ public class PathView extends View {
             point.x = event.getX();
             point.y = event.getY();
             points.add(point);
+            if (listener != null) {
+                listener.onAdd();
+            }
             invalidate();
         }
         return super.onTouchEvent(event);
