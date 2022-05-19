@@ -1,11 +1,15 @@
 package net.scgyong.and.smoothingpath;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PathMeasure;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
@@ -25,6 +29,10 @@ public class PathView extends View {
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
     Path path;
     private Paint paint;
+    private Bitmap bitmap;
+    private int hw, hh;
+    PointF fighterPos = new PointF();
+
     class Point {
         float x, y;
         float dx, dy;
@@ -72,6 +80,10 @@ public class PathView extends View {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(2.0f);
         paint.setColor(mExampleColor);
+
+        bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.plane_240);
+        hw = bitmap.getWidth() / 2;
+        hh = bitmap.getHeight() / 2;
     }
 
     @Override
@@ -93,9 +105,10 @@ public class PathView extends View {
         Point first = points.get(0);
         if (ptCount == 1) {
             canvas.drawCircle(first.x, first.y, 5.0f, paint);
-            return;
+        } else {
+            canvas.drawPath(path, paint);
         }
-        canvas.drawPath(path, paint);
+        canvas.drawBitmap(bitmap, fighterPos.x - hw, fighterPos.y - hh, null);
     }
     private void buildPath() {
         int ptCount = points.size();
@@ -146,7 +159,9 @@ public class PathView extends View {
             points.add(pt);
             buildPath();
             Log.d(TAG, "Points:" + points.size());
-
+            if (points.size() == 1) {
+                fighterPos.set(pt.x, pt.y);
+            }
             if (listener != null) {
                 listener.onAdd();
             }
@@ -174,6 +189,28 @@ public class PathView extends View {
         mExampleColor = exampleColor;
     }
 
+    public void start() {
+        int ptCount = points.size();
+        if (ptCount < 2) { return; }
+        PathMeasure pm = new PathMeasure(path, false);
+        float length = pm.getLength();
+        ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);
+        anim.setDuration(ptCount * 300);
+        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            float[] pos = new float[2];
+            float[] tan = new float[2];
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float progress = animation.getAnimatedFraction();
+                pm.getPosTan(length * progress, pos, tan);
+                fighterPos.x = pos[0];
+                fighterPos.y = pos[1];
+                //Log.d(TAG, "pos:" + fighterPos);
+                invalidate();
+            }
+        });
+        anim.start();
+    }
     public void clear() {
         points.clear();
         invalidate();
