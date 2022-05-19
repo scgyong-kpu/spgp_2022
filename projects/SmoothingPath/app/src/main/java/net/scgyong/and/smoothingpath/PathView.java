@@ -120,4 +120,9 @@ public class PathView extends View {
     public void setExampleColor(int exampleColor) {
         mExampleColor = exampleColor;
     }
+
+    public void clear() {
+        points.clear();
+        invalidate();
+    }
 }
