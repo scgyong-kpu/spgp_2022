@@ -190,6 +190,8 @@ public class PathView extends View {
             if (listener != null) {
                 listener.onAdd();
             }
+            fighterPos.x = point.x;
+            fighterPos.y = point.y;
             buildPath();
             invalidate();
         }
