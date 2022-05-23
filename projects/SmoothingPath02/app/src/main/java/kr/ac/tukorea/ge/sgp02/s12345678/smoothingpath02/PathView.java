@@ -19,6 +19,20 @@ import java.util.ArrayList;
  * TODO: document your custom view class.
  */
 public class PathView extends View {
+    public int getPointCount() {
+        return points.size();
+    }
+
+    public interface Listener {
+        public void onAdd();
+    }
+
+    public void setListener(Listener listener) {
+        this.listener = listener;
+    }
+
+    protected Listener listener;
+
 //    private String mExampleString; // TODO: use a default from R.string...
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
 //    private float mExampleDimension = 0; // TODO: use a default from R.dimen...
@@ -100,6 +114,9 @@ public class PathView extends View {
             point.x = event.getX();
             point.y = event.getY();
             points.add(point);
+            if (listener != null) {
+                listener.onAdd();
+            }
             invalidate();
         }
         return super.onTouchEvent(event);
