@@ -19,6 +19,7 @@ import java.util.ArrayList;
  * TODO: document your custom view class.
  */
 public class PathView extends View {
+    private static final float DIRECTION_FACTOR = 6;
     private Path path;
 
     public int getPointCount() {
@@ -35,6 +36,11 @@ public class PathView extends View {
 
     protected Listener listener;
 
+    protected class Point {
+        float x, y;
+        float dx, dy;
+    }
+
 //    private String mExampleString; // TODO: use a default from R.string...
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
 //    private float mExampleDimension = 0; // TODO: use a default from R.dimen...
@@ -44,7 +50,7 @@ public class PathView extends View {
 //    private float mTextWidth;
 //    private float mTextHeight;
 
-    protected ArrayList<PointF> points = new ArrayList<>();
+    protected ArrayList<Point> points = new ArrayList<>();
     protected Paint paint;
 
     public PathView(Context context) {
@@ -94,7 +100,7 @@ public class PathView extends View {
         int ptCount = points.size();
         if (ptCount == 0) return;
 
-        PointF first = points.get(0);
+        Point first = points.get(0);
         if (ptCount == 1) {
             canvas.drawCircle(first.x, first.y, 5.0f, paint);
             return;
@@ -106,19 +112,42 @@ public class PathView extends View {
     protected void buildPath() {
         int ptCount = points.size();
         if (ptCount < 2) return;
-        PointF first = points.get(0);
+
+        for (int i = ptCount - 2; i < ptCount; i++) {
+            Point pt = points.get(i);
+            if (i == 0) { // only next
+                Point next = points.get(i + 1);
+                pt.dx = ((next.x - pt.x) / DIRECTION_FACTOR);
+                pt.dy = ((next.y - pt.y) / DIRECTION_FACTOR);
+            } else if (i == ptCount - 1) { // only prev
+                Point prev = points.get(i - 1);
+                pt.dx = ((pt.x - prev.x) / DIRECTION_FACTOR);
+                pt.dy = ((pt.y - prev.y) / DIRECTION_FACTOR);
+            } else { // prev and next
+                Point next = points.get(i + 1);
+                Point prev = points.get(i - 1);
+                pt.dx = ((next.x - prev.x) / DIRECTION_FACTOR);
+                pt.dy = ((next.y - prev.y) / DIRECTION_FACTOR);
+            }
+        }
+
+        Point prev = points.get(0);
         path = new Path();
-        path.moveTo(first.x, first.y);
+        path.moveTo(prev.x, prev.y);
         for (int i = 1; i < ptCount; i++) {
-            PointF pt = points.get(i);
-            path.lineTo(pt.x, pt.y);
+            Point pt = points.get(i);
+            path.cubicTo(
+                    prev.x + prev.dx, prev.y + prev.dy,
+                    pt.x - pt.dx, pt.y - pt.dy,
+                    pt.x, pt.y);
+            prev = pt;
         }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            PointF point = new PointF();
+            Point point = new Point();
             point.x = event.getX();
             point.y = event.getY();
             points.add(point);
