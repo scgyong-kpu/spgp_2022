@@ -1,11 +1,15 @@
 package kr.ac.tukorea.ge.sgp02.s12345678.smoothingpath02;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PathMeasure;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
@@ -21,9 +25,34 @@ import java.util.ArrayList;
 public class PathView extends View {
     private static final float DIRECTION_FACTOR = 6;
     private Path path;
+    private Bitmap bitmap;
+    private float halfWidth, halfHeight;
+    private PointF fighterPos = new PointF();
 
     public int getPointCount() {
         return points.size();
+    }
+
+    public void start() {
+        int ptCount = points.size();
+        if (ptCount < 2) { return; }
+        PathMeasure pm = new PathMeasure(path, false);
+        float length = pm.getLength();
+        ValueAnimator animator = ValueAnimator.ofFloat(0, length);
+        animator.setDuration((ptCount - 1) * 300);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            float[] pos = new float[2];
+            float[] tan = new float[2];
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                float dist = (Float) valueAnimator.getAnimatedValue();
+                pm.getPosTan(dist, pos, tan);
+                fighterPos.x = pos[0];
+                fighterPos.y = pos[1];
+                invalidate();
+            }
+        });
+        animator.start();
     }
 
     public interface Listener {
@@ -82,6 +111,10 @@ public class PathView extends View {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(2.0f);
         paint.setColor(mExampleColor);
+
+        bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.plane_240);
+        halfWidth = bitmap.getWidth() / 2;
+        halfHeight = bitmap.getHeight() / 2;
     }
 
 //    private void invalidateTextPaintAndMeasurements() {
@@ -103,10 +136,13 @@ public class PathView extends View {
         Point first = points.get(0);
         if (ptCount == 1) {
             canvas.drawCircle(first.x, first.y, 5.0f, paint);
-            return;
+        } else {
+            canvas.drawPath(path, paint);
         }
-
-        canvas.drawPath(path, paint);
+        canvas.drawBitmap(bitmap,
+                fighterPos.x - halfWidth,
+                fighterPos.y - halfHeight,
+                null);
     }
 
     protected void buildPath() {
