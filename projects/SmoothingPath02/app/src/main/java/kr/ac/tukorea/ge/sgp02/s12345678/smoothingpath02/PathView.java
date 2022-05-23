@@ -80,7 +80,7 @@ public class PathView extends View {
 //    private float mTextHeight;
 
     protected ArrayList<Point> points = new ArrayList<>();
-    protected Paint paint;
+    protected Paint paint, alphaPaint;
 
     public PathView(Context context) {
         super(context);
@@ -112,6 +112,9 @@ public class PathView extends View {
         paint.setStrokeWidth(2.0f);
         paint.setColor(mExampleColor);
 
+        alphaPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        alphaPaint.setAlpha(60 * 255 / 100); // 60% opacity
+
         bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.plane_240);
         halfWidth = bitmap.getWidth() / 2;
         halfHeight = bitmap.getHeight() / 2;
@@ -142,7 +145,7 @@ public class PathView extends View {
         canvas.drawBitmap(bitmap,
                 fighterPos.x - halfWidth,
                 fighterPos.y - halfHeight,
-                null);
+                alphaPaint);
     }
 
     protected void buildPath() {
