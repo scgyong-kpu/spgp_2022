@@ -5,10 +5,15 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
+
+import java.util.ArrayList;
 
 /**
  * TODO: document your custom view class.
@@ -22,6 +27,9 @@ public class PathView extends View {
 //    private TextPaint mTextPaint;
 //    private float mTextWidth;
 //    private float mTextHeight;
+
+    protected ArrayList<PointF> points = new ArrayList<>();
+    protected Paint paint;
 
     public PathView(Context context) {
         super(context);
@@ -43,32 +51,15 @@ public class PathView extends View {
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.PathView, defStyle, 0);
 
-//        mExampleString = a.getString(
-//                R.styleable.PathView_exampleString);
         mExampleColor = a.getColor(
                 R.styleable.PathView_exampleColor,
                 mExampleColor);
-        // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
-        // values that should fall on pixel boundaries.
-//        mExampleDimension = a.getDimension(
-//                R.styleable.PathView_exampleDimension,
-//                mExampleDimension);
-
-//        if (a.hasValue(R.styleable.PathView_exampleDrawable)) {
-//            mExampleDrawable = a.getDrawable(
-//                    R.styleable.PathView_exampleDrawable);
-//            mExampleDrawable.setCallback(this);
-//        }
-
         a.recycle();
 
-//        // Set up a default TextPaint object
-//        mTextPaint = new TextPaint();
-//        mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-//        mTextPaint.setTextAlign(Paint.Align.LEFT);
-
-        // Update TextPaint and text measurements from attributes
-//        invalidateTextPaintAndMeasurements();
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(2.0f);
+        paint.setColor(mExampleColor);
     }
 
 //    private void invalidateTextPaintAndMeasurements() {
@@ -84,30 +75,30 @@ public class PathView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        // TODO: consider storing these as member variables to reduce
-        // allocations per draw cycle.
-//        int paddingLeft = getPaddingLeft();
-//        int paddingTop = getPaddingTop();
-//        int paddingRight = getPaddingRight();
-//        int paddingBottom = getPaddingBottom();
-//
-//        int contentWidth = getWidth() - paddingLeft - paddingRight;
-//        int contentHeight = getHeight() - paddingTop - paddingBottom;
+        int ptCount = points.size();
+        if (ptCount < 2) return;
 
-//        // Draw the text.
-//        canvas.drawText(mExampleString,
-//                paddingLeft + (contentWidth - mTextWidth) / 2,
-//                paddingTop + (contentHeight + mTextHeight) / 2,
-//                mTextPaint);
-
-//        // Draw the example drawable on top of the text.
-//        if (mExampleDrawable != null) {
-//            mExampleDrawable.setBounds(paddingLeft, paddingTop,
-//                    paddingLeft + contentWidth, paddingTop + contentHeight);
-//            mExampleDrawable.draw(canvas);
-//        }
+        Path path = new Path();
+        PointF first = points.get(0);
+        path.moveTo(first.x, first.y);
+        for (int i = 1; i < ptCount; i++) {
+            PointF pt = points.get(i);
+            path.lineTo(pt.x, pt.y);
+        }
+        canvas.drawPath(path, paint);
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            PointF point = new PointF();
+            point.x = event.getX();
+            point.y = event.getY();
+            points.add(point);
+            invalidate();
+        }
+        return super.onTouchEvent(event);
+    }
 
     /**
      * Gets the example color attribute value.
