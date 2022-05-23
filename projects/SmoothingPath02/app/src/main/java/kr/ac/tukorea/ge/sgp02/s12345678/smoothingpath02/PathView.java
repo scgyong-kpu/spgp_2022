@@ -50,7 +50,7 @@ public class PathView extends View {
                 pm.getPosTan(dist, pos, tan);
                 fighterPos.x = pos[0];
                 fighterPos.y = pos[1];
-                angle = (float)(Math.atan2(tan[1], tan[0]) * 180 / Math.PI);
+                angle = (float)(Math.atan2(tan[1], tan[0]) * 180 / Math.PI + 90);
                 invalidate();
             }
         });
