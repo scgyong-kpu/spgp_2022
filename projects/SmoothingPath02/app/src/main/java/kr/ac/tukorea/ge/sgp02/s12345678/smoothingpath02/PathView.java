@@ -119,4 +119,9 @@ public class PathView extends View {
         mExampleColor = exampleColor;
         //invalidateTextPaintAndMeasurements();
     }
+
+    public void clear() {
+        points.clear();
+        invalidate();
+    }
 }
