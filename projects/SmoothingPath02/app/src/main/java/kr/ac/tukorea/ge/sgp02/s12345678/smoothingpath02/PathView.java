@@ -33,13 +33,13 @@ public class PathView extends View {
         return points.size();
     }
 
-    public void start() {
+    public void start(int msec) {
         int ptCount = points.size();
         if (ptCount < 2) { return; }
         PathMeasure pm = new PathMeasure(path, false);
         float length = pm.getLength();
         ValueAnimator animator = ValueAnimator.ofFloat(0, length);
-        animator.setDuration((ptCount - 1) * 300);
+        animator.setDuration((ptCount - 1) * msec);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             float[] pos = new float[2];
             float[] tan = new float[2];

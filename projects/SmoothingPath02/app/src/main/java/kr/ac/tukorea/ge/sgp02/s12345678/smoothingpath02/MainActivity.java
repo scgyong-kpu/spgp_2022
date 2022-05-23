@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private PathView pathView;
     private TextView countTextView;
+    private SeekBar seekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         countTextView = findViewById(R.id.countTextView);
         pathView = findViewById(R.id.pathView);
+        seekBar = findViewById(R.id.seekBar);
         pathView.setListener(new PathView.Listener() {
             @Override
             public void onAdd() {
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onBtnStart(View view) {
-        pathView.start();
+        int msec = 1000 - seekBar.getProgress();
+        pathView.start(msec);
     }
 }
