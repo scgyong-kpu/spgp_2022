@@ -17,12 +17,14 @@ public class MainScene extends Scene {
     }
 
     public enum Layer {
-        some, COUNT;
+        tile, COUNT;
     }
 
     public void init() {
         super.init();
 
         initLayers(Layer.COUNT.ordinal());
+
+        add(Layer.tile.ordinal(), new TiledSprite());
     }
 }
