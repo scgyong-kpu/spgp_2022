@@ -1,4 +1,4 @@
-package kr.ac.kpu.game.s1234567.mapgame.framework.interfaces;
+package kr.ac.kpu.game.framework.interfaces;
 
 import android.graphics.Canvas;
 

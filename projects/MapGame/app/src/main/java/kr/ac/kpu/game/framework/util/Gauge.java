@@ -1,4 +1,4 @@
-package kr.ac.kpu.game.s1234567.mapgame.framework.util;
+package kr.ac.kpu.game.framework.util;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -6,7 +6,7 @@ import android.graphics.Paint;
 
 import androidx.core.content.ContextCompat;
 
-import kr.ac.kpu.game.s1234567.mapgame.framework.view.GameView;
+import kr.ac.kpu.game.framework.view.GameView;
 
 public class Gauge {
     private final float width;

@@ -1,4 +1,4 @@
-package kr.ac.kpu.game.s1234567.mapgame.framework.view;
+package kr.ac.kpu.game.framework.view;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,8 +14,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import kr.ac.kpu.game.s1234567.mapgame.framework.game.Scene;
-import kr.ac.kpu.game.s1234567.mapgame.framework.res.Metrics;
+import kr.ac.kpu.game.framework.game.Scene;
+import kr.ac.kpu.game.framework.res.Metrics;
 
 public class GameView extends View implements Choreographer.FrameCallback {
     public static GameView view;

@@ -1,4 +1,4 @@
-package kr.ac.kpu.game.s1234567.mapgame.framework.game;
+package kr.ac.kpu.game.framework.game;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,11 +10,11 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 
 import kr.ac.kpu.game.s1234567.mapgame.BuildConfig;
-import kr.ac.kpu.game.s1234567.mapgame.framework.interfaces.BoxCollidable;
-import kr.ac.kpu.game.s1234567.mapgame.framework.interfaces.GameObject;
-import kr.ac.kpu.game.s1234567.mapgame.framework.interfaces.Recyclable;
-import kr.ac.kpu.game.s1234567.mapgame.framework.interfaces.Touchable;
-import kr.ac.kpu.game.s1234567.mapgame.framework.view.GameView;
+import kr.ac.kpu.game.framework.interfaces.BoxCollidable;
+import kr.ac.kpu.game.framework.interfaces.GameObject;
+import kr.ac.kpu.game.framework.interfaces.Recyclable;
+import kr.ac.kpu.game.framework.interfaces.Touchable;
+import kr.ac.kpu.game.framework.view.GameView;
 
 public class Scene {
     private static final String TAG = Scene.class.getSimpleName();

@@ -1,4 +1,4 @@
-package kr.ac.kpu.game.s1234567.mapgame.framework.res;
+package kr.ac.kpu.game.framework.res;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 
 import java.util.HashMap;
 
-import kr.ac.kpu.game.s1234567.mapgame.framework.view.GameView;
+import kr.ac.kpu.game.framework.view.GameView;
 
 public class BitmapPool {
     private static final String TAG = BitmapPool.class.getSimpleName();

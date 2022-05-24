@@ -1,8 +1,8 @@
-package kr.ac.kpu.game.s1234567.mapgame.framework.util;
+package kr.ac.kpu.game.framework.util;
 
 import android.graphics.RectF;
 
-import kr.ac.kpu.game.s1234567.mapgame.framework.interfaces.BoxCollidable;
+import kr.ac.kpu.game.framework.interfaces.BoxCollidable;
 
 public class CollisionHelper {
     public static boolean collides(BoxCollidable o1, BoxCollidable o2) {
