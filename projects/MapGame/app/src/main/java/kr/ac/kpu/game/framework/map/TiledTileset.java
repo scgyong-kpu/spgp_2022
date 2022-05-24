@@ -69,7 +69,7 @@ public class TiledTileset {
             }
         }
 
-        float dstTileSize = map.getDstTileSize();
+        int dstTileSize = Math.round(map.getDstTileSize());
         int width = map.width;
 
         int tile_x = (int) (sx / dstTileSize);
