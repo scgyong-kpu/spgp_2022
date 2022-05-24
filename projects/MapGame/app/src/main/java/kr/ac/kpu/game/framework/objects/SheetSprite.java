@@ -1,9 +1,9 @@
-package kr.ac.kpu.game.s1234567.mapgame.framework.objects;
+package kr.ac.kpu.game.framework.objects;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-import kr.ac.kpu.game.s1234567.mapgame.framework.res.BitmapPool;
+import kr.ac.kpu.game.framework.res.BitmapPool;
 
 public class SheetSprite extends Sprite {
     private final float framesPerSecond;

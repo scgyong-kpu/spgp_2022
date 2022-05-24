@@ -1,9 +1,9 @@
-package kr.ac.kpu.game.s1234567.mapgame.framework.res;
+package kr.ac.kpu.game.framework.res;
 
 import android.content.res.Resources;
 import android.util.TypedValue;
 
-import kr.ac.kpu.game.s1234567.mapgame.framework.view.GameView;
+import kr.ac.kpu.game.framework.view.GameView;
 
 public class Metrics {
     public static int width;

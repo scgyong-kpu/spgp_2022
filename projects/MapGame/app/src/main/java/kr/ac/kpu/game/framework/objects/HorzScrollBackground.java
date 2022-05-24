@@ -1,8 +1,8 @@
-package kr.ac.kpu.game.s1234567.mapgame.framework.objects;
+package kr.ac.kpu.game.framework.objects;
 
 import android.graphics.Canvas;
 
-import kr.ac.kpu.game.s1234567.mapgame.framework.res.Metrics;
+import kr.ac.kpu.game.framework.res.Metrics;
 
 public class HorzScrollBackground extends Sprite {
     private final float speed;

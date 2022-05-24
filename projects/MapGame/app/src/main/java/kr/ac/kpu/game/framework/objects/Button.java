@@ -1,11 +1,11 @@
-package kr.ac.kpu.game.s1234567.mapgame.framework.objects;
+package kr.ac.kpu.game.framework.objects;
 
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import kr.ac.kpu.game.s1234567.mapgame.framework.interfaces.Touchable;
-import kr.ac.kpu.game.s1234567.mapgame.framework.res.BitmapPool;
+import kr.ac.kpu.game.framework.interfaces.Touchable;
+import kr.ac.kpu.game.framework.res.BitmapPool;
 
 public class Button extends Sprite implements Touchable {
     private static final String TAG = Button.class.getSimpleName();

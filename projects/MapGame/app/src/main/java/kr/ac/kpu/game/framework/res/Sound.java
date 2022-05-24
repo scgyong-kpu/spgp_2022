@@ -1,4 +1,4 @@
-package kr.ac.kpu.game.s1234567.mapgame.framework.res;
+package kr.ac.kpu.game.framework.res;
 
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
@@ -6,7 +6,7 @@ import android.media.SoundPool;
 
 import java.util.HashMap;
 
-import kr.ac.kpu.game.s1234567.mapgame.framework.view.GameView;
+import kr.ac.kpu.game.framework.view.GameView;
 
 public class Sound {
     protected static MediaPlayer mediaPlayer;

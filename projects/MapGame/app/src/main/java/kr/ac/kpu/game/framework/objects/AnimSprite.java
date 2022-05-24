@@ -1,4 +1,4 @@
-package kr.ac.kpu.game.s1234567.mapgame.framework.objects;
+package kr.ac.kpu.game.framework.objects;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;

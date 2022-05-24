@@ -1,10 +1,10 @@
-package kr.ac.kpu.game.s1234567.mapgame.framework.game;
+package kr.ac.kpu.game.framework.game;
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import kr.ac.kpu.game.s1234567.mapgame.framework.interfaces.Recyclable;
+import kr.ac.kpu.game.framework.interfaces.Recyclable;
 
 public class RecycleBin {
     private static HashMap<Class, ArrayList<Recyclable>> recycleBin = new HashMap<>();
