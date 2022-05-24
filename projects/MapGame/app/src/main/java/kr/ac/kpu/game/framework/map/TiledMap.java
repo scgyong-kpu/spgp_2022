@@ -8,24 +8,24 @@ import java.util.ArrayList;
 
 public class TiledMap {
     private static final String TAG = TiledMap.class.getSimpleName();
-    int x;
-    int y;
-    boolean wraps;
+    public float x;
+    public float y;
+    public boolean wraps;
 
-    public int getX() {
+    public float getX() {
         return x;
     }
-    public void setX(int x) {
+    public void setX(float x) {
         this.x = x;
     }
-    public int getY() {
+    public float getY() {
         return y;
     }
-    public void setY(int y) {
+    public void setY(float y) {
         this.y = y;
     }
 
-    public void scrollTo(int x, int y) {
+    public void scrollTo(float x, float y) {
         this.x = x;
         this.y = y;
     }
