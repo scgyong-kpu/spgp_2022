@@ -1,6 +1,11 @@
 package kr.ac.kpu.game.s1234567.mapgame.scenes;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.view.animation.AnticipateOvershootInterpolator;
+
 import kr.ac.kpu.game.framework.game.Scene;
+import kr.ac.kpu.game.framework.res.Metrics;
 
 public class MainScene extends Scene {
     public static final String PARAM_STAGE_INDEX = "stage_index";
@@ -25,6 +30,15 @@ public class MainScene extends Scene {
 
         initLayers(Layer.COUNT.ordinal());
 
-        add(Layer.tile.ordinal(), new TiledSprite());
+        TiledSprite ts = new TiledSprite();
+        ts.map.wraps = true;
+        add(Layer.tile.ordinal(), ts);
+
+        ObjectAnimator anim = ObjectAnimator
+                .ofFloat(ts.map, "x", 0, 10 * Metrics.width)
+                .setDuration(5000);
+        anim.setRepeatMode(ObjectAnimator.REVERSE);
+        anim.setRepeatCount(ObjectAnimator.INFINITE);
+        anim.start();
     }
 }
