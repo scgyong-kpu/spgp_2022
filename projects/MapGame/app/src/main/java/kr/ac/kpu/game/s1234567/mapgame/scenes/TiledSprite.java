@@ -16,6 +16,13 @@ public class TiledSprite extends Sprite {
     }
 
     @Override
+    public void update(float frameTime) {
+        int speed = 300;
+        map.x += speed * frameTime;
+        map.y += speed * frameTime;
+    }
+
+    @Override
     public void draw(Canvas canvas) {
         map.draw(canvas);
     }
