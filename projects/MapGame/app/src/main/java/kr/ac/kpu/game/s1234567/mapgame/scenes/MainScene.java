@@ -34,11 +34,11 @@ public class MainScene extends Scene {
         ts.map.wraps = true;
         add(Layer.tile.ordinal(), ts);
 
-        ObjectAnimator anim = ObjectAnimator
-                .ofFloat(ts.map, "dstTileSize", 100, 200)
-                .setDuration(2000);
-        anim.setRepeatMode(ObjectAnimator.REVERSE);
-        anim.setRepeatCount(ObjectAnimator.INFINITE);
-        anim.start();
+//        ObjectAnimator anim = ObjectAnimator
+//                .ofFloat(ts.map, "dstTileSize", 100, 200)
+//                .setDuration(2000);
+//        anim.setRepeatMode(ObjectAnimator.REVERSE);
+//        anim.setRepeatCount(ObjectAnimator.INFINITE);
+//        anim.start();
     }
 }
