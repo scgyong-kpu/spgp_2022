@@ -10,7 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MapGame">
         <activity
-            android:name=".MainActivity"
+            android:name=".app.GameActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".app.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
