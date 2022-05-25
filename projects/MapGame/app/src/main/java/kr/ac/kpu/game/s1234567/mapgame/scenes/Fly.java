@@ -1,5 +1,6 @@
 package kr.ac.kpu.game.s1234567.mapgame.scenes;
 
+import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.graphics.Rect;
@@ -17,6 +18,7 @@ public class Fly extends SheetSprite implements Recyclable {
     private Type type;
     private float dist;
     private float speed;
+    private float angle;
 
     private static Random random = new Random();
     private static Path path;
@@ -79,7 +81,16 @@ public class Fly extends SheetSprite implements Recyclable {
         pathMeasure.getPosTan(dist, pos, tan);
         x = pos[0];
         y = pos[1];
+        angle = (float)(Math.atan2(tan[1], tan[0]) * 180 / Math.PI) ;
         setDstRectWithRadius();
+    }
+
+    @Override
+    public void draw(Canvas canvas) {
+        canvas.save();
+        canvas.rotate(angle, x, y);
+        super.draw(canvas);
+        canvas.restore();
     }
 
     @Override
