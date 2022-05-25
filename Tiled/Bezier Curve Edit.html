@@ -243,7 +243,7 @@ function init() {
         new Point2D(150,100), new Point2D(200,100), new Point2D(250,100),
         new Point2D(325,300), new Point2D(325,400), new Point2D(425,400),
         new Point2D(475,100), new Point2D(550,175)
-    
+
       // {"x":92,"y":528},{"x":194,"y":518},{"x":191,"y":443},
       // {"x":191,"y":395},{"x":187,"y":323},{"x":123,"y":326},
       // {"x":126,"y":252},{"x":128,"y":188},{"x":176,"y":127},
@@ -292,6 +292,15 @@ function printPoints() {
   str += "\n]";
   document.getElementById("out").value = str;
 }
+function printJava() {
+  const pts = cubicPoints.map((p)=>{ return { x:p.x-100, y:p.y-100}; });
+  let str = "Path path = new Path();\n";
+  str += `path.moveTo(${pts[0].x}, ${pts[0].y});\n`;
+  for (let i = 1; i < cubicPoints.length; i += 3) {
+    str += `path.cubicTo(${pts[i].x}, ${pts[i].y}, ${pts[i+1].x}, ${pts[i+1].y}, ${pts[i+2].x}, ${pts[i+2].y});\n`;
+  }
+  document.getElementById("out").value = str;
+}
 </script>
 </head>
 <body onload="init()" style="background-color: #CCC">
@@ -328,7 +337,8 @@ segments join are constrained to move together, resulting in a smooth curve.
 
 <canvas width="1000" height="650" id="cubic" style="background-color: white; border: thin solid black"></canvas>
 <br />
-<button onclick="printPoints()">Info</button>
+<button onclick="printPoints()">Points</button>
+<button onclick="printJava()">Java</button>
 <br />
 <textarea id="out" cols="80" rows="10"></textarea>
 
