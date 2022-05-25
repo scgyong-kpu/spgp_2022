@@ -42,11 +42,13 @@ public class TiledSprite extends Sprite {
         paint.setStrokeWidth(3);
         paint.setColor(Color.BLUE);
 
-        transformedPath = path;
-//        matrix.reset();
-//        float scale = map.getDstTileSize() / 25f;
-//        matrix.setScale(scale, scale);
-//        path.transform(matrix, transformedPath);
+//        transformedPath = path;
+        matrix.reset();
+        float scale = map.getDstTileSize() / 25f;
+        matrix.setScale(scale, scale);
+        path.transform(matrix, transformedPath);
+
+        Fly.setPath(transformedPath);
     }
 
     @Override
