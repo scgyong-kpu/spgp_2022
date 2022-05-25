@@ -22,7 +22,7 @@ public class MainScene extends Scene {
     }
 
     public enum Layer {
-        tile, COUNT;
+        tile, enemy, controller, COUNT;
     }
 
     public void init() {
@@ -33,6 +33,8 @@ public class MainScene extends Scene {
         TiledSprite ts = new TiledSprite();
         ts.map.wraps = true;
         add(Layer.tile.ordinal(), ts);
+
+        add(Layer.controller.ordinal(), new FlyGen());
 
 //        ObjectAnimator anim = ObjectAnimator
 //                .ofFloat(ts.map, "dstTileSize", 100, 200)
