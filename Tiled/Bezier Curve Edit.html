@@ -13,6 +13,8 @@ var cubicPoints, quadPoints;
 var quadHideSelect, cubicHideSelect;
 var lockSelect;
 
+var mapImg;
+
 function Point2D(x,y) {
     this.x = x;
     this.y = y;
@@ -21,7 +23,9 @@ function Point2D(x,y) {
 function cubicDraw() {
     var i;
     cubicGraphics.fillStyle = "white";
-    cubicGraphics.fillRect(0,0,600,600);
+    cubicGraphics.fillRect(0,0,1000,650);
+    cubicGraphics.drawImage(mapImg, 100, 100, 800, 450);
+    //console.log(mapImg);
     if ( ! cubicHideSelect.checked ) {
         cubicGraphics.lineWidth = 1;
         if (lockSelect.checked) {
@@ -30,7 +34,7 @@ function cubicDraw() {
         else {
             cubicGraphics.strokeStyle = "#888888";
         }
-        for (i = 0; i < 9; i++) {
+        for (i = 0; i < cubicPoints.length - 1; i++) {
             if (i % 3 != 1) {
                 cubicGraphics.beginPath();
                 cubicGraphics.moveTo( cubicPoints[i].x + .5, cubicPoints[i].y + .5 );
@@ -38,7 +42,7 @@ function cubicDraw() {
                 cubicGraphics.stroke();
             }
         }
-        for (i = 0; i < 10; i++) {
+        for (i = 0; i < cubicPoints.length; i++) {
             if ( i % 3 == 0 ) {
                 cubicGraphics.fillStyle="black";
                 disk(cubicGraphics, cubicPoints[i].x, cubicPoints[i].y, 5);
@@ -52,7 +56,7 @@ function cubicDraw() {
     }
     cubicGraphics.beginPath();
     cubicGraphics.moveTo(cubicPoints[0].x,cubicPoints[0].y);
-    for (i = 1; i < 10; i += 3) {
+    for (i = 1; i < cubicPoints.length; i += 3) {
         cubicGraphics.bezierCurveTo(cubicPoints[i].x,cubicPoints[i].y,
                               cubicPoints[i+1].x,cubicPoints[i+1].y,
                               cubicPoints[i+2].x,cubicPoints[i+2].y);
@@ -132,7 +136,7 @@ function doCubicMouseDown(evt) {
     var r = cubicCanvas.getBoundingClientRect();
     var x = Math.round(evt.clientX - r.left);
     var y = Math.round(evt.clientY - r.top);
-    for (var i = 9; i >= 0; i--) {
+    for (var i = cubicPoints.length - 1; i >= 0; i--) {
         var p = cubicPoints[i];
         if (Math.abs(p.x - x) <= 5 && Math.abs(p.y - y) <= 5) {
             draggingCubic = true;
@@ -158,7 +162,7 @@ function doCubicMouseMove(evt) {
             cubicPoints[dragPointIndex - 1].x += offsetX;
             cubicPoints[dragPointIndex - 1].y += offsetY;
         }
-        if (dragPointIndex < 9) {
+        if (dragPointIndex < cubicPoints.length - 1) {
             cubicPoints[dragPointIndex + 1].x += offsetX;
             cubicPoints[dragPointIndex + 1].y += offsetY;
         }
@@ -239,7 +243,27 @@ function init() {
         new Point2D(150,100), new Point2D(200,100), new Point2D(250,100),
         new Point2D(325,300), new Point2D(325,400), new Point2D(425,400),
         new Point2D(475,100), new Point2D(550,175)
-    ];
+    
+      // {"x":92,"y":528},{"x":194,"y":518},{"x":191,"y":443},
+      // {"x":191,"y":395},{"x":187,"y":323},{"x":123,"y":326},
+      // {"x":126,"y":252},{"x":128,"y":188},{"x":176,"y":127},
+      // {"x":263,"y":127},{"x":348,"y":125},{"x":401,"y":199},
+      // {"x":402,"y":268},{"x":401,"y":339},{"x":302,"y":427},
+      // {"x":414,"y":496},{"x":462,"y":532},{"x":554,"y":536},
+      // {"x":615,"y":497},{"x":717,"y":409},{"x":600,"y":322},
+      // {"x":601,"y":260},{"x":597,"y":195},{"x":649,"y":115},
+      // {"x":731,"y":115},{"x":820,"y":113},{"x":871,"y":196},
+      // {"x":873,"y":256},{"x":872,"y":330},{"x":804,"y":361},
+      // {"x":806,"y":410},{"x":802,"y":462},{"x":822,"y":514},
+      // {"x":907,"y":519}
+    ]
+     // [{"x":92,"y":528},{"x":194,"y":518},{"x":191,"y":443},{"x":191,"y":395},{"x":187,"y":323},{"x":123,"y":326},{"x":126,"y":252},{"x":128,"y":188},{"x":176,"y":127},{"x":263,"y":127},{"x":348,"y":125},{"x":401,"y":199},{"x":402,"y":268},{"x":401,"y":339},{"x":302,"y":427},{"x":414,"y":496},{"x":462,"y":532},{"x":554,"y":536},{"x":615,"y":497},{"x":717,"y":409},{"x":600,"y":322},{"x":601,"y":260},{"x":597,"y":195},{"x":649,"y":115},{"x":731,"y":115},{"x":820,"y":113},{"x":871,"y":196},{"x":873,"y":256},{"x":872,"y":330},{"x":804,"y":361},{"x":806,"y":410},{"x":802,"y":462},{"x":822,"y":514},{"x":907,"y":519}]
+    // [
+    //     new Point2D(50,350),  new Point2D(150,450),
+    //     new Point2D(150,100), new Point2D(200,100), new Point2D(250,100),
+    //     new Point2D(325,300), new Point2D(325,400), new Point2D(425,400),
+    //     new Point2D(475,100), new Point2D(550,175)
+    // ];
     quadPoints = [
         new Point2D(50,300), new Point2D(100,50),  
         new Point2D(200,100), new Point2D(300,75),  
@@ -248,6 +272,8 @@ function init() {
         new Point2D(500,500), new Point2D(475,400),  
         new Point2D(550,300), 
     ];
+    mapImg = new Image();
+    mapImg.src = "map.png"
     cubicDraw();
     quadDraw();
     document.addEventListener("mouseup", doMouseUp, false);
@@ -256,6 +282,16 @@ function init() {
     quadCanvas.addEventListener("mousedown", doQuadMouseDown, false);
     quadCanvas.addEventListener("mousemove", doQuadMouseMove, false);
 };
+function printPoints() {
+  let str = "[\n  ";
+  for (let i = 0; i < cubicPoints.length; i++) {
+    str += JSON.stringify(cubicPoints[i]);
+    if (i < cubicPoints.length - 1) str += ",";
+    if (i % 3 == 2) str += "\n  ";
+  }
+  str += "\n]";
+  document.getElementById("out").value = str;
+}
 </script>
 </head>
 <body onload="init()" style="background-color: #CCC">
@@ -275,6 +311,7 @@ Please use a newer version or a different browser.</p>
 
 <p id="message" style="font-weight: bold"></p>
 
+<img src="map.png" style="display:none;" />
     
 <h2 style="margin-top: 1cm">Cubic Bezier Curve</h2>
 
@@ -289,8 +326,13 @@ segments join are constrained to move together, resulting in a smooth curve.
 <p style="font-weight: bold"><input type="checkbox" id="lock"> <label for="lock" style="margin-right:1cm">Lock Control Point Pairs</label>
 <input type="checkbox" id="cubicHide"> <label for="cubicHide">Hide Controls</label></p>
 
-<canvas width="600" height="600" id="cubic" style="background-color: white; border: thin solid black"></canvas>
+<canvas width="1000" height="650" id="cubic" style="background-color: white; border: thin solid black"></canvas>
+<br />
+<button onclick="printPoints()">Info</button>
+<br />
+<textarea id="out" cols="80" rows="10"></textarea>
 
+<!--
 <h2 style="margin-top: 1cm">Quadratic Bezier Curve</h2>
 
 <p style="width:630px">This demo shows a path made up of five quadratic Bezier curve
@@ -298,10 +340,11 @@ segments.  Each segment is defined by its two endpoints and one control point.  
 control point determines the tangent at both endpoints.  You can drag the
 control points and endpoints.
 </p>
+-->
 
-<p><input type="checkbox" id="quadHide"> <label for="quadHide">Hide Controls</label></p>
+<p style="display:none;"><input type="checkbox" id="quadHide"> <label for="quadHide">Hide Controls</label></p>
 
-<canvas width="600" height="600" id="quad" style="background-color: white; border: thin solid black"></canvas>
+<canvas width="0" height="0" id="quad" style="background-color: white; border: thin solid black"></canvas>
 
 
 
