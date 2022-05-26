@@ -14,6 +14,7 @@ public class Sprite implements GameObject {
     protected float x, y, radius;
     public float getX() { return x; }
     public float getY() { return y; }
+    public float getRadius() { return radius; }
 
     public Sprite(float x, float y, int radiusDimenResId, int bitmapResId) {
         this.x = x;

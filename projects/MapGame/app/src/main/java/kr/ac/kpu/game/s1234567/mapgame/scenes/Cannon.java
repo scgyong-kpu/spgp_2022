@@ -3,7 +3,6 @@ package kr.ac.kpu.game.s1234567.mapgame.scenes;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
-import android.util.Log;
 
 import kr.ac.kpu.game.framework.objects.Sprite;
 import kr.ac.kpu.game.framework.res.BitmapPool;
@@ -48,12 +47,12 @@ public class Cannon extends Sprite {
         angle = (float)(Math.atan2(dy, dx) * 180 / Math.PI) ;
         if (time > interval) {
             time = 0;
-            fire();
+            fireTo(fly);
         }
     }
 
-    private void fire() {
-        Shell shell = Shell.get(level, x, y, angle, 1000);
+    private void fireTo(Fly fly) {
+        Shell shell = Shell.get(level, x, y, fly, angle, 1000);
         MainScene.get().add(MainScene.Layer.shell.ordinal(), shell);
         //Log.d("CannonFire", "" + shell);
     }

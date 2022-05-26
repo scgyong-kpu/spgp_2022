@@ -8,21 +8,24 @@ import kr.ac.kpu.game.framework.interfaces.GameObject;
 import kr.ac.kpu.game.framework.res.Metrics;
 
 public class FlyGen implements GameObject {
-    private static final float GEN_INTERVAL = 5.0f;
+    private static final float GEN_INTERVAL = 2.0f;
+    private float interval;
     private float time;
     private float speed;
     private static Random random = new Random();
 
     public FlyGen() {
         speed = Metrics.height / 9;
+        interval = GEN_INTERVAL;
     }
 
     @Override
     public void update(float frameTime) {
         time += frameTime;
-        if (time > GEN_INTERVAL) {
+        if (time > interval) {
             spawn();
-            time -= GEN_INTERVAL;
+            time -= interval;
+            interval *= 0.95;
         }
     }
 
