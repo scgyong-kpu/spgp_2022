@@ -55,6 +55,6 @@ public class TiledSprite extends Sprite {
     public void draw(Canvas canvas) {
         map.draw(canvas);
 
-        //canvas.drawPath(transformedPath, paint);
+        canvas.drawPath(transformedPath, paint);
     }
 }
