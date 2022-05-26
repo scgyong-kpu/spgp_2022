@@ -1,6 +1,8 @@
 package kr.ac.kpu.game.s1234567.mapgame.scenes;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.RectF;
 
 import kr.ac.kpu.game.framework.objects.Sprite;
 import kr.ac.kpu.game.framework.res.BitmapPool;
@@ -11,6 +13,8 @@ public class Cannon extends Sprite {
     private int level;
     private float power, interval;
     private float angle;
+    private Bitmap barrelBitmap;
+    private RectF barrelRect = new RectF();
     public Cannon(int level, float x, float y, float power, float interval) {
         super(x, y, Metrics.height / 18, Metrics.height / 18, R.mipmap.f_01_01);
         this.level = level;
@@ -19,6 +23,9 @@ public class Cannon extends Sprite {
         if (1 < level && level <= BITMAP_IDS.length) {
             bitmap = BitmapPool.get(BITMAP_IDS[level - 1]);
         }
+        barrelBitmap = BitmapPool.get(R.mipmap.tank_barrel);
+        barrelRect.set(dstRect);
+        barrelRect.inset(-radius, -radius);
     }
     private static int[] BITMAP_IDS = {
             R.mipmap.f_01_01,R.mipmap.f_02_01,R.mipmap.f_03_01,R.mipmap.f_04_01,R.mipmap.f_05_01,
@@ -39,9 +46,10 @@ public class Cannon extends Sprite {
 
     @Override
     public void draw(Canvas canvas) {
+        super.draw(canvas);
         canvas.save();
         canvas.rotate(angle, x, y);
-        super.draw(canvas);
+        canvas.drawBitmap(barrelBitmap, null, barrelRect, null);
         canvas.restore();
     }
 }
