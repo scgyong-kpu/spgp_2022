@@ -9,6 +9,7 @@ import kr.ac.kpu.game.framework.res.Metrics;
 
 public class FlyGen implements GameObject {
     private static final float GEN_INTERVAL = 2.0f;
+    private static final float MIN_INTERVAL = 0.1f;
     private float interval;
     private float time;
     private float speed;
@@ -25,7 +26,8 @@ public class FlyGen implements GameObject {
         if (time > interval) {
             spawn();
             time -= interval;
-            interval *= 0.95;
+            interval *= 0.995;
+            if (interval < MIN_INTERVAL) interval = MIN_INTERVAL;
         }
     }
 
