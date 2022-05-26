@@ -13,13 +13,14 @@ import kr.ac.kpu.game.s1234567.mapgame.R;
 public class Shell extends Sprite implements Recyclable {
     private Rect srcRect;
     private float dx, dy;
+    private Fly target;
 
-    public static Shell get(int level, float x, float y, float angle, float speed) {
+    public static Shell get(int level, float x, float y, Fly target, float angle, float speed) {
         Shell shell = (Shell) RecycleBin.get(Shell.class);
         if (shell == null) {
             shell = new Shell();
         }
-        shell.init(level, x, y, angle, speed);
+        shell.init(level, x, y, target, angle, speed);
         return shell;
     }
 
@@ -28,7 +29,7 @@ public class Shell extends Sprite implements Recyclable {
         radius = Metrics.height / 18 / 10;
     }
 
-    private void init(int level, float x, float y, float angle, float speed) {
+    private void init(int level, float x, float y, Fly target, float angle, float speed) {
         int w = bitmap.getWidth();
         int h = bitmap.getHeight();
         int maxLevel = w / h;
@@ -38,6 +39,7 @@ public class Shell extends Sprite implements Recyclable {
         //Log.d("CannonFire", "shell rect: " + srcRect);
         this.x = x;
         this.y = y;
+        this.target = target;
         double radian = angle * Math.PI / 180;
         dx = (float) (speed * Math.cos(radian));
         dy = (float) (speed * Math.sin(radian));
@@ -54,6 +56,18 @@ public class Shell extends Sprite implements Recyclable {
             //Log.d("CannonFire", "Remove(" + x + "," + y + ") " + this);
             MainScene.get().remove(this);
             return;
+        }
+
+        if (target == null) return;
+
+        float dx = x - target.getX();
+        float dy = y - target.getY();
+        double dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < target.getRadius()) {
+            MainScene scene = MainScene.get();
+            scene.remove(this);
+            scene.remove(target);
+            this.target = null;
         }
     }
 

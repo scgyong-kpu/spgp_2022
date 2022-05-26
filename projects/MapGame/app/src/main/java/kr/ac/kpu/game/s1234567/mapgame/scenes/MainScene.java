@@ -58,9 +58,9 @@ public class MainScene extends Scene {
 
         add(Layer.controller.ordinal(), new FlyGen());
 
-        add(Layer.cannon.ordinal(), new Cannon(1, 400, 400, 1, 1.0f));
-        add(Layer.cannon.ordinal(), new Cannon(2, 1200, 400, 1, 1.0f));
-        add(Layer.cannon.ordinal(), new Cannon(3, 2000, 500, 1, 1.0f));
+        add(Layer.cannon.ordinal(), new Cannon(1, 400, 400, 1, 4.0f));
+        add(Layer.cannon.ordinal(), new Cannon(2, 1200, 400, 1, 3.0f));
+        add(Layer.cannon.ordinal(), new Cannon(3, 2000, 500, 1, 2.0f));
 
 //        ObjectAnimator anim = ObjectAnimator
 //                .ofFloat(ts.map, "dstTileSize", 100, 200)
