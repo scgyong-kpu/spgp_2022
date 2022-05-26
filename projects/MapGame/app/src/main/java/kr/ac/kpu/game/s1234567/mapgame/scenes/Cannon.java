@@ -3,6 +3,7 @@ package kr.ac.kpu.game.s1234567.mapgame.scenes;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
+import android.util.Log;
 
 import kr.ac.kpu.game.framework.objects.Sprite;
 import kr.ac.kpu.game.framework.res.BitmapPool;
@@ -13,6 +14,7 @@ public class Cannon extends Sprite {
     private int level;
     private float power, interval;
     private float angle;
+    private float time;
     private Bitmap barrelBitmap;
     private RectF barrelRect = new RectF();
     public Cannon(int level, float x, float y, float power, float interval) {
@@ -20,6 +22,7 @@ public class Cannon extends Sprite {
         this.level = level;
         this.power = power;
         this.interval = interval;
+        this.time = interval;
         if (1 < level && level <= BITMAP_IDS.length) {
             bitmap = BitmapPool.get(BITMAP_IDS[level - 1]);
         }
@@ -34,6 +37,7 @@ public class Cannon extends Sprite {
 
     @Override
     public void update(float frameTime) {
+        time += frameTime;
         Fly fly = MainScene.get().findNearestFly(this);
         if (fly == null) {
             angle = 0;
@@ -41,14 +45,24 @@ public class Cannon extends Sprite {
         }
         float dx = fly.getX() - x;
         float dy = fly.getY() - y;
-        angle = (float)(Math.atan2(dy, dx) * 180 / Math.PI + 90) ;
+        angle = (float)(Math.atan2(dy, dx) * 180 / Math.PI) ;
+        if (time > interval) {
+            time = 0;
+            fire();
+        }
+    }
+
+    private void fire() {
+        Shell shell = Shell.get(level, x, y, angle, 1000);
+        MainScene.get().add(MainScene.Layer.shell.ordinal(), shell);
+        //Log.d("CannonFire", "" + shell);
     }
 
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
         canvas.save();
-        canvas.rotate(angle, x, y);
+        canvas.rotate(angle + 90, x, y);
         canvas.drawBitmap(barrelBitmap, null, barrelRect, null);
         canvas.restore();
     }

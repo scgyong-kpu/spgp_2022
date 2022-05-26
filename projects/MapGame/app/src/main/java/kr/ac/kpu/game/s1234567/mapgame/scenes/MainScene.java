@@ -1,14 +1,9 @@
 package kr.ac.kpu.game.s1234567.mapgame.scenes;
 
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
-import android.view.animation.AnticipateOvershootInterpolator;
-
 import java.util.ArrayList;
 
 import kr.ac.kpu.game.framework.game.Scene;
 import kr.ac.kpu.game.framework.interfaces.GameObject;
-import kr.ac.kpu.game.framework.res.Metrics;
 
 public class MainScene extends Scene {
     public static final String PARAM_STAGE_INDEX = "stage_index";
@@ -49,7 +44,7 @@ public class MainScene extends Scene {
     }
 
     public enum Layer {
-        tile, cannon, enemy, controller, COUNT;
+        tile, cannon, enemy, shell, controller, COUNT;
     }
 
     public void init() {
