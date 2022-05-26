@@ -19,12 +19,13 @@ public class Fly extends SheetSprite implements Recyclable {
     private float dist;
     private float speed;
     private float angle;
+    private float dx, dy;
 
     private static Random random = new Random();
-    private static Path path;
+    //private static Path path;
     private static PathMeasure pathMeasure;
     public static void setPath(Path path) {
-        Fly.path = path;
+        //Fly.path = path;
         Fly.pathMeasure = new PathMeasure(path, false);
     }
 
@@ -67,6 +68,7 @@ public class Fly extends SheetSprite implements Recyclable {
         this.speed = speed;
         radius = Metrics.height / 18 * size;
         dist = 0;
+        dx = dy = 0;
     }
 
     private float[] pos = new float[2];
@@ -78,9 +80,17 @@ public class Fly extends SheetSprite implements Recyclable {
             MainScene.get().remove(this);
             return;
         }
+
+        dx += (2 * radius * random.nextFloat() - radius) * frameTime;
+        if (dx < -radius) dx = -radius;
+        else if (dx > radius) dx = radius;
+        dy += (2 * radius * random.nextFloat() - radius) * frameTime;
+        if (dy < -radius) dy = -radius;
+        else if (dy > radius) dy = radius;
+
         pathMeasure.getPosTan(dist, pos, tan);
-        x = pos[0];
-        y = pos[1];
+        x = pos[0] + dx;
+        y = pos[1] + dy;
         angle = (float)(Math.atan2(tan[1], tan[0]) * 180 / Math.PI) ;
         setDstRectWithRadius();
     }

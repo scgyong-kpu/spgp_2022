@@ -8,7 +8,7 @@ import kr.ac.kpu.game.framework.interfaces.GameObject;
 import kr.ac.kpu.game.framework.res.Metrics;
 
 public class FlyGen implements GameObject {
-    private static final float GEN_INTERVAL = 2.0f;
+    private static final float GEN_INTERVAL = 1.0f;
     private float time;
     private float speed;
     private static Random random = new Random();
