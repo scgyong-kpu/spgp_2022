@@ -26,7 +26,7 @@ public class Shell extends Sprite implements Recyclable {
 
     private Shell() {
         bitmap = BitmapPool.get(R.mipmap.bullets);
-        radius = TiledSprite.unit / 10;
+        radius = TiledSprite.unit / 8;
     }
 
     private void init(int level, float x, float y, Fly target, float angle, float speed) {
