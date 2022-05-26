@@ -22,7 +22,7 @@ public class MainScene extends Scene {
     }
 
     public enum Layer {
-        tile, enemy, controller, COUNT;
+        tile, cannon, enemy, controller, COUNT;
     }
 
     public void init() {
@@ -35,6 +35,10 @@ public class MainScene extends Scene {
         add(Layer.tile.ordinal(), ts);
 
         add(Layer.controller.ordinal(), new FlyGen());
+
+        add(Layer.cannon.ordinal(), new Cannon(1, 400, 400, 1, 1.0f));
+        add(Layer.cannon.ordinal(), new Cannon(2, 500, 400, 1, 1.0f));
+        add(Layer.cannon.ordinal(), new Cannon(3, 400, 500, 1, 1.0f));
 
 //        ObjectAnimator anim = ObjectAnimator
 //                .ofFloat(ts.map, "dstTileSize", 100, 200)
