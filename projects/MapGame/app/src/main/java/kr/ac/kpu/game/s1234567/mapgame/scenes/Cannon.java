@@ -14,6 +14,7 @@ public class Cannon extends Sprite {
     private float power, interval;
     private float angle;
     private float time;
+    private float range;
     private Bitmap barrelBitmap;
     private RectF barrelRect = new RectF();
     public Cannon(int level, float x, float y, float power, float interval) {
@@ -21,7 +22,8 @@ public class Cannon extends Sprite {
         this.level = level;
         this.power = power;
         this.interval = interval;
-        this.time = interval;
+        this.time = 0;
+        this.range = 5 * Metrics.height / 18 * level;
         if (1 < level && level <= BITMAP_IDS.length) {
             bitmap = BitmapPool.get(BITMAP_IDS[level - 1]);
         }
@@ -44,6 +46,11 @@ public class Cannon extends Sprite {
         }
         float dx = fly.getX() - x;
         float dy = fly.getY() - y;
+        double dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist > range) {
+            angle = 0;
+            return;
+        }
         angle = (float)(Math.atan2(dy, dx) * 180 / Math.PI) ;
         if (time > interval) {
             time = 0;
