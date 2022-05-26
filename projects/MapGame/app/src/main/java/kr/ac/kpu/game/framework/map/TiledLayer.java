@@ -15,4 +15,11 @@ public class TiledLayer {
         this.map = map;
     }
 
+    public int getTileAt(int x, int y) {
+        try {
+            return data[y * width + x];
+        } catch (Exception e) {
+            return 0;
+        }
+    }
 }
