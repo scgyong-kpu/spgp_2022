@@ -14,13 +14,14 @@ public class Shell extends Sprite implements Recyclable {
     private Rect srcRect;
     private float dx, dy;
     private Fly target;
+    private float power;
 
-    public static Shell get(int level, float x, float y, Fly target, float angle, float speed) {
+    public static Shell get(int level, float x, float y, Fly target, float angle, float speed, float power) {
         Shell shell = (Shell) RecycleBin.get(Shell.class);
         if (shell == null) {
             shell = new Shell();
         }
-        shell.init(level, x, y, target, angle, speed);
+        shell.init(level, x, y, target, angle, speed, power);
         return shell;
     }
 
@@ -29,7 +30,7 @@ public class Shell extends Sprite implements Recyclable {
         radius = TiledSprite.unit / 8;
     }
 
-    private void init(int level, float x, float y, Fly target, float angle, float speed) {
+    private void init(int level, float x, float y, Fly target, float angle, float speed, float power) {
         int w = bitmap.getWidth();
         int h = bitmap.getHeight();
         int maxLevel = w / h;
@@ -43,6 +44,7 @@ public class Shell extends Sprite implements Recyclable {
         double radian = angle * Math.PI / 180;
         dx = (float) (speed * Math.cos(radian));
         dy = (float) (speed * Math.sin(radian));
+        this.power = power;
     }
 
     @Override
@@ -66,8 +68,11 @@ public class Shell extends Sprite implements Recyclable {
         if (dist < target.getRadius()) {
             MainScene scene = MainScene.get();
             scene.remove(this);
-            scene.remove(target);
-            this.target = null;
+            boolean dead = target.decreaseHealth(power);
+            if (dead) {
+                scene.remove(target);
+                this.target = null;
+            }
         }
     }
 

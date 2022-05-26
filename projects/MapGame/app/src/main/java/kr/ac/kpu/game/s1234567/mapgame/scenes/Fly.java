@@ -11,6 +11,7 @@ import kr.ac.kpu.game.framework.game.RecycleBin;
 import kr.ac.kpu.game.framework.interfaces.Recyclable;
 import kr.ac.kpu.game.framework.objects.SheetSprite;
 import kr.ac.kpu.game.framework.res.Metrics;
+import kr.ac.kpu.game.framework.util.Gauge;
 import kr.ac.kpu.game.s1234567.mapgame.R;
 
 public class Fly extends SheetSprite implements Recyclable {
@@ -20,6 +21,8 @@ public class Fly extends SheetSprite implements Recyclable {
     private float speed;
     private float angle;
     private float dx, dy;
+    private float health, maxHealth;
+    private Gauge gauge;
 
     private static Random random = new Random();
     //private static Path path;
@@ -29,8 +32,17 @@ public class Fly extends SheetSprite implements Recyclable {
         Fly.pathMeasure = new PathMeasure(path, false);
     }
 
+    public boolean decreaseHealth(float power) {
+        health -= power;
+        return health < 0;
+    }
+
     public enum Type {
-        boss, red, blue, cyan, dragon, COUNT, RANDOM
+        boss, red, blue, cyan, dragon, COUNT, RANDOM;
+        float getMaxHealth() {
+            return HEALTHS[ordinal()];
+        }
+        static float[] HEALTHS = { 100, 50, 40, 30, 10 };
     }
     public static Fly get(Type type, float speed, float size) {
         Fly fly = (Fly) RecycleBin.get(Fly.class);
@@ -56,6 +68,13 @@ public class Fly extends SheetSprite implements Recyclable {
                 }
             }
         }
+        gauge = new Gauge(
+                Metrics.size(R.dimen.fly_gauge_thickness_fg),
+                R.color.fly_gauge_fg,
+                Metrics.size(R.dimen.fly_gauge_thickness_bg),
+                R.color.fly_gauge_bg,
+                TiledSprite.unit
+        );
     }
 
     private Rect[][] rects_array;
@@ -69,6 +88,7 @@ public class Fly extends SheetSprite implements Recyclable {
         radius = TiledSprite.unit * size;
         dist = 0;
         dx = dy = 0;
+        health = maxHealth = type.getMaxHealth() * size;
     }
 
     private float[] pos = new float[2];
@@ -101,6 +121,8 @@ public class Fly extends SheetSprite implements Recyclable {
         canvas.rotate(angle, x, y);
         super.draw(canvas);
         canvas.restore();
+        gauge.setValue(health / maxHealth);
+        gauge.draw(canvas, x, y + radius);
     }
 
     @Override

@@ -42,14 +42,14 @@ public class Cannon extends Sprite {
         time += frameTime;
         Fly fly = MainScene.get().findNearestFly(this);
         if (fly == null) {
-            angle = -90;
+            //angle = -90;
             return;
         }
         float dx = fly.getX() - x;
         float dy = fly.getY() - y;
         double dist = Math.sqrt(dx * dx + dy * dy);
         if (dist > 1.2 * range) {
-            angle = -90;
+            //angle = -90;
             return;
         }
         angle = (float)(Math.atan2(dy, dx) * 180 / Math.PI) ;
@@ -63,7 +63,7 @@ public class Cannon extends Sprite {
     }
 
     private void fireTo(Fly fly) {
-        Shell shell = Shell.get(level, x, y, fly, angle, shellSpeed);
+        Shell shell = Shell.get(level, x, y, fly, angle, shellSpeed, power);
         MainScene.get().add(MainScene.Layer.shell.ordinal(), shell);
         //Log.d("CannonFire", "" + shell);
     }
@@ -86,5 +86,6 @@ public class Cannon extends Sprite {
 
         shellSpeed *= 1.2;
         interval *= 0.9;
+        power *= 1.2;
     }
 }
