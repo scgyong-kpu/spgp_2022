@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fly_gauge_thickness_fg">2dp</dimen>
+    <dimen name="fly_gauge_thickness_bg">4dp</dimen>
+</resources>

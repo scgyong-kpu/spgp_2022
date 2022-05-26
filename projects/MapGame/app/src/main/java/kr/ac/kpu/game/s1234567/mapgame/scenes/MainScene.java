@@ -84,7 +84,7 @@ public class MainScene extends Scene {
             cannon = new Cannon(1,
                     TiledSprite.unit * (x + 0.5f),
                     TiledSprite.unit * (y + 0.5f),
-                    1, 4);
+                    10, 4);
             cannons.put(key, cannon);
             add(Layer.cannon.ordinal(), cannon);
         } else {
