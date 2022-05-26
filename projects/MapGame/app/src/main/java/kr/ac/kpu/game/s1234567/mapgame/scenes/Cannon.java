@@ -11,7 +11,7 @@ import kr.ac.kpu.game.s1234567.mapgame.R;
 
 public class Cannon extends Sprite {
     private int level;
-    private float power, interval;
+    private float power, interval, shellSpeed;
     private float angle;
     private float time;
     private float range;
@@ -22,6 +22,7 @@ public class Cannon extends Sprite {
         this.level = level;
         this.power = power;
         this.interval = interval;
+        this.shellSpeed = TiledSprite.unit * 20;
         this.time = 0;
         this.range = 5 * TiledSprite.unit * level;
         if (1 < level && level <= BITMAP_IDS.length) {
@@ -62,7 +63,7 @@ public class Cannon extends Sprite {
     }
 
     private void fireTo(Fly fly) {
-        Shell shell = Shell.get(level, x, y, fly, angle, 1000);
+        Shell shell = Shell.get(level, x, y, fly, angle, shellSpeed);
         MainScene.get().add(MainScene.Layer.shell.ordinal(), shell);
         //Log.d("CannonFire", "" + shell);
     }
@@ -82,5 +83,8 @@ public class Cannon extends Sprite {
         level += 1;
         bitmap = BitmapPool.get(BITMAP_IDS[level - 1]);
         this.range = 5 * TiledSprite.unit * level;
+
+        shellSpeed *= 1.2;
+        interval *= 0.9;
     }
 }
