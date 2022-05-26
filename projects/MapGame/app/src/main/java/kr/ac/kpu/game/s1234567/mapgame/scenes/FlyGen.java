@@ -28,6 +28,7 @@ public class FlyGen implements GameObject {
 
     private void spawn() {
         float size = (float) (random.nextDouble() * 0.3 + 0.7);
+        float speed = (float) (this.speed * (random.nextDouble() * 0.2 + 0.9));
         Fly fly = Fly.get(Fly.Type.RANDOM, speed, size);
         MainScene.get().add(MainScene.Layer.enemy.ordinal(), fly);
     }
