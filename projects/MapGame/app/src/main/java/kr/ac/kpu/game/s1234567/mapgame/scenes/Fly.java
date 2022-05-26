@@ -31,18 +31,17 @@ public class Fly extends SheetSprite implements Recyclable {
     public enum Type {
         boss, red, blue, cyan, dragon, COUNT, RANDOM
     }
-    public static Fly get(Type type, float speed) {
+    public static Fly get(Type type, float speed, float size) {
         Fly fly = (Fly) RecycleBin.get(Fly.class);
         if (fly == null) {
             fly = new Fly();
         }
-        fly.init(type, speed);
+        fly.init(type, speed, size);
         return fly;
     }
 
     private Fly() {
         super(R.mipmap.galaga_flies, 2.0f);
-        radius = Metrics.height / 18;
         if (rects_array == null) {
             int w = bitmap.getWidth();
             int h = bitmap.getHeight();
@@ -59,13 +58,14 @@ public class Fly extends SheetSprite implements Recyclable {
     }
 
     private Rect[][] rects_array;
-    private void init(Type type, float speed) {
+    private void init(Type type, float speed, float size) {
         if (type == Type.RANDOM) {
             type = Type.values()[random.nextInt(Type.COUNT.ordinal())];
         }
         this.type = type;
         srcRects = rects_array[type.ordinal()];
         this.speed = speed;
+        radius = Metrics.height / 18 * size;
         dist = 0;
     }
 

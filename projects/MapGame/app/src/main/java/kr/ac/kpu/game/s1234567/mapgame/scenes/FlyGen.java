@@ -2,13 +2,16 @@ package kr.ac.kpu.game.s1234567.mapgame.scenes;
 
 import android.graphics.Canvas;
 
+import java.util.Random;
+
 import kr.ac.kpu.game.framework.interfaces.GameObject;
 import kr.ac.kpu.game.framework.res.Metrics;
 
 public class FlyGen implements GameObject {
-    private static final float GEN_INTERVAL = 3.0f;
+    private static final float GEN_INTERVAL = 2.0f;
     private float time;
     private float speed;
+    private static Random random = new Random();
 
     public FlyGen() {
         speed = Metrics.height / 9;
@@ -24,7 +27,8 @@ public class FlyGen implements GameObject {
     }
 
     private void spawn() {
-        Fly fly = Fly.get(Fly.Type.RANDOM, speed);
+        float size = (float) (random.nextDouble() * 0.3 + 0.7);
+        Fly fly = Fly.get(Fly.Type.RANDOM, speed, size);
         MainScene.get().add(MainScene.Layer.enemy.ordinal(), fly);
     }
 
