@@ -12,6 +12,9 @@ public class Sprite implements GameObject {
     protected Bitmap bitmap;
     protected RectF dstRect = new RectF();
     protected float x, y, radius;
+    public float getX() { return x; }
+    public float getY() { return y; }
+
     public Sprite(float x, float y, int radiusDimenResId, int bitmapResId) {
         this.x = x;
         this.y = y;

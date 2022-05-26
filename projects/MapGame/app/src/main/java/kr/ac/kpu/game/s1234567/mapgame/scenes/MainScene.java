@@ -4,7 +4,10 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.view.animation.AnticipateOvershootInterpolator;
 
+import java.util.ArrayList;
+
 import kr.ac.kpu.game.framework.game.Scene;
+import kr.ac.kpu.game.framework.interfaces.GameObject;
 import kr.ac.kpu.game.framework.res.Metrics;
 
 public class MainScene extends Scene {
@@ -19,6 +22,30 @@ public class MainScene extends Scene {
 
     public void setMapIndex(int stageIndex) {
 
+    }
+
+    public Fly findNearestFly(Cannon cannon) {
+        float dist = Float.MAX_VALUE;
+        Fly nearest = null;
+        float cx = cannon.getX();
+        float cy = cannon.getY();
+        ArrayList<GameObject> flies = objectsAt(Layer.enemy.ordinal());
+        for (GameObject gameObject: flies) {
+            if (!(gameObject instanceof Fly)) continue;
+            Fly fly = (Fly) gameObject;
+            float fx = fly.getX();
+            float fy = fly.getY();
+            float dx = cx - fx;
+            if (dx > dist) continue;
+            float dy = cy - fy;
+            if (dy > dist) continue;
+            float d = (float) Math.sqrt(dx * dx + dy * dy);
+            if (dist > d) {
+                dist = d;
+                nearest = fly;
+            }
+        }
+        return nearest;
     }
 
     public enum Layer {
