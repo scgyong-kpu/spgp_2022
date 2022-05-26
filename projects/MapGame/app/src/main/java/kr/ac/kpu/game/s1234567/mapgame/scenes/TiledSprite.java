@@ -13,6 +13,7 @@ import kr.ac.kpu.game.framework.res.Metrics;
 import kr.ac.kpu.game.framework.view.GameView;
 
 public class TiledSprite extends Sprite {
+    public static float unit;
     public final TiledMap map;
     private Paint paint;
     private static Path path;
@@ -36,7 +37,8 @@ public class TiledSprite extends Sprite {
     }
     public TiledSprite() {
         this.map = new MapLoader(GameView.view.getContext()).loadAsset("map", "desert.tmj");
-        map.setDstTileSize(Metrics.height / map.height);
+        unit = Metrics.height / map.height;
+        map.setDstTileSize(unit);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(3);

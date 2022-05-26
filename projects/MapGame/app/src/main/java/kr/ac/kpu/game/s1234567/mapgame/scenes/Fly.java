@@ -66,7 +66,7 @@ public class Fly extends SheetSprite implements Recyclable {
         this.type = type;
         srcRects = rects_array[type.ordinal()];
         this.speed = speed;
-        radius = Metrics.height / 18 * size;
+        radius = TiledSprite.unit * size;
         dist = 0;
         dx = dy = 0;
     }
