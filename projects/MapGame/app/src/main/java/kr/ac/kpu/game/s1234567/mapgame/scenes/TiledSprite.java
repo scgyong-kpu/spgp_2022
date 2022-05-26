@@ -13,6 +13,7 @@ import kr.ac.kpu.game.framework.res.Metrics;
 import kr.ac.kpu.game.framework.view.GameView;
 
 public class TiledSprite extends Sprite {
+    public static final int TILEINDEX_BRICK = 10;
     public static float unit;
     public final TiledMap map;
     private Paint paint;

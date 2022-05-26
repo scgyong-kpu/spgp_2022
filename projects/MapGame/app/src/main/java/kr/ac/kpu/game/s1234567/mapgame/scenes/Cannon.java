@@ -75,4 +75,12 @@ public class Cannon extends Sprite {
         canvas.drawBitmap(barrelBitmap, null, barrelRect, null);
         canvas.restore();
     }
+
+    public void upgrade() {
+        if (level == BITMAP_IDS.length) return;
+
+        level += 1;
+        bitmap = BitmapPool.get(BITMAP_IDS[level - 1]);
+        this.range = 5 * TiledSprite.unit * level;
+    }
 }

@@ -1,6 +1,10 @@
 package kr.ac.kpu.game.s1234567.mapgame.scenes;
 
+import android.util.Log;
+import android.view.MotionEvent;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import kr.ac.kpu.game.framework.game.Scene;
 import kr.ac.kpu.game.framework.interfaces.GameObject;
@@ -8,6 +12,9 @@ import kr.ac.kpu.game.framework.interfaces.GameObject;
 public class MainScene extends Scene {
     public static final String PARAM_STAGE_INDEX = "stage_index";
     private static MainScene singleton;
+    private TiledSprite tiledSprite;
+    private HashMap<Integer, Cannon> cannons = new HashMap<>();
+
     public static MainScene get() {
         if (singleton == null) {
             singleton = new MainScene();
@@ -52,23 +59,37 @@ public class MainScene extends Scene {
 
         initLayers(Layer.COUNT.ordinal());
 
-        TiledSprite ts = new TiledSprite();
-        ts.map.wraps = true;
-        add(Layer.tile.ordinal(), ts);
+        tiledSprite = new TiledSprite();
+        tiledSprite.map.wraps = true;
+        add(Layer.tile.ordinal(), tiledSprite);
 
         add(Layer.controller.ordinal(), new FlyGen());
+    }
 
-        add(Layer.cannon.ordinal(), new Cannon(1, 3.5f * TiledSprite.unit, 5.5f * TiledSprite.unit, 1, 4.0f));
-        add(Layer.cannon.ordinal(), new Cannon(1, 5.5f * TiledSprite.unit, 15.5f * TiledSprite.unit, 2, 4.0f));
-        add(Layer.cannon.ordinal(), new Cannon(2, 13.5f * TiledSprite.unit, 12.5f * TiledSprite.unit, 3, 4.0f));
-        add(Layer.cannon.ordinal(), new Cannon(2, 18.5f * TiledSprite.unit, 12.5f * TiledSprite.unit, 4, 4.0f));
-        add(Layer.cannon.ordinal(), new Cannon(3, 25.5f * TiledSprite.unit, 6.5f * TiledSprite.unit, 5, 4.0f));
-
-//        ObjectAnimator anim = ObjectAnimator
-//                .ofFloat(ts.map, "dstTileSize", 100, 200)
-//                .setDuration(2000);
-//        anim.setRepeatMode(ObjectAnimator.REVERSE);
-//        anim.setRepeatCount(ObjectAnimator.INFINITE);
-//        anim.start();
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() != MotionEvent.ACTION_DOWN) {
+            return false;
+        }
+        int x = (int) (event.getX() / TiledSprite.unit);
+        int y = (int) (event.getY() / TiledSprite.unit);
+        int tileIndex = tiledSprite.map.getTileAt(x, y);
+        //Log.d("MainScene", "("+x+","+y+")"+tileIndex);
+        if (tileIndex != TiledSprite.TILEINDEX_BRICK) {
+            return false;
+        }
+        int key = x * 1000 + y;
+        Cannon cannon = cannons.get(key);
+        if (cannon == null) {
+            cannon = new Cannon(1,
+                    TiledSprite.unit * (x + 0.5f),
+                    TiledSprite.unit * (y + 0.5f),
+                    1, 4);
+            cannons.put(key, cannon);
+            add(Layer.cannon.ordinal(), cannon);
+        } else {
+            cannon.upgrade();
+        }
+        return true;
     }
 }

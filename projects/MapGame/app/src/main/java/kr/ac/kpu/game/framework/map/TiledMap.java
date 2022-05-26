@@ -66,4 +66,13 @@ public class TiledMap {
             e.printStackTrace();
         }
     }
+
+    public int getTileAt(int x, int y) {
+        try {
+            TiledLayer layer = layers.get(0);
+            return layer.getTileAt(x, y);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
 }
