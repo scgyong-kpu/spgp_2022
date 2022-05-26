@@ -16,7 +16,7 @@ public class FlyGen implements GameObject {
     private static Random random = new Random();
 
     public FlyGen() {
-        speed = Metrics.height / 9;
+        speed = 2 * TiledSprite.unit;
         interval = GEN_INTERVAL;
     }
 

@@ -18,12 +18,12 @@ public class Cannon extends Sprite {
     private Bitmap barrelBitmap;
     private RectF barrelRect = new RectF();
     public Cannon(int level, float x, float y, float power, float interval) {
-        super(x, y, Metrics.height / 18, Metrics.height / 18, R.mipmap.f_01_01);
+        super(x, y, TiledSprite.unit, TiledSprite.unit, R.mipmap.f_01_01);
         this.level = level;
         this.power = power;
         this.interval = interval;
         this.time = 0;
-        this.range = 5 * Metrics.height / 18 * level;
+        this.range = 5 * TiledSprite.unit * level;
         if (1 < level && level <= BITMAP_IDS.length) {
             bitmap = BitmapPool.get(BITMAP_IDS[level - 1]);
         }
@@ -41,17 +41,20 @@ public class Cannon extends Sprite {
         time += frameTime;
         Fly fly = MainScene.get().findNearestFly(this);
         if (fly == null) {
-            angle = 0;
+            angle = -90;
             return;
         }
         float dx = fly.getX() - x;
         float dy = fly.getY() - y;
         double dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist > range) {
-            angle = 0;
+        if (dist > 1.2 * range) {
+            angle = -90;
             return;
         }
         angle = (float)(Math.atan2(dy, dx) * 180 / Math.PI) ;
+        if (dist > range) {
+            return;
+        }
         if (time > interval) {
             time = 0;
             fireTo(fly);
@@ -66,9 +69,9 @@ public class Cannon extends Sprite {
 
     @Override
     public void draw(Canvas canvas) {
-        super.draw(canvas);
         canvas.save();
         canvas.rotate(angle + 90, x, y);
+        super.draw(canvas);
         canvas.drawBitmap(barrelBitmap, null, barrelRect, null);
         canvas.restore();
     }

@@ -58,9 +58,11 @@ public class MainScene extends Scene {
 
         add(Layer.controller.ordinal(), new FlyGen());
 
-        add(Layer.cannon.ordinal(), new Cannon(1, 400, 400, 1, 4.0f));
-        add(Layer.cannon.ordinal(), new Cannon(2, 1200, 400, 1, 3.0f));
-        add(Layer.cannon.ordinal(), new Cannon(3, 2000, 500, 1, 2.0f));
+        add(Layer.cannon.ordinal(), new Cannon(1, 3.5f * TiledSprite.unit, 5.5f * TiledSprite.unit, 1, 4.0f));
+        add(Layer.cannon.ordinal(), new Cannon(1, 5.5f * TiledSprite.unit, 15.5f * TiledSprite.unit, 2, 4.0f));
+        add(Layer.cannon.ordinal(), new Cannon(2, 13.5f * TiledSprite.unit, 12.5f * TiledSprite.unit, 3, 4.0f));
+        add(Layer.cannon.ordinal(), new Cannon(2, 18.5f * TiledSprite.unit, 12.5f * TiledSprite.unit, 4, 4.0f));
+        add(Layer.cannon.ordinal(), new Cannon(3, 25.5f * TiledSprite.unit, 6.5f * TiledSprite.unit, 5, 4.0f));
 
 //        ObjectAnimator anim = ObjectAnimator
 //                .ofFloat(ts.map, "dstTileSize", 100, 200)
