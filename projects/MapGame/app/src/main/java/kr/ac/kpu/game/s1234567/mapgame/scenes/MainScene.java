@@ -1,6 +1,7 @@
 package kr.ac.kpu.game.s1234567.mapgame.scenes;
 
 import android.util.Log;
+import android.view.Menu;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
@@ -8,12 +9,14 @@ import java.util.HashMap;
 
 import kr.ac.kpu.game.framework.game.Scene;
 import kr.ac.kpu.game.framework.interfaces.GameObject;
+import kr.ac.kpu.game.s1234567.mapgame.R;
 
 public class MainScene extends Scene {
     public static final String PARAM_STAGE_INDEX = "stage_index";
     private static MainScene singleton;
     private TiledSprite tiledSprite;
     private Selector selector;
+    private TowerMenu towerMenu;
     private HashMap<Integer, Cannon> cannons = new HashMap<>();
 
     public static MainScene get() {
@@ -69,6 +72,9 @@ public class MainScene extends Scene {
         selector = new Selector();
         selector.show(-1, -1);
         add(Layer.selection.ordinal(), selector);
+
+        towerMenu = new TowerMenu();
+        add(Layer.selection.ordinal(), towerMenu);
     }
 
     @Override
@@ -82,9 +88,14 @@ public class MainScene extends Scene {
         //Log.d("MainScene", "("+x+","+y+")"+tileIndex);
         if (tileIndex != TiledSprite.TILEINDEX_BRICK) {
             selector.show(-1, -1);
+            towerMenu.setMenu(-1, -1);
             return false;
         }
         selector.show(x, y);
+        towerMenu.setMenu(x, y,
+                R.mipmap.f_01_01,
+                R.mipmap.f_02_01,
+                R.mipmap.f_03_01);
 //        int key = x * 1000 + y;
 //        Cannon cannon = cannons.get(key);
 //        if (cannon == null) {
