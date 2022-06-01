@@ -1,5 +1,7 @@
 package kr.ac.kpu.game.s1234567.mapgame.scenes;
 
+import android.util.Log;
+
 import java.util.HashMap;
 
 import kr.ac.kpu.game.framework.objects.Sprite;
@@ -23,7 +25,7 @@ public class Selector extends Sprite {
         return x * 1000 + y;
     }
 
-    public void show(int xUnit, int yUnit) {
+    public Cannon select(int xUnit, int yUnit) {
         this.xUnit = xUnit;
         this.yUnit = yUnit;
         this.cannon = cannons.get(getUnitKey(xUnit, yUnit));
@@ -32,9 +34,18 @@ public class Selector extends Sprite {
         dstRect.set(left, top, left + TiledSprite.unit, top + TiledSprite.unit);
         x = left + TiledSprite.unit / 2;
         y = top + TiledSprite.unit / 2;
+
+        return cannon;
     }
 
     public void install(Cannon cannon) {
         cannons.put(getUnitKey(), cannon);
+    }
+
+    public void remove() {
+        int n1 = cannons.size();
+        cannons.remove(getUnitKey());
+        int n2 = cannons.size();
+        Log.d("Selector", "n1=" + n1 + " n2=" + n2);
     }
 }
