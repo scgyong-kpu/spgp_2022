@@ -119,10 +119,17 @@ public class MainScene extends Scene implements TowerMenu.Listener {
         if (cannon != null) {
             switch (menuMipmapResId) {
                 case R.mipmap.upgrade:
+                    int cost = cannon.getUpgradeCost();
+                    if (score.get() < cost) {
+                        return;
+                    }
+                    score.add(-cost);
                     cannon.upgrade();
                     break;
                 case R.mipmap.uninstall:
                     selector.remove();
+                    int price = cannon.getSellPrice();
+                    score.add(price);
                     remove(cannon);
                     break;
             }
@@ -130,23 +137,21 @@ public class MainScene extends Scene implements TowerMenu.Listener {
             towerMenu.setMenu(-1, -1);
             return;
         }
-        int level = 0, cost = 0;
+        int level = 0;
         switch (menuMipmapResId) {
             case R.mipmap.f_01_01:
                 level = 1;
-                cost = 10;
                 break;
             case R.mipmap.f_02_01:
                 level = 2;
-                cost = 40;
                 break;
             case R.mipmap.f_03_01:
                 level = 3;
-                cost = 80;
                 break;
             default:
                 return;
         }
+        int cost = Cannon.getInstallCost(level);
         if (score.get() < cost) {
             return;
         }
