@@ -22,9 +22,9 @@ public class TowerMenu extends Sprite {
         float top = topUnit * TiledSprite.unit;
         this.items = items;
         dstRect.set(left, top, left + items.length * TiledSprite.unit, top + TiledSprite.unit);
-//        if (dstRect.right > Metrics.width) {
-//            dstRect.offset(-(items.length + 1) * TiledSprite.unit, 0);
-//        }
+        if (dstRect.right > Metrics.width) {
+            dstRect.offset(-(items.length + 1) * TiledSprite.unit, 0);
+        }
     }
 
     @Override
