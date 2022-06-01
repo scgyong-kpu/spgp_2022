@@ -3,7 +3,6 @@ package kr.ac.kpu.game.s1234567.mapgame.scenes;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import kr.ac.kpu.game.framework.game.Scene;
 import kr.ac.kpu.game.framework.interfaces.GameObject;
@@ -67,7 +66,7 @@ public class MainScene extends Scene implements TowerMenu.Listener {
         add(Layer.controller.ordinal(), new FlyGen());
 
         selector = new Selector();
-        selector.show(-1, -1);
+        selector.select(-1, -1);
         add(Layer.selection.ordinal(), selector);
 
         towerMenu = new TowerMenu(this);
@@ -87,33 +86,40 @@ public class MainScene extends Scene implements TowerMenu.Listener {
         int tileIndex = tiledSprite.map.getTileAt(x, y);
         //Log.d("MainScene", "("+x+","+y+")"+tileIndex);
         if (tileIndex != TiledSprite.TILEINDEX_BRICK) {
-            selector.show(-1, -1);
+            selector.select(-1, -1);
             towerMenu.setMenu(-1, -1);
             return false;
         }
-        selector.show(x, y);
-        towerMenu.setMenu(x, y,
-                R.mipmap.f_01_01,
-                R.mipmap.f_02_01,
-                R.mipmap.f_03_01);
-//        if (cannon == null) {
-//            cannon = new Cannon(1,
-//                    TiledSprite.unit * (x + 0.5f),
-//                    TiledSprite.unit * (y + 0.5f),
-//                    10, 4);
-//            cannons.put(key, cannon);
-//            add(Layer.cannon.ordinal(), cannon);
-//        } else {
-//            cannon.upgrade();
-//        }
+        Cannon cannon = selector.select(x, y);
+        if (cannon != null) {
+            towerMenu.setMenu(x, y,
+                    R.mipmap.uninstall,
+                    R.mipmap.upgrade);
+        } else {
+            towerMenu.setMenu(x, y,
+                    R.mipmap.f_01_01,
+                    R.mipmap.f_02_01,
+                    R.mipmap.f_03_01);
+        }
         return true;
     }
 
     @Override
     public void onMenuSelected(int menuMipmapResId) {
+
         Cannon cannon = selector.getCannon();
         if (cannon != null) {
-            cannon.upgrade();
+            switch (menuMipmapResId) {
+                case R.mipmap.upgrade:
+                    cannon.upgrade();
+                    break;
+                case R.mipmap.uninstall:
+                    selector.remove();
+                    remove(cannon);
+                    break;
+            }
+            selector.select(-1, -1);
+            towerMenu.setMenu(-1, -1);
             return;
         }
         int level = 0;
@@ -130,10 +136,10 @@ public class MainScene extends Scene implements TowerMenu.Listener {
             default:
                 return;
         }
-        cannon = new Cannon(level, selector.getX(), selector.getY(), 10, 4);
+        cannon = new Cannon(level, selector.getX(), selector.getY(), 10, 2);
         selector.install(cannon);
         add(Layer.cannon.ordinal(), cannon);
-        selector.show(-1, -1);
+        selector.select(-1, -1);
         towerMenu.setMenu(-1, -1);
     }
 }
