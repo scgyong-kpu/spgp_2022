@@ -13,6 +13,7 @@ public class MainScene extends Scene {
     public static final String PARAM_STAGE_INDEX = "stage_index";
     private static MainScene singleton;
     private TiledSprite tiledSprite;
+    private Selector selector;
     private HashMap<Integer, Cannon> cannons = new HashMap<>();
 
     public static MainScene get() {
@@ -51,7 +52,7 @@ public class MainScene extends Scene {
     }
 
     public enum Layer {
-        tile, cannon, enemy, shell, controller, COUNT;
+        tile, cannon, enemy, shell, selection, controller, COUNT;
     }
 
     public void init() {
@@ -64,6 +65,10 @@ public class MainScene extends Scene {
         add(Layer.tile.ordinal(), tiledSprite);
 
         add(Layer.controller.ordinal(), new FlyGen());
+
+        selector = new Selector();
+        selector.show(-1, -1);
+        add(Layer.selection.ordinal(), selector);
     }
 
     @Override
@@ -76,20 +81,22 @@ public class MainScene extends Scene {
         int tileIndex = tiledSprite.map.getTileAt(x, y);
         //Log.d("MainScene", "("+x+","+y+")"+tileIndex);
         if (tileIndex != TiledSprite.TILEINDEX_BRICK) {
+            selector.show(-1, -1);
             return false;
         }
-        int key = x * 1000 + y;
-        Cannon cannon = cannons.get(key);
-        if (cannon == null) {
-            cannon = new Cannon(1,
-                    TiledSprite.unit * (x + 0.5f),
-                    TiledSprite.unit * (y + 0.5f),
-                    10, 4);
-            cannons.put(key, cannon);
-            add(Layer.cannon.ordinal(), cannon);
-        } else {
-            cannon.upgrade();
-        }
+        selector.show(x, y);
+//        int key = x * 1000 + y;
+//        Cannon cannon = cannons.get(key);
+//        if (cannon == null) {
+//            cannon = new Cannon(1,
+//                    TiledSprite.unit * (x + 0.5f),
+//                    TiledSprite.unit * (y + 0.5f),
+//                    10, 4);
+//            cannons.put(key, cannon);
+//            add(Layer.cannon.ordinal(), cannon);
+//        } else {
+//            cannon.upgrade();
+//        }
         return true;
     }
 }
