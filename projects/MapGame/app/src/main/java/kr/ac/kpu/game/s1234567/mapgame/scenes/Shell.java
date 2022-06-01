@@ -92,9 +92,11 @@ public class Shell extends Sprite implements Recyclable {
     }
 
     private void explode() {
+        Explosion ex = Explosion.get(getX(), getY(), TiledSprite.unit);
         MainScene scene = MainScene.get();
+        scene.add(MainScene.Layer.explosion.ordinal(), ex);
         ArrayList<GameObject> flies = scene.objectsAt(MainScene.Layer.enemy.ordinal());
-        double explosion_radius = TiledSprite.unit * 5;
+        double explosion_radius = TiledSprite.unit * 2;
         for (GameObject f: flies) {
             Fly fly = (Fly) f;
             float dx = x - fly.getX();

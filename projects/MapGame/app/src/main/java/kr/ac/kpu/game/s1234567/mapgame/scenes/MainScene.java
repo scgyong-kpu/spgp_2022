@@ -53,7 +53,7 @@ public class MainScene extends Scene implements TowerMenu.Listener {
     }
 
     public enum Layer {
-        tile, cannon, enemy, shell, score, selection, controller, COUNT;
+        tile, cannon, enemy, shell, explosion, score, selection, controller, COUNT;
     }
 
     public void init() {
