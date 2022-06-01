@@ -7,7 +7,7 @@ import java.util.Random;
 import kr.ac.kpu.game.framework.interfaces.GameObject;
 
 public class FlyGen implements GameObject {
-    private static final float GEN_INTERVAL = 2.0f;
+    private static final float GEN_INTERVAL = 5.0f;
     private static final float MIN_INTERVAL = 0.1f;
     private static final float WAVE_INTERVAL = 30.0f;
     private float time, interval;
