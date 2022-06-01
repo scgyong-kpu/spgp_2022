@@ -37,7 +37,8 @@ public class Cannon extends Sprite {
             R.mipmap.f_06_01,R.mipmap.f_07_01,R.mipmap.f_08_01,R.mipmap.f_09_01,R.mipmap.f_10_01,
     };
     private static int[] COSTS = {
-            10, 30, 70, 150, 300, 700, 1500, 3000, 7000, 15000, 100000000
+            10, 30, 70, 72, 300, 700, 1500, 3000, 7000, 15000, 100000000
+//            10, 30, 70, 150, 300, 700, 1500, 3000, 7000, 15000, 100000000
     };
     public static int getInstallCost(int level) {
         return COSTS[level - 1];
@@ -81,7 +82,8 @@ public class Cannon extends Sprite {
     }
 
     private void fireTo(Fly fly) {
-        Shell shell = Shell.get(level, x, y, fly, angle, shellSpeed, power);
+        boolean splash = level >= 4;
+        Shell shell = Shell.get(level, x, y, fly, angle, shellSpeed, power, splash);
         MainScene.get().add(MainScene.Layer.shell.ordinal(), shell);
         //Log.d("CannonFire", "" + shell);
     }
