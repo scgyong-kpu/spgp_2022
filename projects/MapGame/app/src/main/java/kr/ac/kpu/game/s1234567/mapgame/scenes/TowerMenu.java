@@ -32,12 +32,15 @@ public class TowerMenu extends Sprite implements Touchable {
         float left = (leftUnit + 1) * TiledSprite.unit;
         float top = topUnit * TiledSprite.unit;
         this.items = items;
-        dstRect.set(left, top, left + items.length * TiledSprite.unit, top + TiledSprite.unit);
+        dstRect.set(left, top, left + items.length * TiledSprite.unit * 2, top + TiledSprite.unit * 2);
         if (dstRect.right > Metrics.width) {
-            dstRect.offset(-(items.length + 1) * TiledSprite.unit, 0);
+            dstRect.offset(-(items.length + 0.5f) * TiledSprite.unit * 2, 0);
+        }
+        if (dstRect.bottom > Metrics.height) {
+            dstRect.offset(0, -TiledSprite.unit);
         }
         ValueAnimator animator = ValueAnimator
-                .ofInt(0, 255)
+                .ofInt(0, 192)
                 .setDuration(500);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -54,11 +57,11 @@ public class TowerMenu extends Sprite implements Touchable {
 //        super.draw(canvas);
         canvas.drawBitmap(bitmap, null, dstRect, alphaPaint);
         itemRect.set(dstRect);
-        itemRect.right = itemRect.left + TiledSprite.unit;
+        itemRect.right = itemRect.left + TiledSprite.unit * 2;
         for (int item: items) {
             Bitmap bitmap = BitmapPool.get(item);
             canvas.drawBitmap(bitmap, null, itemRect, alphaPaint);
-            itemRect.offset(TiledSprite.unit, 0);
+            itemRect.offset(TiledSprite.unit * 2, 0);
         }
     }
 
@@ -71,14 +74,14 @@ public class TowerMenu extends Sprite implements Touchable {
             return false;
         }
         itemRect.set(dstRect);
-        itemRect.right = itemRect.left + TiledSprite.unit;
+        itemRect.right = itemRect.left + TiledSprite.unit * 2;
         int foundItem = 0;
         for (int item: items) {
             if (itemRect.contains(x, y)) {
                 foundItem = item;
                 break;
             }
-            itemRect.offset(TiledSprite.unit, 0);
+            itemRect.offset(TiledSprite.unit * 2, 0);
         }
         if (foundItem != 0 && listener != null) {
             listener.onMenuSelected(foundItem);
