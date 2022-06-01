@@ -36,6 +36,24 @@ public class Cannon extends Sprite {
             R.mipmap.f_01_01,R.mipmap.f_02_01,R.mipmap.f_03_01,R.mipmap.f_04_01,R.mipmap.f_05_01,
             R.mipmap.f_06_01,R.mipmap.f_07_01,R.mipmap.f_08_01,R.mipmap.f_09_01,R.mipmap.f_10_01,
     };
+    private static int[] COSTS = {
+            10, 30, 70, 150, 300, 700, 1500, 3000, 7000, 15000, 100000000
+    };
+    public static int getInstallCost(int level) {
+        return COSTS[level - 1];
+    }
+    public static int getUpgradeCost(int level) {
+        return Math.round((COSTS[level] - COSTS[level - 1]) * 1.1f);
+    }
+    public int getUpgradeCost() {
+        return getUpgradeCost(level);
+    }
+    public static int getSellPrice(int level) {
+        return COSTS[level - 1] / 2;
+    }
+    public int getSellPrice() {
+        return getSellPrice(level);
+    }
 
     @Override
     public void update(float frameTime) {
