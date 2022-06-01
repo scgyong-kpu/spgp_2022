@@ -38,6 +38,10 @@ public class Fly extends SheetSprite implements Recyclable {
         return health < 0;
     }
 
+    public int score() {
+        return Math.round(maxHealth / 10) * 10;
+    }
+
     public enum Type {
         boss, red, blue, cyan, dragon, COUNT, RANDOM;
         float getMaxHealth() {

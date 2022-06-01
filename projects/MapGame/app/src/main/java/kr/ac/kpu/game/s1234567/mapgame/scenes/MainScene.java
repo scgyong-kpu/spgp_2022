@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import kr.ac.kpu.game.framework.game.Scene;
 import kr.ac.kpu.game.framework.interfaces.GameObject;
+import kr.ac.kpu.game.framework.objects.Score;
 import kr.ac.kpu.game.s1234567.mapgame.R;
 
 public class MainScene extends Scene implements TowerMenu.Listener {
@@ -14,6 +15,7 @@ public class MainScene extends Scene implements TowerMenu.Listener {
     private TiledSprite tiledSprite;
     private Selector selector;
     private TowerMenu towerMenu;
+    public Score score;
 
     public static MainScene get() {
         if (singleton == null) {
@@ -51,7 +53,7 @@ public class MainScene extends Scene implements TowerMenu.Listener {
     }
 
     public enum Layer {
-        tile, cannon, enemy, shell, selection, controller, COUNT;
+        tile, cannon, enemy, shell, score, selection, controller, COUNT;
     }
 
     public void init() {
@@ -71,6 +73,12 @@ public class MainScene extends Scene implements TowerMenu.Listener {
 
         towerMenu = new TowerMenu(this);
         add(Layer.selection.ordinal(), towerMenu);
+
+        score = new Score(R.mipmap.gold_number,
+                TiledSprite.unit / 2.0f,TiledSprite.unit / 2.0f,
+                TiledSprite.unit * 1.2f);
+        score.set(100);
+        add(Layer.score.ordinal(), score);
     }
 
     @Override
@@ -122,20 +130,27 @@ public class MainScene extends Scene implements TowerMenu.Listener {
             towerMenu.setMenu(-1, -1);
             return;
         }
-        int level = 0;
+        int level = 0, cost = 0;
         switch (menuMipmapResId) {
             case R.mipmap.f_01_01:
                 level = 1;
+                cost = 10;
                 break;
             case R.mipmap.f_02_01:
                 level = 2;
+                cost = 40;
                 break;
             case R.mipmap.f_03_01:
                 level = 3;
+                cost = 80;
                 break;
             default:
                 return;
         }
+        if (score.get() < cost) {
+            return;
+        }
+        score.add(-cost);
         cannon = new Cannon(level, selector.getX(), selector.getY(), 10, 2);
         selector.install(cannon);
         add(Layer.cannon.ordinal(), cannon);
