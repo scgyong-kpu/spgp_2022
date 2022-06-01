@@ -71,6 +71,7 @@ public class Shell extends Sprite implements Recyclable {
             boolean dead = target.decreaseHealth(power);
             if (dead) {
                 scene.remove(target);
+                scene.score.add(target.score());
                 this.target = null;
             }
         }
