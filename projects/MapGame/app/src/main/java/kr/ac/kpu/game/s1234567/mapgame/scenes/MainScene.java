@@ -1,7 +1,5 @@
 package kr.ac.kpu.game.s1234567.mapgame.scenes;
 
-import android.util.Log;
-import android.view.Menu;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
@@ -11,13 +9,12 @@ import kr.ac.kpu.game.framework.game.Scene;
 import kr.ac.kpu.game.framework.interfaces.GameObject;
 import kr.ac.kpu.game.s1234567.mapgame.R;
 
-public class MainScene extends Scene {
+public class MainScene extends Scene implements TowerMenu.Listener {
     public static final String PARAM_STAGE_INDEX = "stage_index";
     private static MainScene singleton;
     private TiledSprite tiledSprite;
     private Selector selector;
     private TowerMenu towerMenu;
-    private HashMap<Integer, Cannon> cannons = new HashMap<>();
 
     public static MainScene get() {
         if (singleton == null) {
@@ -73,7 +70,7 @@ public class MainScene extends Scene {
         selector.show(-1, -1);
         add(Layer.selection.ordinal(), selector);
 
-        towerMenu = new TowerMenu();
+        towerMenu = new TowerMenu(this);
         add(Layer.selection.ordinal(), towerMenu);
     }
 
@@ -99,8 +96,6 @@ public class MainScene extends Scene {
                 R.mipmap.f_01_01,
                 R.mipmap.f_02_01,
                 R.mipmap.f_03_01);
-//        int key = x * 1000 + y;
-//        Cannon cannon = cannons.get(key);
 //        if (cannon == null) {
 //            cannon = new Cannon(1,
 //                    TiledSprite.unit * (x + 0.5f),
@@ -112,5 +107,33 @@ public class MainScene extends Scene {
 //            cannon.upgrade();
 //        }
         return true;
+    }
+
+    @Override
+    public void onMenuSelected(int menuMipmapResId) {
+        Cannon cannon = selector.getCannon();
+        if (cannon != null) {
+            cannon.upgrade();
+            return;
+        }
+        int level = 0;
+        switch (menuMipmapResId) {
+            case R.mipmap.f_01_01:
+                level = 1;
+                break;
+            case R.mipmap.f_02_01:
+                level = 2;
+                break;
+            case R.mipmap.f_03_01:
+                level = 3;
+                break;
+            default:
+                return;
+        }
+        cannon = new Cannon(level, selector.getX(), selector.getY(), 10, 4);
+        selector.install(cannon);
+        add(Layer.cannon.ordinal(), cannon);
+        selector.show(-1, -1);
+        towerMenu.setMenu(-1, -1);
     }
 }

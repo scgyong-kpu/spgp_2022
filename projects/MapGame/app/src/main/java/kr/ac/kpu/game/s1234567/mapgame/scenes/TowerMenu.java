@@ -15,11 +15,16 @@ import kr.ac.kpu.game.framework.res.Metrics;
 import kr.ac.kpu.game.s1234567.mapgame.R;
 
 public class TowerMenu extends Sprite implements Touchable {
+    public interface Listener {
+        public void onMenuSelected(int menuMipmapResId);
+    }
+    private Listener listener;
     private int[] items;
     private RectF itemRect = new RectF();
     private Paint alphaPaint = new Paint();
 
-    public TowerMenu() {
+    public TowerMenu(Listener listener) {
+        this.listener = listener;
         bitmap = BitmapPool.get(R.mipmap.menu_bg);
         items = new int[] {};
     }
@@ -75,8 +80,8 @@ public class TowerMenu extends Sprite implements Touchable {
             }
             itemRect.offset(TiledSprite.unit, 0);
         }
-        if (foundItem != 0) {
-            Log.d("TowerMenu", "item = " + foundItem);
+        if (foundItem != 0 && listener != null) {
+            listener.onMenuSelected(foundItem);
         }
         return true;
     }
