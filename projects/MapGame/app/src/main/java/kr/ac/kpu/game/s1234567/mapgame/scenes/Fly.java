@@ -42,7 +42,7 @@ public class Fly extends SheetSprite implements Recyclable {
         float getMaxHealth() {
             return HEALTHS[ordinal()];
         }
-        static float[] HEALTHS = { 100, 50, 40, 30, 10 };
+        static float[] HEALTHS = { 250, 50, 40, 30, 10 };
     }
     public static Fly get(Type type, float speed, float size) {
         Fly fly = (Fly) RecycleBin.get(Fly.class);
@@ -80,7 +80,8 @@ public class Fly extends SheetSprite implements Recyclable {
     private Rect[][] rects_array;
     private void init(Type type, float speed, float size) {
         if (type == Type.RANDOM) {
-            type = Type.values()[random.nextInt(Type.COUNT.ordinal())];
+            int index = random.nextInt(Type.COUNT.ordinal() - 1) + 1;
+            type = Type.values()[index];
         }
         this.type = type;
         srcRects = rects_array[type.ordinal()];
