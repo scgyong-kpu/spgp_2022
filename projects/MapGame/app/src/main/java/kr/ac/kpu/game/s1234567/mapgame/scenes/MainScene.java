@@ -82,6 +82,9 @@ public class MainScene extends Scene {
         if (event.getAction() != MotionEvent.ACTION_DOWN) {
             return false;
         }
+        if (towerMenu.onTouchEvent(event)) {
+            return true;
+        }
         int x = (int) (event.getX() / TiledSprite.unit);
         int y = (int) (event.getY() / TiledSprite.unit);
         int tileIndex = tiledSprite.map.getTileAt(x, y);

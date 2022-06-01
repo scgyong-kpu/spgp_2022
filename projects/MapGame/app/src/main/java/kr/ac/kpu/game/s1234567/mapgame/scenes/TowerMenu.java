@@ -5,13 +5,16 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.util.Log;
+import android.view.MotionEvent;
 
+import kr.ac.kpu.game.framework.interfaces.Touchable;
 import kr.ac.kpu.game.framework.objects.Sprite;
 import kr.ac.kpu.game.framework.res.BitmapPool;
 import kr.ac.kpu.game.framework.res.Metrics;
 import kr.ac.kpu.game.s1234567.mapgame.R;
 
-public class TowerMenu extends Sprite {
+public class TowerMenu extends Sprite implements Touchable {
     private int[] items;
     private RectF itemRect = new RectF();
     private Paint alphaPaint = new Paint();
@@ -52,5 +55,29 @@ public class TowerMenu extends Sprite {
             canvas.drawBitmap(bitmap, null, itemRect, alphaPaint);
             itemRect.offset(TiledSprite.unit, 0);
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent e) {
+        if (this.items.length == 0) return false;
+        float x = e.getX();
+        float y = e.getY();
+        if (!dstRect.contains(x, y)) {
+            return false;
+        }
+        itemRect.set(dstRect);
+        itemRect.right = itemRect.left + TiledSprite.unit;
+        int foundItem = 0;
+        for (int item: items) {
+            if (itemRect.contains(x, y)) {
+                foundItem = item;
+                break;
+            }
+            itemRect.offset(TiledSprite.unit, 0);
+        }
+        if (foundItem != 0) {
+            Log.d("TowerMenu", "item = " + foundItem);
+        }
+        return true;
     }
 }
