@@ -11,6 +11,11 @@ import kr.ac.kpu.game.framework.res.BitmapPool;
 import kr.ac.kpu.game.framework.res.Metrics;
 
 public class Pret extends Sprite {
+    public interface Listener {
+        public void onPret(int lane, boolean pressed);
+    }
+    private Listener listener;
+    private int lane;
     public boolean shows() {
         return shows;
     }
@@ -20,7 +25,9 @@ public class Pret extends Sprite {
     }
 
     boolean shows, captures;
-    public Pret(int lane) {
+    public Pret(int lane, Listener listener) {
+        this.lane = lane;
+        this.listener = listener;
         bitmap = BitmapPool.get(R.mipmap.trans_50p);
         float left = NoteSprite.NOTE_WIDTH * Metrics.width;
         float width = NoteSprite.NOTE_WIDTH * Metrics.width;
@@ -46,10 +53,13 @@ public class Pret extends Sprite {
             if (!in) return false;
             captures = true;
             shows = true;
+            listener.onPret(lane, true);
         } else if (action == MotionEvent.ACTION_UP) {
-            captures = false;
             shows = false;
-            return false;
+            if (!captures) return false;
+            captures = false;
+            listener.onPret(lane, false);
+            return true;
         } else {
             if (!captures) return false;
             shows = in;

@@ -11,6 +11,11 @@ public class NoteGen implements GameObject {
         this.song = song;
         maxTime = song.getLength() + 5.0f;
     }
+
+    public float getTime() {
+        return time;
+    }
+
     @Override
     public void update(float frameTime) {
         MainScene scene = MainScene.get();
