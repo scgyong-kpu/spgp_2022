@@ -10,7 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TapTu">
         <activity
+            android:name=".app.GameActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
             android:name=".app.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
