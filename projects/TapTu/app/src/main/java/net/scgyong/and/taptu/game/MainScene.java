@@ -79,7 +79,7 @@ public class MainScene extends Scene implements Pret.Listener {
         Bitmap bitmap = BitmapPool.get(R.mipmap.trans_50p);
         for (int lane = 0; lane < 5; lane++) {
             float diff = 1.0f;
-            NoteSprite ns = findNearestNote(lane);
+            NoteSprite ns = findNearestNote(lane, time);
             if (ns != null) {
                 diff = time - ns.note.msec / 1000.0f;
                 if (diff < 0) diff = -diff;
@@ -97,14 +97,25 @@ public class MainScene extends Scene implements Pret.Listener {
     public void onPret(int lane, boolean pressed) {
         Log.d(TAG, "onPret: lane=" + lane + " pressed=" + pressed);
         if (!pressed) return;
-        NoteSprite ns = findNearestNote(lane);
+        float time = noteGenerator.getTime();
+        NoteSprite ns = findNearestNote(lane, time);
         if (ns == null) return;
+        float diff = ns.note.msec / 1000.0f - time;
+        if (diff < 0) diff = -diff;
+        if (diff < 0.1) {
+            // perfect
+        } else if (diff < 0.3) {
+            // good
+        } else if (diff < 0.5) {
+            // bad
+        } else {
+            // miss
+        }
         remove(ns);
     }
 
-    private NoteSprite findNearestNote(int lane) {
+    private NoteSprite findNearestNote(int lane, float time) {
         float dist = Float.MAX_VALUE;
-        float time = noteGenerator.getTime();
         NoteSprite nearest = null;
         ArrayList<GameObject> notes = objectsAt(Layer.note.ordinal());
         for (GameObject go : notes) {
