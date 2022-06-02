@@ -1,0 +1,19 @@
+<html>
+ <head>
+  <script>
+
+function start() {
+  let lane = 0;
+  let msec = 5000;
+  for (let i = 0; i < 200; i++) {
+    console.log('N', lane, msec);
+    lane = (lane + 1) % 5;
+    msec += 1000;
+  }
+}
+
+  </script>
+ </head>
+ <body onload="start()">
+ </body>
+</html>

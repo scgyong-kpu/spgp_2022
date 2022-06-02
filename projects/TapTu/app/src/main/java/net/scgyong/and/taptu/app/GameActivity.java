@@ -15,15 +15,22 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-//        int stageIndex = intent.getExtras().getInt(MainScene.PARAM_STAGE_INDEX);
-
         setContentView(new GameView(this, null));
 
         MainScene game = MainScene.get();
-//        game.setMapIndex(stageIndex);
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        if (extras == null) {
+            finish();
+            return;
+        }
+        String fileName = extras.getString(MainScene.PARAM_SONG_FILENAME);
+        boolean loaded = game.loadSong(fileName);
+        if (!loaded) {
+            finish();
+            return;
+        }
         Scene.push(game);
-//        Scene.push(PausedScene.get());
     }
 
     @Override
