@@ -1,6 +1,10 @@
 package net.scgyong.and.taptu.game;
 
+import net.scgyong.and.taptu.R;
+
 import kr.ac.kpu.game.framework.game.Scene;
+import kr.ac.kpu.game.framework.objects.Sprite;
+import kr.ac.kpu.game.framework.res.Metrics;
 
 public class MainScene extends Scene {
     public static final String PARAM_SONG_FILENAME = "song_filename";
@@ -20,7 +24,7 @@ public class MainScene extends Scene {
     }
 
     public enum Layer {
-        note, controller, COUNT;
+        bg, note, controller, COUNT;
     }
 
     public void init() {
@@ -28,6 +32,11 @@ public class MainScene extends Scene {
 
         initLayers(Layer.COUNT.ordinal());
 
+        add(Layer.bg.ordinal(), new Sprite(
+                Metrics.width / 2, Metrics.height / 2,
+                Metrics.width, Metrics.height,
+                R.mipmap.bg
+        ));
         add(Layer.controller.ordinal(), new NoteGen(song));
     }
 }
