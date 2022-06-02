@@ -23,7 +23,7 @@ public class NoteGen implements GameObject {
         while (true) {
             Song.Note note = song.getNextNote(NoteSprite.CREATE_NOTE_BEFORE_MSEC);
             if (note == null) break;
-            NoteSprite ns = NoteSprite.get(note);
+            NoteSprite ns = NoteSprite.get(note, time);
             scene.add(MainScene.Layer.note.ordinal(), ns);
         }
     }

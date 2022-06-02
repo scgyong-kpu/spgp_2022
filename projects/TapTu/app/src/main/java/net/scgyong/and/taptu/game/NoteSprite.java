@@ -18,20 +18,23 @@ public class NoteSprite extends Sprite implements Recyclable {
     private Song.Note note;
     private float speed;
 
-    public static NoteSprite get(Song.Note note) {
+    public static NoteSprite get(Song.Note note, float time) {
         NoteSprite ns = (NoteSprite) RecycleBin.get(NoteSprite.class);
         if (ns == null) {
             ns = new NoteSprite();
         }
-        ns.init(note);
+        ns.init(note, time);
         return ns;
     }
 
-    private void init(Song.Note note) {
+    private void init(Song.Note note, float time) {
         this.note = note;
         float x = (0.5f - 2 * NOTE_WIDTH) * Metrics.width;
         x += NOTE_WIDTH * Metrics.width * note.lane;
-        float y = NOTE_Y_CREATE * Metrics.width;
+
+        float seconds = note.msec / 1000.0f - time;
+        float y = (1.0f - NOTE_Y_HIT_MARGIN) * Metrics.height;
+        y -= seconds * Metrics.height * 1000 / CREATE_NOTE_BEFORE_MSEC;
 
         setCenter(x, y);
     }
@@ -46,7 +49,7 @@ public class NoteSprite extends Sprite implements Recyclable {
 
     private NoteSprite() {
         super(0, 0, Metrics.width * NOTE_WIDTH, Metrics.width * NOTE_HEIGHT, R.mipmap.note_1);
-        speed = (1.0f + NOTE_Y_CREATE - NOTE_Y_HIT_MARGIN) * Metrics.height / CREATE_NOTE_BEFORE_MSEC * 1000;
+        speed = Metrics.height * 1000 / CREATE_NOTE_BEFORE_MSEC;
         //Log.d("NoteSprite", "speed=" + speed);
     }
 
