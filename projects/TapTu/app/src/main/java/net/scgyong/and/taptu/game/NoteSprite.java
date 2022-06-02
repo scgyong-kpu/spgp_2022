@@ -10,7 +10,7 @@ import kr.ac.kpu.game.framework.objects.Sprite;
 import kr.ac.kpu.game.framework.res.Metrics;
 
 public class NoteSprite extends Sprite implements Recyclable {
-    public static final int CREATE_NOTE_BEFORE_MSEC = 4000;
+    public static final int CREATE_NOTE_BEFORE_MSEC = 10000;
     private static final float NOTE_WIDTH = 1.0f / 7.0f;
     private static final float NOTE_HEIGHT = NOTE_WIDTH / 3;
     public static final float NOTE_Y_CREATE = -NOTE_WIDTH;
