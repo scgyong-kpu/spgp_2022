@@ -59,6 +59,7 @@ public class NoteSprite extends Sprite implements Recyclable {
         MainScene scene = MainScene.get();
         if (dstRect.top > Metrics.height) {
             scene.remove(this);
+            scene.call.set(Call.Type.miss);
         }
     }
 

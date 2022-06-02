@@ -22,6 +22,7 @@ public class MainScene extends Scene implements Pret.Listener {
     private static MainScene singleton;
     private Song song;
     private Pret[] prets = new Pret[5];
+    Call call;
     private NoteGen noteGenerator;
 
     public static MainScene get() {
@@ -37,7 +38,7 @@ public class MainScene extends Scene implements Pret.Listener {
     }
 
     public enum Layer {
-        bg, pret, note, controller, COUNT;
+        bg, pret, note, call, controller, COUNT;
     }
 
     public void init() {
@@ -58,6 +59,9 @@ public class MainScene extends Scene implements Pret.Listener {
             prets[lane] = pret;
             add(Layer.pret.ordinal(), pret);
         }
+
+        call = new Call();
+        add(Layer.call.ordinal(), call);
     }
 
     @Override
@@ -102,15 +106,17 @@ public class MainScene extends Scene implements Pret.Listener {
         if (ns == null) return;
         float diff = ns.note.msec / 1000.0f - time;
         if (diff < 0) diff = -diff;
+        Call.Type type = Call.Type.miss;
         if (diff < 0.1) {
-            // perfect
+            type = Call.Type.perfect;
+        } else if (diff < 0.2) {
+            type = Call.Type.great;
         } else if (diff < 0.3) {
-            // good
+            type = Call.Type.good;
         } else if (diff < 0.5) {
-            // bad
-        } else {
-            // miss
+            type = Call.Type.bad;
         }
+        call.set(type);
         remove(ns);
     }
 
