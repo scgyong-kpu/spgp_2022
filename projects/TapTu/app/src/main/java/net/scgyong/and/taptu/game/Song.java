@@ -5,7 +5,6 @@ import android.content.res.AssetManager;
 import android.util.Log;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -27,6 +26,13 @@ public class Song {
     }
     private String title;
     private ArrayList<Note> notes = new ArrayList<>();
+    private int current;
+    private long startedOn;
+
+    private float length;
+    public float getLength() {
+        return length;
+    }
 
     public Song(String fileName) {
         Context context = GameView.view.getContext();
@@ -35,6 +41,7 @@ public class Song {
             InputStream is = assets.open(fileName);
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader reader = new BufferedReader(isr);
+            int msec = 0;
             while (true) {
                 String line = reader.readLine();
                 if (line == null) {
@@ -45,10 +52,15 @@ public class Song {
                 } else if (line.startsWith("N")) {
                     Note note = new Note(line);
                     notes.add(note);
+                    if (msec < note.msec) {
+                        msec = note.msec;
+                    }
                 }
             }
+            length = msec / 1000.0f;
             Log.d(TAG, "Title: " + title);
             Log.d(TAG, "Notes loaded: " + notes.size());
+            start();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,5 +70,23 @@ public class Song {
         if (title == null) return false;
         if (notes.size() == 0) return false;
         return true;
+    }
+
+    public void start() {
+        current = 0;
+        startedOn = System.currentTimeMillis();
+    }
+
+    public Note getNextNote(int msec) {
+        if (current >= notes.size()) {
+            return null;
+        }
+        int elapsed = (int) (System.currentTimeMillis() - startedOn);
+        Note note = notes.get(current);
+        if (note.msec > elapsed + msec) {
+            return null;
+        }
+        current++;
+        return note;
     }
 }

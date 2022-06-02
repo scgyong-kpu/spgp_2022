@@ -20,12 +20,14 @@ public class MainScene extends Scene {
     }
 
     public enum Layer {
-        some, COUNT;
+        note, controller, COUNT;
     }
 
     public void init() {
         super.init();
 
         initLayers(Layer.COUNT.ordinal());
+
+        add(Layer.controller.ordinal(), new NoteGen(song));
     }
 }
