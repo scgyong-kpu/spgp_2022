@@ -21,20 +21,20 @@
   * Distance collision
 * Unit: `Metrics.height / map.height`
 * `Selector` and `TowerMenu`
- * Works only on Tile 10
- * Right Corner check
- * Alpha (Opacity) animation
- * Menu Selection Callback
+  * Works only on Tile 10
+  * Right Corner check
+  * Alpha (Opacity) animation
+  * Menu Selection Callback
 * `Cannon` Menu
- * Install
- * Uninstall
- * Upgrade
+  * Install
+  * Uninstall
+  * Upgrade
 * `FlyGen`
- * Wave
- * Boss Phase
- * Random - rate
- * Gold
-  * Install Cost, Upgrade Cost, Sell Price
+  * Wave
+  * Boss Phase
+  * Random - rate
+  * Gold
+    * Install Cost, Upgrade Cost, Sell Price
 * Shell
- * Splash Damage
- * `Explosion`
+  * Splash Damage
+  * `Explosion`
