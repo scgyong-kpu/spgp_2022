@@ -1,5 +1,8 @@
 package net.scgyong.and.taptu.game;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -10,6 +13,7 @@ import java.util.ArrayList;
 import kr.ac.kpu.game.framework.game.Scene;
 import kr.ac.kpu.game.framework.interfaces.GameObject;
 import kr.ac.kpu.game.framework.objects.Sprite;
+import kr.ac.kpu.game.framework.res.BitmapPool;
 import kr.ac.kpu.game.framework.res.Metrics;
 
 public class MainScene extends Scene implements Pret.Listener {
@@ -67,6 +71,28 @@ public class MainScene extends Scene implements Pret.Listener {
         return false;
     }
 
+    RectF tmpRect = new RectF();
+    @Override
+    public void draw(Canvas canvas) {
+        float time = noteGenerator.getTime();
+        super.draw(canvas);
+        Bitmap bitmap = BitmapPool.get(R.mipmap.trans_50p);
+        for (int lane = 0; lane < 5; lane++) {
+            float diff = 1.0f;
+            NoteSprite ns = findNearestNote(lane);
+            if (ns != null) {
+                diff = time - ns.note.msec / 1000.0f;
+                if (diff < 0) diff = -diff;
+            }
+            float left = NoteSprite.NOTE_WIDTH * Metrics.width;
+            float width = NoteSprite.NOTE_WIDTH * Metrics.width;
+            left += width * lane;
+            float top = (1 - NoteSprite.NOTE_Y_HIT_MARGIN) * Metrics.height;
+            tmpRect.set(left, top, left + width, top + diff * 100);
+            canvas.drawBitmap(bitmap, null, tmpRect, null);
+        }
+    }
+
     @Override
     public void onPret(int lane, boolean pressed) {
         Log.d(TAG, "onPret: lane=" + lane + " pressed=" + pressed);
@@ -88,12 +114,14 @@ public class MainScene extends Scene implements Pret.Listener {
             float diff = ns.note.msec / 1000.0f - time;
             if (diff < 0) diff = -diff;
             if (dist > diff) {
-                Log.d(TAG, "= dist=" + dist + " diff=" + diff);
+//                Log.d(TAG, "= dist=" + dist + " diff=" + diff);
                 dist = diff;
                 nearest = ns;
             }
         }
-        Log.d(TAG, "dist=" + dist + " nearest=" + nearest.note.msec);
+//        if (nearest != null) {
+//            Log.d(TAG, "dist=" + dist + " nearest=" + nearest.note.msec);
+//        }
         return (dist < 1.0f) ? nearest : null;
     }
 }

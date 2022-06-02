@@ -13,7 +13,7 @@ public class NoteSprite extends Sprite implements Recyclable {
     public static final int CREATE_NOTE_BEFORE_MSEC = 10000;
     static final float NOTE_WIDTH = 1.0f / 7.0f;
     static final float NOTE_HEIGHT = NOTE_WIDTH / 3;
-    public static final float NOTE_Y_HIT_MARGIN = NOTE_WIDTH;
+    public static final float NOTE_Y_HIT_MARGIN = 1.0f / 8.0f;
     Song.Note note;
     private float speed;
 
