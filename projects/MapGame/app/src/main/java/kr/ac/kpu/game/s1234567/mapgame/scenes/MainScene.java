@@ -1,19 +1,21 @@
 package kr.ac.kpu.game.s1234567.mapgame.scenes;
 
-import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import kr.ac.kpu.game.framework.game.Scene;
 import kr.ac.kpu.game.framework.interfaces.GameObject;
+import kr.ac.kpu.game.framework.objects.Score;
+import kr.ac.kpu.game.s1234567.mapgame.R;
 
-public class MainScene extends Scene {
+public class MainScene extends Scene implements TowerMenu.Listener {
     public static final String PARAM_STAGE_INDEX = "stage_index";
     private static MainScene singleton;
     private TiledSprite tiledSprite;
-    private HashMap<Integer, Cannon> cannons = new HashMap<>();
+    private Selector selector;
+    private TowerMenu towerMenu;
+    public Score score;
 
     public static MainScene get() {
         if (singleton == null) {
@@ -51,7 +53,7 @@ public class MainScene extends Scene {
     }
 
     public enum Layer {
-        tile, cannon, enemy, shell, controller, COUNT;
+        tile, cannon, enemy, shell, explosion, score, selection, controller, COUNT;
     }
 
     public void init() {
@@ -64,6 +66,19 @@ public class MainScene extends Scene {
         add(Layer.tile.ordinal(), tiledSprite);
 
         add(Layer.controller.ordinal(), new FlyGen());
+
+        selector = new Selector();
+        selector.select(-1, -1);
+        add(Layer.selection.ordinal(), selector);
+
+        towerMenu = new TowerMenu(this);
+        add(Layer.selection.ordinal(), towerMenu);
+
+        score = new Score(R.mipmap.gold_number,
+                TiledSprite.unit / 2.0f,TiledSprite.unit / 2.0f,
+                TiledSprite.unit * 1.2f);
+        score.set(100);
+        add(Layer.score.ordinal(), score);
     }
 
     @Override
@@ -71,25 +86,80 @@ public class MainScene extends Scene {
         if (event.getAction() != MotionEvent.ACTION_DOWN) {
             return false;
         }
+        if (towerMenu.onTouchEvent(event)) {
+            return true;
+        }
         int x = (int) (event.getX() / TiledSprite.unit);
         int y = (int) (event.getY() / TiledSprite.unit);
         int tileIndex = tiledSprite.map.getTileAt(x, y);
         //Log.d("MainScene", "("+x+","+y+")"+tileIndex);
         if (tileIndex != TiledSprite.TILEINDEX_BRICK) {
+            selector.select(-1, -1);
+            towerMenu.setMenu(-1, -1);
             return false;
         }
-        int key = x * 1000 + y;
-        Cannon cannon = cannons.get(key);
-        if (cannon == null) {
-            cannon = new Cannon(1,
-                    TiledSprite.unit * (x + 0.5f),
-                    TiledSprite.unit * (y + 0.5f),
-                    10, 4);
-            cannons.put(key, cannon);
-            add(Layer.cannon.ordinal(), cannon);
+        Cannon cannon = selector.select(x, y);
+        if (cannon != null) {
+            towerMenu.setMenu(x, y,
+                    R.mipmap.uninstall,
+                    R.mipmap.upgrade);
         } else {
-            cannon.upgrade();
+            towerMenu.setMenu(x, y,
+                    R.mipmap.f_01_01,
+                    R.mipmap.f_02_01,
+                    R.mipmap.f_03_01);
         }
         return true;
+    }
+
+    @Override
+    public void onMenuSelected(int menuMipmapResId) {
+
+        Cannon cannon = selector.getCannon();
+        if (cannon != null) {
+            switch (menuMipmapResId) {
+                case R.mipmap.upgrade:
+                    int cost = cannon.getUpgradeCost();
+                    if (score.get() < cost) {
+                        return;
+                    }
+                    score.add(-cost);
+                    cannon.upgrade();
+                    break;
+                case R.mipmap.uninstall:
+                    selector.remove();
+                    int price = cannon.getSellPrice();
+                    score.add(price);
+                    remove(cannon);
+                    break;
+            }
+            selector.select(-1, -1);
+            towerMenu.setMenu(-1, -1);
+            return;
+        }
+        int level = 0;
+        switch (menuMipmapResId) {
+            case R.mipmap.f_01_01:
+                level = 1;
+                break;
+            case R.mipmap.f_02_01:
+                level = 2;
+                break;
+            case R.mipmap.f_03_01:
+                level = 3;
+                break;
+            default:
+                return;
+        }
+        int cost = Cannon.getInstallCost(level);
+        if (score.get() < cost) {
+            return;
+        }
+        score.add(-cost);
+        cannon = new Cannon(level, selector.getX(), selector.getY(), 10, 2);
+        selector.install(cannon);
+        add(Layer.cannon.ordinal(), cannon);
+        selector.select(-1, -1);
+        towerMenu.setMenu(-1, -1);
     }
 }
