@@ -1,5 +1,7 @@
 package net.scgyong.and.taptu.game;
 
+import android.view.MotionEvent;
+
 import net.scgyong.and.taptu.R;
 
 import kr.ac.kpu.game.framework.game.Scene;
@@ -10,6 +12,7 @@ public class MainScene extends Scene {
     public static final String PARAM_SONG_FILENAME = "song_filename";
     private static MainScene singleton;
     private Song song;
+    private Pret[] prets = new Pret[5];
 
     public static MainScene get() {
         if (singleton == null) {
@@ -24,7 +27,7 @@ public class MainScene extends Scene {
     }
 
     public enum Layer {
-        bg, note, controller, COUNT;
+        bg, pret, note, controller, COUNT;
     }
 
     public void init() {
@@ -38,5 +41,22 @@ public class MainScene extends Scene {
                 R.mipmap.bg
         ));
         add(Layer.controller.ordinal(), new NoteGen(song));
+
+        for (int lane = 0; lane < 5; lane++) {
+            Pret pret = new Pret(lane);
+            prets[lane] = pret;
+            add(Layer.pret.ordinal(), pret);
+        }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        for (int lane = 0; lane < 5; lane++) {
+            boolean processed = prets[lane].onTouchEvent(event);
+            if (processed) {
+                return true;
+            }
+        }
+        return false;
     }
 }
