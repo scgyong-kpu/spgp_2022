@@ -57,6 +57,7 @@ public class Song {
                     }
                 }
             }
+            is.close();
             length = msec / 1000.0f;
             Log.d(TAG, "Title: " + title);
             Log.d(TAG, "Notes loaded: " + notes.size());
