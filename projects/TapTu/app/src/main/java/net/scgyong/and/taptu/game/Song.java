@@ -19,7 +19,7 @@ public class Song {
         int lane;
         int msec;
         Note(String line) {
-            String[] comps = line.split("/\\s+");
+            String[] comps = line.split("\\s+");
 
             lane = Integer.parseInt(comps[1]);
             msec = Integer.parseInt(comps[2]);
