@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void onBtnStart(View view) {
+    public void onBtnStartFirst(View view) {
         start("songs/stage_01.txt");
     }
 
@@ -25,5 +25,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(MainScene.PARAM_SONG_FILENAME, fileName);
         startActivity(intent);
+    }
+
+    public void onBtnStartSecond(View view) {
+        start("songs/stage_02.txt");
     }
 }

@@ -5,10 +5,10 @@
 function start() {
   let lane = 0;
   let msec = 5000;
-  for (let i = 0; i < 200; i++) {
+  for (let i = 0; i < 100; i++) {
     console.log('N', lane, msec);
-    lane = (lane + 1) % 5;
-    msec += 1000;
+    lane = Math.floor(Math.random() * 5)
+    msec += 500;
   }
 }
 
