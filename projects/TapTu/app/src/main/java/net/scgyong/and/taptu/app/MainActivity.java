@@ -38,8 +38,9 @@ public class MainActivity extends AppCompatActivity {
             reader.beginArray();
             while (reader.hasNext()) {
                 reader.beginObject();
-                Song song = new Song(reader);
+                Song song = new Song(reader, assets);
                 reader.endObject();
+                Log.d(TAG, "Bitmap #" + songs.size() + " = " + song.albumBitmap);
                 songs.add(song);
             }
             reader.endArray();

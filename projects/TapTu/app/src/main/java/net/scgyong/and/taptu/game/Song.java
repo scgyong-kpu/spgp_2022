@@ -2,6 +2,8 @@ package net.scgyong.and.taptu.game;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.JsonReader;
 import android.util.Log;
 
@@ -31,6 +33,7 @@ public class Song {
     public String title;
     public String artist;
     public String albumFile;
+    public Bitmap albumBitmap;
 
     private ArrayList<Note> notes = new ArrayList<>();
     private int current;
@@ -41,7 +44,7 @@ public class Song {
         return length;
     }
 
-    public Song(JsonReader reader) throws IOException {
+    public Song(JsonReader reader, AssetManager assets) throws IOException {
         while (reader.hasNext()) {
             String name = reader.nextName();
             //Log.d(TAG, "Reading name: " + name);
@@ -53,6 +56,7 @@ public class Song {
                 artist = reader.nextString();
             } else if (name.equals("albumArt")) {
                 albumFile = reader.nextString();
+                albumBitmap = BitmapFactory.decodeStream(assets.open(albumFile));
             } else if (name.equals("note")) {
                 noteFile = reader.nextString();
             } else {
