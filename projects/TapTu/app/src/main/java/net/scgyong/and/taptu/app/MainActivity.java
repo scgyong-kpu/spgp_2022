@@ -45,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
         TextView title;
         TextView artist;
         ImageView thumbnail;
+        Holder(View view) {
+            title = view.findViewById(R.id.title);
+            artist = view.findViewById(R.id.artist);
+            thumbnail = view.findViewById(R.id.thumbnail);
+        }
     }
     private BaseAdapter adapter = new BaseAdapter() {
         @Override
@@ -69,10 +74,7 @@ public class MainActivity extends AppCompatActivity {
             Holder holder;
             if (layout == null) {
                 layout = (LinearLayout) getLayoutInflater().inflate(R.layout.song_item, null);
-                holder = new Holder();
-                holder.title = layout.findViewById(R.id.title);
-                holder.artist = layout.findViewById(R.id.artist);
-                holder.thumbnail = layout.findViewById(R.id.thumbnail);
+                holder = new Holder(layout);
                 layout.setTag(holder);
             } else {
                 holder = (Holder) layout.getTag();
