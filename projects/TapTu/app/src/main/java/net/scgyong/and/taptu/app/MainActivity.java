@@ -41,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
+    class Holder {
+        TextView title;
+        TextView artist;
+        ImageView thumbnail;
+    }
     private BaseAdapter adapter = new BaseAdapter() {
         @Override
         public int getCount() {
@@ -61,12 +66,21 @@ public class MainActivity extends AppCompatActivity {
         public View getView(int i, View view, ViewGroup viewGroup) {
             Song song = songs.get(i);
             LinearLayout layout = (LinearLayout) view;
+            Holder holder;
             if (layout == null) {
                 layout = (LinearLayout) getLayoutInflater().inflate(R.layout.song_item, null);
+                holder = new Holder();
+                holder.title = layout.findViewById(R.id.title);
+                holder.artist = layout.findViewById(R.id.artist);
+                holder.thumbnail = layout.findViewById(R.id.thumbnail);
+                layout.setTag(holder);
+            } else {
+                holder = (Holder) layout.getTag();
             }
-            ((TextView)layout.findViewById(R.id.title)).setText(song.title);
-            ((TextView)layout.findViewById(R.id.artist)).setText(song.artist);
-            ((ImageView)layout.findViewById(R.id.thumbnail)).setImageBitmap(song.albumBitmap);
+            holder.title.setText(song.title);
+            holder.artist.setText(song.artist);
+            holder.thumbnail.setImageBitmap(song.albumBitmap);
+
             return layout;
         }
     };
