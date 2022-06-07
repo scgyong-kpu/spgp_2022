@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private ListView listView;
+    private int selectedPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +93,9 @@ public class MainActivity extends AppCompatActivity {
 
     private AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener() {
         @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
             view.setSelected(true);
+            selectedPosition = position;
         }
     };
 
@@ -120,7 +122,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onBtnStart(View view) {
-        start("songs/stage_01.txt");
+//        int pos = listView.getSelectedItemPosition();
+        Log.d(TAG, "Selected Position = " + selectedPosition);
     }
 
     private void start(String fileName) {
