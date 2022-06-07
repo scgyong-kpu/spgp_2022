@@ -58,7 +58,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             Song song = songs.get(i);
-            TextView tv = new TextView(MainActivity.this);
+            TextView tv = (TextView)view;
+            if (tv == null) {
+                tv = new TextView(MainActivity.this);
+                tv.setTextSize(30);
+            }
             tv.setText(song.title + " - " + song.artist);
             return tv;
         }
