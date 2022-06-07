@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Lectures/2022_1/android/git/projects/TapTu/app/src/main/res/layout/activity_main.xml" value="0.12376237623762376" />
+        <entry key="..\:/Lectures/2022_1/android/git/projects/TapTu/app/src/main/res/drawable/song_item_bg.xml" value="0.201" />
+        <entry key="..\:/Lectures/2022_1/android/git/projects/TapTu/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Lectures/2022_1/android/git/projects/TapTu/app/src/main/res/layout/song_item.xml" value="0.28532608695652173" />
       </map>
     </option>
   </component>

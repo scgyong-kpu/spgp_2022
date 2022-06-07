@@ -9,6 +9,7 @@ import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         loadSongs();
         listView = findViewById(R.id.listView);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(onItemClick);
     }
 
     class Holder {
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             thumbnail = view.findViewById(R.id.thumbnail);
         }
     }
+
     private BaseAdapter adapter = new BaseAdapter() {
         @Override
         public int getCount() {
@@ -84,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
             holder.thumbnail.setImageBitmap(song.albumBitmap);
 
             return layout;
+        }
+    };
+
+    private AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            view.setSelected(true);
         }
     };
 
