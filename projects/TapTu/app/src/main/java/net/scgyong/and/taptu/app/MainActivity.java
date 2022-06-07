@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
 
 import net.scgyong.and.taptu.R;
 import net.scgyong.and.taptu.game.MainScene;
@@ -17,16 +18,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         loadSongs();
+        listView = findViewById(R.id.listView);
     }
 
     ArrayList<Song> songs = new ArrayList<>();
@@ -51,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onBtnStartFirst(View view) {
+    public void onBtnStart(View view) {
         start("songs/stage_01.txt");
     }
 
@@ -59,9 +63,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(MainScene.PARAM_SONG_FILENAME, fileName);
         startActivity(intent);
-    }
-
-    public void onBtnStartSecond(View view) {
-        start("songs/stage_02.txt");
     }
 }
