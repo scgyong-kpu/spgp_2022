@@ -18,6 +18,16 @@ import kr.ac.kpu.game.framework.view.GameView;
 public class Song {
     private static final String TAG = Song.class.getSimpleName();
 
+    public String toJson() {
+        return "{" +
+                "\"file\": \"" + mp3File + "\"," +
+                "\"title\": \"" + title + "\"," +
+                "\"artist\": \"" + artist + "\"," +
+                "\"albumArt\": \"" + albumFile + "\"," +
+                "\"note\": \"" + noteFile + "\"" +
+                "}";
+    }
+
     class Note {
         int lane;
         int msec;

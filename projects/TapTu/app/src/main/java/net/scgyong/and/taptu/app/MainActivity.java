@@ -124,6 +124,11 @@ public class MainActivity extends AppCompatActivity {
     public void onBtnStart(View view) {
 //        int pos = listView.getSelectedItemPosition();
         Log.d(TAG, "Selected Position = " + selectedPosition);
+        if (selectedPosition < 0) return;
+
+        Song song = songs.get(selectedPosition);
+        String json = song.toJson();
+        Log.d(TAG, "JSON: " + json);
     }
 
     private void start(String fileName) {
