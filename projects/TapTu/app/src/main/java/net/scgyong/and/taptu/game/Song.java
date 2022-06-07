@@ -2,9 +2,11 @@ package net.scgyong.and.taptu.game;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.util.JsonReader;
 import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -24,7 +26,12 @@ public class Song {
             msec = Integer.parseInt(comps[2]);
         }
     }
-    private String title;
+    public String mp3File;
+    public String noteFile;
+    public String title;
+    public String artist;
+    public String albumFile;
+
     private ArrayList<Note> notes = new ArrayList<>();
     private int current;
     private long startedOn;
@@ -34,11 +41,31 @@ public class Song {
         return length;
     }
 
-    public Song(String fileName) {
+    public Song(JsonReader reader) throws IOException {
+        while (reader.hasNext()) {
+            String name = reader.nextName();
+            //Log.d(TAG, "Reading name: " + name);
+            if (name.equals("file")) {
+                mp3File = reader.nextString();
+            } else if (name.equals("title")) {
+                title = reader.nextString();
+            } else if (name.equals("artist")) {
+                artist = reader.nextString();
+            } else if (name.equals("albumArt")) {
+                albumFile = reader.nextString();
+            } else if (name.equals("note")) {
+                noteFile = reader.nextString();
+            } else {
+                reader.skipValue();
+            }
+        }
+    }
+
+    public boolean loadNote() {
         Context context = GameView.view.getContext();
         AssetManager assets = context.getAssets();
         try {
-            InputStream is = assets.open(fileName);
+            InputStream is = assets.open(noteFile);
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader reader = new BufferedReader(isr);
             int msec = 0;
@@ -62,8 +89,10 @@ public class Song {
             Log.d(TAG, "Title: " + title);
             Log.d(TAG, "Notes loaded: " + notes.size());
             start();
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 

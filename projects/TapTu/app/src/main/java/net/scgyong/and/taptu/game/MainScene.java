@@ -33,8 +33,9 @@ public class MainScene extends Scene implements Pret.Listener {
     }
 
     public boolean loadSong(String fileName) {
-        song = new Song(fileName);
-        return song.isValid();
+        //song = new Song(fileName);
+        //return song.isValid();
+        return false;
     }
 
     public enum Layer {
