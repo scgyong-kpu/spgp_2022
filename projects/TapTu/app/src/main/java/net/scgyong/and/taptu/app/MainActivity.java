@@ -40,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(onItemClick);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        selectedPosition = -1;
+        adapter.notifyDataSetChanged();
+    }
+
     class Holder {
         TextView title;
         TextView artist;
