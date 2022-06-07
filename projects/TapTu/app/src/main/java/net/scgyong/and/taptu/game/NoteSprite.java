@@ -55,8 +55,13 @@ public class NoteSprite extends Sprite implements Recyclable {
     @Override
     public void update(float frameTime) {
         super.update(frameTime);
-        setCenter(x, y + speed * frameTime);
+
         MainScene scene = MainScene.get();
+        float time = scene.getCurrentTime();
+        float seconds = note.msec / 1000.0f - time;
+        float y = (1.0f - NOTE_Y_HIT_MARGIN) * Metrics.height;
+        y -= seconds * Metrics.height * 1000 / CREATE_NOTE_BEFORE_MSEC;
+        setCenter(x, y);
         if (dstRect.top > Metrics.height) {
             scene.remove(this);
             scene.call.set(Call.Type.miss);

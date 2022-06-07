@@ -1,26 +1,25 @@
 package net.scgyong.and.taptu.game;
 
 import android.graphics.Canvas;
+import android.media.MediaPlayer;
 
 import kr.ac.kpu.game.framework.interfaces.GameObject;
 
 public class NoteGen implements GameObject {
-    private float time = 0, maxTime;
+    private final MediaPlayer mediaPlayer;
+    private float maxTime;
     private Song song;
-    public NoteGen(Song song) {
+    public NoteGen(Song song, MediaPlayer mediaPlayer) {
         this.song = song;
-        maxTime = song.getLength() + 5.0f;
-    }
-
-    public float getTime() {
-        return time;
+        this.mediaPlayer = mediaPlayer;
+        maxTime = mediaPlayer.getDuration() / 1000.0f + 5.0f;
     }
 
     @Override
     public void update(float frameTime) {
         MainScene scene = MainScene.get();
 
-        time += frameTime;
+        float time = mediaPlayer.getCurrentPosition() / 1000.0f;
         if (time > maxTime) {
             scene.finish();
             return;
