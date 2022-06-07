@@ -10,11 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,11 +20,9 @@ import net.scgyong.and.taptu.R;
 import net.scgyong.and.taptu.game.MainScene;
 import net.scgyong.and.taptu.game.Song;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -129,11 +125,8 @@ public class MainActivity extends AppCompatActivity {
         Song song = songs.get(selectedPosition);
         String json = song.toJson();
         Log.d(TAG, "JSON: " + json);
-    }
-
-    private void start(String fileName) {
         Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra(MainScene.PARAM_SONG_FILENAME, fileName);
+        intent.putExtra(MainScene.PARAM_SONG_JSON, json);
         startActivity(intent);
     }
 }

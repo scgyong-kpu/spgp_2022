@@ -24,8 +24,8 @@ public class GameActivity extends AppCompatActivity {
             finish();
             return;
         }
-        String fileName = extras.getString(MainScene.PARAM_SONG_FILENAME);
-        boolean loaded = game.loadSong(fileName);
+        String jsonString = extras.getString(MainScene.PARAM_SONG_JSON);
+        boolean loaded = game.loadSong(jsonString);
         if (!loaded) {
             finish();
             return;

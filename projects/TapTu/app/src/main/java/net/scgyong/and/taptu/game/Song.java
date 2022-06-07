@@ -1,11 +1,16 @@
 package net.scgyong.and.taptu.game;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
+import android.os.Build;
 import android.util.JsonReader;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,6 +31,19 @@ public class Song {
                 "\"albumArt\": \"" + albumFile + "\"," +
                 "\"note\": \"" + noteFile + "\"" +
                 "}";
+    }
+
+    public MediaPlayer loadMusic(AssetManager assets) {
+        MediaPlayer mediaPlayer = new MediaPlayer();
+        try {
+            AssetFileDescriptor afd = assets.openFd(mp3File);
+            mediaPlayer.setDataSource(afd);
+            mediaPlayer.prepare();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mediaPlayer.start();
+        return mediaPlayer;
     }
 
     class Note {
@@ -75,9 +93,7 @@ public class Song {
         }
     }
 
-    public boolean loadNote() {
-        Context context = GameView.view.getContext();
-        AssetManager assets = context.getAssets();
+    public boolean loadNote(AssetManager assets) {
         try {
             InputStream is = assets.open(noteFile);
             InputStreamReader isr = new InputStreamReader(is);

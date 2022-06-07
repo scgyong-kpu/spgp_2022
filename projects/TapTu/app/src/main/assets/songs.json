@@ -4,120 +4,120 @@
     "title": "That That (prod. & feat. SUGA of BTS)",
     "artist": "싸이 (PSY)",
     "albumArt": "album/001.jpg",
-    "note": "stage_01.txt"
+    "note": "songs/stage_01.txt"
   },{
     "file": "mp3s/002.mp3",
     "title": "TOMBOY",
     "artist": "(여자)아이들",
     "albumArt": "album/002.jpg",
-    "note": "stage_02.txt"
+    "note": "songs/stage_02.txt"
   },{
     "file": "mp3s/003.mp3",
     "title": "LOVE DIVE",
     "artist": "IVE (아이브)",
     "albumArt": "album/003.jpg",
-    "note": "stage_03.txt"
+    "note": "songs/stage_03.txt"
   },{
     "file": "mp3s/004.mp3",
     "title": "사랑인가 봐",
     "artist": "멜로망스 (MeloMance)",
     "albumArt": "album/004.jpg",
-    "note": "stage_04.txt"
+    "note": "songs/stage_04.txt"
   },{
     "file": "mp3s/005.mp3",
     "title": "봄여름가을겨울 (Still Life)",
     "artist": "BIGBANG (빅뱅)",
     "albumArt": "album/005.jpg",
-    "note": "stage_05.txt"
+    "note": "songs/stage_05.txt"
   },{
     "file": "mp3s/006.mp3",
     "title": "정이라고 하자 (Feat. 10CM)",
     "artist": "BIG Naughty (서동현)",
     "albumArt": "album/006.jpg",
-    "note": "stage_06.txt"
+    "note": "songs/stage_06.txt"
   },{
     "file": "mp3s/007.mp3",
     "title": "나의 X에게",
     "artist": "경서",
     "albumArt": "album/007.jpg",
-    "note": "stage_07.txt"
+    "note": "songs/stage_07.txt"
   },{
     "file": "mp3s/008.mp3",
     "title": "LOVE me",
     "artist": "BE'O (비오)",
     "albumArt": "album/008.jpg",
-    "note": "stage_08.txt"
+    "note": "songs/stage_08.txt"
   },{
     "file": "mp3s/009.mp3",
     "title": "Feel My Rhythm",
     "artist": "Red Velvet (레드벨벳)",
     "albumArt": "album/009.jpg",
-    "note": "stage_09.txt"
+    "note": "songs/stage_09.txt"
   },{
     "file": "mp3s/010.mp3",
     "title": "FEARLESS",
     "artist": "LE SSERAFIM (르세라핌)",
     "albumArt": "album/010.jpg",
-    "note": "stage_10.txt"
+    "note": "songs/stage_10.txt"
   },{
     "file": "mp3s/011.mp3",
     "title": "취중고백",
     "artist": "김민석 (멜로망스)",
     "albumArt": "album/011.jpg",
-    "note": "stage_11.txt"
+    "note": "songs/stage_11.txt"
   },{
     "file": "mp3s/012.mp3",
     "title": "사랑은 늘 도망가",
     "artist": "임영웅",
     "albumArt": "album/012.jpg",
-    "note": "stage_12.txt"
+    "note": "songs/stage_12.txt"
   },{
     "file": "mp3s/013.mp3",
     "title": "GANADARA (Feat. 아이유)",
     "artist": "박재범",
     "albumArt": "album/013.jpg",
-    "note": "stage_13.txt"
+    "note": "songs/stage_13.txt"
   },{
     "file": "mp3s/014.mp3",
     "title": "ZOOM",
     "artist": "제시",
     "albumArt": "album/014.jpg",
-    "note": "stage_14.txt"
+    "note": "songs/stage_14.txt"
   },{
     "file": "mp3s/015.mp3",
     "title": "신호등",
     "artist": "이무진",
     "albumArt": "album/015.jpg",
-    "note": "stage_15.txt"
+    "note": "songs/stage_15.txt"
   },{
     "file": "mp3s/016.mp3",
     "title": "INVU",
     "artist": "태연 (TAEYEON)",
     "albumArt": "album/016.jpg",
-    "note": "stage_16.txt"
+    "note": "songs/stage_16.txt"
   },{
     "file": "mp3s/017.mp3",
     "title": "다정히 내 이름을 부르면",
     "artist": "경서예지, 전건호",
     "albumArt": "album/017.jpg",
-    "note": "stage_17.txt"
+    "note": "songs/stage_17.txt"
   },{
     "file": "mp3s/018.mp3",
     "title": "듣고 싶을까",
     "artist": "MSG워너비 (M.O.M)",
     "albumArt": "album/018.jpg",
-    "note": "stage_18.txt"
+    "note": "songs/stage_18.txt"
   },{
     "file": "mp3s/019.mp3",
     "title": "ELEVEN",
     "artist": "IVE (아이브)",
     "albumArt": "album/019.jpg",
-    "note": "stage_19.txt"
+    "note": "songs/stage_19.txt"
   },{
     "file": "mp3s/020.mp3",
     "title": "MY BAG",
     "artist": "(여자)아이들",
     "albumArt": "album/002.jpg",
-    "note": "stage_20.txt"
+    "note": "songs/stage_20.txt"
   }
 ]
