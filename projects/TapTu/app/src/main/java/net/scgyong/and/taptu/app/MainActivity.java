@@ -8,7 +8,12 @@ import android.os.Bundle;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import net.scgyong.and.taptu.R;
 import net.scgyong.and.taptu.game.MainScene;
@@ -31,7 +36,33 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         loadSongs();
         listView = findViewById(R.id.listView);
+        listView.setAdapter(adapter);
     }
+
+    private BaseAdapter adapter = new BaseAdapter() {
+        @Override
+        public int getCount() {
+            return songs.size();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            Song song = songs.get(i);
+            TextView tv = new TextView(MainActivity.this);
+            tv.setText(song.title + " - " + song.artist);
+            return tv;
+        }
+    };
 
     ArrayList<Song> songs = new ArrayList<>();
     private void loadSongs() {
