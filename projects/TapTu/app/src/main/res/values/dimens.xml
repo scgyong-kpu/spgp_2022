@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="album_thumb_size">64dp</dimen>
+    <dimen name="song_title_text_size">24sp</dimen>
+    <dimen name="song_artist_text_size">16sp</dimen>
+</resources>

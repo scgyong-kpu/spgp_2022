@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -58,13 +60,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             Song song = songs.get(i);
-            TextView tv = (TextView)view;
-            if (tv == null) {
-                tv = new TextView(MainActivity.this);
-                tv.setTextSize(30);
+            LinearLayout layout = (LinearLayout) view;
+            if (layout == null) {
+                layout = (LinearLayout) getLayoutInflater().inflate(R.layout.song_item, null);
             }
-            tv.setText(song.title + " - " + song.artist);
-            return tv;
+            ((TextView)layout.findViewById(R.id.title)).setText(song.title);
+            ((TextView)layout.findViewById(R.id.artist)).setText(song.artist);
+            ((ImageView)layout.findViewById(R.id.thumbnail)).setImageBitmap(song.albumBitmap);
+            return layout;
         }
     };
 
