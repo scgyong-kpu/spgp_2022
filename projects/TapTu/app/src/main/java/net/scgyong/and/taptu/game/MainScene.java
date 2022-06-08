@@ -1,13 +1,18 @@
 package net.scgyong.and.taptu.game;
 
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
+import android.media.MediaPlayer;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.MotionEvent;
 
 import net.scgyong.and.taptu.R;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 
 import kr.ac.kpu.game.framework.game.Scene;
@@ -15,15 +20,17 @@ import kr.ac.kpu.game.framework.interfaces.GameObject;
 import kr.ac.kpu.game.framework.objects.Sprite;
 import kr.ac.kpu.game.framework.res.BitmapPool;
 import kr.ac.kpu.game.framework.res.Metrics;
+import kr.ac.kpu.game.framework.view.GameView;
 
 public class MainScene extends Scene implements Pret.Listener {
-    public static final String PARAM_SONG_FILENAME = "song_filename";
+    public static final String PARAM_SONG_JSON = "song_filename";
     private static final String TAG = MainScene.class.getSimpleName();
     private static MainScene singleton;
     private Song song;
     private Pret[] prets = new Pret[5];
     Call call;
     private NoteGen noteGenerator;
+    private MediaPlayer mediaPlayer;
 
     public static MainScene get() {
         if (singleton == null) {
@@ -32,8 +39,21 @@ public class MainScene extends Scene implements Pret.Listener {
         return singleton;
     }
 
-    public boolean loadSong(String fileName) {
-        song = new Song(fileName);
+    public boolean loadSong(String json) {
+        JsonReader reader = new JsonReader(new StringReader(json));
+        AssetManager assets = GameView.view.getContext().getAssets();
+        try {
+            reader.beginObject();
+            song = new Song(reader, assets);
+            reader.endObject();
+            reader.close();
+
+            song.loadNote(assets);
+            mediaPlayer = song.loadMusic(assets);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
         return song.isValid();
     }
 
@@ -62,6 +82,15 @@ public class MainScene extends Scene implements Pret.Listener {
 
         call = new Call();
         add(Layer.call.ordinal(), call);
+    }
+
+    @Override
+    public void end() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer = null;
+        }
+        super.end();
     }
 
     @Override
