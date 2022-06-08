@@ -30,13 +30,17 @@ public class MainScene extends Scene implements Pret.Listener {
     private Pret[] prets = new Pret[5];
     Call call;
     private NoteGen noteGenerator;
-    private MediaPlayer mediaPlayer;
+    MediaPlayer mediaPlayer;
 
     public static MainScene get() {
         if (singleton == null) {
             singleton = new MainScene();
         }
         return singleton;
+    }
+
+    public float getCurrentTime() {
+        return mediaPlayer.getCurrentPosition() / 1000.0f;
     }
 
     public boolean loadSong(String json) {
@@ -71,7 +75,7 @@ public class MainScene extends Scene implements Pret.Listener {
                 Metrics.width, Metrics.height,
                 R.mipmap.bg
         ));
-        noteGenerator = new NoteGen(song);
+        noteGenerator = new NoteGen(song, mediaPlayer);
         add(Layer.controller.ordinal(), noteGenerator);
 
         for (int lane = 0; lane < 5; lane++) {
@@ -82,6 +86,8 @@ public class MainScene extends Scene implements Pret.Listener {
 
         call = new Call();
         add(Layer.call.ordinal(), call);
+
+        mediaPlayer.start();
     }
 
     @Override
@@ -107,7 +113,7 @@ public class MainScene extends Scene implements Pret.Listener {
     RectF tmpRect = new RectF();
     @Override
     public void draw(Canvas canvas) {
-        float time = noteGenerator.getTime();
+        float time = getCurrentTime();
         super.draw(canvas);
         Bitmap bitmap = BitmapPool.get(R.mipmap.trans_50p);
         for (int lane = 0; lane < 5; lane++) {
@@ -130,7 +136,7 @@ public class MainScene extends Scene implements Pret.Listener {
     public void onPret(int lane, boolean pressed) {
         Log.d(TAG, "onPret: lane=" + lane + " pressed=" + pressed);
         if (!pressed) return;
-        float time = noteGenerator.getTime();
+        float time = getCurrentTime();
         NoteSprite ns = findNearestNote(lane, time);
         if (ns == null) return;
         float diff = ns.note.msec / 1000.0f - time;

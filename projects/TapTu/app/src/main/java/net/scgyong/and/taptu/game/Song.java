@@ -42,7 +42,6 @@ public class Song {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mediaPlayer.start();
         return mediaPlayer;
     }
 
